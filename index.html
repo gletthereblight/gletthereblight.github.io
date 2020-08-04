@@ -150,10 +150,14 @@
         
         
           
-          
         
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">在战略上要藐视敌人，在战术上要重视敌人!...</div>
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">SQL执行顺序123456789(8)  SELECT  (9) DISTINCT (11) &lt;TOP_specification&gt; &lt;select_list&gt;(1)  FROM &lt;left_table&gt;(3)  &lt;join_type&gt; JOIN &lt;right_table&gt;(2)  ON &lt;join_condition&gt;(4)  WHERE &lt;where_condition&gt;(5)  GROUP BY &lt;group_by_list&gt;(6)  WITH &#123;CUBE | ROLLUP&#125;(7)  HAVING &lt;having_condition&gt;(10) ORDER BY &lt;order_by_list&gt;
+
+
+FORM: 对 from 子句中的前两个表执行计算笛卡尔积，产生虚表 VT1。
+ON: 对虚表 VT1 进行 on 筛选，只有那些符合&lt;join-condition&gt;的行才会被记录在虚表 VT2 中。
+JOIN: 如果指定了 outer </div>
         </div>
       </a>
 
