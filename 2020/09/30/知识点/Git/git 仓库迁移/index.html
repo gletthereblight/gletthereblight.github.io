@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>git 之仓库迁移 | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="将A仓库迁移到B仓库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git 之仓库迁移">
+<meta property="og:url" content="http://example.com/2020/09/30/%E7%9F%A5%E8%AF%86%E7%82%B9/Git/git%20%E4%BB%93%E5%BA%93%E8%BF%81%E7%A7%BB/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="将A仓库迁移到B仓库">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-30T08:55:00.000Z">
+<meta property="article:modified_time" content="2020-09-30T09:08:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Git/git 仓库迁移" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/09/30/%E7%9F%A5%E8%AF%86%E7%82%B9/Git/git%20%E4%BB%93%E5%BA%93%E8%BF%81%E7%A7%BB/" class="article-date">
+  <time class="dt-published" datetime="2020-09-30T08:55:00.000Z" itemprop="datePublished">2020-09-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      git 之仓库迁移
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="A仓库迁移到B仓库"><a href="#A仓库迁移到B仓库" class="headerlink" title="A仓库迁移到B仓库"></a>A仓库迁移到B仓库</h1><p>B仓库是一个空仓库，除了默认的master分支，没有任何分支。把A的branch1,branch2,branch3…依次迁入B，B也就有branch1,branch2,branch3…</p>
+<h2 id="1-进入A工程"><a href="#1-进入A工程" class="headerlink" title="1. 进入A工程"></a>1. 进入A工程</h2><h2 id="2-git-remote"><a href="#2-git-remote" class="headerlink" title="2. git remote"></a>2. <code>git remote</code></h2><p>查看远程仓库B的名称</p>
+<h2 id="3-git-remote-add-origin2-master"><a href="#3-git-remote-add-origin2-master" class="headerlink" title="3. git remote add origin2 master"></a>3. <code>git remote add origin2 master</code></h2><p>建立新远程仓库 <code>origin2</code>，名字随意</p>
+<h2 id="4-git-remote-set-url-origin2-https-github-com-b-git"><a href="#4-git-remote-set-url-origin2-https-github-com-b-git" class="headerlink" title="4. git remote set-url origin2 https://github.com/b.git"></a>4. <code>git remote set-url origin2 https://github.com/b.git</code></h2><p>新远程仓库B 的 url</p>
+<h2 id="5-进入A工程的-branch1分支上"><a href="#5-进入A工程的-branch1分支上" class="headerlink" title="5. 进入A工程的 branch1分支上"></a>5. 进入A工程的 <code>branch1</code>分支上</h2><h2 id="6-git-pull"><a href="#6-git-pull" class="headerlink" title="6. git pull"></a>6. <code>git pull</code></h2><p>拉取最新代码</p>
+<h2 id="7-git-checkout-b-branchB1"><a href="#7-git-checkout-b-branchB1" class="headerlink" title="7. git checkout -b branchB1"></a>7. <code>git checkout -b branchB1</code></h2><p><code>branchB1</code>是基于A工程<code>branch1</code>开的新分支，代码跟A工程<code>branch1</code>一样，之后<code>branchB1</code>会被推到B工程，必须保证B工程下没有该名字分支</p>
+<h2 id="8-git-push-origin2"><a href="#8-git-push-origin2" class="headerlink" title="8. git push origin2"></a>8. <code>git push origin2</code></h2><p>此时已经成功迁移出一个分支到B分支</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/09/30/%E7%9F%A5%E8%AF%86%E7%82%B9/Git/git%20%E4%BB%93%E5%BA%93%E8%BF%81%E7%A7%BB/" data-id="clkvw3doy00013kjw4u20g26s" data-title="git 之仓库迁移" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/01/11/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/3.%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java 的双亲委派
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/08/10/%E7%9F%A5%E8%AF%86%E7%82%B9/Git/git%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">git 常用命令(持续更新)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a></li></ul></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Flink/" style="font-size: 20px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Git/" style="font-size: 17.5px;">Git</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 12.5px;">代码归档</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 20px;">大数据</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 15px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 12.5px;">杂记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/06/16/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-Flink%20CDC%20%E9%97%AE%E9%A2%98-/">杂记-Flink CDC</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/10/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/1.%E6%B3%A8%E8%A7%A3/">Java 注解</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/20/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-%E5%AE%9E%E6%88%98%E9%97%AE%E9%A2%98/">杂记-Flink 实战</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/10/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/0.%E5%BE%AE%E6%89%B9%E5%92%8C%E5%AE%9E%E6%97%B6/">Flink 基础-微批和实时(第零章)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/18/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/2.POJO/">Java 中各种对象的简称</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
