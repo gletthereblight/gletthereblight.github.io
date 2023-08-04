@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Flink 基础-SQL&amp;Table(第六章) | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Flink SQL 与 Table API 介绍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flink 基础-SQL&amp;Table(第六章)">
+<meta property="og:url" content="http://example.com/2020/12/20/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/6.Flink%20SQL%20&%20Table%20API/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="Flink SQL 与 Table API 介绍">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-12-20T15:29:00.000Z">
+<meta property="article:modified_time" content="2021-08-10T10:33:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="Flink">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/大数据部件/Flink/基础/6.Flink SQL &amp; Table API" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/12/20/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/6.Flink%20SQL%20&%20Table%20API/" class="article-date">
+  <time class="dt-published" datetime="2020-12-20T15:29:00.000Z" itemprop="datePublished">2020-12-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>►<a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a>►<a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Flink 基础-SQL&amp;Table(第六章)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="wiki"><a href="#wiki" class="headerlink" title="wiki"></a>wiki</h2><h2 id="1-Flink-SQL-与-Table-API-区别"><a href="#1-Flink-SQL-与-Table-API-区别" class="headerlink" title="1. Flink SQL 与 Table API 区别"></a>1. Flink SQL 与 Table API 区别</h2><ul>
+<li>Table API ：内嵌在 Java 和 Scala 中的查询 API，</li>
+<li>Flink SQL ：支持基于实现了 SQL 标准的 Apache Calcite</li>
+</ul>
+<h2 id="2-基本使用"><a href="#2-基本使用" class="headerlink" title="2. 基本使用"></a>2. 基本使用</h2><h3 id="2-1-使用-DataStream-转换-source"><a href="#2-1-使用-DataStream-转换-source" class="headerlink" title="2.1. 使用 DataStream 转换 source"></a>2.1. 使用 DataStream 转换 source</h3><ol>
+<li><p>创建环境</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">StreamExecutionEnvironment</span> <span class="variable">env</span> <span class="operator">=</span> StreamExecutionEnvironment.getExecutionEnvironment();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接入 source</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DataStream&lt;T&gt; source = ...;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>转换成 POJO</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DataStream&lt;T&gt; dataStream = source.map...;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>引入依赖，创建表环境</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 必要：flink-table-planner_2.12 或者 flink-table-planner-blink_2.12</span></span><br><span class="line"><span class="comment"> * 非必：flink-table-api-java-bridge_2.12</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">    <span class="type">StreamTableEnviroment</span> <span class="variable">tableEnv</span> <span class="operator">=</span> StreamTableEnviroment.create(env);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>表操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 Table API 查询，可以在第二个参数指定别名</span></span><br><span class="line"><span class="type">Table</span> <span class="variable">table</span> <span class="operator">=</span> tableEnv.fromDataStream(source);</span><br><span class="line"><span class="type">Table</span> <span class="variable">tableApiRes</span> <span class="operator">=</span> table.select(<span class="string">&quot;id&quot;</span>, <span class="string">&quot;name&quot;</span>).where(<span class="string">&quot;id = &#x27;1&#x27;&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 SQL 查询</span></span><br><span class="line">tableEnv.createTemporaryView(<span class="string">&quot;tableName&quot;</span>, source);</span><br><span class="line"><span class="type">String</span> <span class="variable">sql</span> <span class="operator">=</span> <span class="string">&quot;SELECT id, name FROM table WHERE id = &#x27;1&#x27;&quot;</span>;</span><br><span class="line"><span class="type">Table</span> <span class="variable">tableSqlRes</span> <span class="operator">=</span> tableEnv.sqlQuery(sql);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打印结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tableEnv.toAppendStream(tableApiRes, Row.class).print(<span class="string">&quot;table api result&quot;</span>);</span><br><span class="line">tableEnv.toAppendStream(tableSqlRes, Row.class).print(<span class="string">&quot;table sql result&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="2-2-直接将-source-读取为表"><a href="#2-2-直接将-source-读取为表" class="headerlink" title="2.2. 直接将 source 读取为表"></a>2.2. 直接将 source 读取为表</h3><ol>
+<li><p>创建表的执行环境</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 流环境</span></span><br><span class="line"><span class="type">StreamExecutionEnvironment</span> <span class="variable">streamEnv</span> <span class="operator">=</span> StreamExecutionEnvironment.getExecutionEnvironment();</span><br><span class="line"><span class="comment">// 批环境</span></span><br><span class="line"><span class="type">ExecutionEnvironment</span> <span class="variable">batchEnv</span> <span class="operator">=</span> ExecutionEnvironment.getExecutionEnvironment();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可选构建配置：流批、planner</span></span><br><span class="line"><span class="type">EnvironmentSettings</span> <span class="variable">settings</span> <span class="operator">=</span> EnvironmentSettings.newInstance()</span><br><span class="line">                                                  <span class="comment">//.inStreamMode()</span></span><br><span class="line">                                                  <span class="comment">//.inBatchMode()</span></span><br><span class="line">                                                  <span class="comment">//.useOldPlanner()</span></span><br><span class="line">                                                  <span class="comment">//.useBlinkPlanner()</span></span><br><span class="line">                                                  .build();</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 基于流的表环境，老版和新版主要在 planner 选择上有差异</span></span><br><span class="line"><span class="type">StreamTableEnviroment</span> <span class="variable">tableEnv</span> <span class="operator">=</span> StreamTableEnviroment.create(streamEnv, settings);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 基于批的表环境，老版，其中参数中传入的是批环境</span></span><br><span class="line"><span class="type">BatchTableEnviroment</span> <span class="variable">tableEnv</span> <span class="operator">=</span> BatchTableEnviroment.create(batchEnv);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 基于批的表环境，新版，其中参数传入的是配置，并使用 useOldPlanner()</span></span><br><span class="line"><span class="type">TableEnviroment</span> <span class="variable">tableEnv</span> <span class="operator">=</span> TableEnviroment.create(settings);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建表，读取数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tableEnv.connect(...).createTemporaryTable(<span class="string">&quot;sourceTable&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注册表，输出结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tableEnv.connect(...).createTemporaryTable(<span class="string">&quot;sinkTable&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>表操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 Table API 查询</span></span><br><span class="line"><span class="type">Table</span> <span class="variable">tableApiRes</span> <span class="operator">=</span> tableEnv.from(<span class="string">&quot;sourceTable&quot;</span>).select(...);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 SQL 查询</span></span><br><span class="line"><span class="type">Table</span> <span class="variable">tableSqlRes</span> <span class="operator">=</span> tableEnv.sqlQuery(<span class="string">&quot;SELECT ...&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写入结果表</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tableApiRes.insertInto(<span class="string">&quot;sinkTable&quot;</span>);</span><br><span class="line">tableSqlRes.insertInto(<span class="string">&quot;sinkTable&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="3-表"><a href="#3-表" class="headerlink" title="3. 表"></a>3. 表</h2><h3 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h3><ul>
+<li><code>TableEnviroment</code>可以注册目录<code>Catalog</code>，并可以基于<code>Catalog</code>去注册表</li>
+<li>表<code>Table</code>是由一个标识符(<code>identifier</code>)来指定，其由三部分组成<ul>
+<li><code>Catalog</code>名</li>
+<li>数据库(<code>database</code>)名</li>
+<li>对象名</li>
+</ul>
+</li>
+<li>表分为常规表(<code>Table</code>)和虚拟表(<code>View</code>)<ul>
+<li>常规表：<code>Table</code>，用来描述外部数据，比如文件、数据库、消息队列，也可以从<code>DataStream</code>转换来</li>
+<li>虚拟表：<code>View</code>，通常是 Table API 或 SQL 的结果集</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-创建表"><a href="#2-创建表" class="headerlink" title="2. 创建表"></a>2. 创建表</h3><p>大致流程如下，需要引入必要的格式化包</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tableEnv.connect(...)                     <span class="comment">// 定义表的数据来源，和外部表建立连接</span></span><br><span class="line">        .withFormat(...)                  <span class="comment">// 定义数据格式化方法，比如切分解析</span></span><br><span class="line">        .withSchema(...)                  <span class="comment">// 定义表结构</span></span><br><span class="line">        .createTemporaryTable(<span class="string">&quot;MyTable&quot;</span>); <span class="comment">// 创建临时表</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-1-读取文件中数据"><a href="#2-1-读取文件中数据" class="headerlink" title="2.1. 读取文件中数据"></a>2.1. 读取文件中数据</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">filePath</span> <span class="operator">=</span> <span class="string">&quot;/home/user/table.txt&quot;</span></span><br><span class="line">tableEnv.connect(<span class="keyword">new</span> <span class="title class_">FileSystem</span>().path(filePath))</span><br><span class="line">        .withFormat(<span class="keyword">new</span> <span class="title class_">CSV</span>())</span><br><span class="line">        .withSchema(<span class="keyword">new</span> <span class="title class_">Schema</span>().field(<span class="string">&quot;id&quot;</span>, DataTypes.BIGINT())</span><br><span class="line">                                .field(<span class="string">&quot;name&quot;</span>, DataTypes.STRING())</span><br><span class="line">                    )</span><br><span class="line">        .createTemporaryTable(<span class="string">&quot;sourceTable&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">Table</span> <span class="variable">table</span> <span class="operator">=</span> tableEnv.from(<span class="string">&quot;sourceTable&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-读取-kafka-中数据"><a href="#2-2-读取-kafka-中数据" class="headerlink" title="2.2. 读取 kafka 中数据"></a>2.2. 读取 kafka 中数据</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">tableEnv.connect(<span class="keyword">new</span> <span class="title class_">kafka</span>().version(<span class="string">&quot;0.11&quot;</span>)</span><br><span class="line">                            .topic(<span class="string">&quot;glett-test-source&quot;</span>)</span><br><span class="line">                            .property(<span class="string">&quot;zookeeper.connect&quot;</span>, <span class="string">&quot;localhost:2181&quot;</span>)</span><br><span class="line">                            .property(<span class="string">&quot;bootstrap.server&quot;</span>, <span class="string">&quot;localhost:9092&quot;</span>)</span><br><span class="line">                )</span><br><span class="line">        .withFormat(<span class="keyword">new</span> <span class="title class_">CSV</span>()) <span class="comment">// csv,avro等</span></span><br><span class="line">        .withSchema(<span class="keyword">new</span> <span class="title class_">Schema</span>().field(<span class="string">&quot;id&quot;</span>, DataTypes.BIGINT())</span><br><span class="line">                                .field(<span class="string">&quot;name&quot;</span>, DataTypes.STRING())</span><br><span class="line">                    )</span><br><span class="line">        .createTemporaryTable(<span class="string">&quot;sourceTable&quot;</span>);</span><br><span class="line">            </span><br><span class="line"><span class="type">Table</span> <span class="variable">table</span> <span class="operator">=</span> tableEnv.from(<span class="string">&quot;sourceTable&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-查询表"><a href="#3-查询表" class="headerlink" title="3. 查询表"></a>3. 查询表</h3><ul>
+<li>使用<code>Table API</code>：<code>Table tableRes = table.select(&quot;id&quot;, &quot;name&quot;).where(&quot;id = &#39;1&#39;&quot;);</code></li>
+<li>使用<code>SQL</code>：<code>Table tableRes = tableEnv.sqlQuery(&quot;SELECT ...&quot;);</code></li>
+</ul>
+<h3 id="4-输出表"><a href="#4-输出表" class="headerlink" title="4. 输出表"></a>4. 输出表</h3><h4 id="4-1-输出表数据到文件"><a href="#4-1-输出表数据到文件" class="headerlink" title="4.1. 输出表数据到文件"></a>4.1. 输出表数据到文件</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">filePath</span> <span class="operator">=</span> <span class="string">&quot;/home/user/out.txt&quot;</span></span><br><span class="line">tableEnv.connect(<span class="keyword">new</span> <span class="title class_">FileSystem</span>().path(filePath))</span><br><span class="line">        .withFormat(<span class="keyword">new</span> <span class="title class_">CSV</span>())</span><br><span class="line">        .withSchema(<span class="keyword">new</span> <span class="title class_">Schema</span>().field(<span class="string">&quot;id&quot;</span>, DataTypes.BIGINT())</span><br><span class="line">                                .field(<span class="string">&quot;name&quot;</span>, DataTypes.STRING())</span><br><span class="line">                    )</span><br><span class="line">        .createTemporaryTable(<span class="string">&quot;sourceTable&quot;</span>);</span><br><span class="line">        </span><br><span class="line"><span class="comment">//由于数据进行了聚合，有数据的更新，即删除和插入，因此无法直接写入</span></span><br><span class="line"><span class="comment">//tableRes.insertInto(&quot;sinkTable&quot;);</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-输出表数据到-kafka"><a href="#4-2-输出表数据到-kafka" class="headerlink" title="4.2. 输出表数据到 kafka"></a>4.2. 输出表数据到 kafka</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">tableEnv.connect(<span class="keyword">new</span> <span class="title class_">kafka</span>().version(<span class="string">&quot;0.11&quot;</span>)</span><br><span class="line">                            .topic(<span class="string">&quot;glett-test-sink&quot;</span>)</span><br><span class="line">                            .property(<span class="string">&quot;zookeeper.connect&quot;</span>, <span class="string">&quot;localhost:2181&quot;</span>)</span><br><span class="line">                            .property(<span class="string">&quot;bootstrap.server&quot;</span>, <span class="string">&quot;localhost:9092&quot;</span>)</span><br><span class="line">                )</span><br><span class="line">        .withFormat(<span class="keyword">new</span> <span class="title class_">CSV</span>()) <span class="comment">// csv,avro等</span></span><br><span class="line">        .withSchema(<span class="keyword">new</span> <span class="title class_">Schema</span>().field(<span class="string">&quot;id&quot;</span>, DataTypes.BIGINT())</span><br><span class="line">                                .field(<span class="string">&quot;name&quot;</span>, DataTypes.STRING())</span><br><span class="line">                    )</span><br><span class="line">        .createTemporaryTable(<span class="string">&quot;sourceTable&quot;</span>);</span><br><span class="line"></span><br><span class="line">tableRes.insertInto(<span class="string">&quot;sinkTable&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-表更新模式"><a href="#4-表更新模式" class="headerlink" title="4. 表更新模式"></a>4. 表更新模式</h2><p>对于流式查询，需要声明如何在表和外部连接器之间执行转换，与外部数据系统交换的消息类型，由更新模式(<code>Update Mode</code>)指定</p>
+<h3 id="4-1-追加-append-模式"><a href="#4-1-追加-append-模式" class="headerlink" title="4.1. 追加(append)模式"></a>4.1. 追加(append)模式</h3><p>仅插入，和外部连接器只交换插入数据</p>
+<h3 id="4-2-撤回-retract-模式"><a href="#4-2-撤回-retract-模式" class="headerlink" title="4.2. 撤回(retract)模式"></a>4.2. 撤回(retract)模式</h3><p>表和外部连接有添加和撤回消息。返回的信息会增加一个标志位，<code>true</code>表示插入，<code>false</code>表示删除</p>
+<ul>
+<li>插入操作编码为 <code>Add</code> 消息</li>
+<li>删除操作编码为 <code>Retract</code> 消息</li>
+<li>更新操作编码为上一条的 <code>Retract</code> 消息和下一条的 <code>Add</code> 消息</li>
+</ul>
+<h3 id="4-3-更新插入-upsert-模式"><a href="#4-3-更新插入-upsert-模式" class="headerlink" title="4.3. 更新插入(upsert)模式"></a>4.3. 更新插入(upsert)模式</h3><ul>
+<li>更新和插入编码为 <code>upsert</code> 消息</li>
+<li>删除操作编码为 <code>Delete</code> 消息</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/12/20/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/6.Flink%20SQL%20&%20Table%20API/" data-id="clkwbuxau00072cjw899kf76o" data-title="Flink 基础-SQL&amp;Table(第六章)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/01/11/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/3.%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java 的双亲委派
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/12/14/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/7.ProcessFunction%20API/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Flink 基础-ProcessFunction API(第七章)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a></li></ul></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Flink/" style="font-size: 20px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Git/" style="font-size: 17.5px;">Git</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 12.5px;">代码归档</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 20px;">大数据</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 15px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 12.5px;">杂记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/06/16/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-Flink%20CDC%20%E9%97%AE%E9%A2%98-/">杂记-Flink CDC</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/10/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/1.%E6%B3%A8%E8%A7%A3/">Java 注解</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/20/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-%E5%AE%9E%E6%88%98%E9%97%AE%E9%A2%98/">杂记-Flink 实战</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/10/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/0.%E5%BE%AE%E6%89%B9%E5%92%8C%E5%AE%9E%E6%97%B6/">Flink 基础-微批和实时(第零章)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/18/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/2.POJO/">Java 中各种对象的简称</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

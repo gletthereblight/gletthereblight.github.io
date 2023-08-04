@@ -9,14 +9,14 @@
   <meta name="description" content="概念、名词总览">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Flink 基础-总览(第一章)">
-<meta property="og:url" content="http://example.com/2021/07/10/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/1.Flink%20%E6%A6%82%E5%BF%B5/index.html">
+<meta property="og:url" content="http://example.com/2020/07/27/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/1.Flink%20%E6%A6%82%E5%BF%B5/index.html">
 <meta property="og:site_name" content="Glett的码字间">
 <meta property="og:description" content="概念、名词总览">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/flink/api-stack.png">
 <meta property="og:image" content="http://example.com/images/flink/processes.svg">
-<meta property="article:published_time" content="2021-07-10T07:43:00.000Z">
-<meta property="article:modified_time" content="2022-08-20T09:41:00.000Z">
+<meta property="article:published_time" content="2020-07-27T03:20:00.000Z">
+<meta property="article:modified_time" content="2023-08-04T07:46:00.000Z">
 <meta property="article:author" content="Gao Peng">
 <meta property="article:tag" content="大数据">
 <meta property="article:tag" content="Flink">
@@ -86,8 +86,8 @@
       <div class="outer">
         <section id="main"><article id="post-知识点/大数据部件/Flink/基础/1.Flink 概念" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/07/10/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/1.Flink%20%E6%A6%82%E5%BF%B5/" class="article-date">
-  <time class="dt-published" datetime="2021-07-10T07:43:00.000Z" itemprop="datePublished">2021-07-10</time>
+    <a href="/2020/07/27/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/1.Flink%20%E6%A6%82%E5%BF%B5/" class="article-date">
+  <time class="dt-published" datetime="2020-07-27T03:20:00.000Z" itemprop="datePublished">2020-07-27</time>
 </a>
     
   <div class="article-category">
@@ -110,16 +110,16 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="1-wiki"><a href="#1-wiki" class="headerlink" title="1. wiki"></a>1. wiki</h2><p><code>Apache Flink</code> 是一个框架和分布式处理引擎，用于在无边界和有边界数据流上进行有状态的计算。<code>Flink</code> 能在所有常见集群环境中运行，并能以内存速度和任意规模进行计算。</p>
-<h2 id="2-概念"><a href="#2-概念" class="headerlink" title="2. 概念"></a>2. 概念</h2><h3 id="1-批处理-batch-vs-流处理-stream"><a href="#1-批处理-batch-vs-流处理-stream" class="headerlink" title="1. 批处理(batch) vs 流处理(stream)"></a>1. 批处理(batch) vs 流处理(stream)</h3><p><code>批处理</code>：</br><br><code>流处理</code>：</br></p>
+        <h2 id="wiki"><a href="#wiki" class="headerlink" title="wiki"></a>wiki</h2><p><code>Apache Flink</code> 是一个框架和分布式处理引擎，用于在无边界和有边界数据流上进行有状态的计算。<code>Flink</code> 能在所有常见集群环境中运行，并能以内存速度和任意规模进行计算。</p>
+<h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h2><h3 id="1-批处理-batch-vs-流处理-stream"><a href="#1-批处理-batch-vs-流处理-stream" class="headerlink" title="1. 批处理(batch) vs 流处理(stream)"></a>1. 批处理(batch) vs 流处理(stream)</h3><p><code>批处理</code>：</br><br><code>流处理</code>：</br></p>
 <h3 id="2-有界流-vs-无界流"><a href="#2-有界流-vs-无界流" class="headerlink" title="2. 有界流 vs 无界流"></a>2. 有界流 vs 无界流</h3><p><code>有界流</code>：有定义数据流的开始，但没有定义数据流的结束</br><br><code>无界流</code>：有定义流的开始，也有定义流的结束</br></p>
 <h3 id="3-状态"><a href="#3-状态" class="headerlink" title="3. 状态"></a>3. 状态</h3><p><code>状态</code>：只有在每一个单独的事件上进行转换操作的应用才不需要状态，换言之，每一个具有一定复杂度的流处理应用都是有状态的</p>
 <h3 id="4-时间"><a href="#4-时间" class="headerlink" title="4. 时间"></a>4. 时间</h3><p><code>时间</code>：许多常见的流计算都基于时间语义，例如窗口聚合、会话计算、模式检测和基于时间的 <code>join</code></p>
-<h2 id="3-API-结构"><a href="#3-API-结构" class="headerlink" title="3. API 结构"></a>3. API 结构</h2><p><img src="/../../../../../images/flink/api-stack.png" alt="api-stack"></p>
+<h3 id="3-API-结构"><a href="#3-API-结构" class="headerlink" title="3. API 结构"></a>3. API 结构</h3><p><img src="/../../../../../images/flink/api-stack.png" alt="api-stack"></p>
 <h3 id="1-ProcessFunction"><a href="#1-ProcessFunction" class="headerlink" title="1. ProcessFunction"></a>1. <code>ProcessFunction</code></h3><p>最底层提供的是有状态的流式计算引擎，流(Stream)、状态(State)和时间(Time)等流式计算概念都在这一层得到了实现</p>
 <h3 id="2-DataStream-API"><a href="#2-DataStream-API" class="headerlink" title="2. DataStream API"></a>2. <code>DataStream API</code></h3><p>应用程序一般使用 <code>Flink</code> 提供的核心API：针对有界和无界数据流的 <code>DataStream API</code> 和针对有界数据集的 <code>DataSet API</code>。用户可以使用这两个API进行常用的数据处理：<code>转换(Transformation)</code>、<code>连接(join)</code>、<code>聚合(Aggregation)</code>、<code>窗口(window)</code>以及对<code>状态(state)</code>的操作。</p>
 <h3 id="3-SQL-Table-API"><a href="#3-SQL-Table-API" class="headerlink" title="3. SQL &amp; Table API"></a>3. <code>SQL &amp; Table API</code></h3><p>在这一层，数据被转换成了关系型数据库式的表格，每个表格拥有一个表模式(<code>Schema</code>)，用户可以像操作表格那样操作流式数据，例如可以使用针对结构化数据的<code>select</code>、<code>join</code>、<code>group-by</code> 等操作</p>
-<h2 id="4-集群"><a href="#4-集群" class="headerlink" title="4. 集群"></a>4. 集群</h2><h3 id="4-1-总览"><a href="#4-1-总览" class="headerlink" title="4.1. 总览"></a>4.1. 总览</h3><p>一个 <code>Flink</code> 集群总是包含一个 <code>JobManager</code> 以及一个或多个 <code>TaskManager</code>。</p>
+<h2 id="3-集群"><a href="#3-集群" class="headerlink" title="3. 集群"></a>3. 集群</h2><h3 id="1-总览"><a href="#1-总览" class="headerlink" title="1. 总览"></a>1. 总览</h3><p>一个 <code>Flink</code> 集群总是包含一个 <code>JobManager</code> 以及一个或多个 <code>TaskManager</code>。</p>
 <ul>
 <li><code>JobManager</code> 负责处理 <code>Job</code> 提交、 监控以及资源管理</li>
 <li><code>TaskManager</code> 运行 <code>worker</code> 进程，负责实际任务 <code>Tasks</code> 的执行，而这些任务共同组成了一个 <code>Flink Job</code></li>
@@ -129,7 +129,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/07/10/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/1.Flink%20%E6%A6%82%E5%BF%B5/" data-id="clkwa9kbk0000ucjw4pnu1pcu" data-title="Flink 基础-总览(第一章)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2020/07/27/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/1.Flink%20%E6%A6%82%E5%BF%B5/" data-id="clkwa9kbk0000ucjw4pnu1pcu" data-title="Flink 基础-总览(第一章)" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -141,19 +141,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/07/10/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/0.%E5%BE%AE%E6%89%B9%E5%92%8C%E5%AE%9E%E6%97%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/07/30/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/3.Flink%20%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Flink 基础-微批和实时(第零章)
+          Flink 基础-常用算子(第三章)
         
       </div>
     </a>
   
   
-    <a href="/2021/05/18/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/2.POJO/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/07/16/%E7%9F%A5%E8%AF%86%E7%82%B9/Git/git%20Docker/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Java 中各种对象的简称</div>
+      <div class="article-nav-title">Docker 搭建 git</div>
     </a>
   
 </nav>
@@ -199,7 +199,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
     </div>
   </div>
 
@@ -228,7 +228,7 @@
           </li>
         
           <li>
-            <a href="/2021/07/10/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/1.Flink%20%E6%A6%82%E5%BF%B5/">Flink 基础-总览(第一章)</a>
+            <a href="/2021/05/18/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/2.POJO/">Java 中各种对象的简称</a>
           </li>
         
       </ul>

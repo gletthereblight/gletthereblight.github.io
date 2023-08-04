@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Flink 基础-窗口(第四章) | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="开窗操作和计算函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flink 基础-窗口(第四章)">
+<meta property="og:url" content="http://example.com/2020/12/06/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/4.Flink%20%E7%AA%97%E5%8F%A3/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="开窗操作和计算函数">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-12-06T04:47:00.000Z">
+<meta property="article:modified_time" content="2020-12-24T07:09:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="Flink">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/大数据部件/Flink/基础/4.Flink 窗口" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/12/06/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/4.Flink%20%E7%AA%97%E5%8F%A3/" class="article-date">
+  <time class="dt-published" datetime="2020-12-06T04:47:00.000Z" itemprop="datePublished">2020-12-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>►<a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a>►<a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Flink 基础-窗口(第四章)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>将无界流切割为有界流，将切割的流数据放到有限大小的桶（bucket）中分析。</br><br>一旦应属于该窗口的第一个元素到达，就会创建一个窗口。并且当时间或者数量到达指定数量后，该窗口将被完全删除。</br></p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><h3 id="1-滚动窗口-Tumbing-Windows"><a href="#1-滚动窗口-Tumbing-Windows" class="headerlink" title="1.滚动窗口(Tumbing Windows)"></a>1.滚动窗口(Tumbing Windows)</h3><ul>
+<li>将数据依据固定的长度进行切分</li>
+<li>时间对齐，窗口长度固定，没有重叠</li>
+</ul>
+<h3 id="2-滑动窗口-Sliding-Windows"><a href="#2-滑动窗口-Sliding-Windows" class="headerlink" title="2. 滑动窗口(Sliding Windows)"></a>2. 滑动窗口(Sliding Windows)</h3><ul>
+<li>滑动窗口由固定的窗口长度和滑动间隔构成</li>
+<li>窗口长度固定，可以叠加</li>
+<li>滚动窗口是一种窗口长度与滑动间隔相同的滑动窗口</li>
+</ul>
+<h3 id="3-会话窗口-Session-Windows"><a href="#3-会话窗口-Session-Windows" class="headerlink" title="3. 会话窗口(Session Windows)"></a>3. 会话窗口(Session Windows)</h3><ul>
+<li>由一系列事件组合一个指定时间长度的时间间隙组成，也就是一段时间没有接到新数据就会关闭</li>
+<li>特点：时间无对齐</li>
+</ul>
+<h3 id="4-全局窗口-Global-Windows"><a href="#4-全局窗口-Global-Windows" class="headerlink" title="4. 全局窗口(Global Windows)"></a>4. 全局窗口(Global Windows)</h3><ul>
+<li>可以设置移除器(<code>evictor</code>)和触发器(<code>trigger</code>)，否则不会执行任何计算</li>
+</ul>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><h3 id="1-窗口分配器"><a href="#1-窗口分配器" class="headerlink" title="1. 窗口分配器"></a>1. 窗口分配器</h3><h4 id="1-1-概念"><a href="#1-1-概念" class="headerlink" title="1.1. 概念"></a>1.1. 概念</h4><p>窗口分配器，<code>windows()</code> 方法必须放在<code>keyby</code>方法后面，最后必须使用窗口聚合函数。</br><br>可以通过扩展<code>WindowAssigner</code>类来实现自定义窗口分配器。</br></p>
+<h4 id="1-2-常用创建方法"><a href="#1-2-常用创建方法" class="headerlink" title="1.2. 常用创建方法"></a>1.2. 常用创建方法</h4><h5 id="1-2-1-滚动窗口"><a href="#1-2-1-滚动窗口" class="headerlink" title="1.2.1. 滚动窗口"></a>1.2.1. 滚动窗口</h5><p>直接声明窗口类型：</p>
+<ul>
+<li><code>.window(TumblingEventTimeWindows.of(Time.seconds(5)))</code>：event-time 窗口</li>
+<li><code>.window(TumblingProcessingTimeWindows.of(Time.seconds(5)))</code>：processing-time 窗口</li>
+<li><code>.window(TumblingEventTimeWindows.of(Time.days(1), Time.hours(-8)))</code>：滚动窗口分配器还采用一个可选 offset  参数，该参数可用于更改窗口的对齐方式。</li>
+</ul>
+<p>间接声明窗口类型：</p>
+<ul>
+<li><code>.timeWindow(Time.seconds(15))</code>：滚动时间窗口，即时间到达 15s 时触发输出，默认使用的是 processing time</li>
+<li><code>.countWindow(5)</code>：滚动计数窗口，即数据量达到 5 时触发输出</li>
+</ul>
+<h5 id="1-2-2-滑动窗口"><a href="#1-2-2-滑动窗口" class="headerlink" title="1.2.2. 滑动窗口"></a>1.2.2. 滑动窗口</h5><p>直接声明窗口类型：</p>
+<ul>
+<li><code>.window(SlidingEventTimeWindows.of(Time.seconds(10), Time.seconds(5)))</code>：event-time 窗口</li>
+<li><code>.window(SlidingProcessingTimeWindows.of(Time.seconds(10), Time.seconds(5)))</code>：processing-time 窗口</li>
+</ul>
+<p>间接声明窗口类型：</p>
+<ul>
+<li><code>.timeWindow(Time.seconds(15), Time.seconds(5))</code>：滑动时间窗口，即时间到达 15s 后滑动 5s，默认使用的是 processing time</li>
+<li><code>.countWindow(10, 5)</code>滑动计数窗口，数据量达到 10 后滑动 5</li>
+</ul>
+<h5 id="1-2-3-会话窗口"><a href="#1-2-3-会话窗口" class="headerlink" title="1.2.3. 会话窗口"></a>1.2.3. 会话窗口</h5><p>静态间隙可以直接设置，动态间隙通过实现<code>SessionWindowTimeGapExtractor</code>接口指定。</p>
+<ul>
+<li><code>.window(EventTimeSessionWindows.withGap(Time.minutes(10)))</code>：静态间隙的 event-time 窗口</li>
+<li><code>.window(EventTimeSessionWindows.withDynamicGap((element) -&gt; &#123; &#125;))</code>：动态间隙的 event-time 窗口</li>
+<li><code>.window(ProcessingTimeSessionWindows.withGap(Time.minutes(10)))</code>：静态间隙的 processing-time 窗口</li>
+<li><code>.window(ProcessingTimeSessionWindows.withDynamicGap((element) -&gt; &#123; &#125;))</code>：动态间隙的 processing-time 窗口</li>
+</ul>
+<h5 id="1-2-4-全局窗口"><a href="#1-2-4-全局窗口" class="headerlink" title="1.2.4. 全局窗口"></a>1.2.4. 全局窗口</h5><ul>
+<li><code>.window(GlobalWindows.create())</code>：全局窗口</li>
+</ul>
+<h3 id="2-窗口函数"><a href="#2-窗口函数" class="headerlink" title="2. 窗口函数"></a>2. 窗口函数</h3><h4 id="2-1-概念"><a href="#2-1-概念" class="headerlink" title="2.1. 概念"></a>2.1. 概念</h4><p>定义了对窗口中数据做的计算操作。</p>
+<h4 id="2-2-分类"><a href="#2-2-分类" class="headerlink" title="2.2. 分类"></a>2.2. 分类</h4><ul>
+<li>增量聚合函数<ul>
+<li>每条数据都会触发计算，只保持一个简单状态，比如 sum，只会保存求和的结果，每次更新这个和</li>
+<li><code>ReduceFunction</code>，<code>AggrengateFunction</code></li>
+</ul>
+</li>
+<li>全窗口函数：<ul>
+<li>先收集窗口数据，等到需要计算时遍历所有数据计算，这种函数适用场景较多</li>
+<li><code>ProcessWindowFunction</code>，<code>WindowFunction</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">StreamExecutionEnvironment</span> <span class="variable">env</span> <span class="operator">=</span> ...;</span><br><span class="line">DataStream&lt;String&gt; source = env...;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 增量聚合函数</span></span><br><span class="line">DateStream&lt;String&gt; sink1 = </span><br><span class="line">    source.keyBy(...)</span><br><span class="line">          .timeWindow(Time.seconds(<span class="number">5</span>))</span><br><span class="line">          <span class="comment">// 聚合函数一</span></span><br><span class="line">          .reduce(<span class="keyword">new</span> <span class="title class_">ReduceFunction</span>&lt;String&gt;() &#123;</span><br><span class="line">              <span class="meta">@override</span></span><br><span class="line">              <span class="keyword">public</span> String <span class="title function_">reduce</span><span class="params">(Strng s1, String s2)</span> <span class="keyword">throw</span> Exception &#123;</span><br><span class="line">                  <span class="keyword">return</span> ...;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;)</span><br><span class="line">          <span class="comment">// 聚合函数二，参数ACC是累加器</span></span><br><span class="line">          .aggregate(<span class="keyword">new</span> <span class="title class_">AggrengateFunction</span>&lt;IN, ACC, OUT&gt;() &#123;</span><br><span class="line">              </span><br><span class="line">              <span class="meta">@override</span></span><br><span class="line">              <span class="keyword">public</span> ACC <span class="title function_">createAccumulator</span><span class="params">()</span> &#123;</span><br><span class="line">                  <span class="comment">// 返回累加器初始值</span></span><br><span class="line">                  <span class="keyword">return</span> ...;</span><br><span class="line">              &#125;</span><br><span class="line">              </span><br><span class="line">              <span class="meta">@override</span></span><br><span class="line">              <span class="keyword">public</span> ACC <span class="title function_">add</span><span class="params">(IN value, ACC accumulator)</span> &#123;</span><br><span class="line">                  <span class="keyword">return</span> ...;</span><br><span class="line">              &#125;</span><br><span class="line">              </span><br><span class="line">              <span class="meta">@override</span></span><br><span class="line">              <span class="keyword">public</span> OUT <span class="title function_">getResult</span><span class="params">(ACC accumulator)</span> &#123;</span><br><span class="line">                  <span class="keyword">return</span> ...;</span><br><span class="line">              &#125;</span><br><span class="line">              </span><br><span class="line">              <span class="meta">@override</span></span><br><span class="line">              <span class="keyword">public</span> ACC <span class="title function_">merge</span><span class="params">(ACC a, ACC b)</span> &#123;</span><br><span class="line">                  <span class="keyword">return</span> ...;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 全窗口函数</span></span><br><span class="line">DateStream&lt;String&gt; sink2 = </span><br><span class="line">    source.keyBy(...)</span><br><span class="line">          .timeWindow(Time.seconds(<span class="number">5</span>))</span><br><span class="line">          <span class="comment">// 函数一，参数 KEY 是分组，W是当前窗口</span></span><br><span class="line">          .apply(<span class="keyword">new</span> <span class="title class_">WindowFunction</span>(IN, OUT, KEY, W) &#123;</span><br><span class="line">              <span class="meta">@override</span></span><br><span class="line">              <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">apply</span><span class="params">(KEY key, TimeWindow window, Iterable&lt;IN&gt; in, Collector&lt;OUT&gt; out)</span> <span class="keyword">throw</span> exception &#123;</span><br><span class="line">                  ...</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-其他-API"><a href="#2-3-其他-API" class="headerlink" title="2.3. 其他 API"></a>2.3. 其他 API</h4><ul>
+<li><code>.trigger()</code>：触发器，定义 window 什么时候关闭，触发计算并输出结果</li>
+<li><code>.evictor()</code>：移除器，定义移除某些数据的逻辑</li>
+<li><code>.allowedLateness()</code>：允许处理迟到的数据</li>
+<li><code>.sideOutputLateData()</code>：将迟到的数据放入侧输出流</li>
+<li><code>.getSideOutput()</code>：获取侧输出流</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">StreamExecutionEnvironment</span> <span class="variable">env</span> <span class="operator">=</span> ...;</span><br><span class="line">DataStream&lt;String&gt; source = env...;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义侧输出流便签</span></span><br><span class="line">OutputTag&lt;IN&gt; outputTag  = <span class="keyword">new</span> <span class="title class_">OutputTag</span>&lt;IN&gt;(<span class="string">&quot;sideOutputName&quot;</span>);</span><br><span class="line"></span><br><span class="line">DateStream&lt;String&gt; sink = </span><br><span class="line">    source.keyBy(...)</span><br><span class="line">          .timeWindow(Time.seconds(<span class="number">5</span>))</span><br><span class="line">          <span class="comment">// 函数一</span></span><br><span class="line">          .trigger(<span class="keyword">new</span> <span class="title class_">Trigger</span>(...))</span><br><span class="line">          <span class="comment">// 函数二</span></span><br><span class="line">          .evictor(<span class="keyword">new</span> <span class="title class_">Evictor</span>(...))</span><br><span class="line">          <span class="comment">// 函数三，输出结果后，不关闭窗口，延迟 10s 后关闭，此时仍会在当前窗口进行统计，来一个处理一次</span></span><br><span class="line">          .allowedLateness(Time.second(<span class="number">10</span>))</span><br><span class="line">          <span class="comment">// 函数四，可以将窗口关闭后的数据放到侧输出流里</span></span><br><span class="line">          .sideOutputLateData(outputTag);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理侧输出流</span></span><br><span class="line">DateStream&lt;String&gt; side = source.getSideOutput(outputTag);</span><br></pre></td></tr></table></figure>
+
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ol>
+<li>开窗函数的起始窗口位置，是采用当前时间戳与偏移量的差值与窗口大小取模后的值，作为起始时间点，即</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">long</span> <span class="title function_">getWindowStartWithOffset</span><span class="params">(<span class="type">long</span> timestamp, <span class="type">long</span> offset, <span class="type">long</span> windowSize)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> timestamp - (timestamp - offset + windowSize) % windowSize</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/12/06/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/4.Flink%20%E7%AA%97%E5%8F%A3/" data-id="clkwbuxar00032cjw1wy76ub0" data-title="Flink 基础-窗口(第四章)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/12/14/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/7.ProcessFunction%20API/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Flink 基础-ProcessFunction API(第七章)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/30/%E7%9F%A5%E8%AF%86%E7%82%B9/Git/git%20%E4%BB%93%E5%BA%93%E8%BF%81%E7%A7%BB/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">git 之仓库迁移</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a></li></ul></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Flink/" style="font-size: 20px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Git/" style="font-size: 17.5px;">Git</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 12.5px;">代码归档</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 20px;">大数据</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 15px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 12.5px;">杂记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/06/16/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-Flink%20CDC%20%E9%97%AE%E9%A2%98-/">杂记-Flink CDC</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/10/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/1.%E6%B3%A8%E8%A7%A3/">Java 注解</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/20/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-%E5%AE%9E%E6%88%98%E9%97%AE%E9%A2%98/">杂记-Flink 实战</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/10/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/0.%E5%BE%AE%E6%89%B9%E5%92%8C%E5%AE%9E%E6%97%B6/">Flink 基础-微批和实时(第零章)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/18/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/2.POJO/">Java 中各种对象的简称</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
