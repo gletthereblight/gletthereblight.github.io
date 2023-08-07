@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Glett的码字间">
+<meta property="og:url" content="http://example.com/page/3/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Gao Peng">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-知识点/大数据部件/Flink/基础/3.Flink 常用算子" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/07/30/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/3.Flink%20%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90/" class="article-date">
+  <time class="dt-published" datetime="2020-07-30T09:22:00.000Z" itemprop="datePublished">2020-07-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>►<a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a>►<a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/07/30/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/3.Flink%20%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90/">Flink 基础-常用算子(第三章)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        常用算子简单讲解
+        
+          <p class="article-more-link">
+            <a href="/2020/07/30/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/3.Flink%20%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/07/30/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/3.Flink%20%E5%B8%B8%E7%94%A8%E7%AE%97%E5%AD%90/" data-id="clkwbuxap00012cjw2sq1gyws" data-title="Flink 基础-常用算子(第三章)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-知识点/大数据部件/Flink/基础/1.Flink 概念" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/07/27/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/1.Flink%20%E6%A6%82%E5%BF%B5/" class="article-date">
+  <time class="dt-published" datetime="2020-07-27T03:20:00.000Z" itemprop="datePublished">2020-07-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>►<a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a>►<a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/07/27/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/1.Flink%20%E6%A6%82%E5%BF%B5/">Flink 基础-总览(第一章)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        概念、名词总览
+        
+          <p class="article-more-link">
+            <a href="/2020/07/27/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/1.Flink%20%E6%A6%82%E5%BF%B5/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/07/27/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/1.Flink%20%E6%A6%82%E5%BF%B5/" data-id="clkwa9kbk0000ucjw4pnu1pcu" data-title="Flink 基础-总览(第一章)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-知识点/Git/git Docker" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/07/16/%E7%9F%A5%E8%AF%86%E7%82%B9/Git/git%20Docker/" class="article-date">
+  <time class="dt-published" datetime="2020-07-16T02:17:00.000Z" itemprop="datePublished">2020-07-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/07/16/%E7%9F%A5%E8%AF%86%E7%82%B9/Git/git%20Docker/">Docker 搭建 git</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        本地 Windows10 docker 搭建 git 服务器
+        
+          <p class="article-more-link">
+            <a href="/2020/07/16/%E7%9F%A5%E8%AF%86%E7%82%B9/Git/git%20Docker/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/07/16/%E7%9F%A5%E8%AF%86%E7%82%B9/Git/git%20Docker/" data-id="clkvw3dp300033kjwgbju74af" data-title="Docker 搭建 git" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-知识点/Git/git Cheatsheet" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/05/14/%E7%9F%A5%E8%AF%86%E7%82%B9/Git/git%20Cheatsheet/" class="article-date">
+  <time class="dt-published" datetime="2020-05-14T08:13:00.000Z" itemprop="datePublished">2020-05-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/05/14/%E7%9F%A5%E8%AF%86%E7%82%B9/Git/git%20Cheatsheet/">git 命令速查小抄</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        搬来的 git 命令合集，正确性持续考证中
+        
+          <p class="article-more-link">
+            <a href="/2020/05/14/%E7%9F%A5%E8%AF%86%E7%82%B9/Git/git%20Cheatsheet/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/05/14/%E7%9F%A5%E8%AF%86%E7%82%B9/Git/git%20Cheatsheet/" data-id="clkvw3dot00003kjwcnu6b3rp" data-title="git 命令速查小抄" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-读书笔记/线性代数的本质-3Blue1Brown/线性代数的本质" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/05/03/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8-3Blue1Brown/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" class="article-date">
+  <time class="dt-published" datetime="2018-05-03T14:30:00.000Z" itemprop="datePublished">2018-05-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/05/03/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8-3Blue1Brown/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/">线性代数的本质-3Blue1Brown</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        线性代数的本质
+        
+          <p class="article-more-link">
+            <a href="/2018/05/03/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8-3Blue1Brown/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/05/03/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8-3Blue1Brown/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" data-id="cll0d01bk000170jw3z5m163h" data-title="线性代数的本质-3Blue1Brown" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-读书笔记/idea-instructions图解算法/euler-path" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/euler-path/" class="article-date">
+  <time class="dt-published" datetime="2018-04-21T03:31:00.000Z" itemprop="datePublished">2018-04-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/euler-path/">Idea Instructions 之 euler-path</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        欧拉路径/一笔画路径
+        
+          <p class="article-more-link">
+            <a href="/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/euler-path/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/euler-path/" data-id="cll0avna800053sjwbdtv5y5h" data-title="Idea Instructions 之 euler-path" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-读书笔记/idea-instructions图解算法/graph-scan" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/graph-scan/" class="article-date">
+  <time class="dt-published" datetime="2018-04-21T03:30:00.000Z" itemprop="datePublished">2018-04-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/graph-scan/">Idea Instructions 之 graph-scan</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        图遍历，包括随机查找，深度优先遍历，广度优先遍历
+        
+          <p class="article-more-link">
+            <a href="/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/graph-scan/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/graph-scan/" data-id="cll0avna300033sjwayxi5i7j" data-title="Idea Instructions 之 graph-scan" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-读书笔记/idea-instructions图解算法/avl-tree" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/avl-tree/" class="article-date">
+  <time class="dt-published" datetime="2018-04-21T02:55:00.000Z" itemprop="datePublished">2018-04-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/avl-tree/">Idea Instructions 之 avl-tree</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        AVL 自平衡二叉查找树
+        
+          <p class="article-more-link">
+            <a href="/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/avl-tree/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/avl-tree/" data-id="cll0avn9l00013sjwcynr7biv" data-title="Idea Instructions 之 avl-tree" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-读书笔记/idea-instructions图解算法/merge-sort" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/merge-sort/" class="article-date">
+  <time class="dt-published" datetime="2018-04-21T02:34:00.000Z" itemprop="datePublished">2018-04-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/merge-sort/">Idea Instructions 之 merge-sort</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        归并排序
+        
+          <p class="article-more-link">
+            <a href="/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/merge-sort/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/merge-sort/" data-id="cll0avnah00093sjw51ykfq97" data-title="Idea Instructions 之 merge-sort" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-读书笔记/idea-instructions图解算法/binary-search" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/binary-search/" class="article-date">
+  <time class="dt-published" datetime="2018-04-21T02:26:00.000Z" itemprop="datePublished">2018-04-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/binary-search/">Idea Instructions 之 binary-search</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        二分查找
+        
+          <p class="article-more-link">
+            <a href="/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/binary-search/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/binary-search/" data-id="cll0avn9900003sjw32ashi5n" data-title="Idea Instructions 之 binary-search" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Flink/" style="font-size: 20px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Git/" style="font-size: 14.29px;">Git</a> <a href="/tags/Idea-Instructions/" style="font-size: 18.57px;">Idea Instructions</a> <a href="/tags/Java/" style="font-size: 17.14px;">Java</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 15.71px;">代码归档</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 20px;">大数据</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 12.86px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 11.43px;">杂记</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 18.57px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/06/16/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-Flink%20CDC%20%E9%97%AE%E9%A2%98-/">杂记-Flink CDC</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/10/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/1.%E6%B3%A8%E8%A7%A3/">Java 注解</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/20/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-%E5%AE%9E%E6%88%98%E9%97%AE%E9%A2%98/">杂记-Flink 实战</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/11/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/%E7%AE%97%E6%B3%95%E7%8F%A0%E7%8E%91/">Java 算法珠玑</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/10/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/0.%E5%BE%AE%E6%89%B9%E5%92%8C%E5%AE%9E%E6%97%B6/">Flink 基础-微批和实时(第零章)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

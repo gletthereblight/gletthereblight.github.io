@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>线性代数的本质-3Blue1Brown | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="线性代数的本质">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线性代数的本质-3Blue1Brown">
+<meta property="og:url" content="http://example.com/2018/05/03/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8-3Blue1Brown/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="线性代数的本质">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/3Blue1Brown/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2-1.png">
+<meta property="og:image" content="http://example.com/images/3Blue1Brown/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2-2.png">
+<meta property="og:image" content="http://example.com/images/3Blue1Brown/%E8%A1%8C%E5%88%97%E5%BC%8F-1.png">
+<meta property="og:image" content="http://example.com/images/3Blue1Brown/%E9%80%86%E7%9F%A9%E9%98%B5-1.png">
+<meta property="og:image" content="http://example.com/images/3Blue1Brown/%E7%82%B9%E7%A7%AF%E4%B8%8E%E5%AF%B9%E5%81%B6%E6%80%A7.png">
+<meta property="og:image" content="http://example.com/images/3Blue1Brown/%E5%8F%89%E7%A7%AF.png">
+<meta property="og:image" content="http://example.com/images/3Blue1Brown/%E5%9F%BA%E5%8F%98%E6%8D%A2-1.png">
+<meta property="og:image" content="http://example.com/images/3Blue1Brown/%E5%9F%BA%E5%8F%98%E6%8D%A2-2.png">
+<meta property="og:image" content="http://example.com/images/3Blue1Brown/%E5%9F%BA%E5%8F%98%E6%8D%A2-3.png">
+<meta property="og:image" content="http://example.com/images/3Blue1Brown/%E5%9F%BA%E5%8F%98%E6%8D%A2-4.png">
+<meta property="og:image" content="http://example.com/images/3Blue1Brown/%E5%9F%BA%E5%8F%98%E6%8D%A2-5.png">
+<meta property="og:image" content="http://example.com/images/3Blue1Brown/%E5%9F%BA%E5%8F%98%E6%8D%A2-6.png">
+<meta property="og:image" content="http://example.com/images/3Blue1Brown/%E5%9F%BA%E5%8F%98%E6%8D%A2-7.png">
+<meta property="og:image" content="http://example.com/images/3Blue1Brown/%E6%8A%BD%E8%B1%A1%E5%90%91%E9%87%8F%E7%A9%BA%E9%97%B4.png">
+<meta property="article:published_time" content="2018-05-03T14:30:00.000Z">
+<meta property="article:modified_time" content="2018-10-15T13:09:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="线性代数的本质">
+<meta property="article:tag" content="3Blue1Brown">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/3Blue1Brown/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2-1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-读书笔记/线性代数的本质-3Blue1Brown/线性代数的本质" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/05/03/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8-3Blue1Brown/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" class="article-date">
+  <time class="dt-published" datetime="2018-05-03T14:30:00.000Z" itemprop="datePublished">2018-05-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      线性代数的本质-3Blue1Brown
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-向量究竟是什么"><a href="#1-向量究竟是什么" class="headerlink" title="1. 向量究竟是什么"></a>1. 向量究竟是什么</h2><p>TODO</p>
+<h2 id="2-线性组合、张成空间与基"><a href="#2-线性组合、张成空间与基" class="headerlink" title="2. 线性组合、张成空间与基"></a>2. 线性组合、张成空间与基</h2><p>TODO</p>
+<h2 id="3-矩阵与线性变换"><a href="#3-矩阵与线性变换" class="headerlink" title="3. 矩阵与线性变换"></a>3. 矩阵与线性变换</h2><h3 id="3-1-词汇"><a href="#3-1-词汇" class="headerlink" title="3.1. 词汇"></a>3.1. 词汇</h3><ul>
+<li><code>Linear transformations</code>：线性变换</li>
+</ul>
+<h3 id="3-2-线性：变换后"><a href="#3-2-线性：变换后" class="headerlink" title="3.2. 线性：变换后"></a>3.2. 线性：变换后</h3><p>直线仍是直线；<br>原点保持固定；</p>
+<h3 id="3-3-线性变换一个重要推论"><a href="#3-3-线性变换一个重要推论" class="headerlink" title="3.3. 线性变换一个重要推论"></a>3.3. 线性变换一个重要推论</h3><p>一个向量是 i-hat 与 j-hat 的特定线性组合，变换后仍为 i-hat 与 j-hat 同样的线性组合，即你可以只通过变换后的 i-hat 与 j-hat，直接推论出变换后的该向量</p>
+<p><img src="/../../../images/3Blue1Brown/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2-1.png" alt="线性变换-1"></p>
+<h3 id="3-4-2×2矩阵"><a href="#3-4-2×2矩阵" class="headerlink" title="3.4. 2×2矩阵"></a>3.4. 2×2矩阵</h3><p>一个二维线性变换仅由四个数字就可完全确定，我们通常把这些坐标包装在2×2格子中，称为2×2矩阵。</br><br>如果你有一个给定向量以及一个描述现象变换的2×2矩阵，你想了解这个线性变换对该向量的影响，你只需要取出向量的坐标将它们与矩阵特定列相乘，再将它们的积求和即可。</br></p>
+<p><img src="/../../../images/3Blue1Brown/%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2-2.png" alt="线性变换-2"></p>
+<h2 id="4-矩阵乘法与线性变换复合"><a href="#4-矩阵乘法与线性变换复合" class="headerlink" title="4. 矩阵乘法与线性变换复合"></a>4. 矩阵乘法与线性变换复合</h2><p>TODO</p>
+<h2 id="附注1"><a href="#附注1" class="headerlink" title="附注1"></a>附注1</h2><p>TODO</p>
+<h2 id="5-行列式"><a href="#5-行列式" class="headerlink" title="5. 行列式"></a>5. 行列式</h2><h3 id="5-1-词汇"><a href="#5-1-词汇" class="headerlink" title="5.1. 词汇"></a>5.1. 词汇</h3><ul>
+<li><code>Parallelepiped</code>：平行六面体</li>
+<li><code>Generally stretches space</code>：向外拉伸空间</li>
+<li><code>Generally squishes space</code>：向内挤压空间</li>
+<li><code>determinant</code>：行列式</li>
+<li><code>orientation</code>：定向，取向</li>
+</ul>
+<h3 id="5-2-行列式的概念"><a href="#5-2-行列式的概念" class="headerlink" title="5.2. 行列式的概念"></a>5.2. 行列式的概念</h3><p>线性变换改变的比例被称为这个变换的行列式(The determinant of a transformation)。</p>
+<h3 id="5-3-n阶行列式"><a href="#5-3-n阶行列式" class="headerlink" title="5.3. n阶行列式"></a>5.3. n阶行列式</h3><ul>
+<li>二阶行列式可看做平行四边形的面积，正负号表示取向</li>
+<li>三阶行列式可简单看做平行六面体的体积，正负号可用右手定则判断</li>
+<li>行列式为0，矩阵必然线性相关</li>
+</ul>
+<h3 id="5-4-集合概念"><a href="#5-4-集合概念" class="headerlink" title="5.4. 集合概念"></a>5.4. 集合概念</h3><p>ad 表示矩形面积，bc表示矩形在对角线方向的挤压量（拉伸量）。</p>
+<p><img src="/../../../images/3Blue1Brown/%E8%A1%8C%E5%88%97%E5%BC%8F-1.png" alt="行列式"></p>
+<h2 id="6-逆矩阵、列空间、零空间"><a href="#6-逆矩阵、列空间、零空间" class="headerlink" title="6. 逆矩阵、列空间、零空间"></a>6. 逆矩阵、列空间、零空间</h2><h3 id="6-1-词汇"><a href="#6-1-词汇" class="headerlink" title="6.1. 词汇"></a>6.1. 词汇</h3><ul>
+<li><code>Inverse matrices</code>：逆矩阵</li>
+<li><code>Column space</code>：列空间</li>
+<li><code>Rank</code>：秩</li>
+<li><code>Null space</code>：零空间</li>
+<li><code>Gaussian elimination</code>：高斯消元法</li>
+<li><code>Row echelon form</code>：行阶梯型</li>
+<li><code>Linear system of equations</code>：线性方程组</li>
+</ul>
+<h3 id="6-2-Ax-v"><a href="#6-2-Ax-v" class="headerlink" title="6.2. Ax&#x3D;v"></a>6.2. Ax&#x3D;v</h3><p>求解Ax&#x3D;v，意味着寻找一个向量x，使它变换后与v重合。</p>
+<h3 id="6-3-矩阵相乘"><a href="#6-3-矩阵相乘" class="headerlink" title="6.3. 矩阵相乘"></a>6.3. 矩阵相乘</h3><p>A与A的逆矩阵相乘，等于一组基向量。</p>
+<p><img src="/../../../images/3Blue1Brown/%E9%80%86%E7%9F%A9%E9%98%B5-1.png" alt="逆矩阵"></p>
+<h3 id="6-4-变换"><a href="#6-4-变换" class="headerlink" title="6.4. 变换"></a>6.4. 变换</h3><p>只要变换A，不会将空间压缩到一个更低的维度时，即det(A)不等于0，就必然存在A的逆矩阵，因为你无法将一条直线“解压缩”为一个平面。</p>
+<h3 id="6-5-秩"><a href="#6-5-秩" class="headerlink" title="6.5. 秩"></a>6.5. 秩</h3><p>秩表示压缩后的空间维数。</p>
+<h3 id="6-6-列空间"><a href="#6-6-列空间" class="headerlink" title="6.6. 列空间"></a>6.6. 列空间</h3><p>所有可能的输出向量Av构成的集合叫做矩阵A的列空间。</p>
+<h3 id="6-7-满秩"><a href="#6-7-满秩" class="headerlink" title="6.7. 满秩"></a>6.7. 满秩</h3><p>秩与列数相等称为满秩。</p>
+<h3 id="6-8-零空间"><a href="#6-8-零空间" class="headerlink" title="6.8. 零空间"></a>6.8. 零空间</h3><p>变换后落在原点的向量集合成为零空间。</p>
+<h2 id="附注2-非方阵"><a href="#附注2-非方阵" class="headerlink" title="附注2 非方阵"></a>附注2 非方阵</h2><ul>
+<li>变换后为3×2矩阵，三维空间用2个三维坐标表示，即为三维空间的一个平面上</li>
+<li>变换后为2×3矩阵，三维空间用3个二维坐标表示，即为二维空间</li>
+<li>变换后为1×1矩阵，一维空间用1个一维坐标表示，即为数轴上点</li>
+</ul>
+<h2 id="7-点积与对偶性"><a href="#7-点积与对偶性" class="headerlink" title="7.点积与对偶性"></a>7.点积与对偶性</h2><h3 id="7-1-词汇"><a href="#7-1-词汇" class="headerlink" title="7.1. 词汇"></a>7.1. 词汇</h3><ul>
+<li><code>Dot product</code>：点积</li>
+<li><code>Duality</code>：对偶性</li>
+</ul>
+<h3 id="7-2-点积"><a href="#7-2-点积" class="headerlink" title="7.2. 点积"></a>7.2. 点积</h3><p>点积就是矩阵向量的乘积。两个向量点乘就是将其中一个向量转换为线性变换。</br><br>线性变换推论可知，变换后的该向量可以从变换后的i-hat与j-hat得到，而两者的变换又与投影有关，所以点积与投影自然而然联系起来了。</br></p>
+<p><img src="/../../../images/3Blue1Brown/%E7%82%B9%E7%A7%AF%E4%B8%8E%E5%AF%B9%E5%81%B6%E6%80%A7.png" alt="点积与对偶性"></p>
+<h3 id="7-3-向量"><a href="#7-3-向量" class="headerlink" title="7.3. 向量"></a>7.3. 向量</h3><p>向量不仅仅是空间的一个箭头，更该把它看成线性变换的载体。向量仿佛一个特定变换的概念性记号，有时，想象空间中的向量比想象整个空间移动到数轴上更加容易理解。</p>
+<h3 id="7-4-严格的线性性质"><a href="#7-4-严格的线性性质" class="headerlink" title="7.4. 严格的线性性质"></a>7.4. 严格的线性性质</h3><p>L(v+w) &#x3D; Lv+Lw：可加性<br>L(cv) &#x3D; cLv：成比性（一阶齐次）</p>
+<h2 id="8-叉积的标准介绍"><a href="#8-叉积的标准介绍" class="headerlink" title="8.叉积的标准介绍"></a>8.叉积的标准介绍</h2><h3 id="8-1-词汇"><a href="#8-1-词汇" class="headerlink" title="8.1. 词汇"></a>8.1. 词汇</h3><ul>
+<li><code>Cross product</code>：叉积</li>
+</ul>
+<h3 id="8-2-概念"><a href="#8-2-概念" class="headerlink" title="8.2. 概念"></a>8.2. 概念</h3><p>两向量的叉积就是两者形成的平行四边形的面积，方向利用右手定则判断。通常用来度量面积变换比例的行列式，给出了平行四边形的面积。</br><br>严格意义上的叉积是使用2个三维向量生成1个新的三维向量。</br><br>叉积所生成的对偶向量，必然与输入的两个向量垂直，并且长度数值上等于输入的两个向量的张成的平行四边形。</br></p>
+<p><img src="/../../../images/3Blue1Brown/%E5%8F%89%E7%A7%AF.png" alt="叉积"></p>
+<h2 id="9-基变换"><a href="#9-基变换" class="headerlink" title="9.基变换"></a>9.基变换</h2><h3 id="9-1-坐标系"><a href="#9-1-坐标系" class="headerlink" title="9.1. 坐标系"></a>9.1. 坐标系</h3><p>发生在向量与一组数之间的任意转化，都称作一个坐标系。</p>
+<h3 id="9-2-向量新理解"><a href="#9-2-向量新理解" class="headerlink" title="9.2. 向量新理解"></a>9.2. 向量新理解</h3><p>我们在线性变换前所想的向量是我们的基向量的一种特定的线性组合，而线性变换的一个重要特征(第3章的线性变换推论)就是，变化后的向量仍然是相同的线性组合，不过使用的是新的基向量。</p>
+<p><img src="/../../../images/3Blue1Brown/%E5%9F%BA%E5%8F%98%E6%8D%A2-1.png" alt="基变换-1"></p>
+<p><img src="/../../../images/3Blue1Brown/%E5%9F%BA%E5%8F%98%E6%8D%A2-2.png" alt="基变换-2"></p>
+<h3 id="9-3-转换一个矩阵"><a href="#9-3-转换一个矩阵" class="headerlink" title="9.3. 转换一个矩阵"></a>9.3. 转换一个矩阵</h3><p>如何转换一个矩阵，即用她的坐标来表示一个与你相同的变换：</br></p>
+<ol>
+<li>从詹妮弗的语言描述的任一向量出发<br><img src="/../../../images/3Blue1Brown/%E5%9F%BA%E5%8F%98%E6%8D%A2-3.png" alt="基变换-3"></li>
+<li>利用基变换转化为我们的语言描述<br><img src="/../../../images/3Blue1Brown/%E5%9F%BA%E5%8F%98%E6%8D%A2-4.png" alt="基变换-4"></li>
+<li>所得结果左乘线性变换矩阵([0,1],[-1,0]为你的变换矩阵，即旋转逆时针90°)<br><img src="/../../../images/3Blue1Brown/%E5%9F%BA%E5%8F%98%E6%8D%A2-5.png" alt="基变换-5"></li>
+<li>再将结果左乘基变换的逆矩阵<br><img src="/../../../images/3Blue1Brown/%E5%9F%BA%E5%8F%98%E6%8D%A2-6.png" alt="基变换-6"></li>
+<li>这三个符合矩阵就是用她的语言来描述一个与你相同的线性变换，它接收詹妮弗语言描述的向量，并输出她的语言描述的变换后的向量<br><img src="/../../../images/3Blue1Brown/%E5%9F%BA%E5%8F%98%E6%8D%A2-7.png" alt="基变换-7"></li>
+</ol>
+<h3 id="9-4-A-1MA"><a href="#9-4-A-1MA" class="headerlink" title="9.4. A-1MA"></a>9.4. A<sup>-1</sup>MA</h3><p>表达式 A<sup>-1</sup>MA 暗示一种数学上的转移作用，中间M矩阵代表你所见的变换，两侧的矩阵代表转移作用，也就是视角的转换，矩阵乘积仍然代表同一个变换，只不过是从其他的人角度来看。</p>
+<h2 id="10-特征向量与特征值"><a href="#10-特征向量与特征值" class="headerlink" title="10.特征向量与特征值"></a>10.特征向量与特征值</h2><h3 id="10-1-词汇"><a href="#10-1-词汇" class="headerlink" title="10.1. 词汇"></a>10.1. 词汇</h3><ul>
+<li><code>Eigenvectors</code>：特征向量</li>
+<li><code>Eigenvalues</code>：特征值</li>
+<li><code>Diagonal matrix</code>：对角矩阵</li>
+<li><code>Eigenbasis</code>：特征值</li>
+</ul>
+<h3 id="10-2-特征向量"><a href="#10-2-特征向量" class="headerlink" title="10.2. 特征向量"></a>10.2. 特征向量</h3><p>特征向量指变换后仍留在其张成空间内的向量；每个特征向量都有一个所属的特征值，被称为特征值，即衡量特征向量在变换中拉伸或压缩比例的因子。</p>
+<h2 id="11-抽象向量空间"><a href="#11-抽象向量空间" class="headerlink" title="11.抽象向量空间"></a>11.抽象向量空间</h2><h3 id="11-1-词汇"><a href="#11-1-词汇" class="headerlink" title="11.1. 词汇"></a>11.1. 词汇</h3><ul>
+<li><code>linear operators</code>：线性算子</li>
+<li><code>Axioms</code>：公理</li>
+</ul>
+<h3 id="11-2-向量加法和数乘规则"><a href="#11-2-向量加法和数乘规则" class="headerlink" title="11.2. 向量加法和数乘规则"></a>11.2. 向量加法和数乘规则</h3><p><img src="/../../../images/3Blue1Brown/%E6%8A%BD%E8%B1%A1%E5%90%91%E9%87%8F%E7%A9%BA%E9%97%B4.png" alt="抽象向量空间"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/05/03/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8-3Blue1Brown/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" data-id="cll0d01bk000170jw3z5m163h" data-title="线性代数的本质-3Blue1Brown" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/05/14/%E7%9F%A5%E8%AF%86%E7%82%B9/Git/git%20Cheatsheet/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          git 命令速查小抄
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/idea-instructions%E5%9B%BE%E8%A7%A3%E7%AE%97%E6%B3%95/euler-path/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Idea Instructions 之 euler-path</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Flink/" style="font-size: 20px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Git/" style="font-size: 14.29px;">Git</a> <a href="/tags/Idea-Instructions/" style="font-size: 18.57px;">Idea Instructions</a> <a href="/tags/Java/" style="font-size: 17.14px;">Java</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 15.71px;">代码归档</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 20px;">大数据</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 12.86px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 11.43px;">杂记</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 18.57px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/06/16/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-Flink%20CDC%20%E9%97%AE%E9%A2%98-/">杂记-Flink CDC</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/10/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/1.%E6%B3%A8%E8%A7%A3/">Java 注解</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/20/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-%E5%AE%9E%E6%88%98%E9%97%AE%E9%A2%98/">杂记-Flink 实战</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/11/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/%E7%AE%97%E6%B3%95%E7%8F%A0%E7%8E%91/">Java 算法珠玑</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/10/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/0.%E5%BE%AE%E6%89%B9%E5%92%8C%E5%AE%9E%E6%97%B6/">Flink 基础-微批和实时(第零章)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

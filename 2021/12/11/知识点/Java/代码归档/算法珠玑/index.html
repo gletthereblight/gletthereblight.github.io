@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java 算法珠玑 | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="算法珠玑之于 Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 算法珠玑">
+<meta property="og:url" content="http://example.com/2021/12/11/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/%E7%AE%97%E6%B3%95%E7%8F%A0%E7%8E%91/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="算法珠玑之于 Java">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-11T13:30:00.000Z">
+<meta property="article:modified_time" content="2022-10-18T09:39:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="代码归档">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Java/代码归档/算法珠玑" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/12/11/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/%E7%AE%97%E6%B3%95%E7%8F%A0%E7%8E%91/" class="article-date">
+  <time class="dt-published" datetime="2021-12-11T13:30:00.000Z" itemprop="datePublished">2021-12-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java 算法珠玑
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="多个构造函数时，考虑使用构造器"><a href="#多个构造函数时，考虑使用构造器" class="headerlink" title="多个构造函数时，考虑使用构造器"></a>多个构造函数时，考虑使用构造器</h2><p>一个对象，具有多个成员变量可能需要初始化，常规方法，需要提供大量构造函数。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AlertDialog</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> width;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> height;</span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line">    <span class="keyword">private</span> String confirmText;</span><br><span class="line">    <span class="keyword">private</span> String denyText;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">AlertDialog</span><span class="params">()</span>&#123;&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">AlertDialog</span><span class="params">(<span class="type">int</span> width, <span class="type">int</span> height)</span>&#123; <span class="comment">// 空白的警告框</span></span><br><span class="line">         AlertDialog(width,height,<span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 带标题的警告框</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">AlertDialog</span><span class="params">(<span class="type">int</span> width, <span class="type">int</span> height, String title)</span>&#123; <span class="comment">// 带标题的警告框</span></span><br><span class="line">        AlertDialog(width, height, title, <span class="string">&quot;确定&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 带标题的警告框，有确定按钮</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">AlertDialog</span><span class="params">(<span class="type">int</span> width, <span class="type">int</span> height, String title, String confirm)</span>&#123;</span><br><span class="line">        AlertDialog(width, height, title, confirm, <span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 带标题的警告框，有确定按钮，取消按钮</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">AlertDialog</span><span class="params">(<span class="type">int</span> width, <span class="type">int</span> height, String title, String confirm, String denyText)</span>&#123;</span><br><span class="line">        <span class="comment">// set every thing.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有多种样式的警告框，为了调用方便，必须提供多个构造函数，不灵活。如果采用另外一种方式，则可以解决，但会花费很多经历处理并发的情况:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AlertDialog</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> width;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> height;</span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line">    <span class="keyword">private</span> String confirmText;</span><br><span class="line">    <span class="keyword">private</span> String denyText;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">AlertDialog</span><span class="params">()</span>&#123;&#125;<span class="comment">// 空白的构造函数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWidth</span><span class="params">(<span class="type">int</span> width)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.width = width;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 其他set方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>调用时，通过调用各个参数的set方法进行设置，但是并发解决不了，且无法进行参数校验。此时，可以使用构造器来解决：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AlertDialog</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> width;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> height;</span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line">    <span class="keyword">private</span> String confirmText;</span><br><span class="line">    <span class="keyword">private</span> String denyText;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// private</span></span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">AlertDialog</span><span class="params">()</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Builder中使用</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="title function_">AlertDialog</span><span class="params">(Builder b)</span>&#123;</span><br><span class="line">        width = b.width;</span><br><span class="line">        height = b.height;</span><br><span class="line">        <span class="comment">// .....</span></span><br><span class="line">        <span class="keyword">if</span>(width==<span class="number">0</span>||height==<span class="number">0</span>) <span class="keyword">throws</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;size must be set&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造器</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Builder</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="type">int</span> width;</span><br><span class="line">        <span class="keyword">private</span> <span class="type">int</span> height;</span><br><span class="line">        <span class="keyword">private</span> String title;</span><br><span class="line">        <span class="keyword">private</span> String confirmText;</span><br><span class="line">        <span class="keyword">private</span> String denyText;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 注意：返回的Builder。</span></span><br><span class="line">        <span class="keyword">public</span> Builder <span class="title function_">setTitle</span><span class="params">(String title)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.title = title;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 其他set...</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> AlertDialog <span class="title function_">build</span><span class="params">()</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AlertDialog</span>(<span class="built_in">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>于是，可以根据相应需求，进行相应设置，并在<code>AlertDialog</code>真正构造时，进行参数校验。如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">AlertDialog</span>.Builder().setTitle(<span class="string">&quot;提示&quot;</span>).build();</span><br></pre></td></tr></table></figure>
+
+<h2 id="通用的-Builder-模式构建器"><a href="#通用的-Builder-模式构建器" class="headerlink" title="通用的 Builder 模式构建器"></a>通用的 Builder 模式构建器</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Builder</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Supplier&lt;T&gt; instantiator;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Consumer&lt;T&gt;&gt; modifiers = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Builder</span><span class="params">(Supplier&lt;T&gt; instantiator)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.instantiator = instantiator;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; Builder&lt;T&gt; <span class="title function_">of</span><span class="params">(Supplier&lt;T&gt; instantiator)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Builder</span>&lt;&gt;(instantiator);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> &lt;P1&gt; Builder&lt;T&gt; <span class="title function_">with</span><span class="params">(Consumer1&lt;T, P1&gt; consumer, P1 p1)</span> &#123;</span><br><span class="line">        Consumer&lt;T&gt; c = instance -&gt; consumer.accept(instance, p1);</span><br><span class="line">        modifiers.add(c);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> &lt;P1, P2&gt; Builder&lt;T&gt; <span class="title function_">with</span><span class="params">(Consumer2&lt;T, P1, P2&gt; consumer, P1 p1, P2 p2)</span> &#123;</span><br><span class="line">        Consumer&lt;T&gt; c = instance -&gt; consumer.accept(instance, p1, p2);</span><br><span class="line">        modifiers.add(c);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> &lt;P1, P2, P3&gt; Builder&lt;T&gt; <span class="title function_">with</span><span class="params">(Consumer3&lt;T, P1, P2, P3&gt; consumer, P1 p1, P2 p2, P3 p3)</span> &#123;</span><br><span class="line">        Consumer&lt;T&gt; c = instance -&gt; consumer.accept(instance, p1, p2, p3);</span><br><span class="line">        modifiers.add(c);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">build</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">T</span> <span class="variable">value</span> <span class="operator">=</span> instantiator.get();</span><br><span class="line">        modifiers.forEach(modifier -&gt; modifier.accept(value));</span><br><span class="line">        modifiers.clear();</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 1 参数 Consumer</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@FunctionalInterface</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Consumer1</span>&lt;T, P1&gt; &#123;</span><br><span class="line">        <span class="keyword">void</span> <span class="title function_">accept</span><span class="params">(T t, P1 p1)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 2 参数 Consumer</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@FunctionalInterface</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Consumer2</span>&lt;T, P1, P2&gt; &#123;</span><br><span class="line">        <span class="keyword">void</span> <span class="title function_">accept</span><span class="params">(T t, P1 p1, P2 p2)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 3 参数 Consumer</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@FunctionalInterface</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Consumer3</span>&lt;T, P1, P2, P3&gt; &#123;</span><br><span class="line">        <span class="keyword">void</span> <span class="title function_">accept</span><span class="params">(T t, P1 p1, P2 p2, P3 p3)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GirlFriend</span> &#123;</span><br><span class="line">    <span class="comment">// 省略属性 ...</span></span><br><span class="line">    <span class="comment">// 省略 getter &amp; setter ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 为了演示方便，加几个聚合方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addHobby</span><span class="params">(String hobby)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.hobby = Optional.ofNullable(<span class="built_in">this</span>.hobby).orElse(<span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;());</span><br><span class="line">        <span class="built_in">this</span>.hobby.add(hobby);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addGift</span><span class="params">(String day, String gift)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.gift = Optional.ofNullable(<span class="built_in">this</span>.gift).orElse(<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;());</span><br><span class="line">        <span class="built_in">this</span>.gift.put(day, gift);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setVitalStatistics</span><span class="params">(<span class="type">int</span> bust, <span class="type">int</span> waist, <span class="type">int</span> hips)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.bust = bust;</span><br><span class="line">        <span class="built_in">this</span>.waist = waist;</span><br><span class="line">        <span class="built_in">this</span>.hips = hips;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">GirlFriend</span> <span class="variable">myGirlFriend</span> <span class="operator">=</span> Builder.of(GirlFriend::<span class="keyword">new</span>)</span><br><span class="line">                .with(GirlFriend::setName, <span class="string">&quot;小美&quot;</span>)</span><br><span class="line">                .with(GirlFriend::setAge, <span class="number">18</span>)</span><br><span class="line">                .with(GirlFriend::setVitalStatistics, <span class="number">33</span>, <span class="number">23</span>, <span class="number">33</span>)</span><br><span class="line">                .with(GirlFriend::setBirthday, <span class="string">&quot;2001-10-26&quot;</span>)</span><br><span class="line">                .with(GirlFriend::setAddress, <span class="string">&quot;上海浦东&quot;</span>)</span><br><span class="line">                .with(GirlFriend::setMobile, <span class="string">&quot;18688888888&quot;</span>)</span><br><span class="line">                .with(GirlFriend::setEmail, <span class="string">&quot;pretty-xiaomei@qq.com&quot;</span>)</span><br><span class="line">                .with(GirlFriend::setHairColor, <span class="string">&quot;浅棕色带点微卷&quot;</span>)</span><br><span class="line">                .with(GirlFriend::addHobby, <span class="string">&quot;逛街&quot;</span>)</span><br><span class="line">                .with(GirlFriend::addHobby, <span class="string">&quot;购物&quot;</span>)</span><br><span class="line">                .with(GirlFriend::addHobby, <span class="string">&quot;买东西&quot;</span>)</span><br><span class="line">                .with(GirlFriend::addGift, <span class="string">&quot;情人节礼物&quot;</span>, <span class="string">&quot;LBR 1912女王时代&quot;</span>)</span><br><span class="line">                .with(GirlFriend::addGift, <span class="string">&quot;生日礼物&quot;</span>, <span class="string">&quot;迪奥烈焰蓝金&quot;</span>)</span><br><span class="line">                .with(GirlFriend::addGift, <span class="string">&quot;纪念日礼物&quot;</span>, <span class="string">&quot;阿玛尼红管唇釉&quot;</span>)</span><br><span class="line">                <span class="comment">// 等等等等 ...</span></span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/11/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/%E7%AE%97%E6%B3%95%E7%8F%A0%E7%8E%91/" data-id="cll0avnbk00163sjw23b4diin" data-title="Java 算法珠玑" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/04/20/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-%E5%AE%9E%E6%88%98%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          杂记-Flink 实战
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/10/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/0.%E5%BE%AE%E6%89%B9%E5%92%8C%E5%AE%9E%E6%97%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Flink 基础-微批和实时(第零章)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Flink/" style="font-size: 20px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Git/" style="font-size: 14.29px;">Git</a> <a href="/tags/Idea-Instructions/" style="font-size: 18.57px;">Idea Instructions</a> <a href="/tags/Java/" style="font-size: 17.14px;">Java</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 15.71px;">代码归档</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 20px;">大数据</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 12.86px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 11.43px;">杂记</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 18.57px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/06/16/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-Flink%20CDC%20%E9%97%AE%E9%A2%98-/">杂记-Flink CDC</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/10/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/1.%E6%B3%A8%E8%A7%A3/">Java 注解</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/20/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-%E5%AE%9E%E6%88%98%E9%97%AE%E9%A2%98/">杂记-Flink 实战</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/11/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/%E7%AE%97%E6%B3%95%E7%8F%A0%E7%8E%91/">Java 算法珠玑</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/10/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/0.%E5%BE%AE%E6%89%B9%E5%92%8C%E5%AE%9E%E6%97%B6/">Flink 基础-微批和实时(第零章)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
