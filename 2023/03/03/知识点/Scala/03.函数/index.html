@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Scala 基础-函数(第三章) | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Scala 中的函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala 基础-函数(第三章)">
+<meta property="og:url" content="http://example.com/2023/03/03/%E7%9F%A5%E8%AF%86%E7%82%B9/Scala/03.%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="Scala 中的函数">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-03-03T13:02:00.000Z">
+<meta property="article:modified_time" content="2023-03-03T14:38:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="Scala">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Scala/03.函数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/03/03/%E7%9F%A5%E8%AF%86%E7%82%B9/Scala/03.%E5%87%BD%E6%95%B0/" class="article-date">
+  <time class="dt-published" datetime="2023-03-03T13:02:00.000Z" itemprop="datePublished">2023-03-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Scala 基础-函数(第三章)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="wiki"><a href="#wiki" class="headerlink" title="wiki"></a>wiki</h2><h2 id="1-函数"><a href="#1-函数" class="headerlink" title="1. 函数"></a>1. 函数</h2><h3 id="1-语法"><a href="#1-语法" class="headerlink" title="1. 语法"></a>1. 语法</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">函数名</span></span>([参数名: 参数类型],...) [: 返回值类型] = &#123;</span><br><span class="line">  语句</span><br><span class="line">  [<span class="keyword">return</span>] 返回值</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果有参数，必须给出参数类型。如果没有形参，括号可以省略。多个参数使用逗号分隔</li>
+<li>只要不是递归函数，就不需要显示指定返回值类型</li>
+<li>每行语句不强制用分号结束，但是单行包含多条语句，需要使用它分隔</li>
+<li>不用显示调用 return，默认以最后一行结果作为返回值。如果显示的调用了 return，则必须指定返回值类型</li>
+<li>可以在函数之中在声明函数</li>
+<li>当 <code>val</code> 被声明为 <code>lazy</code> 时，它的初始化将被推迟，直到我们首次对它取值</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</span><br><span class="line">    <span class="keyword">lazy</span> <span class="keyword">val</span> res = sum(<span class="number">10</span>, <span class="number">20</span>)  <span class="comment">// 并没有马上初始化，计算sum</span></span><br><span class="line">    println(res)                <span class="comment">//这里 res 才真正有值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-调用"><a href="#2-调用" class="headerlink" title="2. 调用"></a>2. 调用</h3><ul>
+<li>在声明参数时，可以设默认值</li>
+<li>在调用函数时，可以指定参数名赋予参数值</li>
+<li>参数类型后面加上* 表示可以接受多个变长参数</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decorate</span></span>(str: <span class="type">String</span>, left: <span class="type">String</span> = <span class="string">&quot;[&quot;</span>, right: <span class="type">String</span> = <span class="string">&quot;]&quot;</span>) = &#123;</span><br><span class="line">  left + str + right</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">decorate(<span class="string">&quot;Hello&quot;</span>)   <span class="comment">// =&gt; &quot;[Hello]&quot; </span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-偏函数"><a href="#2-偏函数" class="headerlink" title="2. 偏函数"></a>2. 偏函数</h2><p>偏函数指被包在花括号内没有 <code>match</code> 的一组 <code>case</code> 语句, 偏函数是 <code>PartialFunction[A, B]</code> 类型的的一个实例对象, 其中 A，B 分别代表输入和返回参数类型。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> 对象名 = &#123; </span><br><span class="line"><span class="comment">//这对大括号及其内部的一组case语句, 就组成了一个偏函数. </span></span><br><span class="line"><span class="keyword">case</span> 值<span class="number">1</span> =&gt; 表达式<span class="number">1</span> </span><br><span class="line"><span class="keyword">case</span> 值<span class="number">2</span> =&gt; 表达式<span class="number">2</span> </span><br><span class="line"><span class="keyword">case</span> 值<span class="number">3</span> =&gt; 表达式<span class="number">3</span> </span><br><span class="line">... </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其类型是 <code>PartialFunction[A, B]</code>，含有一些内部方法 <code>isDefinedAt、OrElse、 andThen、applyOrElse</code>:</p>
+<ul>
+<li><code>isDefinedAt</code> : 这个函数的作用是判断传入来的参数是否在这个偏函数所处理的范围内，类似过滤</li>
+<li><code>apply</code> : 用来描述对已经接收的值，进行如何处理</li>
+<li><code>orElse</code> : 将多个偏函数组合起来使用，效果类似 case 语句</li>
+<li><code>andThen</code> : 相当于方法的连续调用，比如 g(f(x))</li>
+<li><code>applyOrElse</code> ：它接收2个参数，第一个是调用的参数，第二个是个回调函数。如果第一个调用的参数匹配，返回匹配的值，否则调用回调函数</li>
+</ul>
+<p>实战 : 偏函数的应用，取整数的绝对值</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//正数处理，只处理正数</span></span><br><span class="line"><span class="keyword">val</span> positiveAbs:<span class="type">PartialFunction</span>[<span class="type">Int</span>,<span class="type">Int</span>] = &#123;</span><br><span class="line">  <span class="keyword">case</span> x <span class="keyword">if</span> x &gt;<span class="number">0</span> =&gt; x</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//负数处理，只处理负数</span></span><br><span class="line"><span class="keyword">val</span> negativeAbs:<span class="type">PartialFunction</span>[<span class="type">Int</span>,<span class="type">Int</span>] = &#123;</span><br><span class="line">  <span class="keyword">case</span> x <span class="keyword">if</span> x &lt;<span class="number">0</span> =&gt; -x</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//0处理，只处理0</span></span><br><span class="line"><span class="keyword">val</span> zeroAbs:<span class="type">PartialFunction</span>[<span class="type">Int</span>,<span class="type">Int</span>] = &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">0</span> =&gt; <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义最终的绝对值函数,通过多个偏函数得到整个函数，每个函数根据不同情况调用</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">abs</span></span>(x :<span class="type">Int</span>):<span class="type">Int</span> = (positiveAbs orElse negativeAbs orElse zeroAbs) (x)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果 5</span></span><br><span class="line">println(abs(<span class="number">-5</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-偏应用函数"><a href="#3-偏应用函数" class="headerlink" title="3. 偏应用函数"></a>3. 偏应用函数</h2><p>偏应用函数(Partial Applied Function)也叫部分应用函数，指一个函数有n个参数, 而我们为其提供少于n个参数, 那就得到了一个部分应用函数，类似于柯里化(把接受多个参数的函数变换成接受一个单一参数)。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">add</span></span>(x:<span class="type">Int</span>,y:<span class="type">Int</span>,z:<span class="type">Int</span>) = x+y+z</span><br><span class="line">add: (x: <span class="type">Int</span>, y: <span class="type">Int</span>, z: <span class="type">Int</span>)<span class="type">Int</span></span><br><span class="line"> </span><br><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">addX</span> </span>= add(<span class="number">1</span>,:<span class="type">Int</span>,:<span class="type">Int</span>) <span class="comment">// x 已知</span></span><br><span class="line">addX: (<span class="type">Int</span>, <span class="type">Int</span>) =&gt; <span class="type">Int</span></span><br><span class="line">scala&gt; addX(<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">res1: <span class="type">Int</span> = <span class="number">6</span></span><br><span class="line"> </span><br><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">addXAndY</span> </span>= add(<span class="number">10</span>,<span class="number">100</span>,_:<span class="type">Int</span>) <span class="comment">// x 和 y 已知</span></span><br><span class="line">addXAndY: <span class="type">Int</span> =&gt; <span class="type">Int</span></span><br><span class="line">scala&gt; addXAndY(<span class="number">1</span>)</span><br><span class="line">res2: <span class="type">Int</span> = <span class="number">111</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/03/03/%E7%9F%A5%E8%AF%86%E7%82%B9/Scala/03.%E5%87%BD%E6%95%B0/" data-id="cll0io4dp0005vkjwhvg334sm" data-title="Scala 基础-函数(第三章)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/06/16/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-Flink%20CDC%20%E9%97%AE%E9%A2%98-/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          杂记-Flink CDC
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/02/28/%E7%9F%A5%E8%AF%86%E7%82%B9/Scala/02.Any%20%E5%92%8C%E5%9F%BA%E7%B1%BB/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Scala 基础-Any和基类(第二章)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Flink/" style="font-size: 20px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Git/" style="font-size: 14px;">Git</a> <a href="/tags/Idea-Instructions/" style="font-size: 18px;">Idea Instructions</a> <a href="/tags/Java/" style="font-size: 18px;">Java</a> <a href="/tags/Scala/" style="font-size: 14px;">Scala</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 16px;">代码归档</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 20px;">大数据</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 12px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 12px;">杂记</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 18px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/06/16/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-Flink%20CDC%20%E9%97%AE%E9%A2%98-/">杂记-Flink CDC</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/03/%E7%9F%A5%E8%AF%86%E7%82%B9/Scala/03.%E5%87%BD%E6%95%B0/">Scala 基础-函数(第三章)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/28/%E7%9F%A5%E8%AF%86%E7%82%B9/Scala/02.Any%20%E5%92%8C%E5%9F%BA%E7%B1%BB/">Scala 基础-Any和基类(第二章)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/28/%E7%9F%A5%E8%AF%86%E7%82%B9/Scala/0.%E9%9B%B6%E7%A2%8E/">Scala 基础-杂记(第零章)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/23/%E7%9F%A5%E8%AF%86%E7%82%B9/Scala/01.%E7%B1%BB/">Scala 基础-类(第一章)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

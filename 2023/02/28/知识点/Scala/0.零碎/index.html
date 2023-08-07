@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Scala 基础-杂记(第零章) | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Scala 一些零碎信息">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala 基础-杂记(第零章)">
+<meta property="og:url" content="http://example.com/2023/02/28/%E7%9F%A5%E8%AF%86%E7%82%B9/Scala/0.%E9%9B%B6%E7%A2%8E/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="Scala 一些零碎信息">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/scala/scala-template.jpg">
+<meta property="article:published_time" content="2023-02-28T12:48:00.000Z">
+<meta property="article:modified_time" content="2023-03-06T08:54:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="杂记">
+<meta property="article:tag" content="Scala">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/scala/scala-template.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Scala/0.零碎" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/02/28/%E7%9F%A5%E8%AF%86%E7%82%B9/Scala/0.%E9%9B%B6%E7%A2%8E/" class="article-date">
+  <time class="dt-published" datetime="2023-02-28T12:48:00.000Z" itemprop="datePublished">2023-02-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Scala 基础-杂记(第零章)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-关键字"><a href="#1-关键字" class="headerlink" title="1. 关键字"></a>1. 关键字</h2><h3 id="trait"><a href="#trait" class="headerlink" title="trait"></a><code>trait</code></h3><p>相当于 Java 中的接口，可以定义抽象方法，还可以定义字段和方法的实现，且一个类可以混合任意数量的 Trait。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义一个 trait</span></span><br><span class="line"><span class="class"><span class="keyword">trait</span> <span class="title">Flyable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> maxHeight:<span class="type">Int</span>       <span class="comment">// 声明一个抽象字段</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fly</span></span>()               <span class="comment">// 定义一个抽象方法</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">breathe</span></span>() &#123;         <span class="comment">// 定义一个具体的方法</span></span><br><span class="line">        println(<span class="string">&quot;呼吸...&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="implicit"><a href="#implicit" class="headerlink" title="implicit"></a><code>implicit</code></h3><p>隐式转换函数是指在同一个作用域下面，一个给定输入类型并自动转换为指定返回类型的函数，这个函数和函数名、入参名均无关，只和入参类型以及返回类型有关</p>
+<h4 id="1-实战"><a href="#1-实战" class="headerlink" title="1.实战"></a>1.实战</h4><p>display 只接受 String 类型的入参，否则编译会出错</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">display</span></span>(input:<span class="type">String</span>):<span class="type">Unit</span> = println(input)</span><br></pre></td></tr></table></figure>
+
+<p>当想其能支持 Int 类型的入参时，除了我们重新定一个 <code>def display(input:Int):Unit = println(input)</code> 这样的函数以外，还可以在相同的作用域内用 <code>implicit</code> 关键字定义一个隐式转换函数</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">ImplicitDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">display</span></span>(input:<span class="type">String</span>):<span class="type">Unit</span> = println(input)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 定义2个隐式转换函数，实现 Int、Boolean 类型的入参</span></span><br><span class="line">    <span class="keyword">implicit</span> <span class="function"><span class="keyword">def</span> <span class="title">typeConvertor</span></span>(input:<span class="type">Int</span>):<span class="type">String</span> = input.toString</span><br><span class="line">    <span class="keyword">implicit</span> <span class="function"><span class="keyword">def</span> <span class="title">typeConvertor</span></span>(input:<span class="type">Boolean</span>):<span class="type">String</span> = <span class="keyword">if</span>(input) <span class="string">&quot;true&quot;</span> <span class="keyword">else</span> <span class="string">&quot;false&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</span><br><span class="line">        display(<span class="string">&quot;1212&quot;</span>)</span><br><span class="line">        display(<span class="number">12</span>)</span><br><span class="line">        display(<span class="literal">true</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-符号"><a href="#2-符号" class="headerlink" title="2. 符号"></a>2. 符号</h2><h3 id="1"><a href="#1" class="headerlink" title="1. -&gt;, &lt;-"></a>1. <code>-&gt;</code>, <code>&lt;-</code></h3><ul>
+<li><code>-&gt;</code> : 创建 map 时使用，表示映射</li>
+<li><code>&lt;-</code> : 左箭头在遍历时使用</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// map 创建</span></span><br><span class="line"><span class="keyword">val</span> score = <span class="type">Map</span>(<span class="string">&quot;小明&quot;</span> -&gt; <span class="number">50</span>, <span class="string">&quot;小红&quot;</span> -&gt; <span class="number">60</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历</span></span><br><span class="line"><span class="keyword">val</span> people = <span class="type">List</span>(<span class="string">&quot;小明&quot;</span>,<span class="string">&quot;小红&quot;</span>,<span class="string">&quot;小兰&quot;</span>)</span><br><span class="line"><span class="keyword">for</span>(man &lt;- people)&#123;</span><br><span class="line">    println(man)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2"><a href="#2" class="headerlink" title="2. =&gt;"></a>2. <code>=&gt;</code></h3><p>可以看做是创建函数实例的语法糖。例如：<code>A =&gt; T</code>，<code>A,B =&gt; T</code> 表示一个函数的输入参数类型是 <code>A</code>，<code>A,B</code>，返回值类型是 <code>T</code>。<br><code>() =&gt; T</code> 表示函数输入参数为空，而 <code>A =&gt; Unit</code> 则表示函数没有返回值。</p>
+<h3 id="3"><a href="#3" class="headerlink" title="3. _"></a>3. <code>_</code></h3><h4 id="1-匿名函数中参数"><a href="#1-匿名函数中参数" class="headerlink" title="1. 匿名函数中参数"></a>1. 匿名函数中参数</h4><p>当匿名函数参数未被使用或只使用一次时，可用它来代替</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 未使用</span></span><br><span class="line">scala&gt; list.foreach(_ =&gt; println(<span class="string">&quot;Hello Scala&quot;</span>))</span><br><span class="line"><span class="type">Hello</span> <span class="type">Scala</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 只使用一次</span></span><br><span class="line">scala&gt; <span class="keyword">val</span> list = <span class="type">List</span>(<span class="number">5</span>,<span class="number">3</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">1</span>)</span><br><span class="line">list: <span class="type">List</span>[<span class="type">Int</span>] = <span class="type">List</span>(<span class="number">5</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等同于 list.map(x =&gt; x * 10)</span></span><br><span class="line">scala&gt; list.map(_ * <span class="number">10</span>)</span><br><span class="line">res0: <span class="type">List</span>[<span class="type">Int</span>] = <span class="type">List</span>(<span class="number">50</span>, <span class="number">30</span>, <span class="number">70</span>, <span class="number">90</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等同于 list.sortWith((x, y) =&gt; x &lt; y)</span></span><br><span class="line">scala&gt; list.sortWith(_ &lt; _)</span><br><span class="line">res1: <span class="type">List</span>[<span class="type">Int</span>] = <span class="type">List</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-通配符"><a href="#2-通配符" class="headerlink" title="2. 通配符"></a>2. 通配符</h4><p>可用在泛型、模式匹配和导入语句中。</p>
+<p>在泛型中类似 java 中的 ?。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 泛型中使用，等同于 java 中 list&lt;?&gt;</span></span><br><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">testPrint</span></span>(l: <span class="type">List</span>[_]) = &#123;</span><br><span class="line">     |   list.foreach(x =&gt; println(x))</span><br><span class="line">     | &#125;</span><br><span class="line">testPrint: (l: <span class="type">List</span>[_])<span class="type">Unit</span></span><br></pre></td></tr></table></figure>
+
+<p>在模式匹配中，可以用来代替 Java switch-case 表达方式中的 default 之外，还可以占位表示其他元素甚至类型</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">str <span class="keyword">match</span> &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">1</span> =&gt; <span class="string">&quot;one&quot;</span></span><br><span class="line">  <span class="keyword">case</span> <span class="number">2</span> =&gt; <span class="string">&quot;two&quot;</span></span><br><span class="line">  <span class="comment">// 如同 java 中的 default</span></span><br><span class="line">  <span class="keyword">case</span> _ =&gt; <span class="string">&quot;anything other than one and two&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">expr <span class="keyword">match</span> &#123;</span><br><span class="line">  <span class="comment">// 以1开头，且长度为 3 的 List</span></span><br><span class="line">  <span class="keyword">case</span> <span class="type">List</span>(<span class="number">1</span>,_,_) =&gt; <span class="string">&quot;a list with three element and the first element is 1&quot;</span></span><br><span class="line">  <span class="comment">// 长度大于等于 0 的 List</span></span><br><span class="line">  <span class="keyword">case</span> <span class="type">List</span>(_*)  =&gt; <span class="string">&quot;a list with zero or more elements&quot;</span></span><br><span class="line">  <span class="comment">// 键和值类型都为任意类型的Map</span></span><br><span class="line">  <span class="keyword">case</span> <span class="type">Map</span>[_,_] =&gt; <span class="string">&quot;matches a map with any key type and any value type&quot;</span></span><br><span class="line">  <span class="keyword">case</span> _ =&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以实现 Java import 语句中星号的作用，还能导入时做重命名，以及忽略某些类</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// import java.util.concurrent.*</span></span><br><span class="line">scala&gt; <span class="keyword">import</span> java.util.concurrent._</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent._</span><br><span class="line"></span><br><span class="line"><span class="comment">// import java.util.*，并 将ArrayList 重命名为 al</span></span><br><span class="line">scala&gt; <span class="keyword">import</span> java.util.&#123;<span class="type">ArrayList</span> =&gt; al, _&#125;</span><br><span class="line"><span class="keyword">import</span> java.util.&#123;<span class="type">ArrayList</span> =&gt; al, _&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// import java.util.*，但不导入 Timer 类</span></span><br><span class="line">scala&gt; <span class="keyword">import</span> java.util.&#123;<span class="type">Timer</span> =&gt; _, _&#125;</span><br><span class="line"><span class="keyword">import</span> java.util.&#123;<span class="type">Timer</span> =&gt; _, _&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// import static java.lang.Math.*</span></span><br><span class="line">scala&gt; <span class="keyword">import</span> java.lang.<span class="type">Math</span>._</span><br><span class="line"><span class="keyword">import</span> java.lang.<span class="type">Math</span>._</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-变量默认值初始化"><a href="#3-变量默认值初始化" class="headerlink" title="3. 变量默认值初始化"></a>3. 变量默认值初始化</h4><p>用下划线可以自动在变量声明时，将其赋予默认的初始值。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">var</span> name : <span class="type">String</span> = _</span><br><span class="line">name: <span class="type">String</span> = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">var</span> count : <span class="type">Int</span> = _</span><br><span class="line">count: <span class="type">Int</span> = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">var</span> avg : <span class="type">Double</span> = _</span><br><span class="line">avg: <span class="type">Double</span> = <span class="number">0.0</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-访问元组-tuple"><a href="#4-访问元组-tuple" class="headerlink" title="4. 访问元组(tuple)"></a>4. 访问元组(tuple)</h4><p>下划线后面跟上数字 k，可以当作索引表示元组中的第 k 个元素。当要忽略元组中的某个值时，也可以用下划线代替它。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="keyword">val</span> tuple = (<span class="string">&quot;Tom&quot;</span>, <span class="number">173.5</span>, <span class="type">Seq</span>(<span class="number">22</span>,<span class="number">66</span>,<span class="number">88</span>))</span><br><span class="line">tuple: (<span class="type">String</span>, <span class="type">Double</span>, <span class="type">Seq</span>[<span class="type">Int</span>]) = (<span class="type">Tom</span>,<span class="number">173.5</span>,<span class="type">List</span>(<span class="number">22</span>, <span class="number">66</span>, <span class="number">88</span>))</span><br><span class="line"></span><br><span class="line">scala&gt; tuple._1</span><br><span class="line">res1: <span class="type">String</span> = <span class="type">Tom</span></span><br><span class="line"></span><br><span class="line">scala&gt; tuple._2</span><br><span class="line">res2: <span class="type">Double</span> = <span class="number">173.5</span></span><br><span class="line"></span><br><span class="line">scala&gt; tuple._3</span><br><span class="line">res3: <span class="type">Seq</span>[<span class="type">Int</span>] = <span class="type">List</span>(<span class="number">22</span>, <span class="number">66</span>, <span class="number">88</span>)</span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> (first, _, third) = tuple</span><br><span class="line">first: <span class="type">String</span> = <span class="type">LMagics</span></span><br><span class="line">third: <span class="type">Seq</span>[<span class="type">Int</span>] = <span class="type">List</span>(<span class="number">22</span>, <span class="number">66</span>, <span class="number">88</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-声明-setter-方法"><a href="#5-声明-setter-方法" class="headerlink" title="5. 声明 setter 方法"></a>5. 声明 setter 方法</h4><p>Scala 中没有显式的 setter 方法，将 getter 方法的命名后加上一个下划线，当做 setter 方法</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">     |   <span class="keyword">private</span> <span class="keyword">var</span> pCount = <span class="number">0</span></span><br><span class="line">     |   <span class="function"><span class="keyword">def</span> <span class="title">count</span> </span>= pCount         <span class="comment">// getter</span></span><br><span class="line">     |   <span class="function"><span class="keyword">def</span> <span class="title">count_=</span> </span>(c : <span class="type">Int</span>) = &#123;  <span class="comment">// setter</span></span><br><span class="line">     |     require(c &gt; <span class="number">0</span>)</span><br><span class="line">     |     pCount = c</span><br><span class="line">     |   &#125;</span><br><span class="line">     | &#125;</span><br><span class="line">defined <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span></span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> test = <span class="keyword">new</span> <span class="type">Test</span>()</span><br><span class="line">test: <span class="type">Test</span> = <span class="type">Test</span>@<span class="number">27</span>d5a580</span><br><span class="line"></span><br><span class="line">scala&gt; test.count = <span class="number">7</span></span><br><span class="line">test.count: <span class="type">Int</span> = <span class="number">7</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="6-变长参数的转化"><a href="#6-变长参数的转化" class="headerlink" title="6. 变长参数的转化"></a>6. 变长参数的转化</h4><p>下划线与星号连用，可以将序列转化为变长参数的序列，方便调用变长参数的方法</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">sum</span></span>(args: <span class="type">Int</span>*) = &#123;</span><br><span class="line">     |   <span class="keyword">var</span> result = <span class="number">0</span></span><br><span class="line">     |   <span class="keyword">for</span> (arg &lt;- args) result += arg</span><br><span class="line">     |   result</span><br><span class="line">     | &#125;</span><br><span class="line">sum: (args: <span class="type">Int</span>*)<span class="type">Int</span></span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> sum1 = sum(<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>,<span class="number">14</span>)</span><br><span class="line">sum1: <span class="type">Int</span> = <span class="number">84</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果只写 7 to 14，会报错</span></span><br><span class="line">scala&gt; <span class="keyword">val</span> sum2 = sum(<span class="number">7</span> to <span class="number">14</span>: _*)</span><br><span class="line">sum2: <span class="type">Int</span> = <span class="number">84</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="7-将方法转换成函数"><a href="#7-将方法转换成函数" class="headerlink" title="7. 将方法转换成函数"></a>7. 将方法转换成函数</h4><p>函数在 Scala 中是一种对象实例，因此它可以赋值给变量，也可以作为参数。如果方法在赋值时直接写名称的话，编译器会认为是对方法的调用，因此会报没有参数列表的错误。在方法名称后加一个下划线，会将其转化为偏应用函数（partially applied function），就能直接赋值了。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">twoSum</span></span>(a: <span class="type">Int</span>, b: <span class="type">Int</span>) = a + b</span><br><span class="line">twoSum: (a: <span class="type">Int</span>, b: <span class="type">Int</span>)<span class="type">Int</span></span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> twoSumFunc = twoSum _</span><br><span class="line">twoSumFunc: (<span class="type">Int</span>, <span class="type">Int</span>) =&gt; <span class="type">Int</span> = &lt;function2&gt;</span><br><span class="line"></span><br><span class="line">scala&gt; list foreach println _</span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="8-定义偏应用函数"><a href="#8-定义偏应用函数" class="headerlink" title="8. 定义偏应用函数"></a>8. 定义偏应用函数</h4><p>偏应用函数是不提供或者只提供部分参数调用时返回的函数，我们也可以用下划线来代替那些不提供的参数。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">threeMult</span></span>(a: <span class="type">Int</span>, b: <span class="type">Int</span>, c:<span class="type">Int</span>) = a * b * c</span><br><span class="line">threeMult: (a: <span class="type">Int</span>, b: <span class="type">Int</span>, c: <span class="type">Int</span>)<span class="type">Int</span></span><br><span class="line"></span><br><span class="line">scala&gt; <span class="keyword">val</span> parThreeMult = (<span class="number">8</span>, _: <span class="type">Int</span>, <span class="number">42</span>)</span><br><span class="line">parThreeMult: <span class="type">Int</span> =&gt; (<span class="type">Int</span>, <span class="type">Int</span>, <span class="type">Int</span>) = &lt;function1&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-上界-、协变-、逆变"><a href="#4-上界-、协变-、逆变" class="headerlink" title="4. 上界(&lt;:)、下界(&gt;:)、协变(+)、逆变(-)"></a>4. <code>上界(&lt;:)、下界(&gt;:)、协变(+)、逆变(-)</code></h3><h4 id="1-上下界"><a href="#1-上下界" class="headerlink" title="1. 上下界"></a>1. 上下界</h4><p>常用在泛型中，类似 java 的 <code>&lt;S extends T&gt;, &lt;U spuer T&gt;</code></p>
+<ul>
+<li><code>S &lt;: T</code> : 类型上界的定义，S 必须是类型 T 的子类或本身</li>
+<li><code>U &gt;: T</code> : 类型下界的定义，U 必须是类型 T 的父类或本身</li>
+</ul>
+<h4 id="2-协变逆变"><a href="#2-协变逆变" class="headerlink" title="2. 协变逆变"></a>2. 协变逆变</h4><p>常用在泛型中，如 List[T]，如果对于 A 是 B 的子类型，满足 List[A] 也符合 List[B] 的子类型，那么就称为 covariance(协变)，相反，则称为 contravariance(逆变) 。<br>即，协变是指可以将子类集合可以转换成父类集合，符合里氏替换原则(子类型必须能够替换掉他们的基类型)，逆变则是反过来。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bird</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//协变，cov 可以被赋值给 cov2</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Covariant</span>[+<span class="type">T</span>](<span class="params">t:<span class="type">T</span></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">val</span> cov = <span class="keyword">new</span> <span class="type">Covariant</span>[<span class="type">Bird</span>](<span class="keyword">new</span> <span class="type">Bird</span>)</span><br><span class="line"><span class="keyword">val</span> cov2:<span class="type">Covariant</span>[<span class="type">Animal</span>] = cov</span><br><span class="line"></span><br><span class="line"><span class="comment">// 逆变，c 可以被赋值给 c2</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Contravariant</span>[-<span class="type">T</span>](<span class="params">t:<span class="type">T</span></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">val</span> c: <span class="type">Contravariant</span>[<span class="type">Animal</span>] = <span class="keyword">new</span> <span class="type">Contravariant</span>[<span class="type">Animal</span>](<span class="keyword">new</span> <span class="type">Animal</span>)</span><br><span class="line"><span class="keyword">val</span> c2: <span class="type">Contravariant</span>[<span class="type">Bird</span>] = c</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-特殊类"><a href="#3-特殊类" class="headerlink" title="3. 特殊类"></a>3. 特殊类</h2><h3 id="1-Range"><a href="#1-Range" class="headerlink" title="1. Range"></a>1. <code>Range</code></h3><p>是一种数据结构，一种容器，是一种特殊的带索引的不可变的等差数字序列。</p>
+<h4 id="1-声明"><a href="#1-声明" class="headerlink" title="1. 声明"></a>1. 声明</h4><p>除了可以创造整数型序列，也可以是字符型、单精度浮点型</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 常用声明是类形式，3个参数是起始、终止、步长</span></span><br><span class="line"><span class="keyword">val</span> r = <span class="keyword">new</span> <span class="type">Range</span>(<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>)</span><br><span class="line">r.foreach(print(_))     <span class="comment">// 13</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 使用 to, until, by</span></span><br><span class="line"><span class="keyword">val</span> a1 = <span class="number">1</span> to <span class="number">5</span> by <span class="number">1</span>    <span class="comment">// 12345</span></span><br><span class="line"><span class="keyword">val</span> a2 = <span class="number">1.</span>to(<span class="number">5</span>).by(<span class="number">2</span>)  <span class="comment">// 135</span></span><br><span class="line"><span class="keyword">val</span> a3 = <span class="number">1</span> until <span class="number">5</span>      <span class="comment">// 1234</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 浮点型</span></span><br><span class="line"><span class="keyword">val</span> b = <span class="number">.5</span>f to <span class="number">10.8</span>f by <span class="number">0.5</span>f</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-总览"><a href="#4-总览" class="headerlink" title="4. 总览"></a>4. 总览</h2><p><img src="/../../../images/scala/scala-template.jpg" alt="scala-template"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/02/28/%E7%9F%A5%E8%AF%86%E7%82%B9/Scala/0.%E9%9B%B6%E7%A2%8E/" data-id="cll0i1ufx0000zojw2epx5yc4" data-title="Scala 基础-杂记(第零章)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/02/28/%E7%9F%A5%E8%AF%86%E7%82%B9/Scala/02.Any%20%E5%92%8C%E5%9F%BA%E7%B1%BB/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Scala 基础-Any和基类(第二章)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/02/23/%E7%9F%A5%E8%AF%86%E7%82%B9/Scala/01.%E7%B1%BB/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Scala 基础-类(第一章)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Flink/" style="font-size: 20px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Git/" style="font-size: 14px;">Git</a> <a href="/tags/Idea-Instructions/" style="font-size: 18px;">Idea Instructions</a> <a href="/tags/Java/" style="font-size: 18px;">Java</a> <a href="/tags/Scala/" style="font-size: 14px;">Scala</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 16px;">代码归档</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 20px;">大数据</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 12px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 12px;">杂记</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 18px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/06/16/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-Flink%20CDC%20%E9%97%AE%E9%A2%98-/">杂记-Flink CDC</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/03/%E7%9F%A5%E8%AF%86%E7%82%B9/Scala/03.%E5%87%BD%E6%95%B0/">Scala 基础-函数(第三章)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/28/%E7%9F%A5%E8%AF%86%E7%82%B9/Scala/02.Any%20%E5%92%8C%E5%9F%BA%E7%B1%BB/">Scala 基础-Any和基类(第二章)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/28/%E7%9F%A5%E8%AF%86%E7%82%B9/Scala/0.%E9%9B%B6%E7%A2%8E/">Scala 基础-杂记(第零章)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/23/%E7%9F%A5%E8%AF%86%E7%82%B9/Scala/01.%E7%B1%BB/">Scala 基础-类(第一章)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
