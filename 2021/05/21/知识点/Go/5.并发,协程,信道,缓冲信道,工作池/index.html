@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Golang 基础-并发、协程、信道、缓冲信道、工作池(第五章) | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Golang 中的并发、协程、信道、缓冲信道、工作池">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang 基础-并发、协程、信道、缓冲信道、工作池(第五章)">
+<meta property="og:url" content="http://example.com/2021/05/21/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/5.%E5%B9%B6%E5%8F%91,%E5%8D%8F%E7%A8%8B,%E4%BF%A1%E9%81%93,%E7%BC%93%E5%86%B2%E4%BF%A1%E9%81%93,%E5%B7%A5%E4%BD%9C%E6%B1%A0/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="Golang 中的并发、协程、信道、缓冲信道、工作池">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-20T18:32:00.000Z">
+<meta property="article:modified_time" content="2021-06-01T16:52:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Go/5.并发,协程,信道,缓冲信道,工作池" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/21/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/5.%E5%B9%B6%E5%8F%91,%E5%8D%8F%E7%A8%8B,%E4%BF%A1%E9%81%93,%E7%BC%93%E5%86%B2%E4%BF%A1%E9%81%93,%E5%B7%A5%E4%BD%9C%E6%B1%A0/" class="article-date">
+  <time class="dt-published" datetime="2021-05-20T18:32:00.000Z" itemprop="datePublished">2021-05-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Golang 基础-并发、协程、信道、缓冲信道、工作池(第五章)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-wili"><a href="#1-wili" class="headerlink" title="1. wili"></a>1. wili</h2><p>Go 使用 Go 协程（Goroutine） 和信道（Channel）来处理并发。</p>
+<h2 id="2-协程"><a href="#2-协程" class="headerlink" title="2. 协程"></a>2. 协程</h2><h3 id="2-1-概念"><a href="#2-1-概念" class="headerlink" title="2.1. 概念"></a>2.1. 概念</h3><p>Go 协程是与其他函数或方法一起并发运行的函数或方法。协程相比于线程的优势：</p>
+<ul>
+<li>Go 协程的成本极低。堆栈大小只有若干 kb，并且可以根据应用的需求进行增减。而线程必须指定堆栈的大小，其堆栈是固定不变的</li>
+<li>Go 协程会复用（Multiplex）数量更少的 OS 线程。即使程序有数以千计的 Go 协程，也可能只有一个线程。如果该线程中的某一 Go 协程发生了阻塞（比如说等待用户输入），那么系统会再创建一个 OS 线程，并把其余 Go 协程都移动到这个新的 OS 线程。</li>
+<li>Go 协程使用信道（Channel）来进行通信。信道用于防止多个协程访问共享内存时发生竞态条件（Race Condition）。信道可以看作是 Go 协程之间通信的管道。</li>
+</ul>
+<h3 id="2-2-声明"><a href="#2-2-声明" class="headerlink" title="2.2. 声明"></a>2.2. 声明</h3><p>调用函数或者方法时，在前面加上关键字 go，可以让一个新的 Go 协程并发地运行。 协程主要特性：</p>
+<ul>
+<li>启动一个新的协程时，协程的调用会立即返回。与函数不同，程序控制不会去等待 Go 协程执行完毕。在调用 Go 协程之后，程序控制会立即返回到代码的下一行，忽略该协程的任何返回值。</li>
+<li>如果希望运行其他 Go 协程，Go 主协程必须继续运行着。如果 Go 主协程终止，则程序终止，于是其他 Go 协程也不会继续运行。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">hello</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;Hello world goroutine&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;                       <span class="comment">// 主协程（Main Goroutine）</span></span><br><span class="line">    <span class="keyword">go</span> hello()                      <span class="comment">// 启动一个协程，此时，hello() 函数与 main() 函数会并发地执行</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;main function&quot;</span>)    <span class="comment">// 此时只会输出 main function</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以在 Go 主协程中使用休眠（<code>Sleep</code>），以便等待其他协程执行完毕。可以通过休眠时限顺序输出：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">numbers</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++ &#123;</span><br><span class="line">        time.Sleep(<span class="number">250</span> * time.Millisecond)</span><br><span class="line">        fmt.Printf(<span class="string">&quot;%d &quot;</span>, i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">alphabets</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    <span class="keyword">for</span> i := <span class="string">&#x27;a&#x27;</span>; i &lt;= <span class="string">&#x27;e&#x27;</span>; i++ &#123;</span><br><span class="line">        time.Sleep(<span class="number">400</span> * time.Millisecond)</span><br><span class="line">        fmt.Printf(<span class="string">&quot;%c &quot;</span>, i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    <span class="keyword">go</span> numbers()</span><br><span class="line">    <span class="keyword">go</span> alphabets()</span><br><span class="line">    time.Sleep(<span class="number">3000</span> * time.Millisecond)</span><br><span class="line">    fmt.Println(<span class="string">&quot;main terminated&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：<code>1 a 2 3 b 4 c 5 d e main terminated</code>。</p>
+<h2 id="3-信道"><a href="#3-信道" class="headerlink" title="3. 信道"></a>3. 信道</h2><h3 id="3-1-概念"><a href="#3-1-概念" class="headerlink" title="3.1. 概念"></a>3.1. 概念</h3><p>信道可以想像成 Go 协程之间通信的管道。信道只能运输一个类型的数据，</p>
+<h3 id="3-2-声明"><a href="#3-2-声明" class="headerlink" title="3.2. 声明"></a>3.2. 声明</h3><p><code>chan T</code> 表示 T 类型的信道。</p>
+<ul>
+<li>信道的零值为 nil</li>
+<li>用 make 来定义信道</li>
+<li>发送与接收默认是阻塞的，当把数据发送到信道时，直到有其它 Go 协程从信道读取到数据，才会解除阻塞。反之亦然。如果只有输出或输入，则会触发报错，形成死锁<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>)</span><br><span class="line">data := &lt;- a        <span class="comment">// 读取信道 a  </span></span><br><span class="line">a &lt;- data           <span class="comment">// 写入信道 a</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="3-3-一些例子"><a href="#3-3-一些例子" class="headerlink" title="3.3. 一些例子"></a>3.3. 一些例子</h3><p>信道的例子：计算一个数中每一位的平方和与立方和，然后把平方和与立方和相加并打印出来：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在一个单独的 Go 协程计算平方和，而在另一个协程计算立方和，最后在 Go 主协程把平方和与立方和相加</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">calcSquares</span><span class="params">(number <span class="type">int</span>, squareop <span class="keyword">chan</span> <span class="type">int</span>)</span></span> &#123;   <span class="comment">// 计算平方和</span></span><br><span class="line">    sum := <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> number != <span class="number">0</span> &#123;</span><br><span class="line">        digit := number % <span class="number">10</span></span><br><span class="line">        sum += digit * digit</span><br><span class="line">        number /= <span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">    squareop &lt;- sum</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">calcCubes</span><span class="params">(number <span class="type">int</span>, cubeop <span class="keyword">chan</span> <span class="type">int</span>)</span></span> &#123;       <span class="comment">// 计算立方和</span></span><br><span class="line">    sum := <span class="number">0</span> </span><br><span class="line">    <span class="keyword">for</span> number != <span class="number">0</span> &#123;</span><br><span class="line">        digit := number % <span class="number">10</span></span><br><span class="line">        sum += digit * digit * digit</span><br><span class="line">        number /= <span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">    cubeop &lt;- sum</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    number := <span class="number">589</span></span><br><span class="line">    sqrch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>)</span><br><span class="line">    cubech := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>)</span><br><span class="line">    <span class="keyword">go</span> calcSquares(number, sqrch)</span><br><span class="line">    <span class="keyword">go</span> calcCubes(number, cubech)</span><br><span class="line">    squares, cubes := &lt;-sqrch, &lt;-cubech             <span class="comment">// 从两个信道获取值</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;Final output&quot;</span>, squares + cubes)    <span class="comment">// 打印求和，Final output 1536</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-单向信道"><a href="#3-4-单向信道" class="headerlink" title="3.4. 单向信道"></a>3.4. 单向信道</h3><p>单向信道，这种信道只能发送或者接收数据。</p>
+<ul>
+<li>唯送（Send Only）信道：只能发送数据，语法 <code>chan&lt;- T</code>  </li>
+<li>唯收（Receive Only）信道：只能接收数据，语法 <code>&lt;-chan T</code></li>
+</ul>
+<p>可以把双向信道转换成单向信道，但是不能反过来。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sendData</span><span class="params">(sendch <span class="keyword">chan</span>&lt;- <span class="type">int</span>)</span></span> &#123;  <span class="comment">// 唯送信道</span></span><br><span class="line">    sendch &lt;- <span class="number">10</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    cha1 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>)          <span class="comment">// 双向信道</span></span><br><span class="line">    <span class="keyword">go</span> sendData(cha1)</span><br><span class="line">    fmt.Println(&lt;-cha1)             <span class="comment">// 10</span></span><br><span class="line">    </span><br><span class="line">    sendch := <span class="built_in">make</span>(<span class="keyword">chan</span>&lt;- <span class="type">int</span>)</span><br><span class="line">    <span class="keyword">go</span> sendData(sendch)</span><br><span class="line">    fmt.Println(&lt;-sendch)           <span class="comment">// 唯送信道接收数据，报错</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-5-关闭和遍历信道"><a href="#3-5-关闭和遍历信道" class="headerlink" title="3.5. 关闭和遍历信道"></a>3.5. 关闭和遍历信道</h3><p>数据发送方可以关闭信道，通知接收方这个信道不再有数据发送过来。当从信道接收数据时，接收方可以多用一个变量来检查信道是否已经关闭。</p>
+<ul>
+<li><code>v, ok := &lt;-ch</code>：使用第二个参数来判断信道是否关闭。ok 等于 true，成功接收数据；ok 等于 false，信道关闭，读到的值会是该信道类型的零值</li>
+<li><code>for range</code> 循环用于在一个信道关闭之前，从信道接收数据。其会从信道接收数据，直达信道关闭，循环会自动结束<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">producer</span><span class="params">(chnl <span class="keyword">chan</span> <span class="type">int</span>)</span></span> &#123;  </span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">        chnl &lt;- i</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">close</span>(chnl)                      <span class="comment">// 关闭信道</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    ch1 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>)</span><br><span class="line">    <span class="keyword">go</span> producer(ch1)</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        v, ok := &lt;-ch1</span><br><span class="line">        <span class="keyword">if</span> ok == <span class="literal">false</span> &#123;            <span class="comment">// 如果 ok 等于 false，说明信道已经关闭，于是退出 for 循环</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">        fmt.Println(<span class="string">&quot;Received &quot;</span>, v, ok)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    ch2 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>)</span><br><span class="line">    <span class="keyword">go</span> producer(ch2)</span><br><span class="line">    <span class="keyword">for</span> v := <span class="keyword">range</span> ch2 &#123;</span><br><span class="line">        fmt.Println(<span class="string">&quot;Received &quot;</span>,v)  <span class="comment">// 一旦关闭了信道 ch2 ，循环会自动结束</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="4-缓冲信道"><a href="#4-缓冲信道" class="headerlink" title="4. 缓冲信道"></a>4. 缓冲信道</h2><h3 id="4-1-概念"><a href="#4-1-概念" class="headerlink" title="4.1. 概念"></a>4.1. 概念</h3><p>在缓冲已满时，才会阻塞向缓冲信道（Buffered Channel）发送数据。同样，只有在缓冲为空的时候，才会阻塞从缓冲信道接收数据。<br>语法：无缓冲信道的容量默认为 0</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">type</span>, capacity)</span><br></pre></td></tr></table></figure>
+<p>举例</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">write</span><span class="params">(ch <span class="keyword">chan</span> <span class="type">int</span>)</span></span> &#123;  </span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">5</span>; i++ &#123;</span><br><span class="line">        ch &lt;- i</span><br><span class="line">        fmt.Println(<span class="string">&quot;successfully wrote&quot;</span>, i, <span class="string">&quot;to ch&quot;</span>)   <span class="comment">// 写入 2 个元素时，阻塞</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">close</span>(ch)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">int</span>, <span class="number">2</span>)                             <span class="comment">// 容量为 2 的缓冲信道</span></span><br><span class="line">    <span class="keyword">go</span> write(ch)                                        <span class="comment">// 缓冲信道传递给了 write 协程</span></span><br><span class="line">    time.Sleep(<span class="number">2</span> * time.Second)                         <span class="comment">// 主协程休眠 2 秒，此时 write 协程在并发运行</span></span><br><span class="line">    <span class="keyword">for</span> v := <span class="keyword">range</span> ch &#123;</span><br><span class="line">        fmt.Println(<span class="string">&quot;read value&quot;</span>, v,<span class="string">&quot;from ch&quot;</span>)</span><br><span class="line">        time.Sleep(<span class="number">2</span> * time.Second)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 打印结果</span></span><br><span class="line">successfully wrote <span class="number">0</span> to ch  </span><br><span class="line">successfully wrote <span class="number">1</span> to ch  </span><br><span class="line">read value <span class="number">0</span> from ch  </span><br><span class="line">successfully wrote <span class="number">2</span> to ch  </span><br><span class="line">read value <span class="number">1</span> from ch  </span><br><span class="line">successfully wrote <span class="number">3</span> to ch  </span><br><span class="line">read value <span class="number">2</span> from ch  </span><br><span class="line">successfully wrote <span class="number">4</span> to ch  </span><br><span class="line">read value <span class="number">3</span> from ch  </span><br><span class="line">read value <span class="number">4</span> from ch</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-缓冲信道长度和容量"><a href="#4-2-缓冲信道长度和容量" class="headerlink" title="4.2. 缓冲信道长度和容量"></a>4.2. 缓冲信道长度和容量</h3><ul>
+<li><strong>容量</strong>：指信道可以存储的值的数量</li>
+<li><strong>长度</strong>：指信道中当前排队的元素个数<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">string</span>, <span class="number">3</span>)</span><br><span class="line">    ch &lt;- <span class="string">&quot;naveen&quot;</span></span><br><span class="line">    ch &lt;- <span class="string">&quot;paul&quot;</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;capacity is&quot;</span>, <span class="built_in">cap</span>(ch))     <span class="comment">// capacity is 3</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;length is&quot;</span>, <span class="built_in">len</span>(ch))       <span class="comment">// length is 2</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;read value&quot;</span>, &lt;-ch)         <span class="comment">// read value naveen</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;new length is&quot;</span>, <span class="built_in">len</span>(ch))   <span class="comment">// new length is 1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="5-工作池"><a href="#5-工作池" class="headerlink" title="5. 工作池"></a>5. 工作池</h2><h3 id="5-1-WaitGroup"><a href="#5-1-WaitGroup" class="headerlink" title="5.1. WaitGroup"></a>5.1. WaitGroup</h3><p><code>WaitGroup</code> 用于实现工作池，其用于等待一批 Go 协程执行结束。程序控制会一直阻塞，直到这些协程全部执行完毕。<code>WaitGroup</code> 使用计数器来工作。</p>
+<ul>
+<li><code>Add(int)</code>：计数器会加上 <code>Add</code> 的传参</li>
+<li><code>Done()</code>：计数器减少1</li>
+<li><code>Wait()</code>：会阻塞调用它的 Go 协程，直到计数器变为 0 后才会停止阻塞</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;sync&quot;</span></span><br><span class="line">    <span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">process</span><span class="params">(i <span class="type">int</span>, wg *sync.WaitGroup)</span></span> &#123;  </span><br><span class="line">    fmt.Println(<span class="string">&quot;started Goroutine &quot;</span>, i)                <span class="comment">// Go 协程的执行顺序不一定，因此输出数字有多种可能</span></span><br><span class="line">    time.Sleep(<span class="number">2</span> * time.Second)</span><br><span class="line">    fmt.Printf(<span class="string">&quot;Goroutine %d ended\n&quot;</span>, i)</span><br><span class="line">    wg.Done()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    no := <span class="number">3</span></span><br><span class="line">    <span class="keyword">var</span> wg sync.WaitGroup                               <span class="comment">// 创建变量，初始值为零值</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; no; i++ &#123;</span><br><span class="line">        wg.Add(<span class="number">1</span>)                                       <span class="comment">// 计数器变为 3</span></span><br><span class="line">        <span class="keyword">go</span> process(i, &amp;wg)                              <span class="comment">// 创建了 3 个协程，此处必须使用 wg 地址，否则每个 Go 协程将会得到一个 WaitGroup 值的拷贝</span></span><br><span class="line">    &#125;</span><br><span class="line">    wg.Wait()                                           <span class="comment">// 主协程等待计数器变为 0</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;All go routines finished executing&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-工作池"><a href="#5-2-工作池" class="headerlink" title="5.2. 工作池"></a>5.2. 工作池</h3><p>工作池就是一组等待任务分配的线程。一旦完成了所分配的任务，这些线程可继续等待任务的分配。<br>举例，设计一个工作池，任务是计算所输入数字的每一位的和。例如，如果输入 234，结果会是 9（即 2 + 3 + 4）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;math/rand&quot;</span></span><br><span class="line">    <span class="string">&quot;sync&quot;</span></span><br><span class="line">    <span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Job <span class="keyword">struct</span> &#123;  </span><br><span class="line">    id       <span class="type">int</span></span><br><span class="line">    randomno <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Result <span class="keyword">struct</span> &#123;  </span><br><span class="line">    job         Job</span><br><span class="line">    sumofdigits <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> jobs = <span class="built_in">make</span>(<span class="keyword">chan</span> Job, <span class="number">10</span>)  </span><br><span class="line"><span class="keyword">var</span> results = <span class="built_in">make</span>(<span class="keyword">chan</span> Result, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">digits</span><span class="params">(number <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;  </span><br><span class="line">    sum := <span class="number">0</span></span><br><span class="line">    no := number</span><br><span class="line">    <span class="keyword">for</span> no != <span class="number">0</span> &#123;</span><br><span class="line">        digit := no % <span class="number">10</span></span><br><span class="line">        sum += digit</span><br><span class="line">        no /= <span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">    time.Sleep(<span class="number">2</span> * time.Second)</span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">worker</span><span class="params">(wg *sync.WaitGroup)</span></span> &#123;  </span><br><span class="line">    <span class="keyword">for</span> job := <span class="keyword">range</span> jobs &#123;</span><br><span class="line">        output := Result&#123;job, digits(job.randomno)&#125;</span><br><span class="line">        results &lt;- output</span><br><span class="line">    &#125;</span><br><span class="line">    wg.Done()</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">createWorkerPool</span><span class="params">(noOfWorkers <span class="type">int</span>)</span></span> &#123;  </span><br><span class="line">    <span class="keyword">var</span> wg sync.WaitGroup</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; noOfWorkers; i++ &#123;</span><br><span class="line">        wg.Add(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">go</span> worker(&amp;wg)</span><br><span class="line">    &#125;</span><br><span class="line">    wg.Wait()</span><br><span class="line">    <span class="built_in">close</span>(results)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">allocate</span><span class="params">(noOfJobs <span class="type">int</span>)</span></span> &#123;  </span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; noOfJobs; i++ &#123;</span><br><span class="line">        randomno := rand.Intn(<span class="number">999</span>)</span><br><span class="line">        job := Job&#123;i, randomno&#125;</span><br><span class="line">        jobs &lt;- job</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">close</span>(jobs)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">result</span><span class="params">(done <span class="keyword">chan</span> <span class="type">bool</span>)</span></span> &#123;  </span><br><span class="line">    <span class="keyword">for</span> result := <span class="keyword">range</span> results &#123;</span><br><span class="line">        fmt.Printf(<span class="string">&quot;Job id %d, input random no %d , sum of digits %d\n&quot;</span>, result.job.id, result.job.randomno, result.sumofdigits)</span><br><span class="line">    &#125;</span><br><span class="line">    done &lt;- <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    startTime := time.Now()</span><br><span class="line">    noOfJobs := <span class="number">100</span></span><br><span class="line">    <span class="keyword">go</span> allocate(noOfJobs)</span><br><span class="line">    done := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">bool</span>)</span><br><span class="line">    <span class="keyword">go</span> result(done)</span><br><span class="line">    noOfWorkers := <span class="number">10</span></span><br><span class="line">    createWorkerPool(noOfWorkers)</span><br><span class="line">    &lt;-done</span><br><span class="line">    endTime := time.Now()</span><br><span class="line">    diff := endTime.Sub(startTime)</span><br><span class="line">    fmt.Println(<span class="string">&quot;total time taken &quot;</span>, diff.Seconds(), <span class="string">&quot;seconds&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/05/21/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/5.%E5%B9%B6%E5%8F%91,%E5%8D%8F%E7%A8%8B,%E4%BF%A1%E9%81%93,%E7%BC%93%E5%86%B2%E4%BF%A1%E9%81%93,%E5%B7%A5%E4%BD%9C%E6%B1%A0/" data-id="cll0wsvv1000glojwboudb41h" data-title="Golang 基础-并发、协程、信道、缓冲信道、工作池(第五章)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Golang/" rel="tag">Golang</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/01/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/4.%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java 数据库连接
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/05/18/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/2.POJO/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java 中各种对象的简称</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ThreadLocal/" rel="tag">ThreadLocal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Flink/" style="font-size: 18.89px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Golang/" style="font-size: 15.56px;">Golang</a> <a href="/tags/Idea-Instructions/" style="font-size: 15.56px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 11.11px;">JVM</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Maven/" style="font-size: 13.33px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Redis/" style="font-size: 16.67px;">Redis</a> <a href="/tags/Rust/" style="font-size: 12.22px;">Rust</a> <a href="/tags/Scala/" style="font-size: 13.33px;">Scala</a> <a href="/tags/Spring/" style="font-size: 15.56px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 14.44px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/ThreadLocal/" style="font-size: 10px;">ThreadLocal</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 14.44px;">代码归档</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 18.89px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 12.22px;">数据库</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 17.78px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 15.56px;">杂记</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15.56px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 12.22px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 12.22px;">计算机网络</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/03/%E7%9F%A5%E8%AF%86%E7%82%B9/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%BD%91%E7%BB%9C/0.%E9%9B%B6%E7%A2%8E/">计算机基础与网络-杂记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/25/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/0.GolangCheatsheet/">Golang 基础-Cheatsheet</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/11/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Maven/3.maven-assembly-plugin/">Maven assembly plugin</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/11/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Maven/2.Mavenprofiles/">Maven profiles</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/04/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/13.%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/">Java 远程调试</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

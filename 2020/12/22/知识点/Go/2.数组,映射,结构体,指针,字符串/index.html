@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Golang 基础-数组、映射、结构体、指针、字符串(第二章) | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Golang 中的数组、映射、结构体、指针、字符串">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang 基础-数组、映射、结构体、指针、字符串(第二章)">
+<meta property="og:url" content="http://example.com/2020/12/22/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/2.%E6%95%B0%E7%BB%84,%E6%98%A0%E5%B0%84,%E7%BB%93%E6%9E%84%E4%BD%93,%E6%8C%87%E9%92%88,%E5%AD%97%E7%AC%A6%E4%B8%B2/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="Golang 中的数组、映射、结构体、指针、字符串">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-12-22T13:49:00.000Z">
+<meta property="article:modified_time" content="2023-03-11T05:16:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Go/2.数组,映射,结构体,指针,字符串" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/12/22/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/2.%E6%95%B0%E7%BB%84,%E6%98%A0%E5%B0%84,%E7%BB%93%E6%9E%84%E4%BD%93,%E6%8C%87%E9%92%88,%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="article-date">
+  <time class="dt-published" datetime="2020-12-22T13:49:00.000Z" itemprop="datePublished">2020-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Golang 基础-数组、映射、结构体、指针、字符串(第二章)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-数组"><a href="#1-数组" class="headerlink" title="1. 数组"></a>1. 数组</h2><h3 id="1-语法"><a href="#1-语法" class="headerlink" title="1. 语法"></a>1. 语法</h3><ul>
+<li>类型 <code>[n]T</code> 表示拥有 n 个 T 类型的值的数组。</li>
+<li>数组的长度是其类型的一部分，因此数组不能改变大小。</li>
+<li>数组中的所有元素都被自动赋值为数组类型的零值</li>
+<li>数组是值类型而不是引用类型，就是说当数组赋值给一个新的变量或者作为参数传递给函数时，不会改变原始数组</li>
+<li>多维数组也可以直接声明或者利用索引声明<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a [<span class="number">2</span>]<span class="type">string</span>                  <span class="comment">// 一般声明</span></span><br><span class="line">a[<span class="number">0</span>] = <span class="string">&quot;Hello&quot;</span></span><br><span class="line">a[<span class="number">1</span>] = <span class="string">&quot;World&quot;</span></span><br><span class="line"></span><br><span class="line">a := [<span class="number">3</span>]<span class="type">int</span>&#123;<span class="number">12</span>, <span class="number">78</span>&#125;             <span class="comment">// 简略声明，无需将数组中所有的元素赋值</span></span><br><span class="line"></span><br><span class="line">a := [...]<span class="type">int</span>&#123;<span class="number">12</span>, <span class="number">78</span>, <span class="number">50</span>&#125;       <span class="comment">// 可以忽略声明数组的长度声明</span></span><br><span class="line">aa := []<span class="type">int</span>&#123;<span class="number">12</span>&#125;                 <span class="comment">// 如果什么都不写，则声明的是一个数组切片</span></span><br><span class="line"></span><br><span class="line">a := [<span class="number">3</span>]<span class="type">int</span>&#123;<span class="number">5</span>, <span class="number">78</span>, <span class="number">8</span>&#125;</span><br><span class="line"><span class="keyword">var</span> b [<span class="number">5</span>]<span class="type">int</span></span><br><span class="line">b = a                           <span class="comment">// 报错，数组的大小是类型的一部分，[2]int 和 [5]int 是不同类型</span></span><br><span class="line"></span><br><span class="line">a := [<span class="number">3</span>][<span class="number">2</span>]<span class="type">string</span>&#123;</span><br><span class="line">        &#123;<span class="string">&quot;lion&quot;</span>, <span class="string">&quot;tiger&quot;</span>&#125;,      <span class="comment">// 逗号是必须的，因为根据 Go 语言的规则自动插入分号</span></span><br><span class="line">        &#123;<span class="string">&quot;cat&quot;</span>, <span class="string">&quot;dog&quot;</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&quot;pigeon&quot;</span>, <span class="string">&quot;peacock&quot;</span>&#125;,</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">var</span> b [<span class="number">3</span>][<span class="number">2</span>]<span class="type">string</span>              <span class="comment">// 多维数组</span></span><br><span class="line">    b[<span class="number">0</span>][<span class="number">0</span>] = <span class="string">&quot;apple&quot;</span></span><br><span class="line">    b[<span class="number">0</span>][<span class="number">1</span>] = <span class="string">&quot;samsung&quot;</span></span><br><span class="line">    b[<span class="number">1</span>][<span class="number">0</span>] = <span class="string">&quot;microsoft&quot;</span></span><br><span class="line">    b[<span class="number">1</span>][<span class="number">1</span>] = <span class="string">&quot;google&quot;</span></span><br><span class="line">    b[<span class="number">2</span>][<span class="number">0</span>] = <span class="string">&quot;AT&amp;T&quot;</span></span><br><span class="line">    b[<span class="number">2</span>][<span class="number">1</span>] = <span class="string">&quot;T-Mobile&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="2-切片"><a href="#2-切片" class="headerlink" title="2. 切片"></a>2. 切片</h3><h4 id="2-1-概念"><a href="#2-1-概念" class="headerlink" title="2.1. 概念"></a>2.1. 概念</h4><p>切片是组的包装，它本身不拥有任何数据，它只是对现有数组的引用，更改切片的元素会修改其底层数组中对应的元素。  </p>
+<ul>
+<li><code>[]T</code>：表示一个元素类型为 T 的切片。  </li>
+<li><code>a[start:end]</code>：创建一个从 a 数组索引 start 开始到 end - 1 结束的切片<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">letters := [<span class="number">3</span>]<span class="type">string</span>&#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>&#125;</span><br><span class="line"><span class="keyword">var</span> b []<span class="type">string</span> := letters[<span class="number">0</span>:<span class="number">2</span>]      <span class="comment">// 创建切片，语法类似于没有长度的数组</span></span><br><span class="line"></span><br><span class="line">arr1 := letters[<span class="number">0</span>:<span class="number">1</span>]</span><br><span class="line">arr1[<span class="number">0</span>] = <span class="string">&quot;d&quot;</span>                       <span class="comment">// 原数组也被修改</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="2-2-属性"><a href="#2-2-属性" class="headerlink" title="2.2. 属性"></a>2.2. 属性</h4><ul>
+<li>切片拥有<strong>长度</strong>和<strong>容量</strong>。可通过表达式 <code>len(s)</code> 和 <code>cap(s)</code> 来获取。容量大于等于长度。<ul>
+<li>切片的<strong>长度</strong>就是它所包含的元素个数</li>
+<li>切片的<strong>容量</strong>是从它的第一个元素开始数，到其底层数组元素末尾的个数</li>
+</ul>
+</li>
+<li>切片的零值是 nil，其长度和容量为 0 且没有底层数组</li>
+<li>数组下标取值，不能超过 <code>len(s)</code>，向后拓展取值，不能超过底层数组 <code>cap(s)</code><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	s := []<span class="type">int</span>&#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">13</span>&#125;</span><br><span class="line">	printSlice(s)                       <span class="comment">// len=6 cap=6 [2 3 5 7 11 13]</span></span><br><span class="line"></span><br><span class="line">	s = s[:<span class="number">0</span>]                           <span class="comment">// 截取切片使其长度为 0</span></span><br><span class="line">	printSlice(s)                       <span class="comment">// len=0 cap=6 []</span></span><br><span class="line"></span><br><span class="line">	s = s[:<span class="number">4</span>]                           <span class="comment">// 拓展其长度</span></span><br><span class="line">	printSlice(s)                       <span class="comment">// len=4 cap=6 [2 3 5 7]</span></span><br><span class="line"></span><br><span class="line">	s = s[<span class="number">2</span>:]                           <span class="comment">// 舍弃前两个值</span></span><br><span class="line">	printSlice(s)                       <span class="comment">// len=2 cap=4 [5 7]</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printSlice</span><span class="params">(s []<span class="type">int</span>)</span></span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;len=%d cap=%d %v\n&quot;</span>, <span class="built_in">len</span>(s), <span class="built_in">cap</span>(s), s)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="2-3-方法"><a href="#2-3-方法" class="headerlink" title="2.3. 方法"></a>2.3. 方法</h4><h5 id="2-3-1-make"><a href="#2-3-1-make" class="headerlink" title="2.3.1. make"></a>2.3.1. make</h5><p><code>make()</code> 内建函数会分配一个元素为零值的数组并返回一个引用了它的切片  </p>
+<ul>
+<li><code>a := make([]T, 5)</code>：len(a)&#x3D;5</li>
+<li><code>b := make([]T, 0, 5)</code>：len(b)&#x3D;0,，cap(b)&#x3D;5</li>
+</ul>
+<h5 id="2-3-2-append"><a href="#2-3-2-append" class="headerlink" title="2.3.2. append"></a>2.3.2. append</h5><p><code>append()</code> 内建函数的结果是一个包含原切片所有元素加上新添加元素的切片。当原数组的底层数组太小，不足以容纳所有给定的值时，它就会分配一个更大的数组。返回的切片会指向这个新分配的数组。  </p>
+<ul>
+<li><code>append(s []T, x ... T)</code><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cars := []<span class="type">string</span>&#123;<span class="string">&quot;Ferrari&quot;</span>, <span class="string">&quot;Honda&quot;</span>, <span class="string">&quot;Ford&quot;</span>&#125;    <span class="comment">// len=3,cap=3</span></span><br><span class="line">cars = <span class="built_in">append</span>(cars, <span class="string">&quot;Toyota&quot;</span>)                   <span class="comment">// len=4,cap=6</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="2-3-2-range"><a href="#2-3-2-range" class="headerlink" title="2.3.2. range"></a>2.3.2. range</h5><p><code>for</code> 循环的 <code>range</code> 形式可遍历切片或映射。<br>当使用 for 循环遍历切片时，每次迭代都会返回两个值：</p>
+<ol>
+<li>为当前元素的下标，</li>
+<li>为该下标所对应元素的一份副本</li>
+</ol>
+<p>可以将下标或值赋予 <code>_</code> 来忽略它  </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pow = []<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">16</span>, <span class="number">32</span>, <span class="number">64</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i, v := <span class="keyword">range</span> pow &#123;</span><br><span class="line">		fmt.Printf(<span class="string">&quot;2**%d = %d\n&quot;</span>, i, v)    <span class="comment">// 输出 2**0 = 1 等</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 “_” 来忽略某些元素</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	pow := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">10</span>)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="keyword">range</span> pow &#123;</span><br><span class="line">		pow[i] = <span class="number">1</span> &lt;&lt; <span class="type">uint</span>(i) <span class="comment">// == 2**i</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> _, value := <span class="keyword">range</span> pow &#123;</span><br><span class="line">		fmt.Printf(<span class="string">&quot;%d\n&quot;</span>, value)           <span class="comment">// 输出2的幂等</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-3-3-复制切片"><a href="#2-3-3-复制切片" class="headerlink" title="2.3.3. 复制切片"></a>2.3.3. 复制切片</h5><p><code>copy(dest, src)</code> 内建函数，将 src 切片复制给 dest 切片</p>
+<h5 id="2-3-4-删除切片元素"><a href="#2-3-4-删除切片元素" class="headerlink" title="2.3.4. 删除切片元素"></a>2.3.4. 删除切片元素</h5><p>没有删除的内建函数，但可以通过 <code>append</code> 来实现删除</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除第3个元素，由于 append 后面接收变长个元素，使用 ... 解包切片为元素</span></span><br><span class="line">dest = <span class="built_in">append</span>(src[:<span class="number">3</span>], src[<span class="number">4</span>:]...)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-映射"><a href="#2-映射" class="headerlink" title="2. 映射"></a>2. 映射</h2><h3 id="1-语法-1"><a href="#1-语法-1" class="headerlink" title="1. 语法"></a>1. 语法</h3><ul>
+<li>map 的语法与结构体相似，不过必须有键名</li>
+<li>map 的零值是 nil。如果想添加元素到 nil map 中，会触发运行时 panic。因此 map 必须使用 make 函数初始化<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化 map</span></span><br><span class="line">m1 := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)         <span class="comment">// 不指定容量初始化</span></span><br><span class="line">m2 := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>, <span class="number">100</span>)    <span class="comment">// 指定100容量初始化</span></span><br><span class="line">m3 := <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span> &#123;</span><br><span class="line">                 <span class="string">&quot;name&quot;</span>:<span class="string">&quot;Tom&quot;</span>,</span><br><span class="line">                 <span class="string">&quot;gender&quot;</span>:<span class="string">&quot;male&quot;</span></span><br><span class="line">               &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="2-方法"><a href="#2-方法" class="headerlink" title="2. 方法"></a>2. 方法</h3><h4 id="2-1-初始化"><a href="#2-1-初始化" class="headerlink" title="2.1. 初始化"></a>2.1. 初始化</h4><p><code>make</code> 函数会返回给定类型的映射：<code>make(map[K]V)</code></p>
+<h4 id="2-2-获取元素"><a href="#2-2-获取元素" class="headerlink" title="2.2. 获取元素"></a>2.2. 获取元素</h4><ul>
+<li><code>elem = m[key]</code> 获取不存在的元素，会返回 value 类型的零值</li>
+<li><code>elem, ok := m[key]</code> 可以检测键是否存在</li>
+<li>遍历 map 中所有的元素需要用 for range 循环</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">value, ok := example3Map[<span class="string">&quot;first&quot;</span>]</span><br><span class="line"><span class="keyword">if</span> ok == <span class="literal">true</span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;found&quot;</span>, value)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;not found&quot;</span>, value)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> key, value := <span class="keyword">range</span> example3Map &#123;</span><br><span class="line">    fmt.Printf(<span class="string">&quot;example3Map[%s] = %d\n&quot;</span>, key, value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-添加元素"><a href="#2-3-添加元素" class="headerlink" title="2.3. 添加元素"></a>2.3. 添加元素</h4><ul>
+<li>可以在声明的同时添加元素</li>
+<li>添加新元素方式与数组相同 <code>m[key] = elem</code></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">example3Map := <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span> &#123;             <span class="comment">// 可以在声明的同时添加元素</span></span><br><span class="line">        <span class="string">&quot;first&quot;</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="string">&quot;secend&quot;</span>: <span class="number">2</span>,</span><br><span class="line">&#125;    </span><br><span class="line">example3Map[<span class="string">&quot;third&quot;</span>] = <span class="number">3</span>                    <span class="comment">// 添加新元素方式与数组相同</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-4-删除元素"><a href="#2-4-删除元素" class="headerlink" title="2.4. 删除元素"></a>2.4. 删除元素</h4><ul>
+<li><code>delete(m, key)</code> 函数无返回值</li>
+</ul>
+<h4 id="2-5-获取长度"><a href="#2-5-获取长度" class="headerlink" title="2.5. 获取长度"></a>2.5. 获取长度</h4><ul>
+<li><code>len(example3Map)</code> 返回 map 长度</li>
+</ul>
+<h3 id="3-特性"><a href="#3-特性" class="headerlink" title="3. 特性"></a>3. 特性</h3><h4 id="3-1-Map-是引用类型"><a href="#3-1-Map-是引用类型" class="headerlink" title="3.1. Map 是引用类型"></a>3.1. Map 是引用类型</h4><p>和 slices 类似，map 也是引用类型。当 map 被赋值为一个新变量的时候，它们指向同一个内部数据结构。因此，改变其中一个变量，就会影响到另一变量。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">example3Map := <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span> &#123;</span><br><span class="line">        <span class="string">&quot;first&quot;</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="string">&quot;secend&quot;</span>: <span class="number">2</span>,</span><br><span class="line">&#125;</span><br><span class="line">example4Map := personSalary</span><br><span class="line">example4Map[<span class="string">&quot;first&quot;</span>] = <span class="number">0</span>            <span class="comment">// 会引起原 map 也变化</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-map-的相等性"><a href="#3-2-map-的相等性" class="headerlink" title="3.2. map 的相等性"></a>3.2. map 的相等性</h4><p>map 之间不能使用 <code>==</code> 操作符判断，<code>==</code> 只能用来检查 map 是否为 nil。判断两个 map 是否相等的方法是遍历比较两个 map 中的每个元素。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">map1 := <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>&#123;</span><br><span class="line">    <span class="string">&quot;one&quot;</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">&quot;two&quot;</span>: <span class="number">2</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">map2 := map1</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> map1 == map2 &#123;               <span class="comment">// 抛出编译错误</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-结构体"><a href="#3-结构体" class="headerlink" title="3. 结构体"></a>3. 结构体</h2><h3 id="1-语法-2"><a href="#1-语法-2" class="headerlink" title="1. 语法"></a>1. 语法</h3><ul>
+<li><code>type</code> 可以声明一个命名结构体，也可以不用，此时则创建一个匿名结构体</li>
+<li>结构体可以把相同类型的字段声明放在同一行</li>
+<li>未被显式地初始化字段时，该结构体的字段将默认赋为零值</li>
+<li>结构体字段使用点号<code>.</code>来访问</li>
+<li>结构体可以用指针来访问。可以通过 <code>(*p).x</code> 来访问其字段 <code>x</code>，或者隐式间接引用<code>p.x</code>。</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明</span></span><br><span class="line"><span class="keyword">type</span> Vertex <span class="keyword">struct</span> &#123;    <span class="comment">// 可以声明一个新命名结构体 Vertex</span></span><br><span class="line">	x <span class="type">int</span></span><br><span class="line">	y <span class="type">int</span></span><br><span class="line">	z <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> vertex <span class="keyword">struct</span> &#123;    <span class="comment">// 创建一个匿名结构体</span></span><br><span class="line">	x <span class="type">int</span></span><br><span class="line">	y <span class="type">int</span></span><br><span class="line">	z <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Vertex <span class="keyword">struct</span> &#123;    <span class="comment">// 相同类型可以一起声明</span></span><br><span class="line">	x, y, z <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化结构体变量</span></span><br><span class="line">v1 := Vertex&#123;           <span class="comment">// 使用字段</span></span><br><span class="line">    x: <span class="number">1</span>,</span><br><span class="line">    y: <span class="number">2</span>,</span><br><span class="line">    z: <span class="number">3</span>,</span><br><span class="line">&#125;</span><br><span class="line">v2 := Vertex&#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;   <span class="comment">// 不使用字段</span></span><br><span class="line">v3 := Vertex&#123;<span class="number">3</span>&#125;         <span class="comment">// 等同于赋值 x:1, y:0, z=0</span></span><br><span class="line">v3.y = <span class="number">4</span></span><br><span class="line">fmt.Println(<span class="string">&quot;Vertex:&quot;</span>, v3) <span class="comment">// &#123;3 4 0&#125;</span></span><br><span class="line"></span><br><span class="line">vv1 := <span class="keyword">struct</span> &#123;         <span class="comment">// 匿名结构体变量</span></span><br><span class="line">    x <span class="type">int</span></span><br><span class="line">	y <span class="type">int</span></span><br><span class="line">	z <span class="type">int</span></span><br><span class="line">&#125;&#123;</span><br><span class="line">    x:<span class="number">1</span>,</span><br><span class="line">    y:<span class="number">2</span>,</span><br><span class="line">    z:<span class="number">3</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结构体的指针</span></span><br><span class="line">p4 := &amp;Vertex&#123;<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;      <span class="comment">// 创建 Vertex 的指针</span></span><br><span class="line">fmt.Println(<span class="string">&quot;y:&quot;</span>, (*p4).y)</span><br><span class="line">fmt.Println(<span class="string">&quot;z:&quot;</span>, p4.z)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-特性"><a href="#2-特性" class="headerlink" title="2. 特性"></a>2. 特性</h3><h4 id="2-1-匿名字段"><a href="#2-1-匿名字段" class="headerlink" title="2.1. 匿名字段"></a>2.1. 匿名字段</h4><p>创建结构体时，字段可以只有类型，而没有字段名，这样的字段称为匿名字段。<br>虽然匿名字段没有名称，但其实匿名字段的名称就默认为它的类型。如下，可认为 Person 结构体有两个名为 string 和 int 的字段。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;    <span class="comment">// 带匿名字段的结构体</span></span><br><span class="line">    <span class="type">string</span></span><br><span class="line">    <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> p1 Person</span><br><span class="line">    p1.<span class="type">string</span> = <span class="string">&quot;hello&quot;</span></span><br><span class="line">    p1.<span class="type">int</span> = <span class="number">2021</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-嵌套结构体"><a href="#2-2-嵌套结构体" class="headerlink" title="2.2. 嵌套结构体"></a>2.2. 嵌套结构体</h4><p>结构体的字段有可能也是一个结构体。这样的结构体称为嵌套结构体。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Address <span class="keyword">struct</span> &#123;  </span><br><span class="line">    city, state <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;  </span><br><span class="line">    name <span class="type">string</span></span><br><span class="line">    age <span class="type">int</span></span><br><span class="line">    address Address</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> p Person</span><br><span class="line">    p.name = <span class="string">&quot;hello&quot;</span></span><br><span class="line">    p.age = <span class="number">2021</span></span><br><span class="line">    p.address = Address &#123;</span><br><span class="line">        city: <span class="string">&quot;Chicago&quot;</span>,</span><br><span class="line">        state: <span class="string">&quot;Illinois&quot;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-提升字段"><a href="#2-3-提升字段" class="headerlink" title="2.3. 提升字段"></a>2.3. 提升字段</h4><p>如果是结构体中有匿名的结构体类型字段，则该匿名结构体里的字段就称为提升字段。<br>这是因为提升字段就像是属于外部结构体一样，可以用外部结构体直接访问。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Address <span class="keyword">struct</span> &#123;  </span><br><span class="line">    city, state <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;  </span><br><span class="line">    name <span class="type">string</span></span><br><span class="line">    age  <span class="type">int</span></span><br><span class="line">    Address                 <span class="comment">// 匿名字段，Address 有 city 和 state 两个字段，这两个字段就称为提升字段可以直接访问</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> p Person</span><br><span class="line">    p.name = <span class="string">&quot;hello&quot;</span></span><br><span class="line">    p.age = <span class="number">2021</span></span><br><span class="line">    p.address = Address &#123;</span><br><span class="line">        city: <span class="string">&quot;Chicago&quot;</span>,</span><br><span class="line">        state: <span class="string">&quot;Illinois&quot;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">&quot;City:&quot;</span>, p.city)        <span class="comment">// 提升字段</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;State:&quot;</span>, p.state)      <span class="comment">// 提升字段</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-4-导出结构体和字段"><a href="#2-4-导出结构体和字段" class="headerlink" title="2.4. 导出结构体和字段"></a>2.4. 导出结构体和字段</h4><p>如果结构体名称以大写字母开头，则它是其他包可以访问的导出类型。<br>同样，如果结构体里的字段首字母大写，它也能被其他包访问到。  </p>
+<h4 id="2-5-结构体相等性"><a href="#2-5-结构体相等性" class="headerlink" title="2.5. 结构体相等性"></a>2.5. 结构体相等性</h4><p>结构体是值类型。如果它的每一个字段都是可比较的，则该结构体也是可比较的。<br>如果两个结构体变量的对应字段相等，则这两个变量也是相等的。<br>如果结构体包含不可比较的字段，则结构体变量也不可比较。  </p>
+<h2 id="4-指针"><a href="#4-指针" class="headerlink" title="4. 指针"></a>4. 指针</h2><h3 id="1-声明"><a href="#1-声明" class="headerlink" title="1. 声明"></a>1. 声明</h3><blockquote>
+<p>指针是一种存储变量内存地址（Memory Address）的变量</p>
+</blockquote>
+<ul>
+<li><code>*T</code>：指针变量的类型为 <code>*T</code>，该指针指向一个 <code>T</code> 类型的变量。其零值为 <code>nil</code></li>
+<li><code>&amp;</code>：获取变量的地址</li>
+<li><code>*指针变量</code>：获取指针所指向的变量的值</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    b := <span class="number">255</span></span><br><span class="line">    <span class="keyword">var</span> a *<span class="type">int</span> = &amp;b                         <span class="comment">// 把 b 的地址赋值给 *int 类型的 a</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;Type of a is %T\n&quot;</span>, a)      <span class="comment">// Type of a is *int  </span></span><br><span class="line">    fmt.Println(<span class="string">&quot;address of b is&quot;</span>, b)       <span class="comment">// address of b is 0x1040a124</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;value of b is&quot;</span>, *a)        <span class="comment">// value of b is 255</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-注"><a href="#2-注" class="headerlink" title="2. 注"></a>2. 注</h3><ol>
+<li>函数传递可以使用指针参数</li>
+<li>向函数传递数组的指针，不是 Go 语言惯用方式，而应该使用切片</li>
+<li>Go 不支持指针运算<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">change</span><span class="params">(val *<span class="type">int</span>)</span></span> &#123;     <span class="comment">// 利用指针传递，修改原参数值</span></span><br><span class="line">    *val = <span class="number">55</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">modify</span><span class="params">(arr *[3]<span class="type">int</span>)</span></span> &#123;  <span class="comment">// 传递数组的指针，修改原数组值</span></span><br><span class="line">    (*arr)[<span class="number">0</span>] = <span class="number">90</span>          <span class="comment">// 可简写为 arr[0] = 90</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">modify</span><span class="params">(sls []<span class="type">int</span>)</span></span> &#123;    <span class="comment">// 传递数组的切片</span></span><br><span class="line">    sls[<span class="number">0</span>] = <span class="number">90</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="5-字符串"><a href="#5-字符串" class="headerlink" title="5. 字符串"></a>5. 字符串</h2><p>字符串是一个字节切片。Go 中的字符串是兼容 Unicode 编码的，并且使用 UTF-8 进行编码。</p>
+<h3 id="1-构建字符串"><a href="#1-构建字符串" class="headerlink" title="1. 构建字符串"></a>1. 构建字符串</h3><h4 id="1-1-双引号"><a href="#1-1-双引号" class="headerlink" title="1.1. 双引号"></a>1.1. 双引号</h4><p>内容放在双引号””之间，可以创建一个字符串</p>
+<h4 id="1-2-字节切片"><a href="#1-2-字节切片" class="headerlink" title="1.2. 字节切片"></a>1.2. 字节切片</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">byteSlice1 := []<span class="type">byte</span>&#123;<span class="number">0x43</span>, <span class="number">0x61</span>, <span class="number">0x66</span>, <span class="number">0xC3</span>, <span class="number">0xA9</span>&#125;  <span class="comment">// 16 进制字节</span></span><br><span class="line">byteSlice2 := []<span class="type">byte</span>&#123;<span class="number">67</span>, <span class="number">97</span>, <span class="number">102</span>, <span class="number">195</span>, <span class="number">169</span>&#125;         <span class="comment">// 10 进制字节</span></span><br><span class="line">str1 := <span class="type">string</span>(byteSlice1)</span><br><span class="line">str2 := <span class="type">string</span>(byteSlice2)</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-rune-切片"><a href="#1-3-rune-切片" class="headerlink" title="1.3. rune 切片"></a>1.3. rune 切片</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">runeSlice := []<span class="type">rune</span>&#123;<span class="number">0x0053</span>, <span class="number">0x0065</span>, <span class="number">0x00f1</span>, <span class="number">0x006f</span>, <span class="number">0x0072</span>&#125; <span class="comment">// 16 进制的 Unicode 代码点</span></span><br><span class="line">str := <span class="type">string</span>(runeSlice)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-遍历字符串"><a href="#2-遍历字符串" class="headerlink" title="2. 遍历字符串"></a>2. 遍历字符串</h3><h4 id="2-1-rune"><a href="#2-1-rune" class="headerlink" title="2.1. rune"></a>2.1. rune</h4><p>直接使用切片访问，其会按照每个字节来打印，但是有的字符占据不止一个字节，此时必须使用 <code>rune</code> ，其是 int32 的别称，表示一个代码点。代码点无论占用多少个字节，都可以用一个 rune 来表示。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printBytes</span><span class="params">(s <span class="type">string</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i:= <span class="number">0</span>; i &lt; <span class="built_in">len</span>(s); i++ &#123;</span><br><span class="line">        fmt.Printf(<span class="string">&quot;%x &quot;</span>, s[i])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printChars</span><span class="params">(s <span class="type">string</span>)</span></span> &#123;</span><br><span class="line">    runes := []<span class="type">rune</span>(s)                  <span class="comment">// 防止多字节字符，解析错误</span></span><br><span class="line">    <span class="keyword">for</span> i:= <span class="number">0</span>; i &lt; <span class="built_in">len</span>(runes); i++ &#123;</span><br><span class="line">        fmt.Printf(<span class="string">&quot;%c &quot;</span>,runes[i])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-for-rang"><a href="#2-2-for-rang" class="headerlink" title="2.2. for rang"></a>2.2. for rang</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printCharsAndBytes</span><span class="params">(s <span class="type">string</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> index, <span class="type">rune</span> := <span class="keyword">range</span> s &#123;</span><br><span class="line">        fmt.Printf(<span class="string">&quot;%c starts at byte %d\n&quot;</span>, <span class="type">rune</span>, index)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-注意"><a href="#3-注意" class="headerlink" title="3. 注意"></a>3. 注意</h3><h4 id="3-1-长度"><a href="#3-1-长度" class="headerlink" title="3.1. 长度"></a>3.1. 长度</h4><p><code>utf8 package</code> 包中的 <code>func RuneCountInString(s string) (n int)</code> 方法用来获取字符串的长度，返回字符串中的 rune 的数量。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;unicode/utf8&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">length</span><span class="params">(s <span class="type">string</span>)</span></span> &#123;  </span><br><span class="line">    fmt.Printf(<span class="string">&quot;length of %s is %d\n&quot;</span>, s, utf8.RuneCountInString(s))</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123; </span><br><span class="line">    word1 := <span class="string">&quot;Señor&quot;</span> </span><br><span class="line">    length(word1)       <span class="comment">// length of Señor is 5  </span></span><br><span class="line">    word2 := <span class="string">&quot;Pets&quot;</span></span><br><span class="line">    length(word2)       <span class="comment">// length of Pets is 4</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-字符串不可变"><a href="#3-2-字符串不可变" class="headerlink" title="3.2. 字符串不可变"></a>3.2. 字符串不可变</h4><p>Go 中的字符串是不可变的。一旦一个字符串被创建，那么它将无法被修改。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mutate</span><span class="params">(s <span class="type">string</span>)</span></span><span class="type">string</span> &#123;  </span><br><span class="line">    s[<span class="number">0</span>] = <span class="string">&#x27;a&#x27;</span>                  <span class="comment">// 报错，cannot assign to s[0]</span></span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    h := <span class="string">&quot;hello&quot;</span></span><br><span class="line">    fmt.Println(mutate(h))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为了修改字符串，可以把字符串转化为一个 rune 切片。然后这个切片可以进行任何想要的改变，然后再转化为一个字符串。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mutate</span><span class="params">(s []<span class="type">rune</span>)</span></span> <span class="type">string</span> &#123;  </span><br><span class="line">    s[<span class="number">0</span>] = <span class="string">&#x27;a&#x27;</span> </span><br><span class="line">    <span class="keyword">return</span> <span class="type">string</span>(s)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    h := <span class="string">&quot;hello&quot;</span></span><br><span class="line">    fmt.Println(mutate([]<span class="type">rune</span>(h)))      <span class="comment">// 输出，aello</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/12/22/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/2.%E6%95%B0%E7%BB%84,%E6%98%A0%E5%B0%84,%E7%BB%93%E6%9E%84%E4%BD%93,%E6%8C%87%E9%92%88,%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-id="cll0wsvue0004lojw0tprgdm1" data-title="Golang 基础-数组、映射、结构体、指针、字符串(第二章)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Golang/" rel="tag">Golang</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/12/23/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/4.%E5%88%A4%E6%96%AD%E4%B8%8E%E5%BE%AA%E7%8E%AF/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Golang 基础-方法、接口(第四章)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/12/22/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/1.%E5%8C%85,%E5%8F%98%E9%87%8F%E5%92%8C%E5%87%BD%E6%95%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Golang 基础-包、变量和函数(第一章)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ThreadLocal/" rel="tag">ThreadLocal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Flink/" style="font-size: 18.89px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Golang/" style="font-size: 15.56px;">Golang</a> <a href="/tags/Idea-Instructions/" style="font-size: 15.56px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 11.11px;">JVM</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Maven/" style="font-size: 13.33px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Redis/" style="font-size: 16.67px;">Redis</a> <a href="/tags/Rust/" style="font-size: 12.22px;">Rust</a> <a href="/tags/Scala/" style="font-size: 13.33px;">Scala</a> <a href="/tags/Spring/" style="font-size: 15.56px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 14.44px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/ThreadLocal/" style="font-size: 10px;">ThreadLocal</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 14.44px;">代码归档</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 18.89px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 12.22px;">数据库</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 17.78px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 15.56px;">杂记</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15.56px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 12.22px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 12.22px;">计算机网络</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/03/%E7%9F%A5%E8%AF%86%E7%82%B9/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%BD%91%E7%BB%9C/0.%E9%9B%B6%E7%A2%8E/">计算机基础与网络-杂记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/25/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/0.GolangCheatsheet/">Golang 基础-Cheatsheet</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/11/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Maven/3.maven-assembly-plugin/">Maven assembly plugin</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/11/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Maven/2.Mavenprofiles/">Maven profiles</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/04/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/13.%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/">Java 远程调试</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
