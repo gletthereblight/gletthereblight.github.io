@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Spring Cloud 概览 | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Spring Cloud 的功能与部分组件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Cloud 概览">
+<meta property="og:url" content="http://example.com/2020/06/04/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/SpringCloud/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="Spring Cloud 的功能与部分组件">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/others/springcloud01.jpg">
+<meta property="article:published_time" content="2020-06-04T08:36:00.000Z">
+<meta property="article:modified_time" content="2020-06-05T02:38:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="Spring Cloud">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/others/springcloud01.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Java/Spring/SpringCloud" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/06/04/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/SpringCloud/" class="article-date">
+  <time class="dt-published" datetime="2020-06-04T08:36:00.000Z" itemprop="datePublished">2020-06-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Spring Cloud 概览
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="总述"><a href="#总述" class="headerlink" title="总述"></a>总述</h1><p>在平时我们构建微服务的过程中需要做如 服务发现注册 、配置中心 、消息总线 、负载均衡 、断路器 、数据监控 等操作，而 Spring Cloud 为我们提供了一套简易的编程模型，使我们能在 Spring Boot 的基础上轻松地实现微服务项目的构建<br><img src="/../../../../images/others/springcloud01.jpg" alt="sprintcloud"></p>
+<h1 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h1><p>版本号均为英国伦敦地铁站的站名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Angel、Brixton、Camden、Dalston、Edgware、Finchley、Greenwich、Hoxton</span><br></pre></td></tr></table></figure>
+
+<h1 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h1><h2 id="1-服务发现框架-Eureka"><a href="#1-服务发现框架-Eureka" class="headerlink" title="1. 服务发现框架-Eureka"></a>1. 服务发现框架-<code>Eureka</code></h2><blockquote>
+<p>可以充当服务发现的组件有很多：<code>Zookeeper</code>，<code>Consul</code>，<code>Eureka</code> 等。<code>Eureka</code>是基于<code>REST</code>（代表性状态转移）的服务，主要在AWS云中用于定位服务，以实现负载均衡和中间层服务器的故障转移。我们称此服务为<code>Eureka</code>服务器。<code>Eureka</code>还带有一个基于Java的客户端组件<code>Eureka Client</code>，它使与服务的交互变得更加容易。客户端还具有一个内置的负载平衡器，可以执行基本的循环负载平衡。在Netflix，更复杂的负载均衡器将<code>Eureka</code>包装起来，以基于流量，资源使用，错误条件等多种因素提供加权负载均衡，以提供出色的弹性。注册、续约等，底层都是使用的 <code>RestTemplate</code></p>
+</blockquote>
+<h3 id="1-1-服务注册-Register"><a href="#1-1-服务注册-Register" class="headerlink" title="1.1. 服务注册 Register"></a>1.1. 服务注册 <code>Register</code></h3><p>当 <code>Eureka</code> 客户端向 <code>Eureka Server</code> 注册时，它提供自身的元数据，比如IP地址、端口，运行状况指示符URL，主页等</p>
+<h3 id="1-2-服务续约-Renew"><a href="#1-2-服务续约-Renew" class="headerlink" title="1.2. 服务续约 Renew"></a>1.2. 服务续约 <code>Renew</code></h3><p><code>Eureka</code> 客户会每隔30秒(默认情况下)发送一次心跳来续约。通过续约来告知 <code>Eureka Server</code> 该 <code>Eureka</code> 客户仍然存在，没有出现问题。正常情况下，如果 <code>Eureka Server</code> 在90秒没有收到<code> Eureka</code> 客户的续约，它会将实例从其注册表中删除。</p>
+<h3 id="1-3-获取注册列表信息-Fetch-Registries"><a href="#1-3-获取注册列表信息-Fetch-Registries" class="headerlink" title="1.3. 获取注册列表信息 Fetch Registries"></a>1.3. 获取注册列表信息 <code>Fetch Registries</code></h3><p><code>Eureka</code> 客户端从服务器获取注册表信息，并将其缓存在本地。客户端会使用该信息查找其他服务，从而进行远程调用。该注册列表信息定期（每30秒钟）更新一次。每次返回注册列表信息可能与 <code>Eureka</code> 客户端的缓存信息不同, <code>Eureka</code> 客户端自动处理。如果由于某种原因导致注册列表信息不能及时匹配，<code>Eureka</code> 客户端则会重新获取整个注册表信息。<code>Eureka</code> 服务器缓存注册列表信息，整个注册表以及每个应用程序的信息进行了压缩，压缩内容和没有压缩的内容完全相同。<code>Eureka</code> 客户端和 <code>Eureka</code> 服务器可以使用<code>JSON/XML</code> 格式进行通讯。在默认的情况下 <code>Eureka</code> 客户端使用压缩 <code>JSON</code> 格式来获取注册列表的信息。</p>
+<h3 id="1-4-服务下线-Cancel"><a href="#1-4-服务下线-Cancel" class="headerlink" title="1.4. 服务下线 Cancel"></a>1.4. 服务下线 <code>Cancel</code></h3><p><code>Eureka</code> 客户端在程序关闭时向<code>Eureka</code>服务器发送取消请求。发送请求后，该客户端实例信息将从服务器的实例注册表中删除。该下线请求不会自动完成，它需要调用以下内容：<code>DiscoveryManager.getInstance().shutdownComponent()</code>;</p>
+<h3 id="1-5-服务剔除-Eviction"><a href="#1-5-服务剔除-Eviction" class="headerlink" title="1.5. 服务剔除 Eviction"></a>1.5. 服务剔除 <code>Eviction</code></h3><p>在默认的情况下，当 <code>Eureka</code> 客户端连续90秒(3个续约周期)没有向 <code>Eureka</code> 服务器发送心跳，<code>Eureka</code> 服务器会将该服务实例从服务注册列表删除，即服务剔除。</p>
+<h2 id="2-负载均衡-Ribbon"><a href="#2-负载均衡-Ribbon" class="headerlink" title="2. 负载均衡-Ribbon"></a>2. 负载均衡-<code>Ribbon</code></h2><blockquote>
+<p>常用的负载均衡组件有<code>Nginx</code>，<code>Ribbon</code>等。<code>Nginx</code> 是一种集中式的负载均衡器，将所有请求都集中起来，然后再进行负载均衡。在 <code>Nginx</code> 中请求是先进入负载均衡器，而在 <code>Ribbon</code> 中是先在客户端进行负载均衡才进行请求的，其是一个客户端&#x2F;进程内负载均衡器，运行在消费者端</p>
+</blockquote>
+<h3 id="2-1-负载均衡算法"><a href="#2-1-负载均衡算法" class="headerlink" title="2.1. 负载均衡算法"></a>2.1. 负载均衡算法</h3><ul>
+<li>RoundRobinRule：轮询策略。Ribbon 默认采用的策略。若经过一轮轮询没有找到可用的 provider，其最多轮询 10 轮。若最终还没有找到，则返回 null</li>
+<li>RandomRule: 随机策略，从所有可用的 provider 中随机选择一个</li>
+<li>RetryRule: 重试策略。先按照 RoundRobinRule 策略获取 provider，若获取失败，则在指定的时限内重试。默认的时限为 500 毫秒</li>
+<li>自定义：需要实现 <code>IRule</code> 接口，然后修改配置文件或者自定义 <code>Java Config</code> 类</li>
+</ul>
+<h2 id="3-服务调用映射-Open-Feign"><a href="#3-服务调用映射-Open-Feign" class="headerlink" title="3. 服务调用映射-Open Feign"></a>3. 服务调用映射-<code>Open Feign</code></h2><blockquote>
+<p><code>OpenFeign</code> 也是运行在消费者端的，使用 <code>Ribbon</code> 进行负载均衡，所以 <code>OpenFeign</code> 直接内置了 <code>Ribbon</code>。</p>
+</blockquote>
+<h2 id="4-服务降级熔断器-Hystrix"><a href="#4-服务降级熔断器-Hystrix" class="headerlink" title="4. 服务降级熔断器-Hystrix"></a>4. 服务降级熔断器-<code>Hystrix</code></h2><blockquote>
+<p>在分布式环境中，不可避免地会有许多服务依赖项中的某些失败。<code>Hystrix</code> 是一个库，可通过添加等待时间容限和容错逻辑来帮助您控制这些分布式服务之间的交互。<code>Hystrix</code>通过隔离服务之间的访问点，停止服务之间的级联故障并提供后备选项来实现此目的，所有这些都可以提高系统的整体弹性。</p>
+</blockquote>
+<h3 id="4-1-服务雪崩"><a href="#4-1-服务雪崩" class="headerlink" title="4.1. 服务雪崩"></a>4.1. 服务雪崩</h3><blockquote>
+<p>服务A调用了服务B，服务B再调用了服务C，但是因为某些原因，服务C顶不住了，这个时候大量请求会在服务C阻塞，进而导致服务B和服务A也无法正常使用，这就叫服务雪崩</p>
+</blockquote>
+<h3 id="4-2-熔断"><a href="#4-2-熔断" class="headerlink" title="4.2. 熔断"></a>4.2. 熔断</h3><blockquote>
+<p>熔断就是服务雪崩的一种有效解决方案。当指定时间窗内的请求失败率达到设定阈值时，系统将通过断路器 直接将此请求链路断开。也就是上面服务B调用服务C在指定时间窗内，调用的失败率到达了一定的值，那么 <code>Hystrix</code> 则会自动将 服务B与C 之间的请求都断了，以免导致服务雪崩现象</p>
+</blockquote>
+<h3 id="4-3-降级"><a href="#4-3-降级" class="headerlink" title="4.3. 降级"></a>4.3. 降级</h3><blockquote>
+<p>降级是为了更好的用户体验，当一个方法调用异常时，通过执行另一种代码逻辑来给用户友好的回复。这也就对应着 <code>Hystrix</code> 的 后备处理模式，比如这个时候有一个热点新闻出现了，我们会推荐给用户查看详情，然后用户会通过id去查询新闻的详情，但是因为这条新闻太火了，大量用户同时访问可能会导致系统崩溃，那么我们就进行服务降级，一些请求会做一些降级处理比如当前人数太多请稍后查看等等</p>
+</blockquote>
+<h2 id="5-微服务网关-Zuul"><a href="#5-微服务网关-Zuul" class="headerlink" title="5. 微服务网关-Zuul"></a>5. 微服务网关-<code>Zuul</code></h2><blockquote>
+<p><code>Zuul</code>是为了实现动态路由、监视、弹性和安全性而构建的，用于对请求进行鉴权、限流、 路由、监控等功能。<code>Zuul</code>  是消费者工程调用入口</p>
+</blockquote>
+<h2 id="6-配置管理-Config"><a href="#6-配置管理-Config" class="headerlink" title="6. 配置管理-Config"></a>6. 配置管理-<code>Config</code></h2><blockquote>
+<p>配置管理的框架有<code>Spring Cloud Config</code>，<code>disconf</code>，<code>Apollo</code>等等。<code>Spring Cloud Config</code> 为分布式系统中的外部化配置提供服务器和客户端支持。使用 <code>Config</code> 服务器，可以在中心位置管理所有环境中应用程序的外部属性，既能对配置文件统一地进行管理，又能在项目运行时动态修改配置文件。其将各个应用&#x2F;系统&#x2F;模块的配置文件存放到统一的地方然后进行管理(Git 或者 SVN)。一般我们会使用 <code>Bus</code> 消息总线 + <code>Spring Cloud Config</code> 进行配置的动态刷新</p>
+</blockquote>
+<h2 id="7-消息总线-Bus"><a href="#7-消息总线-Bus" class="headerlink" title="7. 消息总线-Bus"></a>7. 消息总线-<code>Bus</code></h2><blockquote>
+<p>用于将服务和服务实例与分布式消息系统链接在一起的事件总线。在集群中传播状态更改很有用（例如配置更改事件），作用是管理和广播分布式系统中的消息，也就是消息引擎系统中的广播模式</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/06/04/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/SpringCloud/" data-id="cll0lp8jx000u3gjwep0j0igz" data-title="Spring Cloud 概览" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/07/16/%E7%9F%A5%E8%AF%86%E7%82%B9/Git/git%20Docker/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Docker 搭建 git
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/25/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/8.JWT/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JWT</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ThreadLocal/" rel="tag">ThreadLocal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Flink/" style="font-size: 18.75px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Git/" style="font-size: 13.75px;">Git</a> <a href="/tags/Idea-Instructions/" style="font-size: 16.25px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 11.25px;">JVM</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Scala/" style="font-size: 13.75px;">Scala</a> <a href="/tags/Spring/" style="font-size: 16.25px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 15px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/ThreadLocal/" style="font-size: 10px;">ThreadLocal</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 15px;">代码归档</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 18.75px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 12.5px;">数据库</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 17.5px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 13.75px;">杂记</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 16.25px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/04/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/13.%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/">Java 远程调试</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/16/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-Flink%20CDC%20%E9%97%AE%E9%A2%98-/">杂记-Flink CDC</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/05/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/5.SpringBoot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/">Spring Boot 定时任务</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/18/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/12.Jps/">Jps 命令</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/27/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/3.SpringBoot%E6%8A%80%E5%B7%A7%E5%92%8C%E5%9D%91/">Spring Boot 的 AOP</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

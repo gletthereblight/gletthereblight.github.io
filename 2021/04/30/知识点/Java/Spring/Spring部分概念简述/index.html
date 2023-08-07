@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Spring 部分概念简述 | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Spring 中部分名词、类、注解、接口的简要介绍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring 部分概念简述">
+<meta property="og:url" content="http://example.com/2021/04/30/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/Spring%E9%83%A8%E5%88%86%E6%A6%82%E5%BF%B5%E7%AE%80%E8%BF%B0/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="Spring 中部分名词、类、注解、接口的简要介绍">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-30T05:13:00.000Z">
+<meta property="article:modified_time" content="2021-04-30T18:36:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Spring">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Java/Spring/Spring部分概念简述" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/30/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/Spring%E9%83%A8%E5%88%86%E6%A6%82%E5%BF%B5%E7%AE%80%E8%BF%B0/" class="article-date">
+  <time class="dt-published" datetime="2021-04-30T05:13:00.000Z" itemprop="datePublished">2021-04-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Spring 部分概念简述
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-BeanDefinition"><a href="#1-BeanDefinition" class="headerlink" title="1. BeanDefinition"></a>1. BeanDefinition</h2><h3 id="1-wiki"><a href="#1-wiki" class="headerlink" title="1. wiki"></a>1. wiki</h3><p>表说 Bean 的定义，Spring 根据它来创建 Bean 对象。常用的 <code>@Component</code>、<code>@Bean</code>、<code>@&lt;bean/&gt;</code> 都会解析为 <code>BeanDifinition</code>。</p>
+<h3 id="2-组成"><a href="#2-组成" class="headerlink" title="2. 组成"></a>2. 组成</h3><ul>
+<li><code>beanCalss</code>：表示一个 bean 的类型。比如：UserService.class，Spring 在创建 Bean 的过程中会根据此属性来实例化得到对象。</li>
+<li><code>scope</code>：表示一个 bean 的作用域。singletion 表示 该 bean 就是一个单例，prototype，该 bean 就是一个原型。</li>
+<li><code>isLazy</code>：表示一个 bean 是不是需要懒加载。原型 bean 的 isLazy 属性不起作用；懒加载的单例 bean 会在第一次 getBean 的时候生成该 bean ，非懒加载的单例 bean 则会在 Spring 启动过程中直接生成好。</li>
+<li><code>dependsOn</code>：表示一个 bean 在创建之前所依赖的其它 bean，在创建之前，他所依赖的这些 bean 得先全部创建好。</li>
+<li><code>primary</code>：表示一个 bean 是主 bean。在 Spring 中一个类型可以有多个 bean 对象，在进行依赖注入时，如果根据类型找到多个 bean，此时会判断这些 bean 是否有一个主 bean，如果存在，则直接将这个 bean 注入属性。</li>
+<li><code>initMethodName</code>：表示一个 bean 的初始化方法。在 Spring 生命周中可以自定义初始化逻辑。</li>
+</ul>
+<h2 id="2-BeanFactory"><a href="#2-BeanFactory" class="headerlink" title="2. BeanFactory"></a>2. BeanFactory</h2><h3 id="1-wiki-1"><a href="#1-wiki-1" class="headerlink" title="1. wiki"></a>1. wiki</h3><p>是一种 Spring 容器，可以用来创建、获取 Bean。利用 <code>BeanDifinition</code> 生成 bean 对象</p>
+<h3 id="2-核心子接口和实现类"><a href="#2-核心子接口和实现类" class="headerlink" title="2. 核心子接口和实现类"></a>2. 核心子接口和实现类</h3><ul>
+<li><code>ListableBeanFactory</code></li>
+<li><code>ConfigurableBeanFactory</code></li>
+<li><code>AutowireCapableBeanFactory</code></li>
+<li><code>AbstractBeanFactory</code></li>
+<li><code>DefaultListableBeanFactory</code>：支持单例bean、bean别名、父子BeanFactory、bean类型转化、bean后置处理、FactoryBean、自动装配等</li>
+</ul>
+<h2 id="3-Bean-生命周期"><a href="#3-Bean-生命周期" class="headerlink" title="3. Bean 生命周期"></a>3. Bean 生命周期</h2><ul>
+<li><code>BeanDefinition</code>：bean 定义</li>
+<li>构造方法推断：选择一个构造方法</li>
+<li>实例化：构造方法反射得到对象，可以通过 BeanPostProcessor 进项干预</li>
+<li>属性填充：给部分属性进行自动填充，即依赖注入</li>
+<li>初始化：对其它属性赋值、校验，可以利用 InitializingBean 接口对其他属性进行赋值</li>
+<li>初始化后：AOP、生成代理对象</li>
+</ul>
+<h2 id="4-Autowire"><a href="#4-Autowire" class="headerlink" title="4. @Autowire"></a>4. @Autowire</h2><h3 id="1-wiki-2"><a href="#1-wiki-2" class="headerlink" title="1. wiki"></a>1. wiki</h3><p>表示属性是否需要进项依赖注入，可以在属性和方法上。  </p>
+<ul>
+<li>写在属性上时：Spring 在容器中找 bean 类型，先根据属性类型查找，如果找到多个时，则根据属性名挑选一个。注解中的 required 属性默认为 true ，表示如果没有对象可以注入给属性则抛出异常。</li>
+<li>写在方法上时：Spring 会在bean属性填充阶段，根据方法参数类型、参数名字从容器中找到并作为入参，自动反射调用该方法。</li>
+<li>写在构造方法上时：Spring 会在推断构造方法阶段，根据方法参数类型、参数名字从容器中找到并作为入参，自动反射调用该方法。</li>
+</ul>
+<h2 id="5-Resource"><a href="#5-Resource" class="headerlink" title="5. @Resource"></a>5. @Resource</h2><h3 id="1-wiki-3"><a href="#1-wiki-3" class="headerlink" title="1. wiki"></a>1. wiki</h3><p>与 <code>@Autowire</code> 一样是提供依赖注入的，但是 <code>@Resource</code>是 java 层面提供的，<code>@Autowire</code> 是 Spring 提供的。<br><code>@Resource</code>有个 name 属性，根据 name 属性是否有值，依赖注入的底层流程不一样的：</p>
+<ul>
+<li>有值，则直接根据指定 name 值去容器中找，没找到则报错</li>
+<li>无值，则先判断属性名字是否在容器中存在，没找到则根据属性类型去找，否则报错</li>
+</ul>
+<h2 id="6-Value"><a href="#6-Value" class="headerlink" title="6. @Value"></a>6. @Value</h2><p>与 <code>@Autowire</code> 和 <code>@Resource</code> 类似，也是对属性进行依赖注入，只不过 <code>@Value</code> 是从 properties 文件中获取值，并且其可以解析 SpEL 表达式。  </p>
+<ul>
+<li><code>@Value(&quot;hello&quot;)</code>：直接赋值给属性，如果属性类型不是String或无法记性类型转化，则报错。</li>
+<li><code>@Value(&quot;$&#123;hello&#125;&quot;)</code>：会把 ${} 中字符串当做 key 从 properties 文件查找对应 value 赋值给属性，没找到则把 ${hello} 赋值给属性。</li>
+<li><code>@Value(&quot;#&#123;hello&#125;&quot;)</code>：会把 #{} 中字符串当做 beanName ，并从容器中找对应 bean，没找到则报错。</li>
+</ul>
+<h2 id="7-FactoryBean"><a href="#7-FactoryBean" class="headerlink" title="7. FactoryBean"></a>7. FactoryBean</h2><h3 id="1-wiki-4"><a href="#1-wiki-4" class="headerlink" title="1. wiki"></a>1. wiki</h3><p>Spring 提供的一种灵活创建 bean 的方式，可以通过 FactoryBean 接口中的 getObject() 方法返回一个对象，其为最终对象。</p>
+<h3 id="2-接口中方法"><a href="#2-接口中方法" class="headerlink" title="2. 接口中方法"></a>2. 接口中方法</h3><ul>
+<li><code>Object getObject()</code>：返回的是 bean 对象</li>
+<li><code>boolean isSingleton()</code>：返回的是否是单例 bean 对象</li>
+<li><code>Class getObjectType()</code>：返回的是 bean 对象类型</li>
+</ul>
+<h2 id="8-ApplicationContext"><a href="#8-ApplicationContext" class="headerlink" title="8. ApplicationContext"></a>8. ApplicationContext</h2><h3 id="1-wiki-5"><a href="#1-wiki-5" class="headerlink" title="1. wiki"></a>1. wiki</h3><p>是比 <code>BeanFactory</code> 更加强大的 Spring 容器，其既可以创建、获取 bean，还可以支持国际化、事件广播、获取资源等。</p>
+<h3 id="2-继承的接口"><a href="#2-继承的接口" class="headerlink" title="2. 继承的接口"></a>2. 继承的接口</h3><ul>
+<li><code>EnvironmentCapable</code>：通过它获取操作系统和JVM环境变量</li>
+<li><code>ListableBeanFactory</code>：通过它获取所有beanNames、判断某个bean是否存在beanDefinition对象、统计beanDefinition个数、获取某个类型对应的所有beanNames等功能</li>
+<li><code>HierarchivalBeanFactory</code>：可以通过它获取父BeanFactory、判断某个name是否存在bean对象的功能</li>
+<li><code>MessageSource</code>：通过它获得国际化功能，可以直接利用 MessageSource 对象获取某个国际化资源</li>
+<li><code>ApplicationEventPublisher</code>：通过它获得事件发布功能</li>
+<li><code>ResourcePatternResolver</code>：通过它获得加载和获取资源功能，资源可以是文件或者图片、url资源等</li>
+</ul>
+<h2 id="9-BeanPostProcessor"><a href="#9-BeanPostProcessor" class="headerlink" title="9. BeanPostProcessor"></a>9. BeanPostProcessor</h2><h3 id="1-wiki-6"><a href="#1-wiki-6" class="headerlink" title="1. wiki"></a>1. wiki</h3><p>bean后置处理器，可以定制化 bean。其是一个接口，可以实现该接口来增加一些功能。</p>
+<h3 id="2-接口中方法-1"><a href="#2-接口中方法-1" class="headerlink" title="2. 接口中方法"></a>2. 接口中方法</h3><ul>
+<li><code>postProcessBeforeInitialization()</code>：初始化前方法，可在初始化前进行自定义</li>
+<li><code>postProcessAfterInitialization()</code>：初始化后方法</li>
+</ul>
+<h2 id="10-AOP"><a href="#10-AOP" class="headerlink" title="10. AOP"></a>10. AOP</h2><h3 id="1-wiki-7"><a href="#1-wiki-7" class="headerlink" title="1. wiki"></a>1. wiki</h3><p>面向切面编程，无需修改业务代码前提下，对某个或某些业务增加统一的功能，比如日志记录、权限控制、事务管理等</p>
+<h3 id="2-核心概念"><a href="#2-核心概念" class="headerlink" title="2. 核心概念"></a>2. 核心概念</h3><ul>
+<li><code>Advice</code>：用来定义代理逻辑</li>
+<li><code>Pointcut</code>：切点，表示 Advice 对应的代理逻辑应用在哪个类、方法上</li>
+<li><code>Advisor</code>：等于 Advice+Pointcut</li>
+<li><code>Weaving</code>：织入，将 Advice 代理逻辑在源代码级别嵌入到切点的过程</li>
+<li><code>Target</code>：代理对象，在 AOP 生成代理对象中会持有对象</li>
+<li><code>Join Point</code>：连接点，值方法的执行点</li>
+</ul>
+<h3 id="3-工作原理"><a href="#3-工作原理" class="headerlink" title="3. 工作原理"></a>3. 工作原理</h3><ol>
+<li>Spring 生成 bean 对象时，先实例化一个对象，即 Target</li>
+<li>对 Target 对象进行属性填充</li>
+<li>在初始化后步骤中，会判断 Target 对象有没有对应切面</li>
+<li>如果有切面，就表示当前 Target 对象需要进行 AOP</li>
+<li>通过 Cglib 或者 JDK 动态代理机制生成一个代理对象，作为最终 bean 对象</li>
+<li>代理对象中有一个 Target 属性指向了 Target 对象</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/30/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/Spring%E9%83%A8%E5%88%86%E6%A6%82%E5%BF%B5%E7%AE%80%E8%BF%B0/" data-id="cll0lp8ju000s3gjwb5qveqma" data-title="Spring 部分概念简述" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/05/18/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/2.POJO/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java 中各种对象的简称
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/24/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/4.SpringBoot%E5%BC%82%E6%AD%A5%E4%BA%8B%E4%BB%B6Event/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Spring Boot 异步事件 Event</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ThreadLocal/" rel="tag">ThreadLocal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Flink/" style="font-size: 18.75px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Git/" style="font-size: 13.75px;">Git</a> <a href="/tags/Idea-Instructions/" style="font-size: 16.25px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 11.25px;">JVM</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Scala/" style="font-size: 13.75px;">Scala</a> <a href="/tags/Spring/" style="font-size: 16.25px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 15px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/ThreadLocal/" style="font-size: 10px;">ThreadLocal</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 15px;">代码归档</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 18.75px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 12.5px;">数据库</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 17.5px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 13.75px;">杂记</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 16.25px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/04/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/13.%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/">Java 远程调试</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/16/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-Flink%20CDC%20%E9%97%AE%E9%A2%98-/">杂记-Flink CDC</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/05/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/5.SpringBoot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/">Spring Boot 定时任务</a>
+          </li>
+        
+          <li>
+            <a href="/2023/04/18/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/12.Jps/">Jps 命令</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/27/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/3.SpringBoot%E6%8A%80%E5%B7%A7%E5%92%8C%E5%9D%91/">Spring Boot 的 AOP</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
