@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Maven 命令 | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Maven 常用命令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maven 命令">
+<meta property="og:url" content="http://example.com/2020/08/05/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Maven/0.Maven%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="Maven 常用命令">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-05T05:13:00.000Z">
+<meta property="article:modified_time" content="2023-07-11T02:05:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Maven">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Java/Maven/0.Maven命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/08/05/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Maven/0.Maven%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time class="dt-published" datetime="2020-08-05T05:13:00.000Z" itemprop="datePublished">2020-08-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Maven 命令
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-mvn-clean-package"><a href="#1-mvn-clean-package" class="headerlink" title="1. mvn clean package"></a>1. mvn clean package</h2><p>使用 <code>mvn package</code> 进行编译、打包时，会执行 <code>src/test/java</code> 中的 <code>JUnit</code> 测试用例，可以跳过测试</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 不执行测试用例，但编译测试用例类生成相应的 class 文件至 target/test-classes 下</span><br><span class="line">$ mvn clean package -DskipTests</span><br><span class="line"></span><br><span class="line"># 不执行测试用例，也不编译测试用例类</span><br><span class="line">$ mvn clean package -Dmaven.test.skip=true</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-package-与-install-区别"><a href="#2-package-与-install-区别" class="headerlink" title="2. package 与 install 区别"></a>2. package 与 install 区别</h2><p><code>package</code> 是把 <code>jar</code> 打到本项目的 <code>target</code> 下，而 <code>install</code> 时把 <code>target</code> 下的 <code>jar</code> 安装到本地仓库，供其他项目使用.</p>
+<ul>
+<li><code>mvn clean package</code> 依次执行了<code>clean、resources、compile、testResources、testCompile、test、war(jar)(打包)</code>７个阶段;</li>
+<li><code>mvn clean install</code> 依次执行了<code>clean、resources、compile、testResources、testCompile、test、war(jar)(打包)、install</code> 8个阶段;</li>
+</ul>
+<h2 id="3-version"><a href="#3-version" class="headerlink" title="3. version"></a>3. version</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># pom文件中 &lt;version&gt; 中的 $&#123;my.version&#125; 取值，是在本或者父 &lt;properties&gt; 中定义</span><br><span class="line">&lt;properties&gt;</span><br><span class="line">    &lt;my.version&gt;1.1.1&lt;/my.version&gt;</span><br><span class="line">&lt;/properties&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-内置属性"><a href="#4-内置属性" class="headerlink" title="4. 内置属性"></a>4. 内置属性</h2><p>Maven 预定义,用户可以直接使用，共 6 种</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$&#123;basedir&#125; 表示项目根目录,即包含pom.xml文件的目录;</span><br><span class="line">$&#123;version&#125; 表示项目版本;</span><br><span class="line">$&#123;project.basedir&#125; 同$&#123;basedir&#125;;</span><br><span class="line">$&#123;project.baseUri&#125; 表示项目文件地址;</span><br><span class="line">$&#123;project.build.directory&#125; 指向 target 目录</span><br><span class="line">$&#123;maven.build.timestamp&#125; 表示项目构件开始时间;</span><br><span class="line">$&#123;maven.build.timestamp.format&#125; 表示属性 $&#123;maven.build.timestamp&#125; 的展示格式，默认值为 yyyyMMdd-HHmm ，可自定义其格式，其类型可参考 java.text.SimpleDateFormat。</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-默认（default）生命周期"><a href="#5-默认（default）生命周期" class="headerlink" title="5. 默认（default）生命周期"></a>5. 默认（default）生命周期</h2><ul>
+<li><code>验证（validate)</code> ：验证项目是正确的，所有必要的信息可用。</li>
+<li><code>初始化（initialize)</code> ：初始化构建状态，例如设置属性或创建目录。</li>
+<li><code>产生来源（generate-sources)</code> ：生成包含在编译中的任何源代码。</li>
+<li><code>流程源（process-sources)</code> ：处理源代码，例如过滤任何值。</li>
+<li><code>生成资源（generate-resources)</code> ：生成包含在包中的资源。</li>
+<li><code>流程资源（process-resources)</code> ：将资源复制并处理到目标目录中，准备打包。</li>
+<li><code>编译（compile)</code> ：编译项目的源代码。</li>
+<li><code>工艺类（process-classes)</code> ：从编译后处理生成的文件，例如对Java类进行字节码增强。</li>
+<li><code>生成测试来源（generate-test-sources)</code> ：生成包含在编译中的任何测试源代码。</li>
+<li><code>流程测试来源（process-test-sources)</code> ：处理测试源代码，例如过滤任何值。</li>
+<li><code>生成测试资源（generate-test-resources)</code> ：创建测试资源。</li>
+<li><code>流程测试资源（process-test-resources)</code> ：将资源复制并处理到测试目标目录中。</li>
+<li><code>测试编译（test-compile)</code> ：将测试源代码编译到测试目标目录中</li>
+<li><code>流程检验类（process-test-classes)</code> ：从测试编译中处理生成的文件，例如对Java类进行字节码增强。对于Maven 2.0.5及以上版本。</li>
+<li><code>测试（test)</code> ：使用合适的单元测试框架运行测试。这些测试不应该要求代码被打包或部署。</li>
+<li><code>制备包（prepare-package)</code> ：在实际包装之前，执行必要的准备包装的操作。这通常会导致打包的处理版本的包。（Maven 2.1及以上）</li>
+<li><code>打包（package)</code> ：采取编译的代码，并以其可分发的格式（如JAR）进行打包。</li>
+<li><code>预集成测试（pre-integration-test)</code> ：在执行集成测试之前执行所需的操作。这可能涉及诸如设置所需环境等。</li>
+<li><code>集成测试（integration-test)</code> ：如果需要，可以将该包过程并部署到可以运行集成测试的环境中。</li>
+<li><code>整合后的测试（post-integration-test)</code> ：执行集成测试后执行所需的操作。这可能包括清理环境。</li>
+<li><code>校验（verify)</code> ：运行任何检查以验证包装是否有效并符合质量标准。</li>
+<li><code>安装（install)</code> ：将软件包安装到本地存储库中，以作为本地其他项目的依赖关系。</li>
+<li><code>部署（deploy)</code> ：在集成或发布环境中完成，将最终软件包复制到远程存储库，以与其他开发人员和项目共享。</li>
+</ul>
+<h2 id="6-常用常量"><a href="#6-常用常量" class="headerlink" title="6. 常用常量"></a>6. 常用常量</h2><ul>
+<li><code>$&#123;basedir&#125;</code>：项目根目录</li>
+<li><code>$&#123;project.groupId&#125;</code>：项目的 groupId</li>
+<li><code>$&#123;project.artifactId&#125;</code>：项目的 artifactId</li>
+<li><code>$&#123;project.version&#125;</code>、<code>$&#123;version&#125;</code>：项目的 version</li>
+<li><code>$&#123;project.build.directory&#125;</code>：构建目录，缺省为 target</li>
+<li><code>$&#123;project.build.outputDirectory&#125;</code>：构建过程输出目录，缺省为 target&#x2F;classes</li>
+<li><code>$&#123;project.build.sourceDirectory&#125;</code>：项目的主源码目录，默认为 src&#x2F;main&#x2F;java</li>
+<li><code>$&#123;project.build.testSourceDirectory&#125;</code>：项目的测试源码目录，默认为 src&#x2F;test&#x2F;java</li>
+<li><code>$&#123;project.testOutputDirectory&#125;</code>：项目测试代码编译输出目录，默认为 target&#x2F;test-classes&#x2F;</li>
+<li><code>$&#123;project.build.fianlName&#125;</code>：项目打包输出文件的名称。默认为<code>&#123;project.artifactId&#125;-$&#123;project.version&#125;</code></li>
+<li><code>$&#123;project.packaging&#125;</code>：打包类型，缺省为jar</li>
+<li><code>$&#123;project.xxx&#125;</code>：当前pom文件的任意节点的内容</li>
+</ul>
+<h2 id="7-mvn-dependency-tree-X"><a href="#7-mvn-dependency-tree-X" class="headerlink" title="7. mvn dependency:tree -X"></a>7. mvn dependency:tree -X</h2><p>检查模块依赖正确性</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/08/05/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Maven/0.Maven%E5%91%BD%E4%BB%A4/" data-id="cll0oj5he0000qkjw7hf40ft0" data-title="Maven 命令" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/08/10/%E7%9F%A5%E8%AF%86%E7%82%B9/Git/git%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          git 常用命令(持续更新)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/08/05/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/2.Flink%20%E6%B5%81%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Flink 基础-流处理过程(第二章)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ThreadLocal/" rel="tag">ThreadLocal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Flink/" style="font-size: 18.75px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Git/" style="font-size: 13.75px;">Git</a> <a href="/tags/Idea-Instructions/" style="font-size: 16.25px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 11.25px;">JVM</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Maven/" style="font-size: 13.75px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Scala/" style="font-size: 13.75px;">Scala</a> <a href="/tags/Spring/" style="font-size: 16.25px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 15px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/ThreadLocal/" style="font-size: 10px;">ThreadLocal</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 15px;">代码归档</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 18.75px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 12.5px;">数据库</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 17.5px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 13.75px;">杂记</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 16.25px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/11/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Maven/3.maven-assembly-plugin/">Maven assembly plugin</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/11/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Maven/2.Mavenprofiles/">Maven profiles</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/04/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/13.%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/">Java 远程调试</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/16/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-Flink%20CDC%20%E9%97%AE%E9%A2%98-/">杂记-Flink CDC</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/05/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/5.SpringBoot%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/">Spring Boot 定时任务</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
