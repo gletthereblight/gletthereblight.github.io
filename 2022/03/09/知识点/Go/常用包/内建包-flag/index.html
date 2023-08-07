@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Golang 内建包-flag | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="flag 包一般用来处理传参">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang 内建包-flag">
+<meta property="og:url" content="http://example.com/2022/03/09/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/%E5%B8%B8%E7%94%A8%E5%8C%85/%E5%86%85%E5%BB%BA%E5%8C%85-flag/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="flag 包一般用来处理传参">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-09T02:32:00.000Z">
+<meta property="article:modified_time" content="2022-04-10T04:05:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="Golang">
+<meta property="article:tag" content="内建包">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Go/常用包/内建包-flag" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/09/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/%E5%B8%B8%E7%94%A8%E5%8C%85/%E5%86%85%E5%BB%BA%E5%8C%85-flag/" class="article-date">
+  <time class="dt-published" datetime="2022-03-09T02:32:00.000Z" itemprop="datePublished">2022-03-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Golang 内建包-flag
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="传参的两种方式"><a href="#传参的两种方式" class="headerlink" title="传参的两种方式"></a>传参的两种方式</h1><h2 id="1-os-Args"><a href="#1-os-Args" class="headerlink" title="1. os.Args"></a>1. <code>os.Args</code></h2><p>引入 “os” 包，<code>os.Args</code> 是一个存储命令行参数的字符串切片，它的第一个元素是执行文件的名称</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;os&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">//os.Args demo</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">//os.Args 是一个[]string</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(os.Args) &gt; <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> index, arg := <span class="keyword">range</span> os.Args &#123;</span><br><span class="line">            fmt.Printf(<span class="string">&quot;args[%d]=%v\n&quot;</span>, index, arg)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将上面的代码执行 <code>go build -o &quot;args_demo&quot;</code> 编译之后执行：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ./args_demo a b c d</span><br><span class="line">args[<span class="number">0</span>]=./args_demo</span><br><span class="line">args[<span class="number">1</span>]=a</span><br><span class="line">args[<span class="number">2</span>]=b</span><br><span class="line">args[<span class="number">3</span>]=c</span><br><span class="line">args[<span class="number">4</span>]=d</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-flag"><a href="#2-flag" class="headerlink" title="2. flag"></a>2. <code>flag</code></h2><p><code>flag</code> 包支持的命令行参数类型有 <code>bool、int、int64、uint、uint64、float64、string、duration</code>。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>方法</th>
+<th>返回值</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Bool</td>
+<td><code>Bool,BoolVar</code></td>
+<td><code>*bool,无</code></td>
+<td>允许 <code>1, 0, t, f, T, F, true, false, TRUE, FALSE, True, False</code></td>
+</tr>
+<tr>
+<td>Int</td>
+<td><code>Int,IntVar</code></td>
+<td><code>*int,无</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Int64</td>
+<td><code>Int64,Int64Var</code></td>
+<td><code>*int64,无</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Uint</td>
+<td><code>Uint,UintVar</code></td>
+<td><code>*uint,无</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Uint64</td>
+<td><code>Uint64,Uint64Var</code></td>
+<td><code>*uint64,无</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Float64</td>
+<td><code>Float64,Float64Var</code></td>
+<td><code>*float64,无</code></td>
+<td></td>
+</tr>
+<tr>
+<td>String</td>
+<td><code>String,StringVar</code></td>
+<td><code>*string,无</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Duration</td>
+<td><code>Duration,DurationVar</code></td>
+<td><code>*duration,无</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="1-定义参数"><a href="#1-定义参数" class="headerlink" title="1. 定义参数"></a>1. 定义参数</h3><h4 id="1-结果保存在指针"><a href="#1-结果保存在指针" class="headerlink" title="1. 结果保存在指针"></a>1. 结果保存在指针</h4><p>语法 <code>flag.类型(参数名, 默认值, 说明信息) *类型</code>，返回一个保存了该 flag 的值的指针，如下，此时 name、age、married、delay 均为对应类型的指针。   </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name := flag.String(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;flink&quot;</span>, <span class="string">&quot;平台&quot;</span>)</span><br><span class="line">parallel := flag.Int(<span class="string">&quot;parallel&quot;</span>, <span class="number">5</span>, <span class="string">&quot;并行度&quot;</span>)</span><br><span class="line">quit := flag.Bool(<span class="string">&quot;quit&quot;</span>, <span class="literal">false</span>, <span class="string">&quot;静默模式&quot;</span>)</span><br><span class="line">delay := flag.Duration(<span class="string">&quot;d&quot;</span>, <span class="number">0</span>, <span class="string">&quot;时间间隔&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-绑定变量"><a href="#2-绑定变量" class="headerlink" title="2. 绑定变量"></a>2. 绑定变量</h4><p>语法 <code>flag.TypeVar(Type指针, flag名, 默认值, 帮助信息)</code>，将 flag 的值保存到相应变量</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name <span class="type">string</span></span><br><span class="line"><span class="keyword">var</span> parallel <span class="type">int</span></span><br><span class="line"><span class="keyword">var</span> quit <span class="type">bool</span></span><br><span class="line"><span class="keyword">var</span> delay time.Duration</span><br><span class="line">flag.StringVar(&amp;name, <span class="string">&quot;name&quot;</span>, <span class="string">&quot;flink&quot;</span>, <span class="string">&quot;平台&quot;</span>)</span><br><span class="line">flag.IntVar(&amp;parallel, <span class="string">&quot;parallel&quot;</span>, <span class="number">5</span>, <span class="string">&quot;并行度&quot;</span>)</span><br><span class="line">flag.BoolVar(&amp;quit, <span class="string">&quot;quit&quot;</span>, <span class="literal">false</span>, <span class="string">&quot;静默模式&quot;</span>)</span><br><span class="line">flag.DurationVar(&amp;delay, <span class="string">&quot;d&quot;</span>, <span class="number">0</span>, <span class="string">&quot;时间间隔&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-解析参数"><a href="#2-解析参数" class="headerlink" title="2. 解析参数"></a>2. 解析参数</h3><h4 id="1-flag-Parse"><a href="#1-flag-Parse" class="headerlink" title="1. flag.Parse()"></a>1. <code>flag.Parse()</code></h4><p>支持的命令行参数格式有以下几种：</p>
+<ul>
+<li><code>-flag</code> : 只支持bool类型</li>
+<li><code>-flag=xxx</code> : 支持任何类型</li>
+<li><code>-flag xxx</code> : 只支持非bool类型<br>其中，对于一个或两个 <code>-</code> 号，效果一样。<br>flag 解析在第一个非flag参数（单个”-“不是flag参数）之前停止，或者在终止符”–”之后停止。</li>
+</ul>
+<h3 id="3-其他函数"><a href="#3-其他函数" class="headerlink" title="3. 其他函数"></a>3. 其他函数</h3><ul>
+<li><code>flag.NFlag()</code> : 返回解析时进行了设置的 flag 的数量</li>
+<li><code>flag.NArg()</code> : 返回解析 flag 之后剩余参数的个数</li>
+<li><code>flag.Args()</code> : 返回解析之后剩下的非 flag 参数，以 []string 类型</li>
+<li><code>flag.Args(i)</code> : 返回解析之后剩下的第 i 个参数，从 0 开始索引</li>
+</ul>
+<h3 id="4-示例"><a href="#4-示例" class="headerlink" title="4. 示例"></a>4. 示例</h3><p>定义</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;flag&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">//定义命令行参数方式1</span></span><br><span class="line">    <span class="keyword">var</span> name <span class="type">string</span></span><br><span class="line">    <span class="keyword">var</span> parallel <span class="type">int</span></span><br><span class="line">    <span class="keyword">var</span> quit <span class="type">bool</span></span><br><span class="line">    <span class="keyword">var</span> delay time.Duration</span><br><span class="line">    flag.StringVar(&amp;name, <span class="string">&quot;name&quot;</span>, <span class="string">&quot;flink&quot;</span>, <span class="string">&quot;平台&quot;</span>)</span><br><span class="line">    flag.IntVar(&amp;parallel, <span class="string">&quot;parallel&quot;</span>, <span class="number">5</span>, <span class="string">&quot;并行度&quot;</span>)</span><br><span class="line">    flag.BoolVar(&amp;quit, <span class="string">&quot;quit&quot;</span>, <span class="literal">false</span>, <span class="string">&quot;静默模式&quot;</span>)</span><br><span class="line">    flag.DurationVar(&amp;delay, <span class="string">&quot;d&quot;</span>, <span class="number">0</span>, <span class="string">&quot;时间间隔&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//解析命令行参数</span></span><br><span class="line">    flag.Parse()</span><br><span class="line">    fmt.Println(name, parallel, quit, delay)</span><br><span class="line">    </span><br><span class="line">    fmt.Println(flag.NFlag())</span><br><span class="line">    fmt.Println(flag.NArg())</span><br><span class="line">    fmt.Println(flag.Args())</span><br><span class="line">    <span class="comment">//fmt.Println(flag.Arg(0))</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式一</span></span><br><span class="line">$ ./flag_demo -name spark --parallel <span class="number">18</span> -quit=<span class="literal">false</span> -d=<span class="number">1</span>h30m</span><br><span class="line">spark <span class="number">18</span> <span class="literal">false</span> <span class="number">1</span>h30m0s</span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line">[]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式二</span></span><br><span class="line">$ ./flag_demo a b c</span><br><span class="line">flink <span class="number">5</span> <span class="literal">false</span> <span class="number">0</span>s</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line">[a b c]</span><br><span class="line">a</span><br></pre></td></tr></table></figure>
+
+<p>帮助提示</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ ./flag_demo -help</span><br><span class="line">Usage of ./flag_demo:</span><br><span class="line">  -d duration</span><br><span class="line">        时间间隔</span><br><span class="line">  -name <span class="type">string</span></span><br><span class="line">        平台 (<span class="keyword">default</span> <span class="string">&quot;flink&quot;</span>)</span><br><span class="line">  -parallel <span class="type">int</span></span><br><span class="line">        并行度 (<span class="keyword">default</span> <span class="number">5</span>)</span><br><span class="line">  -quit</span><br><span class="line">        静默模式</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/09/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/%E5%B8%B8%E7%94%A8%E5%8C%85/%E5%86%85%E5%BB%BA%E5%8C%85-flag/" data-id="cll0xbb190001ycjw1258h9kz" data-title="Golang 内建包-flag" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Golang/" rel="tag">Golang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/03/09/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/%E5%B8%B8%E7%94%A8%E5%8C%85/%E5%86%85%E5%BB%BA%E5%8C%85-exec/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Golang 内建包-exec
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/01/19/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/9.HotSpot%E7%9A%84GC/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">HotSpot 的 GC</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ThreadLocal/" rel="tag">ThreadLocal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Flink/" style="font-size: 19px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Golang/" style="font-size: 17px;">Golang</a> <a href="/tags/Idea-Instructions/" style="font-size: 15px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 11px;">JVM</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Redis/" style="font-size: 16px;">Redis</a> <a href="/tags/Rust/" style="font-size: 12px;">Rust</a> <a href="/tags/Scala/" style="font-size: 13px;">Scala</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 14px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/ThreadLocal/" style="font-size: 10px;">ThreadLocal</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 14px;">代码归档</a> <a href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" style="font-size: 13px;">内建包</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 19px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 12px;">数据库</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 18px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 15px;">杂记</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 12px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 12px;">计算机网络</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/03/%E7%9F%A5%E8%AF%86%E7%82%B9/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%BD%91%E7%BB%9C/0.%E9%9B%B6%E7%A2%8E/">计算机基础与网络-杂记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/26/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/%E5%B8%B8%E7%94%A8%E5%8C%85/%E5%86%85%E5%BB%BA%E5%8C%85-log/">Golang 内建包-log</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/25/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/0.GolangCheatsheet/">Golang 基础-Cheatsheet</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/25/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/%E5%B8%B8%E7%94%A8%E5%8C%85/%E5%86%85%E5%BB%BA%E5%8C%85-http/">Golang 内建包-http</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/11/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Maven/3.maven-assembly-plugin/">Maven assembly plugin</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
