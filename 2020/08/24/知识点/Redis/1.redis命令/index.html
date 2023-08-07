@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Redis 基础-命令(第一章) | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Redis 常用命令行命令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis 基础-命令(第一章)">
+<meta property="og:url" content="http://example.com/2020/08/24/%E7%9F%A5%E8%AF%86%E7%82%B9/Redis/1.redis%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="Redis 常用命令行命令">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-24T02:06:00.000Z">
+<meta property="article:modified_time" content="2023-08-07T12:45:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Redis/1.redis命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/08/24/%E7%9F%A5%E8%AF%86%E7%82%B9/Redis/1.redis%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time class="dt-published" datetime="2020-08-24T02:06:00.000Z" itemprop="datePublished">2020-08-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Redis 基础-命令(第一章)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-启动"><a href="#1-启动" class="headerlink" title="1. 启动"></a>1. 启动</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./redis-server redis.conf</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="2-系统服务"><a href="#2-系统服务" class="headerlink" title="2. 系统服务"></a>2. 系统服务</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">systemctl start redis.service    #启动redis服务</span><br><span class="line">systemctl stop redis.service     #停止redis服务</span><br><span class="line">systemctl restart redis.service  #重新启动服务</span><br><span class="line">systemctl status redis.service   #查看服务当前状态</span><br><span class="line">systemctl enable redis.service   #设置开机自启动</span><br><span class="line">systemctl disable redis.service  #停止开机自启动</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-设置密码"><a href="#3-设置密码" class="headerlink" title="3. 设置密码"></a>3. 设置密码</h2><h3 id="1-配置"><a href="#1-配置" class="headerlink" title="1. 配置"></a>1. 配置</h3><p>找到配置文件中 <code>#requirepass XXX</code> ，取消注释，填写密码，并重启服务</br><br>可以在连接时使用 <code>redis-cli -a PASSEORD</code> 来登录，或者连接后再鉴权</br></p>
+<h3 id="2-连接后设置"><a href="#2-连接后设置" class="headerlink" title="2. 连接后设置"></a>2. 连接后设置</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 查看现有 redis 密码，第二行为空，则为无密码</span><br><span class="line">127.0.0.1:6379&gt; config get requirepass</span><br><span class="line">1) &quot;requirepass&quot;</span><br><span class="line">2) &quot;&quot;</span><br><span class="line"></span><br><span class="line"># 设置密码，设置为空时，取消密码</span><br><span class="line">127.0.0.1:6379&gt; config set requirepass test123</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line"># 登录后查询前输入密码，否则会提示权限不允许</span><br><span class="line">127.0.0.1:6379&gt; auth test123</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-清除所有-keys"><a href="#4-清除所有-keys" class="headerlink" title="4. 清除所有 keys"></a>4. 清除所有 keys</h2><ul>
+<li><code>flushdb</code> : 删除当前数据库中的所有Key</li>
+<li><code>flushall</code> : 删除所有数据库中的key</li>
+</ul>
+<h2 id="5-Info-命令"><a href="#5-Info-命令" class="headerlink" title="5. Info 命令"></a>5. <code>Info</code> 命令</h2><p><code>info [server|clients|memory|stats|persistence|replication|cpu|cluster|keyspace|commandstats]</code></p>
+<h3 id="1-server"><a href="#1-server" class="headerlink" title="1. server"></a>1. <code>server</code></h3><p>一般包含服务器信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">redis_version:5.0.4                               #redis版本</span><br><span class="line">redis_git_sha1:00000000</span><br><span class="line">redis_git_dirty:0</span><br><span class="line">redis_build_id:964fe9af98041665</span><br><span class="line">redis_mode:standalone                             #运行模式，单机或集群</span><br><span class="line">os:Linux 3.10.0-693.21.1.el7.x86_64 x86_64        #系统版本</span><br><span class="line">arch_bits:64                                      #架构，32位或64位</span><br><span class="line">multiplexing_api:epoll                            #Redis 所使用的事件处理机制</span><br><span class="line">atomicvar_api:atomic-builtin</span><br><span class="line">gcc_version:4.8.5                                 #编译redis时所使用的gcc版本</span><br><span class="line">process_id:2939                                   #redis服务器的进程id</span><br><span class="line">run_id:11b5694d024d8c728c1448ec4163fb0c22b86375   #redis服务器的随机标识符(用于sentinel和集群)</span><br><span class="line">tcp_port:6379                                     #redis服务监听端口</span><br><span class="line">uptime_in_seconds:18316                           #redis服务启动时长，单位为秒</span><br><span class="line">uptime_in_days:0                                  #redis服务启动时长，单位为天</span><br><span class="line">hz:10                                             #redis内部调度（进行关闭timeout的客户端，删除过期key等等）频率</span><br><span class="line">configured_hz:10</span><br><span class="line">lru_clock:4564768</span><br><span class="line">executable:/usr/local/redis/redis-server          #执行文件位置</span><br><span class="line">config_file:/usr/local/redis/./redis.conf         #配置文件位置</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-clients"><a href="#2-clients" class="headerlink" title="2. clients"></a>2. <code>clients</code></h3><p>已连接客户端信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">connected_clients:2                               #已连接的客户端数(不包括通过slave连接的客户端)</span><br><span class="line">client_longest_output_list :0                     #当前连接的客户端当中，最长的输出列表</span><br><span class="line">client_longest_input_buf :0                       #当前连接的客户端当中，最大输入缓存</span><br><span class="line">client_biggest_input_buf:0</span><br><span class="line">blocked_clients:0                                 #正在等待阻塞命令(BLPOP、BRPOP、BRPOPLPUSH)的客户端的数量</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-memory"><a href="#3-memory" class="headerlink" title="3.memory"></a>3.<code>memory</code></h3><p>内存信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">used_memory:8985032                               #由redis分配器分配的内存总量，以字节为单位</span><br><span class="line">used_memory_human:8.57M </span><br><span class="line">used_memory_rss:15175680                          #从操作系统的角度，返回redis已分配的内存总量(俗称常驻集大小)。值和top、ps 等命令的输出一致</span><br><span class="line">used_memory_rss_human:14.47M                     </span><br><span class="line">used_memory_peak:14859000                         #redis的内存消耗峰值(以字节为单位) </span><br><span class="line">used_memory_peak_human:14.17M </span><br><span class="line">used_memory_peak_perc:60.47%                      #使用内存达到峰值内存的百分比，即(used_memory/ used_memory_peak) *100%</span><br><span class="line">used_memory_overhead:5407864                      #服务器为管理其内部数据结构而分配的所有开销的字节总和，包括所有客户端输出缓冲区、查询缓冲区、AOF重写缓冲区和主从复制的backlog</span><br><span class="line">used_memory_startup:862032                        #Redis在启动时消耗的初始内存量（以字节为单位）</span><br><span class="line">used_memory_dataset:3577168                       #数据占用的内存大小，即used_memory-sed_memory_overhead  </span><br><span class="line">used_memory_dataset_perc:44.04%                   #数据占用的内存大小的百分比，(used_memory_dataset/(used_memory-used_memory_startup))*100%</span><br><span class="line">allocator_allocated:8951208</span><br><span class="line">allocator_active:15137792</span><br><span class="line">allocator_resident:15137792</span><br><span class="line">total_system_memory:512077824                     #系统内存总量</span><br><span class="line">total_system_memory_human:488.36M                 </span><br><span class="line">used_memory_lua:37888                             #Lua引擎使用的字节量</span><br><span class="line">used_memory_lua_human:37.00K</span><br><span class="line">used_memory_scripts:0</span><br><span class="line">used_memory_scripts_human:0B</span><br><span class="line">number_of_cached_scripts:0</span><br><span class="line">maxmemory:0                                       #配置设置的最大可使用内存值</span><br><span class="line">maxmemory_human:0B</span><br><span class="line">maxmemory_policy:noeviction                       #当达到maxmemory时的淘汰策略</span><br><span class="line">allocator_frag_ratio:1.69        </span><br><span class="line">allocator_frag_bytes:6186584</span><br><span class="line">allocator_rss_ratio:1.00</span><br><span class="line">allocator_rss_bytes:0</span><br><span class="line">rss_overhead_ratio:1.00</span><br><span class="line">rss_overhead_bytes:37888</span><br><span class="line">mem_fragmentation_ratio:1.70                      #碎片率，used_memory_rss/used_memory，正常(1,1.6)，大于比例说明内存碎片严重，小于表示 Redis 的部分内存被操作系统换出到交换空间了，在这种情况下，操作可能会产生明显的延迟</span><br><span class="line">mem_fragmentation_bytes:6224472                   #碎片大小，单位字节</span><br><span class="line">mem_not_counted_for_evict:0</span><br><span class="line">mem_replication_backlog:0</span><br><span class="line">mem_clients_slaves:0</span><br><span class="line">mem_clients_normal:66616</span><br><span class="line">mem_aof_buffer:0</span><br><span class="line">mem_allocator:libc                                #内存分配器，在编译时选择</span><br><span class="line">active_defrag_running:0                           #指示活动碎片整理是否处于活动状态的标志，1表示有活动正在进行</span><br><span class="line">lazyfree_pending_objects:0                        #0表示不存在延迟释放的挂起对象</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-persistence"><a href="#4-persistence" class="headerlink" title="4.persistence"></a>4.<code>persistence</code></h3><p><code>RDB</code> 和 <code>AOF</code> 的相关信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">loading:0                                         #服务器是否正在载入持久化rdb文件</span><br><span class="line">rdb_changes_since_last_save:0                     #自上次rdb持久化以来发生改变的数值</span><br><span class="line">rdb_bgsave_in_progress:0                          #服务器是否正在创建rdb文件</span><br><span class="line">rdb_last_save_time:1564845192                     #最后一次成功rdb持久化的时间戳</span><br><span class="line">rdb_last_bgsave_status:ok                         #最后一次rdb持久化是否成功</span><br><span class="line">rdb_last_bgsave_time_sec:0                        #最后一次成功生成rdb文件耗时秒数</span><br><span class="line">rdb_current_bgsave_time_sec:-1                    #当前bgsave已耗费的时间（如果有）</span><br><span class="line">rdb_last_cow_size:438272                          #上次rbd保存操作期间写时复制分配的字节大小</span><br><span class="line">aof_enabled:0                                     #aof功能是否开启</span><br><span class="line">aof_rewrite_in_progress:0                         #标识aof的rewrite操作是否在进行中</span><br><span class="line">aof_rewrite_scheduled:0</span><br><span class="line">aof_last_rewrite_time_sec:-1                      #最后一次aof rewrite耗费的时长</span><br><span class="line">aof_current_rewrite_time_sec:-1                   #当前rewrite已耗费的时间（如果有）</span><br><span class="line">aof_last_bgrewrite_status:ok                      #最后一次bgrewrite是否成功</span><br><span class="line">aof_last_write_status:ok                          #上次aof写入状态</span><br><span class="line">aof_last_cow_size:0                               #上次AOF重写操作期间写时复制分配的大小（以字节为单位）</span><br><span class="line"></span><br><span class="line"># 如果激活了AOF，则会添加以下附加字段：</span><br><span class="line">aof_current_size:4201740                          #aof当前尺寸</span><br><span class="line">aof_base_size:4201687                             #服务器启动时或者aof重写最近一次执行之后aof文件的大小</span><br><span class="line">aof_pending_rewrite:0                             #是否有aof重写操作在等待rdb文件创建完毕之后执行?</span><br><span class="line">aof_buffer_length:0                               #aof buffer的大小</span><br><span class="line">aof_rewrite_buffer_length:0                       #aof rewrite buffer的大小</span><br><span class="line">aof_pending_bio_fsync:0                           #后台I/O队列里面，等待执行的fsync调用数量</span><br><span class="line">aof_delayed_fsync:0                               #被延迟的fsync调用数量</span><br><span class="line"></span><br><span class="line"># 如果正在进行加载操作，则会添加以下附加字段：</span><br><span class="line">loading_start_time                                #加载操作开始的基于纪元的时间戳</span><br><span class="line">loading_total_bytes                               #文件总大小</span><br><span class="line">loading_loaded_bytes                              #已加载的字节数</span><br><span class="line">loading_loaded_perc                               #加载进度表示为百分比</span><br><span class="line">loading_eta_seconds                               #ETA在几秒钟内完成负载</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-stats"><a href="#5-stats" class="headerlink" title="5.stats"></a>5.<code>stats</code></h3><p>一般统计信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">total_connections_received:7212                   #服务接受的总连接数</span><br><span class="line">total_commands_processed:2341631                  #服务器处理的总命令数</span><br><span class="line">instantaneous_ops_per_sec:0                       #每秒处理的命令数</span><br><span class="line">total_net_input_bytes:125344667                   #从网络读取的总字节数</span><br><span class="line">total_net_output_bytes:1712517025                 #写入网络的总字节数</span><br><span class="line">instantaneous_input_kbps:0.00                     #网络读取速率KB/sec</span><br><span class="line">instantaneous_output_kbps:0.00                    #网络写入速率KB/sec </span><br><span class="line">rejected_connections:0                            #因达到最大连接数而拒绝的连接</span><br><span class="line">sync_full:1                                       #给从节点完全同步的数量</span><br><span class="line">sync_partial_ok:0                                 #接受的同步请求数量</span><br><span class="line">sync_partial_err:0                                #拒绝的同步请求数量</span><br><span class="line">expired_keys:0                                    #键到期的总数</span><br><span class="line">expired_stale_perc:0.00</span><br><span class="line">expired_time_cap_reached_count:0</span><br><span class="line">evicted_keys:0                                    #因达到maxmemory限制而被驱逐的键的数量</span><br><span class="line">keyspace_hits:641037                              #Number of successful lookup of keys in the main dictionary</span><br><span class="line">keyspace_misses:9002                              #Number of failed lookup of keys in the main dictionary</span><br><span class="line">pubsub_channels:1</span><br><span class="line">pubsub_patterns:0</span><br><span class="line">latest_fork_usec:326                              #最新fork操作的持续时间（以微秒为单位）</span><br><span class="line">migrate_cached_sockets:0</span><br><span class="line">slave_expires_tracked_keys:0</span><br><span class="line">active_defrag_hits:0</span><br><span class="line">active_defrag_misses:0</span><br><span class="line">active_defrag_key_hits:0</span><br><span class="line">active_defrag_key_misses:0</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-replication"><a href="#6-replication" class="headerlink" title="6.replication"></a>6.<code>replication</code></h3><p>主&#x2F;从复制信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">role:master                                               #master or slave</span><br><span class="line">connected_slaves:0                                        #已建立连接的从节点数</span><br><span class="line">master_replid:fe1bb6f5cfef91b36603d8e57081cc02890705c8    #复制ID</span><br><span class="line">master_replid2:0000000000000000000000000000000000000000   #第二个复制ID，用于failover的PSYNC</span><br><span class="line">master_repl_offset:86270959                               #服务当前的复制偏移量</span><br><span class="line">second_repl_offset:-1                                     #The offset up to which replication IDs are accepted</span><br><span class="line">repl_backlog_active:0</span><br><span class="line">repl_backlog_size:1048576                                 #复制积压缓冲区的总大小（B）</span><br><span class="line">repl_backlog_first_byte_offset:85222384                   #复制积压缓冲区的主偏移量</span><br><span class="line">repl_backlog_histlen:1048576                              #复制积压缓冲区中数据的大小</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-cpu"><a href="#7-cpu" class="headerlink" title="7.cpu"></a>7.<code>cpu</code></h3><p><code>cpu</code> 计算量统计信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">used_cpu_sys:24.941282                    #Redis服务消耗的系统cpu</span><br><span class="line">used_cpu_user:18.820039                   #Redis服务消耗的用户cpu</span><br><span class="line">used_cpu_sys_children:0.050757            #后台进程占用的系统cpu</span><br><span class="line">used_cpu_user_children:0.259980           #后台进程占用的用户cpu</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-cluster"><a href="#8-cluster" class="headerlink" title="8.cluster"></a>8.<code>cluster</code></h3><p>集群信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cluster_enabled:0</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-keyspace"><a href="#9-keyspace" class="headerlink" title="9. keyspace"></a>9. <code>keyspace</code></h3><p>数据库相关的统计信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db0:keys=85766,expires=0,avg_ttl=0</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-commandstats"><a href="#10-commandstats" class="headerlink" title="10. commandstats"></a>10. <code>commandstats</code></h3><p>命令统计信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db0:keys=85766,expires=0,avg_ttl=0</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/08/24/%E7%9F%A5%E8%AF%86%E7%82%B9/Redis/1.redis%E5%91%BD%E4%BB%A4/" data-id="cll0vux8u0003c8jw45h252c1" data-title="Redis 基础-命令(第一章)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/09/02/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/1.SpringBoot%E6%B3%A8%E8%A7%A3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Spring Boot 注解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/08/24/%E7%9F%A5%E8%AF%86%E7%82%B9/Redis/2.redis%E5%AE%89%E8%A3%85/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Redis 基础-安装(第二章)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ThreadLocal/" rel="tag">ThreadLocal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Flink/" style="font-size: 18.89px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/Idea-Instructions/" style="font-size: 15.56px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 11.11px;">JVM</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Maven/" style="font-size: 13.33px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Redis/" style="font-size: 16.67px;">Redis</a> <a href="/tags/Rust/" style="font-size: 12.22px;">Rust</a> <a href="/tags/Scala/" style="font-size: 13.33px;">Scala</a> <a href="/tags/Spring/" style="font-size: 15.56px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 14.44px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/ThreadLocal/" style="font-size: 10px;">ThreadLocal</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 14.44px;">代码归档</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 18.89px;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 12.22px;">数据库</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 17.78px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 15.56px;">杂记</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 15.56px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 12.22px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 12.22px;">计算机网络</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/03/%E7%9F%A5%E8%AF%86%E7%82%B9/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%BD%91%E7%BB%9C/0.%E9%9B%B6%E7%A2%8E/">计算机基础与网络-杂记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/11/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Maven/3.maven-assembly-plugin/">Maven assembly plugin</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/11/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Maven/2.Mavenprofiles/">Maven profiles</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/04/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/13.%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/">Java 远程调试</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/16/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-Flink%20CDC%20%E9%97%AE%E9%A2%98-/">杂记-Flink CDC</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
