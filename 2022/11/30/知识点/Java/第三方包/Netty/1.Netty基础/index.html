@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Netty 基础-总览(第一章) | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Netty 介绍和使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Netty 基础-总览(第一章)">
+<meta property="og:url" content="http://example.com/2022/11/30/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/Netty/1.Netty%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="Netty 介绍和使用">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/netty/%E7%9B%B4%E6%8E%A5IO.webp">
+<meta property="og:image" content="http://example.com/images/netty/%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="http://example.com/images/netty/%E9%9B%B6%E6%8B%B7%E8%B4%9D%E6%8A%80%E6%9C%AF.png">
+<meta property="article:published_time" content="2022-11-30T01:22:00.000Z">
+<meta property="article:modified_time" content="2020-12-11T06:16:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="第三方包">
+<meta property="article:tag" content="Netty">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/netty/%E7%9B%B4%E6%8E%A5IO.webp">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Java/第三方包/Netty/1.Netty基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/30/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/Netty/1.Netty%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time class="dt-published" datetime="2022-11-30T01:22:00.000Z" itemprop="datePublished">2022-11-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Netty 基础-总览(第一章)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="1-Java-中的网络-IO-模型"><a href="#1-Java-中的网络-IO-模型" class="headerlink" title="1. Java 中的网络 IO 模型"></a>1. Java 中的网络 IO 模型</h2><h3 id="1-1-BIO：同步的、阻塞式-IO"><a href="#1-1-BIO：同步的、阻塞式-IO" class="headerlink" title="1.1. BIO：同步的、阻塞式 IO"></a>1.1. <code>BIO</code>：同步的、阻塞式 IO</h3><p>在这种模型中，服务器上一个线程处理一次连接，即客户端每发起一个请求，服务端都要开启一个线程专门处理该请求。<br>构建 C&#x2F;S 系统的 Java 编程组件是 <code>ServerSocket</code> 和 <code>Socket</code>。</p>
+<h3 id="1-2-NIO：同步的、非阻塞式-IO"><a href="#1-2-NIO：同步的、非阻塞式-IO" class="headerlink" title="1.2. NIO：同步的、非阻塞式 IO"></a>1.2. <code>NIO</code>：同步的、非阻塞式 IO</h3><p>在这种模型中，服务器上一个线程处理多个连接，即多个客户端请求都会被注册到多路复用器(<code>Selector</code>)上，多路复用器会轮训这些连接，轮训到连接上有 IO 活动就进行处理。这种模式也叫做 <code>Reactor</code> 模式。<br>构建 C&#x2F;S 系统的 Java 编程组件是 <code>Channel</code>、<code>Buffer</code>、<code>Selector</code>。</p>
+<h3 id="1-3-AIO：异步非阻塞式-IO"><a href="#1-3-AIO：异步非阻塞式-IO" class="headerlink" title="1.3. AIO：异步非阻塞式 IO"></a>1.3. <code>AIO</code>：异步非阻塞式 IO</h3><p>在这种模型中，由操作系统完成与客户端之间的read&#x2F;write，之后再由操作系统主动通知服务器线程去处理后面的工作，在这个过程中服务器线程不必同步等待 read&#x2F;write 完成。这种模式也叫做 <code>Proactor</code> 模式。</p>
+<h2 id="2-网路-IO-术语"><a href="#2-网路-IO-术语" class="headerlink" title="2. 网路 IO 术语"></a>2. 网路 IO 术语</h2><ul>
+<li>阻塞：如果线程调用 read&#x2F;write 过程，但 read&#x2F;write 过程没有就绪或没有完成，则调用 read&#x2F;write 过程的线程会一直等待，这个过程叫做阻塞式读写。</li>
+<li>非阻塞：如果线程调用 read&#x2F;write 过程，但 read&#x2F;write 过程没有就绪或没有完成，调用 read&#x2F;write 过程的线程并不会一直等待，而是去处理其他工作，等到 read&#x2F;write 过程就绪或完成后再回来处理，这个过程叫做非阻塞式读写。</li>
+<li>异步：read&#x2F;write 过程托管给操作系统来完成，完成后操作系统会通知（通过回调或者事件）应用网络 IO 程序（其中的线程）来进行后续的处理。</li>
+<li>同步：read&#x2F;write 过程由网络 IO 程序（其中的线程）来完成。</li>
+</ul>
+<h1 id="NIO-组件"><a href="#NIO-组件" class="headerlink" title="NIO 组件"></a>NIO 组件</h1><h2 id="1-缓冲区（Buffer）"><a href="#1-缓冲区（Buffer）" class="headerlink" title="1. 缓冲区（Buffer）"></a>1. 缓冲区（<code>Buffer</code>）</h2><p>缓冲区（<code>Buffer</code>）本质上是一个可读可写的内存块，可以理解成一个容器对象，<code>Channel</code> 读写文件或者网络都要经由 <code>Buffer</code>。</p>
+<h3 id="1-1-常用子类"><a href="#1-1-常用子类" class="headerlink" title="1.1. 常用子类"></a>1.1. 常用子类</h3><ul>
+<li><code>ByteBuffer</code></li>
+<li><code>CharBuffer</code></li>
+<li><code>ShortBuffer</code></li>
+<li><code>IntBuffer</code></li>
+<li><code>LongBuffer</code></li>
+<li><code>DoubleBuffer</code></li>
+<li><code>FloatBuffer</code></li>
+<li><code>MappedByteBuffer</code></li>
+</ul>
+<h2 id="2-通道（Channel）"><a href="#2-通道（Channel）" class="headerlink" title="2. 通道（Channel）"></a>2. 通道（<code>Channel</code>）</h2><p>通道（<code>Channel</code>）是双向的，可读可写。</p>
+<h3 id="2-1-常用子类"><a href="#2-1-常用子类" class="headerlink" title="2.1. 常用子类"></a>2.1. 常用子类</h3><ul>
+<li><code>FileChannel</code>：用于文件读写</li>
+<li><code>DatagramChannel</code>：用于 UDP 数据包收发</li>
+<li><code>ServerSocketChannel</code>：用于服务端 TCP 数据包收发</li>
+<li><code>SocketChannel</code>：用于客户端 TCP 数据包收发</li>
+</ul>
+<h2 id="3-选择器（Selector）"><a href="#3-选择器（Selector）" class="headerlink" title="3. 选择器（Selector）"></a>3. 选择器（<code>Selector</code>）</h2><p>选择器（<code>Selector</code>）是实现 IO 多路复用的关键，多个 <code>Channel</code> 注册到某个 <code>Selector</code> 上，当 <code>Channel</code> 上有事件发生时，<code>Selector</code>就会取得事件然后调用线程去处理事件。</p>
+<h3 id="3-1-常用子类"><a href="#3-1-常用子类" class="headerlink" title="3.1. 常用子类"></a>3.1. 常用子类</h3><p><code>Selector</code> 是一个抽象类，常用方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Selector</span> <span class="keyword">implements</span> <span class="title class_">Closeable</span> &#123;</span><br><span class="line">    ......</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 得到一个选择器对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Selector <span class="title function_">open</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="keyword">return</span> SelectorProvider.provider().openSelector();</span><br><span class="line">    &#125;</span><br><span class="line">    ......</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回所有发生事件的 Channel 对应的 SelectionKey 的集合，通过</span></span><br><span class="line"><span class="comment">     * SelectionKey 可以找到对应的 Channel</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> Set&lt;SelectionKey&gt; <span class="title function_">selectedKeys</span><span class="params">()</span>;</span><br><span class="line">    ......</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回所有 Channel 对应的 SelectionKey 的集合，通过 SelectionKey</span></span><br><span class="line"><span class="comment">     * 可以找到对应的 Channel</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> Set&lt;SelectionKey&gt; <span class="title function_">keys</span><span class="params">()</span>;</span><br><span class="line">    ......</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 监控所有注册的 Channel，当其中的 Channel 有 IO 操作可以进行时，</span></span><br><span class="line"><span class="comment">     * 将这些 Channel 对应的 SelectionKey 找到。参数用于设置超时时间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="type">int</span> <span class="title function_">select</span><span class="params">(<span class="type">long</span> timeout)</span> <span class="keyword">throws</span> IOException;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 无超时时间的 select 过程，一直等待，直到发现有 Channel 可以进行</span></span><br><span class="line"><span class="comment">    * IO 操作</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="type">int</span> <span class="title function_">select</span><span class="params">()</span> <span class="keyword">throws</span> IOException;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 立即返回的 select 过程</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="type">int</span> <span class="title function_">selectNow</span><span class="params">()</span> <span class="keyword">throws</span> IOException;</span><br><span class="line">    ......</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 唤醒 Selector，对无超时时间的 select 过程起作用，终止其等待</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> Selector <span class="title function_">wakeup</span><span class="params">()</span>;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="服务端的工作流程"><a href="#服务端的工作流程" class="headerlink" title="服务端的工作流程"></a>服务端的工作流程</h1><ol>
+<li>当客户端发起连接时，会通过 <code>ServerSocketChannel</code> 创建对应的 <code>SocketChannel</code>。</li>
+<li>调用 <code>SocketChannel</code> 的注册方法将 <code>SocketChannel</code> 注册到 <code>Selector</code> 上，注册方法返回一个 <code>SelectionKey</code>，该 <code>SelectionKey</code> 会被放入 <code>Selector</code> 内部的 <code>SelectionKey</code> 集合中。该 <code>SelectionKey</code> 和 <code>Selector</code> 关联（即通过 <code>SelectionKey</code> 可以找到对应的 <code>Selector</code>），也和 <code>SocketChannel</code> 关联（即通过 <code>SelectionKey</code> 可以找到对应的 <code>SocketChannel</code>）。</li>
+<li><code>Selector</code> 会调用 <code>select()/select(timeout)/selectNow()</code>方法对内部的 <code>SelectionKey</code> 集合关联的 <code>SocketChannel</code> 集合进行监听，找到有事件发生的 <code>SocketChannel</code> 对应的 <code>SelectionKey</code>。</li>
+<li>通过 <code>SelectionKey</code> 找到有事件发生的 <code>SocketChannel</code>，完成数据处理。</li>
+</ol>
+<p>相关源码为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* SocketChannel 继承 AbstractSelectableChannel</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">SocketChannel</span></span><br><span class="line">    <span class="keyword">extends</span> <span class="title class_">AbstractSelectableChannel</span></span><br><span class="line">    <span class="keyword">implements</span> <span class="title class_">ByteChannel</span>, </span><br><span class="line">               ScatteringByteChannel, </span><br><span class="line">               GatheringByteChannel, </span><br><span class="line">               NetworkChannel</span><br><span class="line">&#123;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">AbstractSelectableChannel</span></span><br><span class="line">    <span class="keyword">extends</span> <span class="title class_">SelectableChannel</span></span><br><span class="line">&#123;</span><br><span class="line">    ......</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * AbstractSelectableChannel 中包含注册方法，SocketChannel 实例</span></span><br><span class="line"><span class="comment">     * 借助该注册方法注册到 Selector 实例上去，该方法返回 SelectionKey</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> SelectionKey <span class="title function_">register</span><span class="params">(</span></span><br><span class="line"><span class="params">        // 指明注册到哪个 Selector 实例</span></span><br><span class="line"><span class="params">        Selector sel, </span></span><br><span class="line"><span class="params">        // ops 是事件代码，告诉 Selector 应该关注该通道的什么事件</span></span><br><span class="line"><span class="params">        <span class="type">int</span> ops,</span></span><br><span class="line"><span class="params">        // 附加信息 attachment</span></span><br><span class="line"><span class="params">        Object att)</span> <span class="keyword">throws</span> ClosedChannelException &#123;</span><br><span class="line">        ......</span><br><span class="line">    &#125;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">SelectionKey</span> &#123;</span><br><span class="line">    ......</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取该 SelectionKey 对应的 Channel</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> SelectableChannel <span class="title function_">channel</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取该 SelectionKey 对应的 Selector</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> Selector <span class="title function_">selector</span><span class="params">()</span>;</span><br><span class="line">    ......</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 事件代码，上面的 ops 参数取这里的值</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">OP_READ</span> <span class="operator">=</span> <span class="number">1</span> &lt;&lt; <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">OP_WRITE</span> <span class="operator">=</span> <span class="number">1</span> &lt;&lt; <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">OP_CONNECT</span> <span class="operator">=</span> <span class="number">1</span> &lt;&lt; <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">OP_ACCEPT</span> <span class="operator">=</span> <span class="number">1</span> &lt;&lt; <span class="number">4</span>;</span><br><span class="line">    ......</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 检查该 SelectionKey 对应的 Channel 是否可读</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="type">boolean</span> <span class="title function_">isReadable</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (readyOps() &amp; OP_READ) != <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 检查该 SelectionKey 对应的 Channel 是否可写</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="type">boolean</span> <span class="title function_">isWritable</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (readyOps() &amp; OP_WRITE) != <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 检查该 SelectionKey 对应的 Channel 是否已经建立起 socket 连接</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="type">boolean</span> <span class="title function_">isConnectable</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (readyOps() &amp; OP_CONNECT) != <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 检查该 SelectionKey 对应的 Channel 是否准备好接受一个新的 socket 连接</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="type">boolean</span> <span class="title function_">isAcceptable</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (readyOps() &amp; OP_ACCEPT) != <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 添加附件（例如 Buffer）</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> Object <span class="title function_">attach</span><span class="params">(Object ob)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> attachmentUpdater.getAndSet(<span class="built_in">this</span>, ob);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取附件</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> Object <span class="title function_">attachment</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> attachment;</span><br><span class="line">    &#125;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="Linux-下零拷贝技术"><a href="#Linux-下零拷贝技术" class="headerlink" title="Linux 下零拷贝技术"></a>Linux 下零拷贝技术</h1><h2 id="1-直接-IO-技术"><a href="#1-直接-IO-技术" class="headerlink" title="1. 直接 IO 技术"></a>1. 直接 IO 技术</h2><p><img src="/../../../../../images/netty/%E7%9B%B4%E6%8E%A5IO.webp" alt="直接IO"></p>
+<p>内核缓冲区是 Linux 系统的 <code>Page Cahe</code>。整个过程有四次数据拷贝，读进来两次，写回去又两次：磁盘–&gt;内核缓冲区–&gt;Socket 缓冲区–&gt;网络。  </p>
+<p>直接 IO 过程使用的 Linux 系统 API 为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssize_t read(int filedes, void *buf, size_t nbytes);</span><br><span class="line">ssize_t write(int filedes, void *buf, size_t nbytes);</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-内存映射文件技术"><a href="#2-内存映射文件技术" class="headerlink" title="2. 内存映射文件技术"></a>2. 内存映射文件技术</h2><p><img src="/../../../../../images/netty/%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6.png" alt="内存映射文件"></p>
+<p>整个过程有三次数据拷贝，不再经过应用程序内存，直接在内核空间中从内核缓冲区拷贝到 Socket 缓冲区。</p>
+<p>内存映射文件过程使用的 Linux 系统 API 为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset);</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-零拷贝技术"><a href="#3-零拷贝技术" class="headerlink" title="3. 零拷贝技术"></a>3. 零拷贝技术</h2><p><img src="/../../../../../images/netty/%E9%9B%B6%E6%8B%B7%E8%B4%9D%E6%8A%80%E6%9C%AF.png" alt="零拷贝技术"></p>
+<p>内核缓冲区到 Socket 缓冲区之间并没有做数据的拷贝，只是一个地址的映射。底层的网卡驱动程序要读取数据并发送到网络上的时候，看似读取的是 Socket 的缓冲区中的数据，其实直接读的是内核缓冲区中的数据。内存中数据拷贝的次数为 0。</p>
+<p>零拷贝过程使用的 Linux 系统 API 为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssize_t sendfile(int out_fd, int in_fd, off_t *offset, size_t count);</span><br></pre></td></tr></table></figure>
+
+<p>JDK中提供的是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FileChannel.transderTo(<span class="type">long</span> position, <span class="type">long</span> count, WritableByteChannel target);</span><br></pre></td></tr></table></figure>
+
+<p>具体可参考：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="type">SocketChannel</span> <span class="variable">socketChannel</span> <span class="operator">=</span> SocketChannel.open();</span><br><span class="line">    socketChannel.connect(<span class="keyword">new</span> <span class="title class_">InetSocketAddress</span>(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">8080</span>));</span><br><span class="line">    <span class="type">String</span> <span class="variable">fileName</span> <span class="operator">=</span> <span class="string">&quot;test.zip&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 得到一个文件 channel</span></span><br><span class="line">    <span class="type">FileChannel</span> <span class="variable">fileChannel</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(fileName).getChannel();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 使用零拷贝 IO 技术发送</span></span><br><span class="line">    <span class="type">long</span> <span class="variable">transferSize</span> <span class="operator">=</span> fileChannel.transferTo(<span class="number">0</span>, fileChannel.size(), socketChannel);</span><br><span class="line">    System.out.println(<span class="string">&quot;file transfer done, size: &quot;</span> + transferSize);</span><br><span class="line">    fileChannel.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/30/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/Netty/1.Netty%E5%9F%BA%E7%A1%80/" data-id="cll226tom0000m0jw33wjh83k" data-title="Netty 基础-总览(第一章)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" rel="tag">第三方包</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/01/14/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/%E8%87%AA%E5%88%B6/%E8%87%AA%E5%AE%9A%E4%B9%89http%E8%AF%B7%E6%B1%82/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java 代码之自定义 http 请求
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/08/28/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/%E8%87%AA%E5%88%B6/%E8%87%AA%E5%88%B6mock/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java 代码之自制 mock</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flume/">Flume</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/HBase/">HBase</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hive/">Hive</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kubernetes/">Kubernetes</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flume/" rel="tag">Flume</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guava/" rel="tag">Guava</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jackson/" rel="tag">Jackson</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/" rel="tag">Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Quartz/" rel="tag">Quartz</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" rel="tag">安全框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" rel="tag">日志框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" rel="tag">第三方包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%88%B6/" rel="tag">自制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Flink/" style="font-size: 16.92px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Flume/" style="font-size: 10px;">Flume</a> <a href="/tags/Git/" style="font-size: 12.31px;">Git</a> <a href="/tags/Golang/" style="font-size: 15.38px;">Golang</a> <a href="/tags/Guava/" style="font-size: 10.77px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hadoop/" style="font-size: 10.77px;">Hadoop</a> <a href="/tags/Hive/" style="font-size: 10px;">Hive</a> <a href="/tags/Idea-Instructions/" style="font-size: 13.85px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 10.77px;">JVM</a> <a href="/tags/Jackson/" style="font-size: 10px;">Jackson</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java8/" style="font-size: 12.31px;">Java8</a> <a href="/tags/Kubernetes/" style="font-size: 10px;">Kubernetes</a> <a href="/tags/Maven/" style="font-size: 12.31px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Netty/" style="font-size: 13.08px;">Netty</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/Redis/" style="font-size: 14.62px;">Redis</a> <a href="/tags/Rust/" style="font-size: 11.54px;">Rust</a> <a href="/tags/Scala/" style="font-size: 12.31px;">Scala</a> <a href="/tags/Spring/" style="font-size: 13.85px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 13.08px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 19.23px;">代码归档</a> <a href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" style="font-size: 12.31px;">内建包</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 18.46px;">大数据</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" style="font-size: 11.54px;">安全框架</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 13.08px;">容器</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 11.54px;">数据库</a> <a href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" style="font-size: 11.54px;">日志框架</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 16.15px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.62px;">杂记</a> <a href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" style="font-size: 17.69px;">第三方包</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.85px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%87%AA%E5%88%B6/" style="font-size: 11.54px;">自制</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.54px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 11.54px;">计算机网络</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/08/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/%E8%87%AA%E5%88%B6/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8/">Java 代码之自定义异常</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/03/%E7%9F%A5%E8%AF%86%E7%82%B9/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%BD%91%E7%BB%9C/0.%E9%9B%B6%E7%A2%8E/">计算机基础与网络-杂记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/26/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/%E5%B8%B8%E7%94%A8%E5%8C%85/%E5%86%85%E5%BB%BA%E5%8C%85-log/">Golang 内建包-log</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/25/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/0.GolangCheatsheet/">Golang 基础-Cheatsheet</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/25/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/%E5%B8%B8%E7%94%A8%E5%8C%85/%E5%86%85%E5%BB%BA%E5%8C%85-http/">Golang 内建包-http</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
