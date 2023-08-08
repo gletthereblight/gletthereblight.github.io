@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java 代码之文件处理 | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="使用 Java 对文件进行处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 代码之文件处理">
+<meta property="og:url" content="http://example.com/2021/06/10/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="使用 Java 对文件进行处理">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-06-10T02:37:00.000Z">
+<meta property="article:modified_time" content="2022-10-19T01:58:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="代码归档">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Java/代码归档/文件处理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/06/10/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/" class="article-date">
+  <time class="dt-published" datetime="2021-06-10T02:37:00.000Z" itemprop="datePublished">2021-06-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java 代码之文件处理
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="1-1-IO流"><a href="#1-1-IO流" class="headerlink" title="1.1. IO流"></a>1.1. IO流</h3><ul>
+<li>字节流：接口 <code>InputStream</code>、<code>OutputStream</code></li>
+<li>字符流：接口 <code>Reader</code>、<code>Writer</code>、<code>BufferedReader</code>、<code>BufferedWriter</code></li>
+<li>转换流：<code>InputStreamReader</code>、<code>OutputStreamWriter</code></li>
+</ul>
+<h4 id="1-1-1-字节流"><a href="#1-1-1-字节流" class="headerlink" title="1.1.1 字节流"></a>1.1.1 字节流</h4><h5 id="1-FileInputStream-与-FileOutStream"><a href="#1-FileInputStream-与-FileOutStream" class="headerlink" title="1. FileInputStream 与 FileOutStream"></a>1. <code>FileInputStream</code> 与 <code>FileOutStream</code></h5><p>读取或写入单个字节</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">File</span> <span class="variable">file1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;read.txt&quot;</span>);</span><br><span class="line"><span class="type">FileInputStream</span> <span class="variable">input</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(file1);</span><br><span class="line"><span class="type">byte</span>[] date = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];                           <span class="comment">// 每次可以读取的最大数量</span></span><br><span class="line"><span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> input.read(date);                             <span class="comment">// 此时数据读取到数组中</span></span><br><span class="line"><span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(date,<span class="number">0</span>,len);                 <span class="comment">// 将字节数组转换为 String</span></span><br><span class="line">System.out.println(result);</span><br><span class="line">input.close();</span><br><span class="line"></span><br><span class="line"><span class="type">File</span> <span class="variable">file2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;write.txt&quot;</span>);</span><br><span class="line"><span class="type">FileOutputStream</span> <span class="variable">output</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(file2);</span><br><span class="line"><span class="type">String</span> <span class="variable">msg</span> <span class="operator">=</span> <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line">output.write(msg.getBytes());</span><br><span class="line">output.close();</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-1-2-字符流"><a href="#1-1-2-字符流" class="headerlink" title="1.1.2 字符流"></a>1.1.2 字符流</h4><p>Writer 类有方法直接向目标源写入字符串，而在 Reader 类中没有方法可以直接读取字符串类型，只能读取字符数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">File</span> <span class="variable">file1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;read.txt&quot;</span>);</span><br><span class="line"><span class="type">FileReader</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileReader</span>(file1);</span><br><span class="line"><span class="type">char</span>[] date = <span class="keyword">new</span> <span class="title class_">char</span>[<span class="number">1024</span>];               <span class="comment">// 每次可读取的最大数量</span></span><br><span class="line"><span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> in.read(date);                    <span class="comment">// 将数据读取到字符数组中</span></span><br><span class="line"><span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(date,<span class="number">0</span>,len);     <span class="comment">// 将字符数组转换为 String</span></span><br><span class="line">System.out.println(result);</span><br><span class="line">in.close();</span><br><span class="line"></span><br><span class="line"><span class="type">File</span> <span class="variable">file2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;write.txt&quot;</span>);</span><br><span class="line"><span class="type">FileWriter</span> <span class="variable">out</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileWriter</span>(file2,<span class="literal">true</span>);</span><br><span class="line">out.write(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">out.flush();                                <span class="comment">// 刷新缓存</span></span><br><span class="line">out.close();</span><br></pre></td></tr></table></figure>
+<h4 id="1-1-3-转换流"><a href="#1-1-3-转换流" class="headerlink" title="1.1.3. 转换流"></a>1.1.3. 转换流</h4><p>也是字符流，字节流通向字符流的桥梁，一般可以设置字符集</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">File</span> <span class="variable">file1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;read.txt&quot;</span>);</span><br><span class="line"><span class="type">FileInputStream</span> <span class="variable">input</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(file1);</span><br><span class="line"><span class="type">InputStreamReader</span> <span class="variable">isr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(input,Charset.forName(<span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line"><span class="type">BufferedReader</span> <span class="variable">br</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(isr);</span><br><span class="line"><span class="type">String</span> <span class="variable">line</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">while</span> ((line = br.readLine()) != <span class="literal">null</span>) &#123;</span><br><span class="line">    System.out.println(line);</span><br><span class="line">&#125;</span><br><span class="line">br.close();</span><br><span class="line"></span><br><span class="line"><span class="type">File</span> <span class="variable">file2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;write.txt&quot;</span>);</span><br><span class="line"><span class="type">FileOutputStream</span> <span class="variable">output</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(file2);</span><br><span class="line"><span class="type">OutputStreamWriter</span> <span class="variable">osw</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OutputStreamWriter</span>(output,Charset.forName(<span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line"><span class="type">BufferedWriter</span> <span class="variable">bw</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedWriter</span>(osw);</span><br><span class="line">bw.write(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">bw.flush();</span><br><span class="line">bw.close();</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-NIO流"><a href="#1-2-NIO流" class="headerlink" title="1.2. NIO流"></a>1.2. NIO流</h3><h4 id="1-2-1-Path"><a href="#1-2-1-Path" class="headerlink" title="1.2.1. Path"></a>1.2.1. Path</h4><p>文件系统都是 Tree 或者层级结构来组织文件的，任何一个节点可以是一个目录或者一个文件，在 NIO2 中称为 Path</p>
+<h5 id="1-2-1-1-基本属性"><a href="#1-2-1-1-基本属性" class="headerlink" title="1.2.1.1. 基本属性"></a>1.2.1.1. 基本属性</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取文件路径</span></span><br><span class="line"><span class="type">Path</span> <span class="variable">path</span> <span class="operator">=</span> Paths.get(<span class="string">&quot;/data/logs/web.log&quot;</span>);</span><br><span class="line"><span class="comment">// 父路径</span></span><br><span class="line">System.out.printf(<span class="string">&quot;Parent:%s%n&quot;</span>,path.getParent());</span><br><span class="line"><span class="comment">// 根路径，比如&quot;/&quot;、&quot;C:&quot;;如果是相对路径，则返回null</span></span><br><span class="line">System.out.printf(<span class="string">&quot;Root:%s%n&quot;</span>,path.getRoot());</span><br><span class="line"><span class="comment">// 子路径，结果中不包含root，前开后闭</span></span><br><span class="line">System.out.printf(<span class="string">&quot;Subpath[0,2]:%s%n&quot;</span>,path.subpath(<span class="number">0</span>,<span class="number">2</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取路径中的文件名或者最后一个节点元素</span></span><br><span class="line">System.out.printf(<span class="string">&quot;FileName:%s%n&quot;</span>, path.getFileName());</span><br><span class="line"><span class="comment">// 路径节点元素的格式</span></span><br><span class="line">System.out.printf(<span class="string">&quot;NameCount:%s%n&quot;</span>, path.getNameCount());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历路径节点：方法1</span></span><br><span class="line">Iterator&lt;Path&gt; names = path.iterator();</span><br><span class="line"><span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (names.hasNext()) &#123;</span><br><span class="line">    <span class="type">Path</span> <span class="variable">name</span> <span class="operator">=</span> names.next();</span><br><span class="line">    System.out.printf(<span class="string">&quot;Name %s:%s%n&quot;</span>,i,name.toString());</span><br><span class="line">    i++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历路径节点：方法2</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; path.getNameCount(); j++) &#123;</span><br><span class="line">    System.out.printf(<span class="string">&quot;Name %s:%s%n&quot;</span>,j,path.getName(j));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line">FileName:web.log</span><br><span class="line">Parent:/data/logs</span><br><span class="line">Root:/</span><br><span class="line">Subpath[<span class="number">0</span>,<span class="number">2</span>]:data/logs</span><br><span class="line">NameCount:<span class="number">3</span></span><br><span class="line">Name <span class="number">0</span>:data</span><br><span class="line">Name <span class="number">1</span>:logs</span><br><span class="line">Name <span class="number">2</span>:web.log</span><br><span class="line">Name <span class="number">0</span>:data</span><br><span class="line">Name <span class="number">1</span>:logs</span><br><span class="line">Name <span class="number">2</span>:web.log</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-2-1-2-路径转换"><a href="#1-2-1-2-路径转换" class="headerlink" title="1.2.1.2. 路径转换"></a>1.2.1.2. 路径转换</h5><ol>
+<li><p>去除冗余路径展示标准路径 <code>normalize()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Path</span> <span class="variable">path</span> <span class="operator">=</span> Paths.get(<span class="string">&quot;/data/logs/../web.log&quot;</span>);</span><br><span class="line">System.out.printf(<span class="string">&quot;%s%n&quot;</span>,path.normalize()); <span class="comment">// 结果：/data/web.log</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>转换为 uri，使文件可以被外部资源访问（resource） <code>toUri()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Path</span> <span class="variable">path</span> <span class="operator">=</span> Paths.get(<span class="string">&quot;/data/logs/web.log&quot;</span>);</span><br><span class="line">System.out.printf(<span class="string">&quot;%s%n&quot;</span>,path.toUri()); <span class="comment">// 结果：file:///data/logs/web.log</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>转换绝对路径 <code>toAbsolutePath()</code><br>如果路径为相对路径，则转换为绝对路径。对于JAVA程序而言，起始路径为 classpath。此方法不会检测文件是否真的存在或者有权限。</p>
+</li>
+<li><p>转换真实路径 <code>toRealPath()</code><br>它会对文件是否存在、访问权限进行检测，需要捕获异常，常用于对“用户输入的 path ”进行校验和转换：</p>
+</li>
+</ol>
+<ul>
+<li>如果为相对路径，则将会转换为绝对路径，同 3</li>
+<li>如果路径中包含冗余，则移除，同 3</li>
+<li>如果是“符号连接”文件（软连接），则获取其实际 targe t路径（除非指定了NO_FOLLOW_LINKS）</li>
+</ul>
+<ol start="5">
+<li><p>路径合并 <code>resolve()</code> 和 <code>resolveSibling()</code><br>当前 path 与参数进行路径合并，即 append</p>
+</li>
+<li><p>获取相对路径 <code>relativize()</code><br>是 <code>resolve()</code> 逆操作，是母路径 - 组合的新路径，得到相对路径，对于 “&#x2F;data” 与 “&#x2F;data&#x2F;logs&#x2F;p1” 的相对路径为 “logs&#x2F;p1”，反之为 “..&#x2F;..&#x2F;“</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Path</span> <span class="variable">basePath</span> <span class="operator">=</span> Paths.get(<span class="string">&quot;rss&quot;</span>); <span class="comment">// 通过字符串获取路径</span></span><br><span class="line"><span class="type">Path</span> <span class="variable">resolvePath</span> <span class="operator">=</span> basePath.resolve(<span class="string">&quot;resolvePath&quot;</span>); <span class="comment">// 组合 basePath 和 &quot;resolvePath&quot; 得到新路径</span></span><br><span class="line"><span class="type">Path</span> <span class="variable">resolveSibling</span> <span class="operator">=</span> basePath.resolveSibling(<span class="string">&quot;resolveSibling&quot;</span>); <span class="comment">// 得到 basePath 兄弟路径 &quot;resolveSibling&quot;</span></span><br><span class="line"><span class="type">Path</span> <span class="variable">relativizePath</span> <span class="operator">=</span> basePath.relativize(resolvePath); <span class="comment">// 得到路径 basePath - resolvePath 的相对路径</span></span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">&quot;basePath = &quot;</span> + basePath.toAbsolutePath());</span><br><span class="line">System.out.println(<span class="string">&quot;resolvePath = &quot;</span> + resolvePath.toAbsolutePath());</span><br><span class="line">System.out.println(<span class="string">&quot;resolveSibling = &quot;</span> + resolveSibling.toAbsolutePath());</span><br><span class="line">System.out.println(<span class="string">&quot;relativizePath = &quot;</span> + relativizePath);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line">basePath = F:\workspace\IDEA\Java_Core2\<span class="type">rss</span></span><br><span class="line"><span class="variable">resolvePath</span> <span class="operator">=</span> F:\workspace\IDEA\Java_Core2\rss\<span class="type">resolvePath</span></span><br><span class="line"><span class="variable">resolveSibling</span> <span class="operator">=</span> F:\workspace\IDEA\Java_Core2\<span class="type">resolveSibling</span></span><br><span class="line"><span class="variable">relativizePath</span> <span class="operator">=</span> resolvePath</span><br></pre></td></tr></table></figure></li>
+<li><p>转换成 <code>File</code> 类对象 <code>toFile()</code></p>
+</li>
+<li><p>建 <code>Scanner</code> 对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Scanner</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(Paths.get(<span class="string">&quot;C:\\Users\test.txt&quot;</span>));</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="1-2-2-Files"><a href="#1-2-2-Files" class="headerlink" title="1.2.2. Files"></a>1.2.2. Files</h4><p>Files 类中提供了大量静态方法，用于实现文件（目录）的创建、复制、迁移、删除以及访问文件数据等操作</p>
+<h5 id="1-2-2-1-检测文件或目录"><a href="#1-2-2-1-检测文件或目录" class="headerlink" title="1.2.2.1. 检测文件或目录"></a>1.2.2.1. 检测文件或目录</h5><ul>
+<li><code>exist(Path)</code>：true 时表示文件存在且有权限；false 时表示文件不存在或者存在但无权限</li>
+<li><code>notExists(Path)</code>：true 时表示文件不存在；false 时表示文件存在或者存在但无权限</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>函数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>文件存在且有权限</td>
+<td><code>exist(Path)</code></td>
+</tr>
+<tr>
+<td>文件存在但无权限</td>
+<td><code>!exist(Path) &amp;&amp; !notExists(Path)</code></td>
+</tr>
+<tr>
+<td>文件不存在</td>
+<td><code>notExists(Path)</code></td>
+</tr>
+</tbody></table>
+<p>判断文件（目录）具有读、写、执行的权限，可以通过如下方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Path</span> <span class="variable">path</span> <span class="operator">=</span> Paths.get(<span class="string">&quot;data/logs/web.log&quot;</span>);</span><br><span class="line"><span class="type">boolean</span> <span class="variable">isRegularExecutableFile</span> <span class="operator">=</span> Files.isRegularFile(path) &amp;</span><br><span class="line">        Files.isReadable(path) &amp; Files.isExecutable(path);</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-2-2-2-删除"><a href="#1-2-2-2-删除" class="headerlink" title="1.2.2.2. 删除"></a>1.2.2.2. 删除</h5><ul>
+<li><code>Files.delete(Path)</code>: 如果指定路径不存在，报异常 NoSuchFileException  </li>
+<li><code>Files.deleteIfExists(Path)</code> : 如果文件存在，才会删除，不会报异常。可以用来删除空目录<br>如果文件是软连接，则只删除连接文件而不会删除 target 文件，如果 path 为目录，则目录需要为空，否则删除失败（IOException）。</li>
+</ul>
+<h5 id="1-2-2-3-文件（目录）复制"><a href="#1-2-2-3-文件（目录）复制" class="headerlink" title="1.2.2.3. 文件（目录）复制"></a>1.2.2.3. 文件（目录）复制</h5><ul>
+<li><code>Files.copy(fromPath, toPath)</code> : fromPath 和 toPath 都是 Path 对象, 如果目标路径已存在文件, 复制失败</li>
+<li><code>Files.copy(fromPath, toPath, CopyIOption)</code> : </li>
+<li><code>Files.copy(inputStream, toPath)</code> : 从输入流复制到目标路径</li>
+<li><code>Files.copy(fromPath, outputStream)</code> : 从源路径复制到输出流</li>
+</ul>
+<p>注意 CopyOption 的相关选项。当被复制文件是软连接时，将会默认复制 target 文件，如果只想复制软连接，可以指定 <code>NOFOLLOW_LINKS</code> 选项。如下为 CopyOption 选项列表：</p>
+<ol>
+<li><code>REPLACE_EXISTING</code>：如果目标文件已经存在，则直接覆盖；如果目标文件是个软连接，则软连接文件本身被覆盖（而非连接文件的target文件）；如果复制的是目录，且目标目录不为空时，则会抛出异常（DirectoryNotEmptyException）。此参数通常必选。复制目录时，目标目录会自动创建，源目录中如果有文件，则不会复制文件，只会创建空的目标目录。source和target，要么同时是目录、要么同时是文件。</li>
+<li><code>COPY_ATTRIBUTES</code>：复制文件时，也同时复制目标文件的属性（metadata），对于文件属性（FileAttribute）的支持依赖于文件系统（和平台），不过 lastModifiedTime 通常会被复制。</li>
+<li><code>NOFOLLOW_LINKS</code>：继承自 LinkOption，表示如果文件是软连接，则不 followed，即只复制连接文件，不复制其 target 实际文件内容。</li>
+</ol>
+<h5 id="1-2-2-4-移动"><a href="#1-2-2-4-移动" class="headerlink" title="1.2.2.4. 移动"></a>1.2.2.4. 移动</h5><ul>
+<li><code>Files.move(fromPath, toPath)</code></li>
+<li><code>Files.move(Path,Path,CopyIOption)</code></li>
+</ul>
+<p>如果是目录，目录中包含文件时也可以移动的（这可能依赖于平台），子目录也一起移动，但是目标目录必须为空（DirectoryNotEmptyException）目标目录不需要提前创建，move 结束后，源目录将不存在。支持两种选项：</p>
+<ol>
+<li><code>REPLACE_EXISTING</code>：如果目标文件已存在，则覆盖；如果目标文件是软连接，则连接文件被覆盖但是其指向不会受影响。</li>
+<li><code>ATOMIC_MOVE</code>：原子复制，需要平台的文件系统支持（不支持则抛出异常），指定此参数时其他选项将被忽略；如果文件不能被原子复制（或者替换），则会抛出 AtomicMoveNotSupportedException。</li>
+</ol>
+<h5 id="1-2-2-5-打开文件"><a href="#1-2-2-5-打开文件" class="headerlink" title="1.2.2.5. 打开文件"></a>1.2.2.5. 打开文件</h5><p>Files 类中提供了多个静态的方法，用于直接读写文件。如下为文件写入时的几个选项参数（StandardOpenOptions）：</p>
+<ol>
+<li><code>WRITE</code>： 打开文件用于 write 访问。</li>
+<li><code>APPEND</code>：在文件尾部追加数据，伴随用于 <code>WRITE</code> 或 <code>CREATE</code> 选项。</li>
+<li><code>TRUNCATE_EXISTING</code>：将文件 truncate 为空，伴随用于 <code>WRITE</code> 选项。比如，文件存在时，将文件数据清空并重新写入。</li>
+<li><code>CREATE_NEW</code>：创建新文件，如果文件已存在则抛出异常。</li>
+<li><code>CREATE</code>：如果文件已存在则直接打开，否则创建文件。</li>
+<li><code>DELETE_ON_CLOSE</code>：当文件操作关闭时则删除文件（close 方法或者 JVM 关闭时），此选项适用于临时文件（临时文件不应该被其他进程并发访问）。</li>
+<li><code>SPARSE</code>：创建一个“稀疏”文件，伴随使用 <code>CREATE_NEW</code>，适用于某些特殊的文件系统比如 NTFS，这些大文件允许出现 “gaps”（空洞）在某些情况下可以提高性能且这些 gaps 不消耗磁盘空间。</li>
+<li><code>SYNC</code>：对文件内容（data）或者 metadata 的修改，都会同步到底层存储。</li>
+<li><code>DSYNC</code>：对文件内容的修改，会同步到底层存储。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Path</span> <span class="variable">path1</span> <span class="operator">=</span> Paths.get(<span class="string">&quot;/data1/web.log&quot;</span>);</span><br><span class="line"><span class="type">Path</span> <span class="variable">path2</span> <span class="operator">=</span> Paths.get(<span class="string">&quot;/data2/web.log&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取文件</span></span><br><span class="line"><span class="type">byte</span>[] arr = Files.readAllBytes(path1);</span><br><span class="line">List&lt;String&gt; lines = Files.readAllLines(path1,Charset.forName(<span class="string">&quot;utf-8&quot;</span>));</span><br><span class="line"><span class="type">BufferedReader</span> <span class="variable">reader</span> <span class="operator">=</span> Files.newBufferedReader(path1);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写入文件</span></span><br><span class="line">Files.write(path2,lines,Charset.forName(<span class="string">&quot;utf-8&quot;</span>),StandardOpenOption.APPEND);</span><br><span class="line">...</span><br><span class="line"><span class="type">BufferedWriter</span> <span class="variable">writer</span> <span class="operator">=</span> Files.newBufferedWriter(path2,Charset.forName(<span class="string">&quot;utf-8&quot;</span>),StandardOpenOption.APPEND);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h5 id="1-2-2-6-创建文件"><a href="#1-2-2-6-创建文件" class="headerlink" title="1.2.2.6. 创建文件"></a>1.2.2.6. 创建文件</h5><ol>
+<li><p>创建目录<br>如果目录已经存在会抛出异常 FileAlreadyExistsException，创建目录是原子性的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Path</span> <span class="variable">path</span> <span class="operator">=</span> Paths.get(<span class="string">&quot;dir&quot;</span>);</span><br><span class="line">Files.createDirectory(path); <span class="comment">// 创建以 path 为路径的目录</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建文件<br>如果文件已经存在会抛出异常 FileAlreadyExistsException，创建文件是原子性的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Path</span> <span class="variable">path</span> <span class="operator">=</span> Paths.get(<span class="string">&quot;file&quot;</span>);</span><br><span class="line">Files.createDirectory(pat); <span class="comment">// 创建以 path 为路径的文件, 文件可以与目录路径及同名</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>必须支持 Posix 权限的系统(linux)才需要指定 FileAttribute ，其他无需指定，否则报错</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Path</span> <span class="variable">path</span> <span class="operator">=</span> Paths.get(<span class="string">&quot;/data1/web.log&quot;</span>);</span><br><span class="line">List&lt;String&gt; lines = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br><span class="line">lines.add(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (Files.notExists(path) || Files.deleteIfExists(path)) &#123;</span><br><span class="line">    Set&lt;PosixFilePermission&gt; perms = PosixFilePermissions.fromString(<span class="string">&quot;rw-r--r--&quot;</span>);</span><br><span class="line">    FileAttribute&lt;Set&lt;PosixFilePermission&gt;&gt; attrs = PosixFilePermissions.asFileAttribute(perms);</span><br><span class="line">    Files.createFile(path, attrs);</span><br><span class="line">    Files.write(path, lines, Charset.forName(<span class="string">&quot;utf-8&quot;</span>), StandardOpenOption.TRUNCATE_EXISTING);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;Get wrong sql file path!&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在给定位置或者系统指定位置，创建临时文件&#x2F;目录<br>Win10x64 系统默认临时文件夹路径：C:\Users&lt;usernamw&gt;\AppData\Local\Temp<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Path</span> <span class="variable">dir</span> <span class="operator">=</span> ...;</span><br><span class="line"><span class="type">Path</span> <span class="variable">newPath</span> <span class="operator">=</span> Files.createTempFile(dir, prefix, suffix); <span class="comment">// dir路径下, 创建以prefix为前缀, suffix为后缀的名称的文件</span></span><br><span class="line"><span class="type">Path</span> <span class="variable">newPath</span> <span class="operator">=</span> Files.createTempFile(prefix, suffix); <span class="comment">// 系统默认临时目录路径下, 创建以prefix为前缀, suffix为后缀的名称的文件</span></span><br><span class="line"><span class="type">Path</span> <span class="variable">newPath</span> <span class="operator">=</span> Files.createTempDirectory(dir, prefix); <span class="comment">// dir路径下, 创建以prefix为前缀, suffix为后缀的名称的目录</span></span><br><span class="line"><span class="type">Path</span> <span class="variable">newPath</span> <span class="operator">=</span> Files.createTempDirecotry(prefix); <span class="comment">// 系统默认临时目录路径下, 创建以prefix为前缀, suffix为后缀的名称的目录</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h5 id="1-2-2-7-读写文件"><a href="#1-2-2-7-读写文件" class="headerlink" title="1.2.2.7. 读写文件"></a>1.2.2.7. 读写文件</h5><ol>
+<li><p>读取&#x2F;写中小文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 读取文件内容 */</span></span><br><span class="line"><span class="comment">// 一次按二进制读取所有文件内容</span></span><br><span class="line"><span class="type">byte</span>[] bytes = Files.readAllBytes(path); <span class="comment">// 文件路径Path -&gt; 二进制数组byte[]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 一次按行读取文件所有内容</span></span><br><span class="line">List&lt;String&gt; lines = Files.readAllLines(path);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 写文件内容 */</span></span><br><span class="line"><span class="comment">// 将 bytes 转换成字符串</span></span><br><span class="line"><span class="type">String</span> <span class="variable">content</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(bytes, charset); <span class="comment">// charset指定字符编码, 如 StandardCharsets.UTF_8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 写一个字符串到文件</span></span><br><span class="line">Files.write(path, content.getBytes(charset)); </span><br><span class="line"><span class="comment">// 追加字符串到文件</span></span><br><span class="line">Files.write(path, content.getBytes(charset),StandardOpenOption.APPEND);</span><br><span class="line"><span class="comment">// 写一个行的集合到文件</span></span><br><span class="line">Files.write(path, lines);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>大文件<br>要处理大文件和二进制文件，需要用到输入流&#x2F;输出流，或者使用读入器&#x2F;写入器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">InputStream</span> <span class="variable">in</span> <span class="operator">=</span> Files.newInputStream(path);</span><br><span class="line"><span class="type">OutputStream</span> <span class="variable">out</span> <span class="operator">=</span> Files.newOutputStream();</span><br><span class="line"><span class="type">Reader</span> <span class="variable">reader</span> <span class="operator">=</span> Files.newBufferedReader(path, charset);</span><br><span class="line"><span class="type">Writer</span> <span class="variable">writer</span> <span class="operator">=</span> Writer.newBufferedWriter(path, charset);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h5 id="1-2-2-8-获取文件信息"><a href="#1-2-2-8-获取文件信息" class="headerlink" title="1.2.2.8. 获取文件信息"></a>1.2.2.8. 获取文件信息</h5><ul>
+<li><code>boolean exists(path)</code> : 文件存在?</li>
+<li><code>boolean isHidden(path)</code> : 文件隐藏?</li>
+<li><code>boolean isReadable(path)</code> : 文件可读?</li>
+<li><code>boolean isWritable(path)</code> : 文件可写?</li>
+<li><code>boolean isExecutable(path)</code> : 可执行?</li>
+<li><code>boolean isRegularFile(path)</code> : 是普通文件? 等价于 <code>!isSymbolicLink() &amp;&amp; !isDirectory() &amp;&amp; !isOther()</code></li>
+<li><code>boolean isDirectory(path)</code> : 是目录?</li>
+<li><code>boolean isSymbolicLink(path)</code> : 是符号链接? </li>
+<li><code>long fileSize = Files.size(path)</code> : 获取文件字节数</li>
+<li><code>Files.readAttributes(path, BasicFileAttributes.class)</code> : 获取基本文件属性集</li>
+<li><code>Files.readAttributes(path, PosixiFileAttributes.class)</code> : 如果文件系统兼容 POSIX, 才能获取到 PosixiFileAttributes 实例</li>
+</ul>
+<h5 id="1-2-2-9-目录访问"><a href="#1-2-2-9-目录访问" class="headerlink" title="1.2.2.9. 目录访问"></a>1.2.2.9. 目录访问</h5><p>遍历指定目录下各项，<code>Files.list(Path)</code>会返回Stream，而且是惰性读取，处理目录具有大量项时高效。不过，其不会进入子目录，进入子目录使用 <code>Files.walk(Path)</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>(Stream&lt;Path&gt; entries = Files.list(dirPath)) &#123; <span class="comment">// 读取目录涉及需要关闭系统资源, 使用try块. 不进入子目录</span></span><br><span class="line">      entries.forEach(System.out::println); <span class="comment">// 打印每个entries项, 也就是打印每个path</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>(Stream&lt;Path&gt; entries = Files.walk(dirPath)) &#123; <span class="comment">// 会进入子目录</span></span><br><span class="line">      entries.forEach(System.out.println);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 示例将当前目录rss下所有文件（包括目录）及子文件, 都复制到目录rss2下 */</span></span><br><span class="line"><span class="type">Path</span> <span class="variable">source</span> <span class="operator">=</span> Paths.get(<span class="string">&quot;rss&quot;</span>); <span class="comment">// 根据实际情况设置字节的source路径</span></span><br><span class="line"><span class="type">Path</span> <span class="variable">target</span> <span class="operator">=</span> Paths.get(<span class="string">&quot;rss2&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>(Stream&lt;Path&gt; entries = Files.walk(source)) &#123;</span><br><span class="line">    entries.forEach( p-&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                <span class="comment">// 取得p相对于source的相对路径后, 再拼接到target路径下. 相当于是说, 将每个文件相对路径都由source转移到target下</span></span><br><span class="line">              <span class="type">Path</span> <span class="variable">q</span> <span class="operator">=</span> target.resolve(source.relative(p)); </span><br><span class="line">              <span class="keyword">if</span>(!Files.exists(q)) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(Files.isDirectory(q)) Files.createDirectory(q); <span class="comment">// 如果是目录, 在target路径下, 根据相对路径创建对应目录</span></span><br><span class="line">                    <span class="keyword">else</span> Files.copy(p, q);  <span class="comment">// 如果是文件, 从source路径复制到target下</span></span><br><span class="line">              &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span>(IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-2-2-10-目录流"><a href="#1-2-2-10-目录流" class="headerlink" title="1.2.2.10. 目录流"></a>1.2.2.10. 目录流</h5><p>使用 <code>Files.walk(Path)</code>有一个缺陷，无法方便地删除目录，因为要删除父目录，必须先删除子目录。否则，会抛出异常。<br>使用 <code>File.newDirectoryStream(Path)</code>对象，产生一个 DirectoryStream，对遍历过程可以进行更细粒度控制。其不是流，而是专门用于目录遍历的接口。它是 Iterable 的子接口。<br>还可以搭配 glob 模式来过滤文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 滤出dir目录下 后缀名为 &quot;&quot;.java&quot; 的文件</span></span><br><span class="line"><span class="keyword">try</span>(DirectoryStream&lt;Path&gt; entries = Files.newDirectoryStream(dir, <span class="string">&quot;*.java&quot;</span>))&#123;</span><br><span class="line">    <span class="keyword">for</span> (Path entry: entries) &#123;</span><br><span class="line">        ...    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-2-2-11-访问目录所有子孙"><a href="#1-2-2-11-访问目录所有子孙" class="headerlink" title="1.2.2.11. 访问目录所有子孙"></a>1.2.2.11. 访问目录所有子孙</h5><p>如果想要访问某个目录下所有子孙，可以使用 <code>walkFileTree()</code>，并向其传递一个 <code>FileVisitor</code> 对象。这个方法并非简单遍历。<br>在遇到文件或目录时、目录被处理前、目录被处理后、访问文件错误时等情形下，<code>FileVisitor</code> 会收到通知，然后指定执行方式：跳过该文件、跳过目录、跳过兄弟文件、终止访问。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// walkFileTree得到的通知：</span></span><br><span class="line">FileVisitResult <span class="title function_">visitFile</span><span class="params">()</span>  <span class="comment">// 遇到文件或目录时</span></span><br><span class="line">FileVisitResult <span class="title function_">preVisitDirectory</span><span class="params">()</span> <span class="comment">// 一个目录被处理前</span></span><br><span class="line">FileVisitResult <span class="title function_">postVisitDirectory</span><span class="params">()</span> <span class="comment">// 一个目录被处理后</span></span><br><span class="line">FileVisitResult <span class="title function_">visitFileFailed</span><span class="params">()</span> <span class="comment">// 试图访问文件失败, 或目录发生错误时</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 收到通知后, 可以设置指定的操作</span></span><br><span class="line">FileVisitResult.CONTINURE <span class="comment">// 继续访问下一个文件</span></span><br><span class="line">FileVisitResult.SKIP_SUBTREE <span class="comment">// 继续访问, 但不再访问这个目录下任何文件</span></span><br><span class="line">FileVisitResult.SKIP_SIBLINGS <span class="comment">// 继续访问, 但不再访问这个文件的兄弟文件(同一个目录下的文件)</span></span><br><span class="line">FileVisitResult.TERMINATE <span class="comment">// 终止访问</span></span><br></pre></td></tr></table></figure>
+<p>便捷类 <code>SimpleFileVisitor</code> 和 <code>Files.walkFileTree()</code> 可以实现对目录的细粒度访问，并在在收到相关通知时，有机会进行相应处理。<br>默认 <code>SimpleFileVisitor</code> 类实现 <code>FileVisitor</code> 接口，除 <code>visitFileFailed()</code>  外(抛出异常并终止访问)，其余方法都是直接继续访问，而不做任何处理。<br>注意：<code>preVisitDirectory()</code> 和 <code>postVisitDirectory()</code> 通常需要覆盖，否则，访问时遇到不允许打开的目录或者不允许访问的文件时立即失败，进而直接跳转到 <code>visitFileFailed()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/********** 例1 : 打印给定目录下的所有子目录 **********/</span></span><br><span class="line">Files.walkFileTree(Paths.get(<span class="string">&quot;F:\\test&quot;</span>), <span class="keyword">new</span> <span class="title class_">SimpleFileVisitor</span>&lt;Path&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> FileVisitResult <span class="title function_">preVisitDirectory</span><span class="params">(Path dir, BasicFileAttributes attrs)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        System.out.println(dir);</span><br><span class="line">        <span class="keyword">return</span> FileVisitResult.CONTINUE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> FileVisitResult <span class="title function_">postVisitDirectory</span><span class="params">(Path dir, IOException exc)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;postVisitDirectory &quot;</span> + dir);</span><br><span class="line">        <span class="keyword">return</span> FileVisitResult.CONTINUE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> FileVisitResult <span class="title function_">visitFileFailed</span><span class="params">(Path file, IOException exc)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="keyword">return</span> FileVisitResult.SKIP_SUBTREE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line">F:\test</span><br><span class="line">F:\test\dir1</span><br><span class="line">F:\test\dir1\subdir1</span><br><span class="line">postVisitDirectory F:\test\dir1\subdir1</span><br><span class="line">postVisitDirectory F:\test\dir1</span><br><span class="line">F:\test\dir2</span><br><span class="line">postVisitDirectory F:\test\dir2</span><br><span class="line">F:\test\dir3</span><br><span class="line">postVisitDirectory F:\test\dir3</span><br><span class="line">postVisitDirectory F:\test</span><br><span class="line"></span><br><span class="line"><span class="comment">/********** 例2 : 删除目录树（包括其中的文件） **********/</span></span><br><span class="line">Files.walkFileTree(Paths.get(<span class="string">&quot;F:\\test&quot;</span>), <span class="keyword">new</span> <span class="title class_">SimpleFileVisitor</span>&lt;Path&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> FileVisitResult <span class="title function_">preVisitDirectory</span><span class="params">(Path dir, BasicFileAttributes attrs)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        System.out.println(dir);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 删除dir路径下所有文件(不包含子目录)</span></span><br><span class="line">        Files.list(dir).forEach(p-&gt;&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (!Files.isDirectory(p))</span><br><span class="line">                    Files.delete(p);</span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> FileVisitResult.CONTINUE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除目录</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> FileVisitResult <span class="title function_">postVisitDirectory</span><span class="params">(Path dir, IOException exc)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;postVisitDirectory &quot;</span> + dir);</span><br><span class="line">        <span class="keyword">if</span> (<span class="literal">null</span> != exc) <span class="keyword">throw</span> exc;</span><br><span class="line">        Files.delete(dir);</span><br><span class="line">        <span class="keyword">return</span> FileVisitResult.CONTINUE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; );</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-2-2-12-文件通道"><a href="#1-2-2-12-文件通道" class="headerlink" title="1.2.2.12. 文件通道"></a>1.2.2.12. 文件通道</h5><p><code>FileChannel</code> 提供了一种通过通道来访问文件的方式，它可以通过带参数 <code>position(int)</code>  方法定位到文件的任意位置开始进行操作，还能够将文件映射到直接内存，提高大文件的访问效率。</p>
+<h6 id="1-通道获取"><a href="#1-通道获取" class="headerlink" title="1. 通道获取"></a>1. 通道获取</h6><p>通过 <code>FileInputStream, FileOutputStream, RandomAccessFile</code> 的对象中的 <code>getChannel()</code> 方法来获取，也可以通通过静态方法 <code>FileChannel.open(Path, OpenOption …)</code> 来打开。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// io 字节流</span></span><br><span class="line"><span class="type">FileOutputStream</span> <span class="variable">ous</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;a.txt&quot;</span>));</span><br><span class="line"><span class="type">FileChannel</span> <span class="variable">out</span> <span class="operator">=</span> ous.getChannel(); <span class="comment">// 获取一个只读通道</span></span><br><span class="line"><span class="type">FileInputStream</span> <span class="variable">ins</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;a.txt&quot;</span>));</span><br><span class="line"><span class="type">FileChannel</span> <span class="variable">in</span> <span class="operator">=</span> ins.getChannel();  <span class="comment">// 获取一个只写通道</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// io 随机访问文件</span></span><br><span class="line"><span class="type">RandomAccessFile</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RandomAccessFile</span>(<span class="string">&quot;a.txt&quot;</span>, <span class="string">&quot;rw&quot;</span>);</span><br><span class="line"><span class="type">FileChannel</span> <span class="variable">channel</span> <span class="operator">=</span> file.getChannel(); <span class="comment">// 获取一个可读写文件通道</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// nio</span></span><br><span class="line"><span class="type">FileChannel</span> <span class="variable">channel</span> <span class="operator">=</span> FileChannel.open(Paths.get(<span class="string">&quot;a.txt&quot;</span>), StandardOpenOption.READ); <span class="comment">// 以只读的方式打开一个文件 a.txt 的通道</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="2-读取数据"><a href="#2-读取数据" class="headerlink" title="2. 读取数据"></a>2. 读取数据</h6><p>读取数据的 <code>read(ByteBuffer buf)</code> 方法返回的值表示读取到的字节数，如果读到了文件末尾，返回值为 -1。读取数据时，<code>position</code> 会往后移动。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FileChannel</span> <span class="variable">channel</span> <span class="operator">=</span> FileChannel.open(Paths.get(<span class="string">&quot;a.txt&quot;</span>), StandardOpenOption.READ);</span><br><span class="line"><span class="type">ByteBuffer</span> <span class="variable">buf</span> <span class="operator">=</span> ByteBuffer.allocate(<span class="number">5</span>);</span><br><span class="line"><span class="keyword">while</span>(channel.read(buf)!=-<span class="number">1</span>)&#123;</span><br><span class="line">    buf.flip();</span><br><span class="line">    System.out.print(<span class="keyword">new</span> <span class="title class_">String</span>(buf.array()));</span><br><span class="line">    buf.clear();</span><br><span class="line">&#125;</span><br><span class="line">channel.close();</span><br></pre></td></tr></table></figure>
+
+<h6 id="3-写入数据"><a href="#3-写入数据" class="headerlink" title="3. 写入数据"></a>3. 写入数据</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FileChannel</span> <span class="variable">channel</span> <span class="operator">=</span> FileChannel.open(Paths.get(<span class="string">&quot;a.txt&quot;</span>), StandardOpenOption.WRITE);</span><br><span class="line"><span class="type">ByteBuffer</span> <span class="variable">buf</span> <span class="operator">=</span> ByteBuffer.allocate(<span class="number">5</span>);</span><br><span class="line"><span class="type">byte</span>[] data = <span class="string">&quot;Hello, Java NIO.&quot;</span>.getBytes();</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; data.length; ) &#123;</span><br><span class="line">    buf.put(data, i, Math.min(data.length - i, buf.limit() - buf.position()));</span><br><span class="line">    buf.flip();</span><br><span class="line">    i += channel.write(buf);</span><br><span class="line">    buf.compact();</span><br><span class="line">&#125;</span><br><span class="line">channel.force(<span class="literal">false</span>);</span><br><span class="line">channel.close();</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/06/10/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/" data-id="cll1xb9rf0000a8jw0hpkgd03" data-title="Java 代码之文件处理" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/06/10/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/%E4%BB%A3%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java 中的代理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/05/31/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java 多线程</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flume/">Flume</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/HBase/">HBase</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hive/">Hive</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kubernetes/">Kubernetes</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flume/" rel="tag">Flume</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/" rel="tag">Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Quartz/" rel="tag">Quartz</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" rel="tag">第三方包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%88%B6/" rel="tag">自制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Flink/" style="font-size: 17.5px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Flume/" style="font-size: 10px;">Flume</a> <a href="/tags/Git/" style="font-size: 12.5px;">Git</a> <a href="/tags/Golang/" style="font-size: 15.83px;">Golang</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hadoop/" style="font-size: 10.83px;">Hadoop</a> <a href="/tags/Hive/" style="font-size: 10px;">Hive</a> <a href="/tags/Idea-Instructions/" style="font-size: 14.17px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 10.83px;">JVM</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java8/" style="font-size: 12.5px;">Java8</a> <a href="/tags/Kubernetes/" style="font-size: 10px;">Kubernetes</a> <a href="/tags/Maven/" style="font-size: 12.5px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/Redis/" style="font-size: 15px;">Redis</a> <a href="/tags/Rust/" style="font-size: 11.67px;">Rust</a> <a href="/tags/Scala/" style="font-size: 12.5px;">Scala</a> <a href="/tags/Spring/" style="font-size: 14.17px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 13.33px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 19.17px;">代码归档</a> <a href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" style="font-size: 12.5px;">内建包</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 18.33px;">大数据</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 13.33px;">容器</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 11.67px;">数据库</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 16.67px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 15px;">杂记</a> <a href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" style="font-size: 10px;">第三方包</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 14.17px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%87%AA%E5%88%B6/" style="font-size: 11.67px;">自制</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 11.67px;">计算机网络</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/08/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/%E8%87%AA%E5%88%B6/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8/">Java 代码之自定义异常</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/03/%E7%9F%A5%E8%AF%86%E7%82%B9/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%BD%91%E7%BB%9C/0.%E9%9B%B6%E7%A2%8E/">计算机基础与网络-杂记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/26/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/%E5%B8%B8%E7%94%A8%E5%8C%85/%E5%86%85%E5%BB%BA%E5%8C%85-log/">Golang 内建包-log</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/25/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/0.GolangCheatsheet/">Golang 基础-Cheatsheet</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/25/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/%E5%B8%B8%E7%94%A8%E5%8C%85/%E5%86%85%E5%BB%BA%E5%8C%85-http/">Golang 内建包-http</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
