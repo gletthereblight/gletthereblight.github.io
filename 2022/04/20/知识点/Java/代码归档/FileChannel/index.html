@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java 代码之 FileChannel | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="FileChannel 类的使用代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 代码之 FileChannel">
+<meta property="og:url" content="http://example.com/2022/04/20/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/FileChannel/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="FileChannel 类的使用代码">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="e:/youdaoNote/Image/java/filechannel01.png">
+<meta property="og:image" content="e:/youdaoNote/Image/java/filechannel02.png">
+<meta property="article:published_time" content="2022-04-20T01:41:00.000Z">
+<meta property="article:modified_time" content="2022-10-19T01:58:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="代码归档">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="e:/youdaoNote/Image/java/filechannel01.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Java/代码归档/FileChannel" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/20/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/FileChannel/" class="article-date">
+  <time class="dt-published" datetime="2022-04-20T01:41:00.000Z" itemprop="datePublished">2022-04-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java 代码之 FileChannel
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="wiki"><a href="#wiki" class="headerlink" title="wiki"></a>wiki</h2><p><code>FileChannel</code> 使用“通道”来对文件进行读、写、映射、操作文件。</p>
+<p>文件通道实现了 <code>SeekableByteChannel</code> 来连接的文件。文件本身包含一个变长的字节序列可供读写，且当前的 <code>size</code> 可以查询。文件的 <code>size</code> 会增长和减少，当数据写入和 <code>truncate</code> 时。但其无法查询文件的元数据，如权限、类型、最后修改时间等。文件拥有可供查询和修改的 <code>position</code>，它可以定位到文件的任意位置开始进行操作。</p>
+<h2 id="1-通道获取"><a href="#1-通道获取" class="headerlink" title="1. 通道获取"></a>1. 通道获取</h2><p>几种渠道获取 <code>FileChannel</code> : </p>
+<ul>
+<li>文件流获取，包括 <code>FileInputStream/FileOutputStream</code> 的 <code>getChannel()</code> 方法</li>
+<li>随机读写 <code>RandomAccessFile</code> 的 <code>getChannel()</code> 方法</li>
+<li>其类方法来打开 <code>open()</code></li>
+</ul>
+<h3 id="1-1-从-FileInputStream-FileOutputStream-中获取"><a href="#1-1-从-FileInputStream-FileOutputStream-中获取" class="headerlink" title="1.1 从 FileInputStream &#x2F; FileOutputStream 中获取"></a>1.1 从 FileInputStream &#x2F; FileOutputStream 中获取</h3><p>中获取以读和写的方式打开的文件通道。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FileOutputStream</span> <span class="variable">ous</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;a.txt&quot;</span>));</span><br><span class="line"><span class="type">FileChannel</span> <span class="variable">out</span> <span class="operator">=</span> ous.getChannel(); <span class="comment">// 获取一个只读通道</span></span><br><span class="line"><span class="type">FileInputStream</span> <span class="variable">ins</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;a.txt&quot;</span>));</span><br><span class="line"><span class="type">FileChannel</span> <span class="variable">in</span> <span class="operator">=</span> ins.getChannel();  <span class="comment">// 获取一个只写通道</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-从-RandomAccessFile-中获取"><a href="#1-2-从-RandomAccessFile-中获取" class="headerlink" title="1.2 从 RandomAccessFile 中获取"></a>1.2 从 RandomAccessFile 中获取</h3><p>获取的通道取决于其是以什么方式创建的，”r”, “w”, “rw” 分别对应着读模式，写模式，以及读写模式。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">RandomAccessFile</span> <span class="variable">file</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RandomAccessFile</span>(<span class="string">&quot;a.txt&quot;</span>, <span class="string">&quot;rw&quot;</span>);</span><br><span class="line"><span class="type">FileChannel</span> <span class="variable">channel</span> <span class="operator">=</span> file.getChannel(); <span class="comment">// 获取一个可读写文件通道</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-通过-FileChannel-open-打开"><a href="#1-3-通过-FileChannel-open-打开" class="headerlink" title="1.3 通过 FileChannel.open() 打开"></a>1.3 通过 FileChannel.open() 打开</h3><p>通过类方法打开的通道，打开模式通过 StandardOpenOption 枚举类型指定。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FileChannel</span> <span class="variable">channel</span> <span class="operator">=</span> FileChannel.open(Paths.get(<span class="string">&quot;a.txt&quot;</span>), StandardOpenOption.READ); <span class="comment">// 以只读的方式打开一个文件 a.txt 的通道</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-读取数据"><a href="#2-读取数据" class="headerlink" title="2. 读取数据"></a>2. 读取数据</h2><p>读取数据的 read(ByteBuffer buf) 方法返回的值表示读取到的字节数，如果读到了文件末尾，返回值为 -1。读取数据时，position 会往后移动。</p>
+<h3 id="2-1-将数据读取到单个缓冲区"><a href="#2-1-将数据读取到单个缓冲区" class="headerlink" title="2.1 将数据读取到单个缓冲区"></a>2.1 将数据读取到单个缓冲区</h3><p>和一般通道的操作一样，数据也是需要读取到1个缓冲区中，然后从缓冲区取出数据。在调用 read 方法读取数据的时候，可以传入参数 position 和 length 来指定开始读取的位置和长度。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FileChannel</span> <span class="variable">channel</span> <span class="operator">=</span> FileChannel.open(Paths.get(<span class="string">&quot;a.txt&quot;</span>), StandardOpenOption.READ);</span><br><span class="line"><span class="type">ByteBuffer</span> <span class="variable">buf</span> <span class="operator">=</span> ByteBuffer.allocate(<span class="number">5</span>);</span><br><span class="line"><span class="keyword">while</span>(channel.read(buf)!=-<span class="number">1</span>)&#123;</span><br><span class="line">    buf.flip();</span><br><span class="line">    System.out.print(<span class="keyword">new</span> <span class="title class_">String</span>(buf.array()));</span><br><span class="line">    buf.clear();</span><br><span class="line">&#125;</span><br><span class="line">channel.close();</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-读取到多个缓冲区"><a href="#2-2-读取到多个缓冲区" class="headerlink" title="2.2 读取到多个缓冲区"></a>2.2 读取到多个缓冲区</h3><p>文件通道 FileChannel 实现了 ScatteringByteChannel 接口，可以将文件通道中的内容同时读取到多个 ByteBuffer 当中，这在处理包含若干长度固定数据块的文件时很有用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ScatteringByteChannel</span> <span class="variable">channel</span> <span class="operator">=</span> FileChannel.open(Paths.get(<span class="string">&quot;a.txt&quot;</span>), StandardOpenOption.READ);</span><br><span class="line"><span class="type">ByteBuffer</span> <span class="variable">key</span> <span class="operator">=</span> ByteBuffer.allocate(<span class="number">5</span>), value=ByteBuffer.allocate(<span class="number">10</span>);</span><br><span class="line">ByteBuffer[] buffers = <span class="keyword">new</span> <span class="title class_">ByteBuffer</span>[]&#123;key, value&#125;;</span><br><span class="line"><span class="keyword">while</span>(channel.read(buffers)!=-<span class="number">1</span>)&#123;</span><br><span class="line">    key.flip();</span><br><span class="line">    value.flip();</span><br><span class="line">    System.out.println(<span class="keyword">new</span> <span class="title class_">String</span>(key.array()));</span><br><span class="line">    System.out.println(<span class="keyword">new</span> <span class="title class_">String</span>(value.array()));</span><br><span class="line">    key.clear();</span><br><span class="line">    value.clear();</span><br><span class="line">&#125;</span><br><span class="line">channel.close();</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-写入数据"><a href="#3-写入数据" class="headerlink" title="3. 写入数据"></a>3. 写入数据</h2><h3 id="3-1-从单个缓冲区写入"><a href="#3-1-从单个缓冲区写入" class="headerlink" title="3.1 从单个缓冲区写入"></a>3.1 从单个缓冲区写入</h3><p>单个缓冲区操作也非常简单，它返回往通道中写入的字节数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FileChannel</span> <span class="variable">channel</span> <span class="operator">=</span> FileChannel.open(Paths.get(<span class="string">&quot;a.txt&quot;</span>), StandardOpenOption.WRITE);</span><br><span class="line"><span class="type">ByteBuffer</span> <span class="variable">buf</span> <span class="operator">=</span> ByteBuffer.allocate(<span class="number">5</span>);</span><br><span class="line"><span class="type">byte</span>[] data = <span class="string">&quot;Hello, Java NIO.&quot;</span>.getBytes();</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; data.length; ) &#123;</span><br><span class="line">    buf.put(data, i, Math.min(data.length - i, buf.limit() - buf.position()));</span><br><span class="line">    buf.flip();</span><br><span class="line">    i += channel.write(buf);</span><br><span class="line">    buf.compact();</span><br><span class="line">&#125;</span><br><span class="line">channel.force(<span class="literal">false</span>);</span><br><span class="line">channel.close();</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-从多个缓冲区写入"><a href="#3-2-从多个缓冲区写入" class="headerlink" title="3.2 从多个缓冲区写入"></a>3.2 从多个缓冲区写入</h3><p>FileChannel 实现了 GatherringByteChannel 接口，与 ScatteringByteChannel 相呼应。可以一次性将多个缓冲区的数据写入到通道中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FileChannel</span> <span class="variable">channel</span> <span class="operator">=</span> FileChannel.open(Paths.get(<span class="string">&quot;a.txt&quot;</span>), StandardOpenOption.WRITE);</span><br><span class="line"><span class="type">ByteBuffer</span> <span class="variable">key</span> <span class="operator">=</span> ByteBuffer.allocate(<span class="number">10</span>), value = ByteBuffer.allocate(<span class="number">10</span>);</span><br><span class="line"><span class="type">byte</span>[] data = <span class="string">&quot;017 Robothy&quot;</span>.getBytes();</span><br><span class="line">key.put(data, <span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line">value.put(data, <span class="number">4</span>, data.length-<span class="number">4</span>);</span><br><span class="line">ByteBuffer[] buffers = <span class="keyword">new</span> <span class="title class_">ByteBuffer</span>[]&#123;key, value&#125;;</span><br><span class="line">key.flip();</span><br><span class="line">value.flip();</span><br><span class="line">channel.write(buffers);</span><br><span class="line">channel.force(<span class="literal">false</span>); <span class="comment">// 将数据刷出到磁盘</span></span><br><span class="line">channel.close();</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-数据刷出"><a href="#3-3-数据刷出" class="headerlink" title="3.3 数据刷出"></a>3.3 数据刷出</h3><p>为了减少访问磁盘的次数，通过文件通道对文件进行操作之后可能不会立即刷出到磁盘，此时如果系统崩溃，将导致数据的丢失。为了减少这种风险，在进行了重要数据的操作之后应该调用 force() 方法强制将数据刷出到磁盘。</p>
+<p>无论是否对文件进行过修改操作，即使文件通道是以只读模式打开的，只要调用了 force(metaData) 方法，就会进行一次 I&#x2F;O 操作。参数 metaData 指定是否将元数据（例如：访问时间）也刷出到磁盘。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">channel.force(<span class="literal">false</span>); <span class="comment">// 将数据刷出到磁盘，但不包括元数据</span></span><br></pre></td></tr></table></figure>
+<h2 id="4-文件锁"><a href="#4-文件锁" class="headerlink" title="4. 文件锁"></a>4. 文件锁</h2><p>可以通过调用 FileChannel 的 lock() 或者 tryLock() 方法来获得一个文件锁，获取锁的时候可以指定参数起始位置 position，锁定大小 size，是否共享 shared。如果没有指定参数，默认参数为 position &#x3D; 0, size &#x3D; Long.MAX_VALUE, shared &#x3D; false。</p>
+<p>位置 position 和大小 size 不需要严格与文件保持一致，position 和 size 均可以超过文件的大小范围。例如：文件大小为 100，可以指定位置为 200， 大小为 50；则当文件大小扩展到 250 时，[200,250) 的部分会被锁住。</p>
+<p>shared 参数指定是排他的还是共享的。要获取共享锁，文件通道必须是可读的；要获取排他锁，文件通道必须是可写的。</p>
+<p>由于 Java 的文件锁直接映射为操作系统的文件锁实现，因此获取文件锁时代表的是整个虚拟机，而非当前线程。若操作系统不支持共享的文件锁，即使指定了文件锁是共享的，也会被转化为排他锁。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FileLock</span> <span class="variable">lock</span> <span class="operator">=</span> channel.lock(<span class="number">0</span>, Long.MAX_VALUE, <span class="literal">false</span>);<span class="comment">// 排它锁，此时同一操作系统下的其它进程不能访问 a.txt</span></span><br><span class="line">System.out.println(<span class="string">&quot;Channel locked in exclusive mode.&quot;</span>);</span><br><span class="line">Thread.sleep(<span class="number">30</span> * <span class="number">1000L</span>); <span class="comment">// 锁住 30 s</span></span><br><span class="line">lock.release(); <span class="comment">// 释放锁</span></span><br><span class="line"></span><br><span class="line">lock = channel.lock(<span class="number">0</span>, Long.MAX_VALUE, <span class="literal">true</span>); <span class="comment">// 共享锁，此时文件可以被其它文件访问</span></span><br><span class="line">System.out.println(<span class="string">&quot;Channel locked in shared mode.&quot;</span>);</span><br><span class="line">Thread.sleep(<span class="number">30</span> * <span class="number">1000L</span>); <span class="comment">// 锁住 30 s</span></span><br><span class="line">lock.release();</span><br></pre></td></tr></table></figure>
+
+<p>与 lock() 相比，tryLock() 是非阻塞的，无论是否能够获取到锁，它都会立即返回。若 tryLock() 请求锁定的区域已经被操作系统内的其它的进程锁住了，则返回 null；而 lock() 会阻塞，直到获取到了锁、通道被关闭或者线程被中断为止。</p>
+<h2 id="5-通道转换"><a href="#5-通道转换" class="headerlink" title="5. 通道转换"></a>5. 通道转换</h2><p>普通的读写方式是利用一个 ByteBuffer 缓冲区，作为数据的容器。但如果是两个通道之间的数据交互，利用缓冲区作为媒介是多余的。文件通道允许从一个 ReadableByteChannel 中直接输入数据，也允许直接往 WritableByteChannel 中写入数据。实现这两个操作的分别为 transferFrom(ReadableByteChannel src, position, count) 和 transferTo(position, count, WritableChannel target) 方法。</p>
+<p>这进行通道间的数据传输时，这两个方法比使用 ByteBuffer 作为媒介的效率要高；很多操作系统支持文件系统缓存，两个文件之间实际可能并没有发生复制。</p>
+<p>transferFrom 或者 transferTo 在调用之后并不会改变 position 的位置。</p>
+<p>下面示例是一个 spring 源码中的一个工具方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">copy</span><span class="params">(File source, File target)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="type">FileInputStream</span> <span class="variable">sourceOutStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(source);</span><br><span class="line">    <span class="type">FileOutputStream</span> <span class="variable">targetOutStream</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(target);</span><br><span class="line">    <span class="type">FileChannel</span> <span class="variable">sourceChannel</span> <span class="operator">=</span> sourceOutStream.getChannel();</span><br><span class="line">    <span class="type">FileChannel</span> <span class="variable">targetChannel</span> <span class="operator">=</span> targetOutStream.getChannel();</span><br><span class="line">    sourceChannel.transferTo(<span class="number">0</span>, sourceChannel.size(), targetChannel);</span><br><span class="line">    sourceChannel.close();</span><br><span class="line">    targetChannel.close();</span><br><span class="line">    sourceOutStream.close();</span><br><span class="line">    targetOutStream.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，调用这两个转换方法之后，某些情况下并不保证数据能够全部完成传输，确切传输了多少字节的数据需要根据返回的值来进行判断。例如：从一个非阻塞模式下的 SocketChannel 中输入数据就不能够一次性将数据全部传输过来，或者将文件通道的数据传输给一个非阻塞模式下的 SocketChannel 不能一次性传输过去。</p>
+<p>下面给出一个示例，客户端连接到服务端，然后从服务端下载一个叫 video.mp4 文件，文件在当前目录存在。</p>
+<p>错误示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 服务端 **/</span></span><br><span class="line"><span class="type">ServerSocketChannel</span> <span class="variable">serverSocketChannel</span> <span class="operator">=</span> ServerSocketChannel.open(); <span class="comment">// 打开服务通道</span></span><br><span class="line">serverSocketChannel.bind(<span class="keyword">new</span> <span class="title class_">InetSocketAddress</span>(<span class="number">9090</span>)); <span class="comment">// 绑定端口号</span></span><br><span class="line"><span class="type">SocketChannel</span> <span class="variable">clientChannel</span> <span class="operator">=</span> serverSocketChannel.accept(); <span class="comment">// 等待客户端连接，获取 SocketChannel</span></span><br><span class="line"><span class="type">FileChannel</span> <span class="variable">fileChannel</span> <span class="operator">=</span> FileChannel.open(Paths.get(<span class="string">&quot;video.mp4&quot;</span>), StandardOpenOption.READ); <span class="comment">// 打开文件通道</span></span><br><span class="line">fileChannel.transferTo(<span class="number">0</span>, fileChannel.size(), clientChannel); <span class="comment">// 【可能出错位置】文件通道数据输出转化到 socket 通道，输出范围为整个文件。文件太大将导致输出不完整</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/** 客户端 **/</span></span><br><span class="line"><span class="type">SocketChannel</span> <span class="variable">socketChannel</span> <span class="operator">=</span> SocketChannel.open(<span class="keyword">new</span> <span class="title class_">InetSocketAddress</span>(<span class="string">&quot;localhost&quot;</span>, <span class="number">9090</span>)); <span class="comment">// 打卡 socket 通道并连接到服务端</span></span><br><span class="line"><span class="type">FileChannel</span> <span class="variable">fileChannel</span> <span class="operator">=</span> FileChannel.open(Paths.get(<span class="string">&quot;video-downloaded.mp4&quot;</span>), StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE, StandardOpenOption.CREATE); <span class="comment">// 打开文件通道</span></span><br><span class="line">fileChannel.transferFrom(socketChannel, <span class="number">0</span>, Long.MAX_VALUE); <span class="comment">// 【非阻塞模式下可能出错】</span></span><br><span class="line">fileChannel.force(<span class="literal">false</span>); <span class="comment">// 确保数据刷出到磁盘</span></span><br></pre></td></tr></table></figure>
+
+<p>正确的姿势是：transferTo&#x2F;transferFrom 的时候应该用一个循环检查实际输出内容大小是否和期望输出内容大小一致，特别是通道处于非阻塞模式下，极大概率不能够一次传输完成。</p>
+<p>所以服务端正确的转换方式是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">transfered</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (transfered &lt; fileChannel.size())&#123;</span><br><span class="line">    transfered += fileChannel.transferTo(transfered, fileChannel.size(), clientChannel);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>本例中客户端使用的是阻塞模式，服务端通道关闭输出（socketChannel.shutdownOutput()）之后 transferFrom 才退出，服务端正常关闭通道的情况下数据传输不会出错，这里就不处理非正常关闭的情况了。</p>
+<h2 id="6-截取文件"><a href="#6-截取文件" class="headerlink" title="6. 截取文件"></a>6. 截取文件</h2><p>FileChannel.truncate(long size) 可以截取指定的文件，指定大小之后的内容将被丢弃。size 的值可以超过文件大小，超过的话不会截取任何内容，也不会增加任何内容。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FileChannel</span> <span class="variable">fileChannel</span> <span class="operator">=</span> FileChannel.open(Paths.get(<span class="string">&quot;a.txt&quot;</span>), StandardOpenOption.WRITE);</span><br><span class="line">fileChannel.truncate(<span class="number">1</span>);</span><br><span class="line">System.out.println(fileChannel.size()); <span class="comment">// 输出 1</span></span><br><span class="line">fileChannel.write(ByteBuffer.wrap(<span class="string">&quot;Hello&quot;</span>.getBytes()));</span><br><span class="line">System.out.println(fileChannel.size()); <span class="comment">// 输出 5</span></span><br><span class="line">fileChannel.force(<span class="literal">true</span>);</span><br><span class="line">fileChannel.close();</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-映射文件到直接内存"><a href="#7-映射文件到直接内存" class="headerlink" title="7. 映射文件到直接内存"></a>7. 映射文件到直接内存</h2><p>文件通道 FileChannel 可以将文件的指定范围映射到程序的地址空间中，映射部分使用字节缓冲区的一个子类 MappedByteBuffer 的对象表示，只要对映射字节缓冲区进行操作就能够达到操作文件的效果。与之相对应的，前面介绍的内容是通过操作文件通道和堆内存中的字节缓冲区 HeapByteBuffer 来达到操作文件的目的。</p>
+<p><img src="E:/youdaoNote/Image/java/filechannel01.png" alt="filechannel01"></p>
+<p>通过 ByteBuffer.allocate() 分配的缓冲区是一个 HeapByteBuffer，存在于 JVM 堆中；而 FileChannle.map() 将文件映射到直接内存，返回的是一个 MappedByteBuffer，存在于堆外的直接内存中；这块内存在 MappedByteBuffer 对象本身被回收之前有效。</p>
+<h3 id="7-1-内存映射原理"><a href="#7-1-内存映射原理" class="headerlink" title="7.1 内存映射原理"></a>7.1 内存映射原理</h3><p>前面使用堆缓冲区 ByteBuffer 和文件通道 FileChannel 对文件的操作使用的是 read()&#x2F;write() 系统调用。读取数据时数据从 I&#x2F;O 设备读到内核缓存，再从内核缓存复制到用户空间缓存，这里是 JVM 的堆内存。而映射磁盘文件是使用 mmap() 系统调用，将文件的指定部分映射到程序地址空间中；数据交互发生在 I&#x2F;O 设备于用户空间之间，不需要经过内核空间。<br><img src="E:/youdaoNote/Image/java/filechannel02.png" alt="filechannel02"></p>
+<p>虽然映射磁盘文件减少了一次数据复制，但对于大多数操作系统来说，将文件映射到内存这个操作本身开销较大；如果操作的文件很小，只有数十KB，映射文件所获得的好处将不及其开销。因此，只有在操作大文件的时候才将其映射到直接内存。</p>
+<h3 id="7-2-映射缓冲区用法"><a href="#7-2-映射缓冲区用法" class="headerlink" title="7.2 映射缓冲区用法"></a>7.2 映射缓冲区用法</h3><p>文件通道 FileChanle 通过成员方法 map(MapMode mode, long position, long size) 将文件映射到应用内存。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FileChannel</span> <span class="variable">fileChannel</span> <span class="operator">=</span> FileChannel.open(Paths.get(<span class="string">&quot;a.txt&quot;</span>), StandardOpenOption.READ, StandardOpenOption.WRITE); <span class="comment">// 以读写的方式打开文件通道</span></span><br><span class="line"><span class="type">MappedByteBuffer</span> <span class="variable">buf</span> <span class="operator">=</span> fileChannel.map(FileChannel.MapMode.READ_WRITE, <span class="number">0</span>, fileChannel.size()); <span class="comment">// 将整个文件映射到内存</span></span><br></pre></td></tr></table></figure>
+<p><code>mode</code> 表示打开模式，为枚举值，其值可以为 READ_ONLY, READ_WRITE, PRIVATE。</p>
+<p>模式为 READ_ONLY 时，不能对 buf 进行写操作；<br>模式为 READ_WRITE 时，通道 fileChannel 必须具有读写文件的权限；对 buf 进行的写操作将对文件生效，但不保证立即同步到 I&#x2F;O 设备；<br>模式为 PRIVATE 时，通道 fileChannle 必须对文件有读写权限；但是对文件的修改操作不会传播到 I&#x2F;O 设备，而是会在内存复制一份数据。此时对文件的修改对其它线程和进程不可见。  </p>
+<p><code>position</code> 指定文件的开始映射到内存的位置；</p>
+<p><code>size</code> 指定映射的大小，值为非负 int 型整数。</p>
+<p>调用 map() 方法之后，返回的 MappedByteBuffer 就与 fileChannel 脱离了关系，关闭 fileChannel 对 buf 没有影响。同时，如果要确保对 buf 修改的数据能够同步到文件 I&#x2F;O 设备中，需要调用 MappedByteBuffer 中的无参数的 force() 方法，而调用 FileChannel 中的 force(metaData) 方法无效。</p>
+<p>此时可以通过操作缓冲区来操作文件了。不过映射的内容存在于 JVM 程序的堆外内存中，这部分内存是虚拟内存，意味着 buf 中的内容不一定都在物理内存中，要让这些内容加载到物理内存，可以调用 MappedByteBuffer 中的 load() 方法。另外，还可以调用 isLoaded() 来判断 buf 中的内容是否在物理内存中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FileChannel</span> <span class="variable">fileChannel</span> <span class="operator">=</span> FileChannel.open(Paths.get(<span class="string">&quot;a.txt&quot;</span>), StandardOpenOption.WRITE, StandardOpenOption.READ);</span><br><span class="line"><span class="type">MappedByteBuffer</span> <span class="variable">buf</span> <span class="operator">=</span> fileChannel.map(FileChannel.MapMode.READ_WRITE, <span class="number">0</span>, fileChannel.size());</span><br><span class="line">fileChannel.close();    <span class="comment">// 关于文件通道对 buf 没有影响</span></span><br><span class="line">System.out.println(buf.capacity()); <span class="comment">// 输出 fileChannel.size()</span></span><br><span class="line">System.out.println(buf.limit());    <span class="comment">// 输出 fileChannel.size()</span></span><br><span class="line">System.out.println(buf.position()); <span class="comment">// 输出 0</span></span><br><span class="line">buf.put((<span class="type">byte</span>)<span class="string">&#x27;R&#x27;</span>); <span class="comment">// 写入内容</span></span><br><span class="line">buf.compact();      <span class="comment">// 截掉 positoin 之前的内容</span></span><br><span class="line">buf.force();        <span class="comment">// 将数据刷出到 I/O 设备</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="8-小结"><a href="#8-小结" class="headerlink" title="8. 小结"></a>8. 小结</h2><ol>
+<li>文件通道 FileChannel 能够将数据从 I&#x2F;O 设备中读入(read)到字节缓冲区中，或者将字节缓冲区中的数据写入(write)到 I&#x2F;O 设备中。</li>
+<li>文件通道能够转换到 (transferTo) 一个可写通道中，也可以从一个可读通道转换而来（transferFrom）。这种方式使用于通道之间地数据传输，比使用缓冲区更加高效。</li>
+<li>文件通道能够将文件的部分内容映射（map）到 JVM 堆外内存中，这种方式适合处理大文件，不适合处理小文件，因为映射过程本身开销很大。</li>
+<li>在对文件进行重要的操作之后，应该将数据刷出刷出(force)到磁盘，避免操作系统崩溃导致的数据丢失。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/20/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/FileChannel/" data-id="cll1osn5q0002jcjwek4ga61n" data-title="Java 代码之 FileChannel" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/04/20/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E6%9D%82%E8%AE%B0-%E5%AE%9E%E6%88%98%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          杂记-Flink 实战
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/03/09/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/%E5%B8%B8%E7%94%A8%E5%8C%85/%E5%86%85%E5%BB%BA%E5%8C%85-exec/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Golang 内建包-exec</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flume/">Flume</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/HBase/">HBase</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hive/">Hive</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kubernetes/">Kubernetes</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flume/" rel="tag">Flume</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/" rel="tag">Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Docker/" style="font-size: 12.73px;">Docker</a> <a href="/tags/Flink/" style="font-size: 18.18px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Flume/" style="font-size: 10px;">Flume</a> <a href="/tags/Git/" style="font-size: 12.73px;">Git</a> <a href="/tags/Golang/" style="font-size: 16.36px;">Golang</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hadoop/" style="font-size: 10.91px;">Hadoop</a> <a href="/tags/Hive/" style="font-size: 10px;">Hive</a> <a href="/tags/Idea-Instructions/" style="font-size: 14.55px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 10.91px;">JVM</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java8/" style="font-size: 12.73px;">Java8</a> <a href="/tags/Kubernetes/" style="font-size: 10px;">Kubernetes</a> <a href="/tags/Maven/" style="font-size: 12.73px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Redis/" style="font-size: 15.45px;">Redis</a> <a href="/tags/Rust/" style="font-size: 11.82px;">Rust</a> <a href="/tags/Scala/" style="font-size: 12.73px;">Scala</a> <a href="/tags/Spring/" style="font-size: 14.55px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 13.64px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 18.18px;">代码归档</a> <a href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" style="font-size: 12.73px;">内建包</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 19.09px;">大数据</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 13.64px;">容器</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 11.82px;">数据库</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 17.27px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 15.45px;">杂记</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 14.55px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.82px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 11.82px;">计算机网络</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/03/%E7%9F%A5%E8%AF%86%E7%82%B9/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%BD%91%E7%BB%9C/0.%E9%9B%B6%E7%A2%8E/">计算机基础与网络-杂记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/26/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/%E5%B8%B8%E7%94%A8%E5%8C%85/%E5%86%85%E5%BB%BA%E5%8C%85-log/">Golang 内建包-log</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/25/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/0.GolangCheatsheet/">Golang 基础-Cheatsheet</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/25/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/%E5%B8%B8%E7%94%A8%E5%8C%85/%E5%86%85%E5%BB%BA%E5%8C%85-http/">Golang 内建包-http</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/11/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Maven/3.maven-assembly-plugin/">Maven assembly plugin</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
