@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java 第三方包-Jackson | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Jackson 介绍和使用代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 第三方包-Jackson">
+<meta property="og:url" content="http://example.com/2021/04/21/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/04.Jackson/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="Jackson 介绍和使用代码">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-21T03:19:00.000Z">
+<meta property="article:modified_time" content="2022-12-09T07:19:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="第三方包">
+<meta property="article:tag" content="Jackson">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Java/第三方包/04.Jackson" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/21/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/04.Jackson/" class="article-date">
+  <time class="dt-published" datetime="2021-04-21T03:19:00.000Z" itemprop="datePublished">2021-04-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Java 第三方包-Jackson
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-wiki"><a href="#1-wiki" class="headerlink" title="1. wiki"></a>1. wiki</h2><p>用于 Json 和 XML(基于jackson-dataformat-xml) 与 JavaBean 之间的序列化和反序列化</p>
+<h2 id="2-模块"><a href="#2-模块" class="headerlink" title="2. 模块"></a>2. 模块</h2><ul>
+<li><code>jackson-core</code>：核心包，定义了低级流(Streaming) API，提供基于“流模式”解析。Jackson 内部实现正是通过高性能的流模式 API 的 JsonGenerator 和 JsonParser 来生成和解析 json；</li>
+<li><code>jackson-annotations</code>：注解包，提供标准的 Jackson 注解功能；</li>
+<li><code>jackson-databind</code>：数据绑定包，实现了数据绑定（和对象序列化）支持，它依赖于 Streaming 和 Annotations 包。提供基于“对象绑定”解析的 API(ObjectMapper) 和“树模型”解析的 API(JsonNode)，两者则依赖基于“流模式”解析的API。</li>
+</ul>
+<p>一般必须引入以下3个依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-annotations<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- JavaBean 中的时间字段使用的是JDK8新增的时间日期需要引入 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.datatype<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-datatype-jsr310<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 解析 XML 需要引入 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.dataformat<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-dataformat-xml<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 解析 yaml 需要引入 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.dataformat<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-dataformat-yaml<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-核心类"><a href="#3-核心类" class="headerlink" title="3. 核心类"></a>3. 核心类</h2><h3 id="3-1-ObjectMapper"><a href="#3-1-ObjectMapper" class="headerlink" title="3.1. ObjectMapper"></a>3.1. <code>ObjectMapper</code></h3><p>常用功能：</p>
+<ul>
+<li>从字符串、流或文件中解析 JSON，并创建表示已解析的 JSON 的 Java 对象（反序列化）。</li>
+<li>将 Java 对象构建成 JSON 字符串（序列化）。</li>
+<li>将 JSON 解析为自定义类的对象，也可以解析 JSON 树模型的对象。</li>
+</ul>
+<p>一般遵循已下规则的属性都可以被序列化和反序列化：</p>
+<ul>
+<li>public 修饰的属性可序列化和反序列化。</li>
+<li>属性提供 public 的 getter&#x2F;setter 方法，该属性可序列化和反序列化。</li>
+<li>属性只有 public 的 setter 方法，而无 public 的 getter 方法，该属性只能用于反序列化。</li>
+</ul>
+<h4 id="3-1-1-JavaBean-与-json"><a href="#3-1-1-JavaBean-与-json" class="headerlink" title="3.1.1. JavaBean 与 json"></a>3.1.1. JavaBean 与 json</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">ObjectMapper</span> <span class="variable">mapper</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectMapper</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// JavaBean转JSON字符串</span></span><br><span class="line"><span class="type">WeChat</span> <span class="variable">weChat</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">WeChat</span>();</span><br><span class="line">weChat.setId(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">weChat.setName(<span class="string">&quot;world&quot;</span>);</span><br><span class="line">weChat.setInterest(<span class="keyword">new</span> <span class="title class_">String</span>[]&#123;<span class="string">&quot;Java&quot;</span>, <span class="string">&quot;Python&quot;</span>, <span class="string">&quot;C&quot;</span>&#125;);</span><br><span class="line"><span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> mapper.writeValueAsString(weChat);</span><br><span class="line">System.out.println(result);</span><br><span class="line"></span><br><span class="line"><span class="comment">// JSON字符串转JavaBean</span></span><br><span class="line"><span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> <span class="string">&quot;&#123;\&quot;id\&quot;:\&quot;hello\&quot;,\&quot;name\&quot;:\&quot;world\&quot;,\&quot;interest\&quot;:[\&quot;Java\&quot;,\&quot;Python\&quot;,\&quot;C\&quot;]&#125;&quot;</span>;</span><br><span class="line"><span class="type">WeChat</span> <span class="variable">weChat</span> <span class="operator">=</span> mapper.readValue(json, WeChat.class);</span><br><span class="line">System.out.println(weChat);</span><br><span class="line"></span><br><span class="line"><span class="comment">// JSON字符串转Map、集合，对泛型的反序列化，可以使用 TypeReference 可以明确的指定反序列化的类型。</span></span><br><span class="line"><span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> ...;</span><br><span class="line">Map&lt;String, Object&gt; map1 = mapper.readValue(json, <span class="keyword">new</span> <span class="title class_">TypeReference</span>&lt;Map&lt;String, Object&gt;&gt;() &#123;&#125;);</span><br><span class="line">List&lt;WeChat&gt; list1 = mapper.readValue(jsonStr, <span class="keyword">new</span> <span class="title class_">TypeReference</span>&lt;List&lt;WeChat&gt;&gt;() &#123;&#125;);</span><br><span class="line">Map&lt;String, Object&gt; map2 = mapper.readValue(json, Map.class);</span><br><span class="line">List&lt;WeChat&gt; list2 = mapper.readValue(jsonStr, List.class);</span><br><span class="line"></span><br><span class="line"><span class="comment">// JavaBean转文件</span></span><br><span class="line"><span class="type">WeChat</span> <span class="variable">weChat</span> <span class="operator">=</span> ...;</span><br><span class="line">mapper.writeValue(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;/json.txt&quot;</span>), weChat);<span class="comment">//写到文件</span></span><br><span class="line"><span class="type">WeChat</span> <span class="variable">weChat1</span> <span class="operator">=</span> mapper.readValue(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;/json.txt&quot;</span>), WeChat.class);<span class="comment">//从文件中读取</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// JavaBean转字节流</span></span><br><span class="line"><span class="type">WeChat</span> <span class="variable">weChat</span> <span class="operator">=</span> ...;</span><br><span class="line"><span class="type">byte</span>[] bytes = mapper.writeValueAsBytes(weChat);<span class="comment">// 写为字节流</span></span><br><span class="line"><span class="type">WeChat</span> <span class="variable">weChat1</span> <span class="operator">=</span> mapper.readValue(bytes, WeChat.class);<span class="comment">// 从字节流读取</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-1-2-JSON-树模型"><a href="#3-1-2-JSON-树模型" class="headerlink" title="3.1.2. JSON 树模型"></a>3.1.2. JSON 树模型</h4><p>JSON树模型，用于字符串比较大但不是所有字段都需要时，灵活的获取所需的字段内容。其中 get 方法和 path 功能相似，区别在于:</p>
+<ul>
+<li>如果要读取的 key 在Json串中不存在时，get 方法会 null，</li>
+<li>而 path 会返回 MissingNode 实例对象，在链路方法情况下保证不会抛出异常。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JavaBean转JSON字符串</span></span><br><span class="line"><span class="comment">// 1.构建JSON树</span></span><br><span class="line"><span class="type">ObjectNode</span> <span class="variable">root</span> <span class="operator">=</span> mapper.createObjectNode();</span><br><span class="line">root.put(<span class="string">&quot;id&quot;</span>, <span class="string">&quot;hello&quot;</span>);</span><br><span class="line">root.put(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;world&quot;</span>);</span><br><span class="line"><span class="type">ArrayNode</span> <span class="variable">interest</span> <span class="operator">=</span> root.putArray(<span class="string">&quot;interest&quot;</span>);</span><br><span class="line">interest.add(<span class="string">&quot;Java&quot;</span>);</span><br><span class="line">interest.add(<span class="string">&quot;Python&quot;</span>);</span><br><span class="line">interest.add(<span class="string">&quot;C&quot;</span>);</span><br><span class="line"><span class="comment">// 2.JSON树转JSON字符串</span></span><br><span class="line"><span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> mapper.writeValueAsString(root);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解析JSON字符串为JSON树模型</span></span><br><span class="line"><span class="type">String</span> <span class="variable">json</span> <span class="operator">=</span> ...;</span><br><span class="line"><span class="type">JsonNode</span> <span class="variable">jsonNode</span> <span class="operator">=</span> mapper.readTree(json);</span><br><span class="line"><span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> jsonNode.path(<span class="string">&quot;name&quot;</span>).asText();</span><br><span class="line"><span class="type">JsonNode</span> <span class="variable">interestNode</span> <span class="operator">=</span> jsonNode.get(<span class="string">&quot;interest&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (interestNode.isArray())&#123;</span><br><span class="line">    <span class="keyword">for</span> (JsonNode node : interestNode)&#123;</span><br><span class="line">        System.out.println(node.asText());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-1-3-格式化统一配置"><a href="#3-1-3-格式化统一配置" class="headerlink" title="3.1.3. 格式化统一配置"></a>3.1.3. 格式化统一配置</h4><p>可以统一配置一些需要的参数。在2.2版本中新增了一个 ObjectMapper 的实现类 JsonMapper，功能与 ObjectMapper 一致，但是可以使用链式配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span>&#123;</span><br><span class="line">    <span class="comment">// 转换为格式化的 json 显示出来的格式美化</span></span><br><span class="line">    mapper.enable(SerializationFeature.INDENT_OUTPUT);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//序列化的时候序列对象的那些属性  </span></span><br><span class="line">    <span class="comment">//JsonInclude.Include.ALWAYS      所有属性</span></span><br><span class="line">    <span class="comment">//JsonInclude.Include.NON_DEFAULT 属性为默认值不序列化 </span></span><br><span class="line">    <span class="comment">//JsonInclude.Include.NON_EMPTY   属性为 空（“”） 或者为 NULL 都不序列化 </span></span><br><span class="line">    <span class="comment">//JsonInclude.Include.NON_NULL    属性为NULL 不序列化</span></span><br><span class="line">    mapper.setSerializationInclusion(Include.ALWAYS);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//如果是空对象的时候,不抛异常  </span></span><br><span class="line">    mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, <span class="literal">false</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 忽略 transient 修饰的属性</span></span><br><span class="line">    mapper.configure(MapperFeature.PROPAGATE_TRANSIENT_MARKER, <span class="literal">true</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//修改序列化后日期格式</span></span><br><span class="line">    mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, <span class="literal">false</span>);</span><br><span class="line">    mapper.setDateFormat(<span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//处理不同的时区偏移格式</span></span><br><span class="line">    mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);</span><br><span class="line">    mapper.registerModule(<span class="keyword">new</span> <span class="title class_">JavaTimeModule</span>());</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//反序列化时，遇到没有的属性就报错=true，否则 false</span></span><br><span class="line">    mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-注解"><a href="#3-2-注解" class="headerlink" title="3.2. 注解"></a>3.2. 注解</h3><ul>
+<li><code>@JsonProperty</code>：作用JavaBean字段上，指定一个字段用于JSON映射，默认情况下映射的JSON字段与注解的字段名称相同。可通过value属性指定映射的JSON的字段名称</li>
+<li><code>@JsonIgnore</code>：可用于字段、getter&#x2F;setter、构造函数参数上，指定字段不参与序列化和反序列化</li>
+<li><code>@JsonValue</code>：反序列化时，指定将枚举字段反序列化为什么值</li>
+<li><code>@JsonIgnoreProperties</code>：作用于类上，序列化时<code>@JsonIgnoreProperties(&#123;&quot;prop1&quot;, &quot;prop2&quot;&#125;)</code>会忽略 pro1 和 pro2 两个属性。反序列化时<code>@JsonIgnoreProperties(ignoreUnknown=true)</code>会忽略类中不存在的字段。</li>
+<li><code>@JsonFormat</code>：作用于字段上，通常用来进行格式化操作。<code>@JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;, timezone = &quot;GMT+8&quot;)</code></li>
+</ul>
+<h3 id="3-3-自定义解析器"><a href="#3-3-自定义解析器" class="headerlink" title="3.3. 自定义解析器"></a>3.3. 自定义解析器</h3><p>可自定义解析器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyFastjsonDeserialize</span> <span class="keyword">extends</span> <span class="title class_">JsonDeserializer</span>&lt;Point&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Point <span class="title function_">deserialize</span><span class="params">(JsonParser jsonParser, DeserializationContext deserializationContext)</span> <span class="keyword">throws</span> IOException, JsonProcessingException &#123;</span><br><span class="line">        <span class="type">JsonNode</span> <span class="variable">node</span> <span class="operator">=</span> jsonParser.getCodec().readTree(jsonParser);</span><br><span class="line">        Iterator&lt;JsonNode&gt; iterator = node.get(<span class="string">&quot;coordinates&quot;</span>).elements();</span><br><span class="line">        List&lt;Double&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">            list.add(iterator.next().asDouble());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Point</span>(list.get(<span class="number">0</span>), list.get(<span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>定义完成之后，注册到Mapper中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ObjectMapper</span> <span class="variable">objectMapper</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectMapper</span>();</span><br><span class="line"><span class="type">SimpleModule</span> <span class="variable">module</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleModule</span>();</span><br><span class="line"><span class="keyword">module</span>.addDeserializer(Point.class, <span class="keyword">new</span> <span class="title class_">MyFastjsonDeserialize</span>());</span><br><span class="line">objectMapper.registerModule(<span class="keyword">module</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-解析-XML"><a href="#3-4-解析-XML" class="headerlink" title="3.4. 解析 XML"></a>3.4. 解析 XML</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JavaBean转XML</span></span><br><span class="line"><span class="type">WeChat</span> <span class="variable">weChat</span> <span class="operator">=</span> ...;</span><br><span class="line"><span class="type">XmlMapper</span> <span class="variable">xmlMapper</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">XmlMapper</span>();</span><br><span class="line"><span class="type">String</span> <span class="variable">xml</span> <span class="operator">=</span> xmlMapper.writeValueAsString(weChat);</span><br><span class="line">System.out.println(xml);</span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">WeChat</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>world<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">interest</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">interest</span>&gt;</span>Java<span class="tag">&lt;/<span class="name">interest</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">interest</span>&gt;</span>Python<span class="tag">&lt;/<span class="name">interest</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">interest</span>&gt;</span>C<span class="tag">&lt;/<span class="name">interest</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">interest</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">WeChat</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/21/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/04.Jackson/" data-id="cll1ylt10000104jw3n08b0qb" data-title="Java 第三方包-Jackson" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jackson/" rel="tag">Jackson</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" rel="tag">第三方包</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/04/24/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/4.SpringBoot%E5%BC%82%E6%AD%A5%E4%BA%8B%E4%BB%B6Event/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Spring Boot 异步事件 Event
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/07/%E7%9F%A5%E8%AF%86%E7%82%B9/C&C++/HelloWorld/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">The hello wrold in C&amp;C++</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flume/">Flume</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/HBase/">HBase</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hadoop/">Hadoop</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hive/">Hive</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kubernetes/">Kubernetes</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flume/" rel="tag">Flume</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guava/" rel="tag">Guava</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jackson/" rel="tag">Jackson</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/" rel="tag">Java8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Quartz/" rel="tag">Quartz</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" rel="tag">第三方包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%88%B6/" rel="tag">自制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Docker/" style="font-size: 12.31px;">Docker</a> <a href="/tags/Flink/" style="font-size: 17.69px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Flume/" style="font-size: 10px;">Flume</a> <a href="/tags/Git/" style="font-size: 12.31px;">Git</a> <a href="/tags/Golang/" style="font-size: 16.15px;">Golang</a> <a href="/tags/Guava/" style="font-size: 10.77px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hadoop/" style="font-size: 10.77px;">Hadoop</a> <a href="/tags/Hive/" style="font-size: 10px;">Hive</a> <a href="/tags/Idea-Instructions/" style="font-size: 13.85px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 10.77px;">JVM</a> <a href="/tags/Jackson/" style="font-size: 10px;">Jackson</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java8/" style="font-size: 12.31px;">Java8</a> <a href="/tags/Kubernetes/" style="font-size: 10px;">Kubernetes</a> <a href="/tags/Maven/" style="font-size: 12.31px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/Redis/" style="font-size: 14.62px;">Redis</a> <a href="/tags/Rust/" style="font-size: 11.54px;">Rust</a> <a href="/tags/Scala/" style="font-size: 12.31px;">Scala</a> <a href="/tags/Spring/" style="font-size: 13.85px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 13.08px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 19.23px;">代码归档</a> <a href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" style="font-size: 12.31px;">内建包</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 18.46px;">大数据</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 13.08px;">容器</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 11.54px;">数据库</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 16.92px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.62px;">杂记</a> <a href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" style="font-size: 15.38px;">第三方包</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.85px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%87%AA%E5%88%B6/" style="font-size: 11.54px;">自制</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.54px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 11.54px;">计算机网络</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">July 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">June 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/08/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/%E8%87%AA%E5%88%B6/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8/">Java 代码之自定义异常</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/03/%E7%9F%A5%E8%AF%86%E7%82%B9/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%BD%91%E7%BB%9C/0.%E9%9B%B6%E7%A2%8E/">计算机基础与网络-杂记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/26/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/%E5%B8%B8%E7%94%A8%E5%8C%85/%E5%86%85%E5%BB%BA%E5%8C%85-log/">Golang 内建包-log</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/25/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/0.GolangCheatsheet/">Golang 基础-Cheatsheet</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/25/%E7%9F%A5%E8%AF%86%E7%82%B9/Go/%E5%B8%B8%E7%94%A8%E5%8C%85/%E5%86%85%E5%BB%BA%E5%8C%85-http/">Golang 内建包-http</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
