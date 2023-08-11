@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Linux 常用命令(持续更新) | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Linux 常使用命令整理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 常用命令(持续更新)">
+<meta property="og:url" content="http://example.com/2019/11/13/%E7%9F%A5%E8%AF%86%E7%82%B9/Linux/1.%E5%B7%B2%E6%95%B4%E7%90%86%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="Linux 常使用命令整理">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-11-13T02:18:00.000Z">
+<meta property="article:modified_time" content="2023-04-18T02:32:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="杂记">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Linux/1.已整理命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/11/13/%E7%9F%A5%E8%AF%86%E7%82%B9/Linux/1.%E5%B7%B2%E6%95%B4%E7%90%86%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time class="dt-published" datetime="2019-11-13T02:18:00.000Z" itemprop="datePublished">2019-11-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Linux 常用命令(持续更新)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="1-系统信息参数"><a href="#1-系统信息参数" class="headerlink" title="1. 系统信息参数"></a>1. 系统信息参数</h1><ul>
+<li>查看当前操作系统发行版本</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/issue</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Asianux Server 4 (Hiranya SP4)</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Kernel \r on an \m</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看当前操作系统内核信息</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">uname -a</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Linux TD-APP-10 2.6.32-431.20.3.el6.x86_64 <span class="comment">#1 SMP Thu Jun 26 11:55:21 ICT 2014 x86_64 x86_64 x86_64 GNU/Linux</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">内核名称 主机名称 内核release 内核版本 机器名称 处理器 硬件平台 操作系统。</span></span><br><span class="line"></span><br><span class="line">cat /proc/version</span><br><span class="line">Linux version 3.10.0-693.el7.x86_64 (builder@kbuilder.dev.centos.org) (gcc version 4.8.5 20150623 (Red Hat 4.8.5-16) (GCC) ) #1 SMP Tue Aug 22 21:09:27 UTC 2017</span><br><span class="line"></span><br><span class="line">cat /etc/os-release</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>物理 cpu 个数</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">uniq</span> ：删除重复行</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">wc</span> –l ：统计行数</span></span><br><span class="line">cat /proc/cpuinfo | grep &quot;physical id&quot; | uniq | wc -l</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>逻辑 cpu 个数</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo | grep &quot;processor&quot; | wc -l</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>cpu 内核数</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo | grep &quot;cpu cores&quot; | uniq</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>cpu 型号</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>单个物理 cpu 封装的逻辑CPU数量</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo | grep &quot;siblings&quot; | uniq</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看内存总数</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/meminfo | grep MemTotal</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看硬盘大小</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>显示和设置系统的主机名</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">临时修改主机名</span></span><br><span class="line">hostname [主机名]</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">永久修改主机名，是对/etc/hostname文件的内容进行修改</span></span><br><span class="line">hostnamectl set-hostname [主机名]</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-切换用户"><a href="#2-切换用户" class="headerlink" title="2. 切换用户"></a>2. 切换用户</h1><h2 id="2-1-su"><a href="#2-1-su" class="headerlink" title="2.1. su"></a>2.1. su</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">格式为两种：</span></span><br><span class="line">su -l USERNAME（-l为login，即登陆的简写）</span><br><span class="line">su USERNAME</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果不指定USERNAME（用户名），默认即为root。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">两者区别为，前者在改变用户的同时，也会切换工作目录，也会改变环境变量</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-sudo"><a href="#2-2-sudo" class="headerlink" title="2.2. sudo"></a>2.2. sudo</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">用来以其他身份来执行命令，预设的身份为root。在/etc/sudoers中设置了可执行sudo指令的用户。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">若其未经授权的用户企图使用sudo，则会发出警告的邮件给管理员。用户使用sudo时，必须先输入密码，之后有5分钟的有效期限，超过期限则必须重新输入密码。</span></span><br><span class="line">sudo(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-注"><a href="#2-3-注" class="headerlink" title="2.3. 注"></a>2.3. 注</h2><p><code>su -使用root的密码,而sudo su使用用户密码</code></p>
+<h1 id="3-启停后台screen"><a href="#3-启停后台screen" class="headerlink" title="3. 启停后台screen"></a>3. 启停后台screen</h1><h2 id="3-1-常用语法"><a href="#3-1-常用语法" class="headerlink" title="3.1. 常用语法"></a>3.1. 常用语法</h2><ul>
+<li><code>screen -ls</code> : 列出当前所有的 session</li>
+<li><code>screen -S yourname</code> : 新建一个 yourname 的 session</li>
+<li><code>screen -R yourname</code> : 先试图恢复 yourname 的离线作业，若找不到，即建立新的作业</li>
+<li><code>screen -r yourname</code> : 恢复 yourname 的离线 screen 作业</li>
+<li><code>screen -S id.yourname -X quit</code> : 删除 screen</li>
+</ul>
+<h2 id="3-2-常用操作"><a href="#3-2-常用操作" class="headerlink" title="3.2. 常用操作"></a>3.2. 常用操作</h2><ul>
+<li><code>Ctril+a 再 d</code> : detach，保持当前 screen 到后台并回到主终端</li>
+</ul>
+<h1 id="4-快速定位到用户目录"><a href="#4-快速定位到用户目录" class="headerlink" title="4. 快速定位到用户目录"></a>4. 快速定位到用户目录</h1><ul>
+<li><code>cd ~</code> : <code>~</code> 是用户的主目录，等价于 <code>/home/username</code></li>
+</ul>
+<h1 id="5-删除面板上已输入命令"><a href="#5-删除面板上已输入命令" class="headerlink" title="5. 删除面板上已输入命令"></a>5. 删除面板上已输入命令</h1><ul>
+<li><code>Ctrl+k</code> : 删除从光标到行尾的部分</li>
+<li><code>Ctrl+u</code> : 删除从光标到行首的部分</li>
+</ul>
+<h1 id="6-查找并显示给定命令的绝对路径"><a href="#6-查找并显示给定命令的绝对路径" class="headerlink" title="6. 查找并显示给定命令的绝对路径"></a>6. 查找并显示给定命令的绝对路径</h1><ul>
+<li><code>which (选项) (参数)</code> : 环境变量 <code>$PATH</code> 中保存了查找命令时需要遍历的目录。<code>which</code>指令会在环境变量 <code>$PATH</code> 设置的目录里查找符合条件的文件。也就是说，可以看到某个系统命令是否存在，以及执行的到底是哪一个位置的命令。</li>
+</ul>
+<h1 id="7-端口"><a href="#7-端口" class="headerlink" title="7. 端口"></a>7. 端口</h1><h2 id="7-1-端口占用"><a href="#7-1-端口占用" class="headerlink" title="7.1 端口占用"></a>7.1 端口占用</h2><p>查看某端口被谁占用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">netstat -tunlp | grep 8080</span><br><span class="line">netstat -anp | grep 8080</span><br></pre></td></tr></table></figure>
+
+<p>参数含义：</p>
+<ul>
+<li><code>-a</code> (all)显示所有选项，默认不显示LISTEN相关</li>
+<li><code>-t</code> (tcp)仅显示tcp相关选项</li>
+<li><code>-u</code> (udp)仅显示udp相关选项</li>
+<li><code>-n</code> 拒绝显示别名，能显示数字的全部转化成数字。</li>
+<li><code>-l</code> 仅列出有在 Listen (监听) 的服務状态</li>
+<li><code>-p</code> 显示建立相关链接的程序名</li>
+<li><code>-r</code> 显示路由信息，路由表</li>
+<li><code>-e</code> 显示扩展信息，例如uid等</li>
+<li><code>-s</code> 按各个协议进行统计</li>
+<li><code>-c</code> 每隔一个固定时间，执行该netstat命令。</li>
+</ul>
+<h2 id="7-2-端口监听"><a href="#7-2-端口监听" class="headerlink" title="7.2 端口监听"></a>7.2 端口监听</h2><p><code>nc</code>用于设置路由器，它能通过 <code>TCP</code> 和 <code>UDP</code> 在网络中读写数据，是网络工具中的瑞士军刀</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-l 使用监听模式，管控传入的资料</span></span><br><span class="line">nc -l [通信端口...]</span><br></pre></td></tr></table></figure>
+
+<h1 id="8-查看文件编码格式"><a href="#8-查看文件编码格式" class="headerlink" title="8. 查看文件编码格式"></a>8. 查看文件编码格式</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">直接查看</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">file [filename]</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">vim 中查看并修改</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vim [filename]</span></span><br><span class="line">:set fileencoding        # 查看文件编码格式</span><br><span class="line">:set fileencoding=utf-8  # 修改文件编码格式</span><br><span class="line">:set fileformat=unix     # 修改文件编码换行模式</span><br></pre></td></tr></table></figure>
+
+<h1 id="9-SCP"><a href="#9-SCP" class="headerlink" title="9. SCP"></a>9. <code>SCP</code></h1><p>加密的方式在本地主机和远程主机之间复制文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">scp (选项) (参数)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">选项</span></span><br><span class="line">-4：使用ipv4；</span><br><span class="line">-6：使用ipv6；</span><br><span class="line">-P：指定远程主机的端口号；</span><br><span class="line">-p：保留文件的最后修改时间，最后访问时间和权限模式；</span><br><span class="line">-r：以递归方式复制</span><br><span class="line">-q：不显示传输进度条</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">参数</span></span><br><span class="line">源文件：指定要复制的源文件。</span><br><span class="line">目标文件：目标文件。格式为user@host：filename（文件名为目标文件的名称）。</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从远程机器复制到本地，例如：从10.10.10.10机器上的/opt/soft/的目录中下载nginx-0.5.38.tar.gz 文件到本地/opt/soft/目录中。</span></span><br><span class="line">scp -P 10000 root@10.10.10.10:/opt/soft/nginx-0.5.38.tar.gz /opt/soft/</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">上传本地目录到远程机器指定目录，例如：上传本地目录/opt/soft/mongodb到远程机器10.10.10.10上/opt/soft/scptest的目录中</span></span><br><span class="line">scp -r /opt/soft/mongodb root@10.10.10.10:/opt/soft/scptest</span><br></pre></td></tr></table></figure>
+
+<h1 id="10-进程相关"><a href="#10-进程相关" class="headerlink" title="10. 进程相关"></a>10. 进程相关</h1><h2 id="10-1-查看-java-进程"><a href="#10-1-查看-java-进程" class="headerlink" title="10.1. 查看 java 进程"></a>10.1. 查看 <code>java</code> 进程</h2><p><code>jps(Java Virtual Machine Process Status Tool)</code> 是 <code>java</code>  提供的一个显示当前所有 <code>java</code> 进程 <code>pid</code> 的命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">jps 存放在 JAVA_HOME/bin/jps</span></span><br><span class="line">jps [参数]</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">参数</span></span><br><span class="line">-q：只显示pid，不显示class名称，jar文件名和传递给main方法的参数</span><br><span class="line">-m 输出传递给main方法的参数</span><br><span class="line">-l 输出应用程序main class的完整package名或者应用程序的jar文件完整路径名</span><br><span class="line">-v 输出传递给JVM的参数</span><br><span class="line">-V 隐藏输出传递给JVM的参数</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-2-shell脚本启动的服务进程"><a href="#10-2-shell脚本启动的服务进程" class="headerlink" title="10.2. shell脚本启动的服务进程"></a>10.2. <code>shell</code>脚本启动的服务进程</h2><ol>
+<li>如果使用 <code>nohop</code> 方式启动脚本，会有一个如下进程<br><code>username 23418     1  0 Oct10 ?        00:00:00 /bin/bash ./start.sh</code></li>
+<li>其<code>PID</code>是真正服务的父进程，所以需要查询该<code>PID</code>的子进程，才是服务的真正进程<br><code>$ ps -ef|grep 23418</code></li>
+</ol>
+<h1 id="11-软链接"><a href="#11-软链接" class="headerlink" title="11. 软链接"></a>11. 软链接</h1><h2 id="11-1-创建"><a href="#11-1-创建" class="headerlink" title="11.1. 创建"></a>11.1. 创建</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ln -s [实际目标文件或目录] [链接放置的文件或目录]</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在 /home/test2 下建立软链接，链接到 /data/test1，即效果为新增 /home/test2/test1</span></span><br><span class="line">ln -s /data/test1/ /home/test2/</span><br></pre></td></tr></table></figure>
+
+<h2 id="11-2-修改"><a href="#11-2-修改" class="headerlink" title="11.2. 修改"></a>11.2. 修改</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln –snf  [新被链接文件或目录] [目标文件或目录]</span><br></pre></td></tr></table></figure>
+
+<h2 id="11-3-删除"><a href="#11-3-删除" class="headerlink" title="11.3. 删除"></a>11.3. 删除</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rm –rf [软链接名称]</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除软链接 /home/test2/test1，最后不能带/，否则会删除被链接的文件，并且之后软链接还在</span></span><br><span class="line">rm –rf /home/test2/test1</span><br></pre></td></tr></table></figure>
+
+<h1 id="12-grep"><a href="#12-grep" class="headerlink" title="12. grep"></a>12. <code>grep</code></h1><p>语法 <code>grep 查找内容</code></p>
+<p>参数</p>
+<ul>
+<li><code>grep -v</code> : 反向查找，即不含指定文本的行</li>
+<li><code>-l</code> : <code>--file-with-matches</code>，列出文件内容符合指定的范本样式的文件名称</li>
+<li><code>-d &lt;动作&gt;</code> : <code>--directories=&lt;动作&gt;</code>，当指定要查找的是目录而非文件时，必须使用这项参数，否则将回报信息并停止动作</li>
+<li><code>-r/-R</code> : <code>--recursive</code>，等同于 <code>-d recurse</code></li>
+<li><code>-n</code> : 显示行号</li>
+<li><code>-E</code> : 等于 <code>egrep</code>，开启扩展匹配，可匹配多个关键字</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查找 apache 的进程</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">ps -ef|grep apache</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查找 apache 的进程，并排除 gerp 的进程</span></span><br><span class="line">ps -ef|grep apache |grep -v grep</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">只列出包含指定文本的文件名</span></span><br><span class="line">grep -r -l &quot;查询内容&quot;  文件目录</span><br></pre></td></tr></table></figure>
+
+<h2 id="12-1-使用正则"><a href="#12-1-使用正则" class="headerlink" title="12.1. 使用正则"></a>12.1. 使用正则</h2><p>标准的字符类</p>
+<table>
+<thead>
+<tr>
+<th>字符类</th>
+<th>表示1</th>
+<th>表示2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字母数字字符</td>
+<td><code>[:alnum:]</code></td>
+<td><code>[0-9A-Za-z]</code></td>
+</tr>
+<tr>
+<td>字母字符</td>
+<td><code>[:alpha:]</code></td>
+<td><code>[A-Za-z]</code></td>
+</tr>
+<tr>
+<td>数字</td>
+<td><code>[:digit:]</code></td>
+<td><code>[0-9]</code></td>
+</tr>
+<tr>
+<td>小写字母</td>
+<td><code>[:lower:]</code></td>
+<td><code>[a-z]</code></td>
+</tr>
+<tr>
+<td>大写字母</td>
+<td><code>[:upper:]</code></td>
+<td><code>[A-Z]</code></td>
+</tr>
+<tr>
+<td>空字符: 空格键符 和 制表符</td>
+<td><code>[:blank:]</code></td>
+<td></td>
+</tr>
+<tr>
+<td>空格字符: 制表符、换行符、垂直制表符、换页符、回车符和空格键符</td>
+<td><code>[:space:]</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">匹配 IP 地址</span></span><br><span class="line">egrep &#x27;[[:digit:]]&#123;1,3&#125;/.[[:digit:]]&#123;1,3&#125;/.[[:digit:]]&#123;1,3&#125;/.[[:digit:]]&#123;1,3&#125;&#x27; 文件名</span><br></pre></td></tr></table></figure>
+
+<h2 id="12-2-注意"><a href="#12-2-注意" class="headerlink" title="12.2. 注意"></a>12.2. 注意</h2><ol>
+<li>在管道中使用时，必须使用双中括号来包裹标准字符，使用大括号时要转义：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查找日志文件中，在20220330那天，生成时间中分钟数是50多的文件，文件格式为 log_20220330090101.log</span></span><br><span class="line">ll | grep &quot;log_20220330[[:digit:]]\&#123;2\&#125;5[[:digit:]]\&#123;3\&#125;\.log&quot;</span><br></pre></td></tr></table></figure>
+
+<h1 id="13-压缩"><a href="#13-压缩" class="headerlink" title="13. 压缩"></a>13. 压缩</h1><h2 id="13-1-tar"><a href="#13-1-tar" class="headerlink" title="13.1. tar"></a>13.1. <code>tar</code></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">打包：tar -cvf [目标文件名].tar [原文件名/目录名]</span><br><span class="line">解包：tar -xvf [原文件名].tar</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注：c参数代表create（创建），x参数代表extract（解包），v参数代表verbose（详细信息），f参数代表filename（文件名），所以f后必须接文件名。</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看包含文件</span></span><br><span class="line">tar -tzvf tmp.tar.gz</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解压单个文件</span></span><br><span class="line">tar -zxvf tmp.tar.gz fooo/1.log</span><br></pre></td></tr></table></figure>
+
+<h2 id="13-2-tar-gz"><a href="#13-2-tar-gz" class="headerlink" title="13.2. tar.gz"></a>13.2. <code>tar.gz</code></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">方式一：利用前面已经打包好的tar文件，直接用压缩命令。</span></span><br><span class="line">压缩：gzip [原文件名].tar</span><br><span class="line">解压：gunzip [原文件名].tar.gz</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">方式二：一次性打包并压缩、解压并解包</span></span><br><span class="line">打包并压缩： tar -zcvf [目标文件名].tar.gz [原文件名/目录名]</span><br><span class="line">解压并解包： tar -zxvf [原文件名].tar.gz -C /date/tmp</span><br><span class="line">注：z代表用gzip算法来压缩/解压。</span><br></pre></td></tr></table></figure>
+
+<h1 id="14-top"><a href="#14-top" class="headerlink" title="14. top"></a>14. <code>top</code></h1><details>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">top - 12:05:27 up 1118 days, 17:08,  3 users,  load average: 0.08, 0.06, 0.00</span><br><span class="line">Tasks: 471 total,   1 running, 470 sleeping,   0 stopped,   0 zombie</span><br><span class="line">Cpu(s):  0.2%us,  0.2%sy,  0.0%ni, 99.5%id,  0.1%wa,  0.0%hi,  0.0%si,  0.0%st</span><br><span class="line">Mem:  132110604k total, 131593952k used,   516652k free,   214532k buffers</span><br><span class="line">Swap: 67108856k total, 15100916k used, 52007940k free, 12616408k cached</span><br><span class="line"></span><br><span class="line">PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND</span><br></pre></td></tr></table></figure>
+
+<h2 id="14-1-任务队列信息，同-uptime-命令的执行结果"><a href="#14-1-任务队列信息，同-uptime-命令的执行结果" class="headerlink" title="14.1. 任务队列信息，同 uptime 命令的执行结果"></a>14.1. 任务队列信息，同 <code>uptime</code> 命令的执行结果</h2><ul>
+<li>系统时间：12:05:27</li>
+<li>运行时间：up 1118 days, 17:08</li>
+<li>当前登录用户：3 users</li>
+<li>负载均衡(uptime)：load average: 0.08, 0.06, 0.00<ul>
+<li>average后面的三个数分别是1分钟、5分钟、15分钟的负载情况。</li>
+<li>数据是每隔5秒钟检查一次活跃的进程数，然后按特定算法计算出的数值。如果这个数除以逻辑CPU的数量，结果高于5的时候就表明系统在超负荷运转了</li>
+</ul>
+</li>
+</ul>
+<h2 id="14-2-Tasks-—-任务（进程）"><a href="#14-2-Tasks-—-任务（进程）" class="headerlink" title="14.2 Tasks — 任务（进程）"></a>14.2 <code>Tasks</code> — 任务（进程）</h2><ul>
+<li>总进程：471 total</li>
+<li>运行：1 running</li>
+<li>休眠：470 sleeping</li>
+<li>停止：0 stopped</li>
+<li>僵尸进程：0 zombie</li>
+</ul>
+<h2 id="14-3-Cpu-s-—-状态信息"><a href="#14-3-Cpu-s-—-状态信息" class="headerlink" title="14.3 Cpu(s) — 状态信息"></a>14.3 <code>Cpu(s)</code> — 状态信息</h2><ul>
+<li>用户空间占用CPU的百分比(user space)：0.2%us</li>
+<li>内核空间占用CPU的百分比(sysctl)：0.2%sy</li>
+<li>改变过优先级的进程占用CPU的百分比：0.0%ni</li>
+<li>空闲CPU百分比(idolt)：99.5%id</li>
+<li>IO等待占用CPU的百分比(wait)：0.1%wa</li>
+<li>硬中断占用CPU的百分比(Hardware IRQ)：0.0%hi</li>
+<li>软中断占用CPU的百分比(Software Interrupts)：0.0%si</li>
+</ul>
+<h2 id="14-4-Mem-—-内存状态"><a href="#14-4-Mem-—-内存状态" class="headerlink" title="14.4 Mem — 内存状态"></a>14.4 <code>Mem</code> — 内存状态</h2><ul>
+<li>物理内存总量：132110604k total</li>
+<li>使用的物理内存总量：131593952k used</li>
+<li>空闲的物理内存总量：516652k free</li>
+<li>用在内核缓存的内存总量：214532k buffers</li>
+</ul>
+<h2 id="14-5-Swap-—-swap交换分区信息"><a href="#14-5-Swap-—-swap交换分区信息" class="headerlink" title="14.5 Swap — swap交换分区信息"></a>14.5 <code>Swap</code> — swap交换分区信息</h2><ul>
+<li>交换区内存总量：67108856k total</li>
+<li>使用的交换区的总量：15100916k used</li>
+<li>空闲的交换区总量：52007940k free</li>
+<li>缓存的交换区总量：12616408k cached</li>
+</ul>
+<h2 id="14-6-各进程（任务）的状态监控"><a href="#14-6-各进程（任务）的状态监控" class="headerlink" title="14.6 各进程（任务）的状态监控"></a>14.6 各进程（任务）的状态监控</h2><ul>
+<li><code>PID</code>：进程id</li>
+<li><code>USER</code>：进程所有者</li>
+<li><code>PR</code>：进程优先级</li>
+<li><code>NI</code>：nice值。负值表示高优先级，正值表示低优先级</li>
+<li><code>VIRT</code>：进程使用的虚拟内存总量，单位kb。<code>VIRT=SWAP+RES</code></li>
+<li><code>RES</code>：进程使用的、未被换出的物理内存大小，单位kb。<code>RES=CODE+DATA</code></li>
+<li><code>SHR</code>：共享内存大小，单位kb</li>
+<li><code>S</code>：进程状态。<code>D</code>&#x3D;不可中断的睡眠状态 <code>R</code>&#x3D;运行 <code>S</code>&#x3D;睡眠 <code>T</code>&#x3D;跟踪&#x2F;停止 <code>Z</code>&#x3D;僵尸进程</li>
+<li><code>%CPU</code>：上次更新到现在的CPU时间占用百分比</li>
+<li><code>%MEM</code>：进程使用的物理内存百分比</li>
+<li><code>TIME+</code>：进程使用的CPU时间总计，单位1&#x2F;100秒</li>
+<li><code>COMMAND</code>：进程名称（命令名&#x2F;命令行）</li>
+</ul>
+<h3 id="14-6-1-VIRT：virtual-memory-usage-虚拟内存"><a href="#14-6-1-VIRT：virtual-memory-usage-虚拟内存" class="headerlink" title="14.6.1. VIRT：virtual memory usage 虚拟内存"></a>14.6.1. <code>VIRT：virtual memory usage 虚拟内存</code></h3><ol>
+<li>进程“需要的”虚拟内存大小，包括进程使用的库、代码、数据等</li>
+<li>假如进程申请100m的内存，但实际只使用了10m，那么它会增长100m，而不是实际的使用量</li>
+</ol>
+<h3 id="14-6-2-RES：resident-memory-usage-常驻内存"><a href="#14-6-2-RES：resident-memory-usage-常驻内存" class="headerlink" title="14.6.2. RES：resident memory usage 常驻内存"></a>14.6.2. <code>RES：resident memory usage 常驻内存</code></h3><ol>
+<li>进程当前使用的内存大小，但不包括swap out</li>
+<li>包含其他进程的共享</li>
+<li>如果申请100m的内存，实际使用10m，它只增长10m，与VIRT相反</li>
+<li>关于库占用内存的情况，它只统计加载的库文件所占内存大小</li>
+</ol>
+<h3 id="14-6-3-SHR：shared-memory-共享内存"><a href="#14-6-3-SHR：shared-memory-共享内存" class="headerlink" title="14.6.3. SHR：shared memory 共享内存"></a>14.6.3. <code>SHR：shared memory 共享内存</code></h3><ol>
+<li>除了自身进程的共享内存，也包括其他进程的共享内存</li>
+<li>虽然进程只使用了几个共享库的函数，但它包含了整个共享库的大小</li>
+<li>计算某个进程所占的物理内存大小公式：RES-SHR</li>
+<li>swap out后，它将会降下来</li>
+</ol>
+<h3 id="14-6-4-DATA"><a href="#14-6-4-DATA" class="headerlink" title="14.6.4. DATA"></a>14.6.4. <code>DATA</code></h3><ol>
+<li>数据占用的内存。如果top没有显示，按f键可以显示出来。</li>
+<li>真正的该程序要求的数据空间，是真正在运行中要使用的。</li>
+</ol>
+</details>
+
+<h1 id="15-文本处理"><a href="#15-文本处理" class="headerlink" title="15. 文本处理"></a>15. 文本处理</h1><h2 id="15-1-head在屏幕上显示指定文件的起始若干行"><a href="#15-1-head在屏幕上显示指定文件的起始若干行" class="headerlink" title="15.1. head在屏幕上显示指定文件的起始若干行"></a>15.1. <code>head</code>在屏幕上显示指定文件的起始若干行</h2><p><code>head [OPTION] [FILE]</code></p>
+<ul>
+<li>在未指定行数时默认显示前10行。</li>
+<li>处理多个文件时会在各个文件之前附加含有文件名的行</li>
+<li>当没有文件或文件为-时，读取标准输入</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-n, --lines=[-]NUM       显示前NUM行而不是默认的10行；如果NUM前有&quot;-&quot;，那么会打印除了文件末尾的NUM行以外的其他行</span><br><span class="line">-c, --bytes=[-]NUM       显示前NUM字节；如果NUM前有&quot;-&quot;，那么会打印除了文件末尾的NUM字节以外的其他内容</span><br><span class="line">-q, --quiet, --silent    不打印文件名行</span><br><span class="line">-v, --verbose            总是打印文件名行</span><br></pre></td></tr></table></figure>
+
+<h2 id="15-2-tail在屏幕上显示指定文件的末尾若干行"><a href="#15-2-tail在屏幕上显示指定文件的末尾若干行" class="headerlink" title="15.2. tail在屏幕上显示指定文件的末尾若干行"></a>15.2. <code>tail</code>在屏幕上显示指定文件的末尾若干行</h2><p><code>tail [OPTION] [FILE]</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-n, --lines=[-]NUM       显示末尾NUM行而不是默认的10行；如果NUM前有&quot;+&quot;，那么会打印除了文件起始的NUM行以外的其他行</span><br><span class="line">-c, --bytes=[-]NUM       显示前NUM字节；如果NUM前有&quot;+&quot;，那么会打印除了文件起始的NUM字节以外的其他内容</span><br><span class="line">-f, --quiet, --silent    不打印文件名行</span><br><span class="line">-v, --verbose            总是打印文件名行</span><br></pre></td></tr></table></figure>
+
+<h1 id="16-配置-jdk"><a href="#16-配置-jdk" class="headerlink" title="16. 配置 jdk"></a>16. 配置 jdk</h1><h2 id="16-1-全局"><a href="#16-1-全局" class="headerlink" title="16.1. 全局"></a>16.1. 全局</h2><p>root 用户配置 <code>/etc/profile</code></br><br>JDK9 之后就没有了 <code>dt.jar</code> 和 <code>tools.jar</code>，不用配置 <code>CLASSPATH</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">[root]# </span><span class="language-bash">vim /etc/profile</span></span><br><span class="line"></span><br><span class="line">JAVA_HOME=/opt/jdk1.7.0_07</span><br><span class="line">PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line">export JAVA_HOME</span><br><span class="line">export PATH</span><br><span class="line">export CLASSPATH</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">[root]# </span><span class="language-bash"><span class="built_in">source</span> /etc/profile</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="16-2-分用户"><a href="#16-2-分用户" class="headerlink" title="16.2. 分用户"></a>16.2. 分用户</h2><p>用户账号配置 <code>~/.bash_profile</code>，配置内容与上面一致，最后要</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">[user1]$ </span><span class="language-bash"><span class="built_in">source</span> ~/.bash_profile</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="16-3-当前-session"><a href="#16-3-当前-session" class="headerlink" title="16.3. 当前 session"></a>16.3. 当前 session</h2><p>只能影响当前 session，更换后需要重新执行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1<span class="number">.8</span><span class="number">.0_25</span></span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br></pre></td></tr></table></figure>
+
+<h1 id="17-别名"><a href="#17-别名" class="headerlink" title="17. 别名"></a>17. 别名</h1><p>设置命令别名，可以将参数放到当前用户主目录下的 <code>.profile</code> 或者 <code>.bashrc</code>里，两者为隐藏文件，前者针对当前普通用户，后者针对 root 用户。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias [自定义命令]=`[源命令]` </span><br></pre></td></tr></table></figure>
+
+<h1 id="18-调度"><a href="#18-调度" class="headerlink" title="18. 调度"></a>18. 调度</h1><h2 id="1-crontab"><a href="#1-crontab" class="headerlink" title="1. crontab"></a>1. <code>crontab</code></h2><p>周期执行的任务一般由 <code>cron</code> 这个守护进程来处理 (<code>ps -ef|grep cron)</code>。<code>cron</code> 读取一个或多个配置文件，这些配置文件中包含了命令行及其调用时间。</p>
+<h3 id="1-1-命令"><a href="#1-1-命令" class="headerlink" title="1.1. 命令"></a>1.1. 命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">crontab </span><br><span class="line">    -u username  省略用户表表示操作当前用户的crontab</span><br><span class="line">    -e           编辑工作表</span><br><span class="line">    -l           列出工作表里的命令</span><br><span class="line">    -r           删除工作作</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-配置"><a href="#1-2-配置" class="headerlink" title="1.2. 配置"></a>1.2. 配置</h3><p><code>cron</code> 在 3 个地方查找配置文件:</p>
+<ul>
+<li><code>/var/spool/cron/</code></br><br>这个目录下存放的是每个用户包括 root 的 crontab 任务，每个任务以创建者的名字命名，比如 tom 建的 crontab 任务对应的文件就是 &#x2F;var&#x2F;spool&#x2F;cron&#x2F;tom。一般一个用户最多只有一个 crontab 文件。</li>
+<li><code>/etc/crontab</code></br><br>这个文件负责安排由系统管理员制定的维护系统以及其他任务的 crontab。</li>
+<li><code>/etc/cron.d/</code></br><br>这个目录用来存放任何要执行的 crontab 文件或脚本。</li>
+</ul>
+<h2 id="2-at-执行一次，将在某个特定的时间执行的任务调度"><a href="#2-at-执行一次，将在某个特定的时间执行的任务调度" class="headerlink" title="2. at 执行一次，将在某个特定的时间执行的任务调度"></a>2. <code>at</code> 执行一次，将在某个特定的时间执行的任务调度</h2><h2 id="3-anacron-关机后恢复尚未执行的程序-anacron"><a href="#3-anacron-关机后恢复尚未执行的程序-anacron" class="headerlink" title="3. anacron 关机后恢复尚未执行的程序 anacron"></a>3. <code>anacron</code> 关机后恢复尚未执行的程序 <code>anacron</code></h2><h1 id="19-字符集"><a href="#19-字符集" class="headerlink" title="19. 字符集"></a>19. 字符集</h1><p>修改显示字符</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LANG=&quot;en_US.UTF-8&quot;</span><br><span class="line">export LANG </span><br></pre></td></tr></table></figure>
+
+<h1 id="20-免密登陆"><a href="#20-免密登陆" class="headerlink" title="20. 免密登陆"></a>20. 免密登陆</h1><h2 id="1-生成密钥"><a href="#1-生成密钥" class="headerlink" title="1. 生成密钥"></a>1. 生成密钥</h2><p>使用 <code>ssh-keygen -t rsa</code>，此时用户目录下的 <code>.ssh</code> 会生成 <code>id_rsa(私钥)</code> 和 <code>id_rsa.pub(公钥)</code> 两个文件</p>
+<h2 id="2-密钥发送到其他主机"><a href="#2-密钥发送到其他主机" class="headerlink" title="2. 密钥发送到其他主机"></a>2. 密钥发送到其他主机</h2><ol>
+<li>方法一 : 使用 <code>ssh-copy-id -i &lt;id_ras.pub 路径&gt;* &lt;用户&gt;@&lt;ip&gt;</code> ，此时，会在 <code>.ssh</code> 生成 <code>authorized_keys</code> 文件</li>
+<li>方法二 : 直接在机器下建立 <code>.ssh/authorized_keys</code> 文件，将其他机器的密钥写入文件</li>
+</ol>
+<h1 id="21-新增用户"><a href="#21-新增用户" class="headerlink" title="21. 新增用户"></a>21. 新增用户</h1><ol>
+<li>创建用户</li>
+</ol>
+<ul>
+<li><code>adduser [用户名]</code> : 该命令其实是个 perl 脚本，底层调用 useradd ，会在 &#x2F;home 目录下会自动创建同名文件夹</li>
+<li><code>useradd [用户名]</code> : 直接调用会创建一个三无用户，无用户家目录，无指定shell版本，无密码<ul>
+<li><code>-c [备注]</code> : 添加备注，会保存在 passwd 的备注栏位中</li>
+<li><code>-d [登入目录]</code> : 指定用户登入时的启始目录</li>
+<li><code>-g [群组]</code> : 指定用户所属的群组</li>
+<li><code>-G [群组]</code> : 指定用户所属的附加群组</li>
+<li><code>-m</code> : 自动建立用户的登入目录</li>
+<li><code>-s</code> : 指定用户登入后所使用的 shell</li>
+<li><code>-u</code> : 指定用户 id</li>
+</ul>
+</li>
+<li><code>passwd [用户名]</code> : 为指定用户添加密码</li>
+</ul>
+<ol start="2">
+<li>删除用户</li>
+</ol>
+<ul>
+<li><code>userdel [username]</code> : <ul>
+<li><code>-r</code> : 会将它在系统上的文件也删除掉</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>修改用户信息</li>
+</ol>
+<p>使用 <code>id</code> 来查看用户信息，使用 <code>usermod</code> 来修改用户信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">用户 oracle，用户组 oinstall，附属组是 dba，创建文件时，文件属组是 oinstall</span></span><br><span class="line"><span class="meta prompt_">[root@host1]$ </span><span class="language-bash"><span class="built_in">id</span></span></span><br><span class="line">uid=500(oracle) gid=500(oinstall) groups=500(oinstall),501(dba)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>usermod [参数] [用户组] [用户名]</code> : 修改用户组<ul>
+<li><code>-g</code> or <code>--gid</code> : 修改用户的属组</li>
+<li><code>-a</code> or <code>--append</code> : 把用户追加到某些组中，仅与 <code>-G</code> 选项一起使用</li>
+<li><code>-G</code> or <code>--groups</code> : 把用户追加到某些组中，仅与 <code>-a</code> 选项一起使用</li>
+</ul>
+</li>
+</ul>
+<h1 id="22-文件修改用户"><a href="#22-文件修改用户" class="headerlink" title="22. 文件修改用户"></a>22. 文件修改用户</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将文件夹 file_root 用户切换为 user 用户</span></span><br><span class="line">sudo chown user:user  file_root/ -R</span><br></pre></td></tr></table></figure>
+
+<h1 id="23-查看指定几行"><a href="#23-查看指定几行" class="headerlink" title="23. 查看指定几行"></a>23. 查看指定几行</h1><ol>
+<li>从第 3000 行开始，显示 1000 行，即显示 3000~3999 行<br><code>cat filename | tail -n +3000 | head -n 100</code></li>
+<li>显示 1000 行到 3000 行<br><code>cat filename| head -n 3000 | tail -n +1000</code></li>
+<li>从第 5 行开始，显示到第 10 行<br><code>sed -n &#39;5,10p&#39; filename</code></li>
+</ol>
+<h1 id="24-删除指定时间前文件"><a href="#24-删除指定时间前文件" class="headerlink" title="24. 删除指定时间前文件"></a>24. 删除指定时间前文件</h1><ol>
+<li>删除20分钟前的文件</li>
+</ol>
+<ul>
+<li><code>find ./tmp -maxdepth 1 -type f -mmin +20 -exec rm &#123;&#125; \;</code></li>
+</ul>
+<ol start="2">
+<li>删除20天前的文件</li>
+</ol>
+<ul>
+<li><code>find ./tmp -maxdepth 1 -type f -mtime +20 -exec rm &#123;&#125; \;</code></li>
+</ul>
+<p>参数</p>
+<ol>
+<li>时间处理</li>
+</ol>
+<ul>
+<li><code>mtime(Modify time)\mmin</code> : 修改天数&#x2F;分钟数</li>
+<li><code>atime(Access time)\amin</code> : 访问天数&#x2F;分钟数</li>
+<li><code>ctime(Change time)\cmin</code> : 状态变更天数&#x2F;分钟数</li>
+<li><code>n</code> : 从现在算起向前推第 n 天当天</li>
+<li><code>+n</code> : 表示从现在算起向前推第 n 天之前所有的，不包括第 n 天当天</li>
+<li><code>n=0</code> : 表示今天</li>
+<li><code>n=+0</code> : 表示今天之前</li>
+</ul>
+<ol start="2">
+<li><code>-exec</code> 参数</li>
+</ol>
+<ul>
+<li><code>&#123;&#125;</code> 表示命令的参数, 即为所找到的文件</li>
+<li>命令的末尾必须以 <code>;</code> 结束</li>
+</ul>
+<h1 id="25-分区和挂载"><a href="#25-分区和挂载" class="headerlink" title="25. 分区和挂载"></a>25. 分区和挂载</h1><p>查看分区</p>
+<ul>
+<li><code>lsblk</code> : 列出系统的所有块设备及其逻辑分区</li>
+<li><code>fdisk</code> : 主要用于创建或删除硬盘分区</li>
+</ul>
+<h1 id="26-查看文件被进程占用"><a href="#26-查看文件被进程占用" class="headerlink" title="26. 查看文件被进程占用"></a>26. 查看文件被进程占用</h1><p><code>lsof |grep /tmp/.lock</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/11/13/%E7%9F%A5%E8%AF%86%E7%82%B9/Linux/1.%E5%B7%B2%E6%95%B4%E7%90%86%E5%91%BD%E4%BB%A4/" data-id="cll61sylf0000ncjwdls8btvm" data-title="Linux 常用命令(持续更新)" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/19/%E7%9F%A5%E8%AF%86%E7%82%B9/Vim/Vim%E4%B8%AD%E4%BD%BF%E7%94%A8LaTex/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Vim 中使用 LaTex
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/06/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/01.log4j%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Java 第三方包-log4j</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">关于我</h3>
+      <ul class="widget about">
+      
+      
+      <li>专业泼冷水，执着负能量</li>
+      
+    </ul>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><span class="category-list-count">160</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Docker/">Docker</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flume/">Flume</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/HBase/">HBase</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hadoop/">Hadoop</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hive/">Hive</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kubernetes/">Kubernetes</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flume/" rel="tag">Flume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guava/" rel="tag">Guava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jackson/" rel="tag">Jackson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">74</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/" rel="tag">Java8</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LaTex/" rel="tag">LaTex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Quartz/" rel="tag">Quartz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%A7%A3/" rel="tag">图解</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" rel="tag">安全框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" rel="tag">日志框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" rel="tag">第三方包</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%88%B6/" rel="tag">自制</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Docker/" style="font-size: 12.14px;">Docker</a> <a href="/tags/Flink/" style="font-size: 17.14px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Flume/" style="font-size: 10px;">Flume</a> <a href="/tags/Git/" style="font-size: 12.14px;">Git</a> <a href="/tags/Golang/" style="font-size: 15.71px;">Golang</a> <a href="/tags/Guava/" style="font-size: 10.71px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hadoop/" style="font-size: 10.71px;">Hadoop</a> <a href="/tags/Hive/" style="font-size: 10px;">Hive</a> <a href="/tags/Idea-Instructions/" style="font-size: 13.57px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 10.71px;">JVM</a> <a href="/tags/Jackson/" style="font-size: 10px;">Jackson</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java8/" style="font-size: 12.14px;">Java8</a> <a href="/tags/Kubernetes/" style="font-size: 10px;">Kubernetes</a> <a href="/tags/LaTex/" style="font-size: 10px;">LaTex</a> <a href="/tags/Linux/" style="font-size: 16.43px;">Linux</a> <a href="/tags/Maven/" style="font-size: 12.14px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Netty/" style="font-size: 12.86px;">Netty</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/Redis/" style="font-size: 14.29px;">Redis</a> <a href="/tags/Rust/" style="font-size: 11.43px;">Rust</a> <a href="/tags/Scala/" style="font-size: 12.14px;">Scala</a> <a href="/tags/Shell/" style="font-size: 15px;">Shell</a> <a href="/tags/Spring/" style="font-size: 13.57px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 12.86px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Vim/" style="font-size: 11.43px;">Vim</a> <a href="/tags/cmd/" style="font-size: 11.43px;">cmd</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 19.29px;">代码归档</a> <a href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" style="font-size: 12.14px;">内建包</a> <a href="/tags/%E5%9B%BE%E8%A7%A3/" style="font-size: 12.86px;">图解</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 18.57px;">大数据</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" style="font-size: 11.43px;">安全框架</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 12.86px;">容器</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 11.43px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 14.29px;">数据结构与算法</a> <a href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" style="font-size: 11.43px;">日志框架</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 16.43px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 16.43px;">杂记</a> <a href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" style="font-size: 17.86px;">第三方包</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.57px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%87%AA%E5%88%B6/" style="font-size: 11.43px;">自制</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 12.14px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 12.14px;">计算机网络</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Linux 碎片知识(持续更新) | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Linux 除命令外的碎片知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 碎片知识(持续更新)">
+<meta property="og:url" content="http://example.com/2021/04/07/%E7%9F%A5%E8%AF%86%E7%82%B9/Linux/3.%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="Linux 除命令外的碎片知识">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-07T01:31:00.000Z">
+<meta property="article:modified_time" content="2021-11-16T01:48:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="杂记">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Linux/3.碎片知识" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/07/%E7%9F%A5%E8%AF%86%E7%82%B9/Linux/3.%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/" class="article-date">
+  <time class="dt-published" datetime="2021-04-07T01:31:00.000Z" itemprop="datePublished">2021-04-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Linux 碎片知识(持续更新)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-profile、bashrc、bash-profile、bash-logout"><a href="#1-profile、bashrc、bash-profile、bash-logout" class="headerlink" title="1. profile、bashrc、bash_profile、bash_logout"></a>1. profile、bashrc、bash_profile、bash_logout</h2><h2 id="1-1-etc-profile-与-bash-profile"><a href="#1-1-etc-profile-与-bash-profile" class="headerlink" title="1.1. /etc/profile 与 ~/.bash_profile"></a>1.1. <code>/etc/profile</code> 与 <code>~/.bash_profile</code></h2><ul>
+<li><code>/etc/profile</code>：此文件为系统的每个用户设置环境信息，当用户第一次登录时该文件被执行，并从 <code>/etc/profile.d</code> 目录的配置文件中搜集 shell 的设置。有修改的话必须得重启你的修改才会生效，此修改对每个用户都生效。  </li>
+<li><code>~/.bash_profile</code>：每个用户都可使用该文件输入专用于自己使用的 shell 信息，当用户登录时，该文件仅仅执行一次。默认情况下，他设置一些环境变量，执行用户的 .bashrc 文件。需要重启才会生效。</li>
+<li><code>~/.bash_login</code> 和 <code>~/.profile</code> 文件，作为对其他shell的兼容，与 <code>~/.bash_profile</code> 文件的作用是相同，比如在 Debian 中使用<code>.profile</code>文件代替<code>.bash_profile</code>文件</li>
+</ul>
+<h2 id="1-2-etc-bashrc-与-bashrc"><a href="#1-2-etc-bashrc-与-bashrc" class="headerlink" title="1.2. /etc/bashrc 与 ~/.bashrc"></a>1.2. <code>/etc/bashrc</code> 与 <code>~/.bashrc</code></h2><ul>
+<li><code>/etc/bashrc</code>：为每一个运行 bash shell 的用户执行此文件，当 bash shell 被打开时，该文件被读取。  </li>
+<li><code>~/.bashrc</code>：该文件包含专用于你的 bash shell 的 bash 信息，当登录时以及每次打开新的 shell 时，该文件被读取。重新打开一个 bash 即可生效。</li>
+<li><code>.bashrc</code> 文件会在bash shell调用另一个 bash shell 时读取，也就是在 shell 中再键入 bash 命令启动一个新 shell 时就会去读该文件。这样可有效分离登录和子 shell 所需的环境。但一般来说都会在<code>.bash_profile</code>里调用<code>.bashrc</code>脚本以便统一配置用户环境。</li>
+</ul>
+<h2 id="1-3-bash-logout"><a href="#1-3-bash-logout" class="headerlink" title="1.3. ~/.bash_logout"></a>1.3. <code>~/.bash_logout</code></h2><p><code>~/.bash_logout</code>：当每次退出系统(退出bash shell)时，执行该文件。</p>
+<h2 id="1-4-交互shell-interactive-shell-、登录shell-login-shell"><a href="#1-4-交互shell-interactive-shell-、登录shell-login-shell" class="headerlink" title="1.4. 交互shell(interactive shell)、登录shell(login shell)"></a>1.4. 交互shell(interactive shell)、登录shell(login shell)</h2><h3 id="1-4-1-交互式shell和非交互式shell（interactive-shell-and-non-interactive-shell）"><a href="#1-4-1-交互式shell和非交互式shell（interactive-shell-and-non-interactive-shell）" class="headerlink" title="1.4.1. 交互式shell和非交互式shell（interactive shell and non-interactive shell）"></a>1.4.1. 交互式shell和非交互式shell（interactive shell and non-interactive shell）</h3><ul>
+<li>交互式模式就是在终端上执行，shell等待你的输入，并且立即执行你提交的命令。这种模式被称作交互式是因为shell与用户进行交互。这种模式也是大多数用户非常熟悉的：登录、执行一些命令、退出。当你退出后，shell也终止了。  </li>
+<li>非交互式模式shell不与你进行交互，而是读取存放在文件中的命令，并且执行它们。当它读到文件的结尾EOF，shell也就终止了。</li>
+<li>可以通过打印<code>$-</code>变量的值（代表着当前shell的选项标志），查看其中的<code>i</code>选项（表示interactive shell）来区分交互式与非交互式shell。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">master@user:~/workspace/shell$ echo $-</span><br><span class="line">himBH</span><br><span class="line">master@user:~/workspace/shell$ ./test.sh</span><br><span class="line">echo $-</span><br><span class="line">hB</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-2-登录shell和非登录shell"><a href="#1-4-2-登录shell和非登录shell" class="headerlink" title="1.4.2. 登录shell和非登录shell"></a>1.4.2. 登录shell和非登录shell</h3><ul>
+<li>登录 shell：是需要用户名、密码登录后才能进入的shell（或者通过”–login”选项生成的shell）。</li>
+<li>非登录 shell：当然就不需要输入用户名和密码即可打开的 Shell，例如：直接命令 <code>bash</code> 就是打开一个新的非登录 shell，在 Gnome 或 KDE 中打开一个“终端”（terminal）窗口程序也是一个非登录shell。</li>
+<li>执行 exit 命令，退出一个 shell（登录或非登录shell）；执行 logout 命令，退出登录 shell（不能退出非登录shell）。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">master@user:~$ bash --login</span><br><span class="line">master@user:~$ logout</span><br><span class="line">master@user:~$ bash --login</span><br><span class="line">master@user:~$ exit</span><br><span class="line">logout</span><br><span class="line"></span><br><span class="line">master@user:~$ bash</span><br><span class="line">master@user:~$ logout</span><br><span class="line">bash: logout: not login shell: use `exit&#x27;</span><br><span class="line">master@user:~$ exit</span><br><span class="line">exit</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">bash是 login shell 时，其进程名为”-bash“ 而不是”bash”</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在 login shell 中：</span></span><br><span class="line">[perf@host_220-188 ~]$ echo $0</span><br><span class="line">-bash</span><br><span class="line">[perf@host_220-188 ~]$ ps -ef | grep &#x27;\-bash&#x27; | grep -v grep</span><br><span class="line">root     16823 16821  0 May06 pts/0    00:00:00 -bash</span><br><span class="line">perf     21135 21134  0 May07 pts/1    00:00:00 -bash</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在一个非登陆shell中：</span></span><br><span class="line">jay@jay-linux:~$ echo $0</span><br><span class="line">/bin/bash</span><br><span class="line">jay@jay-linux:~$ ps -ef | grep &#x27;\-bash&#x27; | grep -v grep</span><br><span class="line">jay@jay-linux:~$ </span><br></pre></td></tr></table></figure>
+
+<h2 id="1-5-关系"><a href="#1-5-关系" class="headerlink" title="1.5. 关系"></a>1.5. 关系</h2><table>
+<thead>
+<tr>
+<th>startup 文件</th>
+<th>交互登录</th>
+<th>非交互登录</th>
+<th>交互非登录</th>
+<th>非交互非登录</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/etc/profile</code></td>
+<td>直接执行1</td>
+<td>直接执行1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>~/.bash_profile</code></td>
+<td>直接执行2</td>
+<td>直接执行2</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>~/.bash_login</code></td>
+<td>条件执行2</td>
+<td>条件执行2</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>~/.profile</code></td>
+<td>条件执行2</td>
+<td>条件执行2</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>~/.bash_logout</code></td>
+<td>直接执行3</td>
+<td>不执行</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>etc/bash.bash_logout</code></td>
+<td>直接执行4</td>
+<td>不执行</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>~/.bash</code></td>
+<td>引用执行2.1</td>
+<td>引用执行2.1</td>
+<td>直接执行1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/etc/bashrc</code></td>
+<td>引用执行2.2</td>
+<td>引用执行2.2</td>
+<td>引用执行1.1</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>备注：</p>
+<ol>
+<li><code>直接执行</code>表示此文件被系统直接调用，它的执行是无条件的；</li>
+<li><code>条件执行</code>表示此文件被系统调用是有先决条件的（没有优先级更高的文件可用）；</li>
+<li><code>引用执行</code>表示此文件不是被系统直接调用的，而是被其他文件显式调用的；</li>
+<li>后面的数字表示文件被调用的顺序，数字越大调用越靠后；</li>
+<li><code>非交互非登陆</code> shell的配置文件可以由BASH_ENV环境变量指定；</li>
+<li><code>~/.bash_profile</code>会显式调用<code>~/.bashrc文件</code>，而<code>~/.bashrc</code>又会显式调用<code>/etc/bashrc</code>文件，这是为了让所有交互式界面看起来一样；</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/07/%E7%9F%A5%E8%AF%86%E7%82%B9/Linux/3.%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/" data-id="cll6dbyoy000b9cjw50u11gjb" data-title="Linux 碎片知识(持续更新)" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/04/07/%E7%9F%A5%E8%AF%86%E7%82%B9/C&C++/HelloWorld/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          The hello wrold in C&amp;C++
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/02/03/%E7%9F%A5%E8%AF%86%E7%82%B9/Linux/shell/shell-awk/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Shell 命令之 awk</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">关于我</h3>
+      <ul class="widget about">
+      
+      
+      <li>专业泼冷水，执着负能量</li>
+      
+    </ul>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><span class="category-list-count">160</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Docker/">Docker</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flume/">Flume</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/HBase/">HBase</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hadoop/">Hadoop</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hive/">Hive</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kubernetes/">Kubernetes</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flume/" rel="tag">Flume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guava/" rel="tag">Guava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jackson/" rel="tag">Jackson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">74</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/" rel="tag">Java8</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LaTex/" rel="tag">LaTex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Quartz/" rel="tag">Quartz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%A7%A3/" rel="tag">图解</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" rel="tag">安全框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" rel="tag">日志框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" rel="tag">第三方包</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%88%B6/" rel="tag">自制</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Docker/" style="font-size: 12.14px;">Docker</a> <a href="/tags/Flink/" style="font-size: 17.14px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Flume/" style="font-size: 10px;">Flume</a> <a href="/tags/Git/" style="font-size: 12.14px;">Git</a> <a href="/tags/Golang/" style="font-size: 15.71px;">Golang</a> <a href="/tags/Guava/" style="font-size: 10.71px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hadoop/" style="font-size: 10.71px;">Hadoop</a> <a href="/tags/Hive/" style="font-size: 10px;">Hive</a> <a href="/tags/Idea-Instructions/" style="font-size: 13.57px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 10.71px;">JVM</a> <a href="/tags/Jackson/" style="font-size: 10px;">Jackson</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java8/" style="font-size: 12.14px;">Java8</a> <a href="/tags/Kubernetes/" style="font-size: 10px;">Kubernetes</a> <a href="/tags/LaTex/" style="font-size: 10px;">LaTex</a> <a href="/tags/Linux/" style="font-size: 16.43px;">Linux</a> <a href="/tags/Maven/" style="font-size: 12.14px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Netty/" style="font-size: 12.86px;">Netty</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/Redis/" style="font-size: 14.29px;">Redis</a> <a href="/tags/Rust/" style="font-size: 11.43px;">Rust</a> <a href="/tags/Scala/" style="font-size: 12.14px;">Scala</a> <a href="/tags/Shell/" style="font-size: 15px;">Shell</a> <a href="/tags/Spring/" style="font-size: 13.57px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 12.86px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Vim/" style="font-size: 11.43px;">Vim</a> <a href="/tags/cmd/" style="font-size: 11.43px;">cmd</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 19.29px;">代码归档</a> <a href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" style="font-size: 12.14px;">内建包</a> <a href="/tags/%E5%9B%BE%E8%A7%A3/" style="font-size: 12.86px;">图解</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 18.57px;">大数据</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" style="font-size: 11.43px;">安全框架</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 12.86px;">容器</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 11.43px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 14.29px;">数据结构与算法</a> <a href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" style="font-size: 11.43px;">日志框架</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 16.43px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 16.43px;">杂记</a> <a href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" style="font-size: 17.86px;">第三方包</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.57px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%87%AA%E5%88%B6/" style="font-size: 11.43px;">自制</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 12.14px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 12.14px;">计算机网络</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Linux 命令汇总 | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Linux 命令汇总">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 命令汇总">
+<meta property="og:url" content="http://example.com/2021/04/14/%E7%9F%A5%E8%AF%86%E7%82%B9/Linux/2.%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="Linux 命令汇总">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-14T03:13:00.000Z">
+<meta property="article:modified_time" content="2022-04-02T08:58:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Linux/2.命令汇总" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/14/%E7%9F%A5%E8%AF%86%E7%82%B9/Linux/2.%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB/" class="article-date">
+  <time class="dt-published" datetime="2021-04-14T03:13:00.000Z" itemprop="datePublished">2021-04-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Linux 命令汇总
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-线上查询及帮助命令-2个"><a href="#1-线上查询及帮助命令-2个" class="headerlink" title="1. 线上查询及帮助命令(2个)"></a>1. 线上查询及帮助命令(2个)</h2><ul>
+<li><input checked="" disabled="" type="checkbox"> <code>man</code>：查看命令帮助，命令的词典，更复杂的还有info，但不常用。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>help</code>：查看Linux内置命令的帮助，比如cd命令。</li>
+</ul>
+<h2 id="2-文件和目录操作命令-18个"><a href="#2-文件和目录操作命令-18个" class="headerlink" title="2. 文件和目录操作命令(18个)"></a>2. 文件和目录操作命令(18个)</h2><ul>
+<li><input checked="" disabled="" type="checkbox"> <code>ls</code>：全拼list，功能是列出目录的内容及其内容属性信息。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>cd</code>：全拼change directory，功能是从当前工作目录切换到指定的工作目录。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>cp</code>：全拼copy，其功能为复制文件或目录。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>find</code>：查找的意思，用于查找目录及目录下的文件。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>mkdir</code>：全拼make directories，其功能是创建目录。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>mv</code>：全拼move，其功能是移动或重命名文件。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>pwd</code>：全拼print working directory，其功能是显示当前工作目录的绝对路径。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>rename</code>：用于重命名文件。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>rm</code>：全拼remove，其功能是删除一个或多个文件或目录。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>rmdir</code>：全拼remove empty directories，功能是删除空目录。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>touch</code>：创建新的空文件，改变已有文件的时间戳属性。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>tree</code>：功能是以树形结构显示目录下的内容。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>file</code>：显示文件的类型。</li>
+<li><input disabled="" type="checkbox"> <code>basename</code>：显示文件名或目录名。</li>
+<li><input disabled="" type="checkbox"> <code>dirname</code>：显示文件或目录路径。</li>
+<li><input disabled="" type="checkbox"> <code>chattr</code>：改变文件的扩展属性。</li>
+<li><input disabled="" type="checkbox"> <code>lsattr</code>：查看文件扩展属性。</li>
+<li><input disabled="" type="checkbox"> <code>md5sum</code>：计算和校验文件的MD5值。</li>
+</ul>
+<h2 id="3-查看文件及内容处理命令-21个"><a href="#3-查看文件及内容处理命令-21个" class="headerlink" title="3. 查看文件及内容处理命令(21个)"></a>3. 查看文件及内容处理命令(21个)</h2><ul>
+<li><input checked="" disabled="" type="checkbox"> <code>vi/vim</code>：命令行文本编辑器。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>cat</code>：全拼concatenate，功能是用于连接多个文件并且打印到屏幕输出或重定向到指定文件中。</li>
+<li><input disabled="" type="checkbox"> <code>tac</code>：是cat的反向拼写，因此命令的功能为反向显示文件内容。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>more</code>：分页显示文件内容，只能向前浏览。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>less</code>：分页显示文件内容，与 more 类似，但可以向前或向后浏览文件。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>head</code>：显示文件内容的头部。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>tail</code>：显示文件内容的尾部。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>wc</code>：统计文件的行数、单词数或字节数。</li>
+<li><input disabled="" type="checkbox"> <code>tr</code>：替换或删除字符。</li>
+<li><input disabled="" type="checkbox"> <code>cut</code>：将文件的每一行按指定分隔符分割并输出。</li>
+<li><input disabled="" type="checkbox"> <code>split</code>：分割文件为不同的小片段。</li>
+<li><input disabled="" type="checkbox"> <code>paste</code>：按行合并文件内容。</li>
+<li><input disabled="" type="checkbox"> <code>sort</code>：对文件的文本内容排序。</li>
+<li><input disabled="" type="checkbox"> <code>uniq</code>：去除重复行。</li>
+<li><input disabled="" type="checkbox"> <code>iconv</code>：转换文件的编码格式。</li>
+<li><input disabled="" type="checkbox"> <code>dos2unix</code>：将DOS格式文件转换成UNIX格式。</li>
+<li><input disabled="" type="checkbox"> <code>diff</code>：全拼difference，比较文件的差异，常用于文本文件。</li>
+<li><input disabled="" type="checkbox"> <code>vimdiff</code>：命令行可视化文件比较工具，常用于文本文件。</li>
+<li><input disabled="" type="checkbox"> <code>rev</code>：反向输出文件内容。</li>
+<li><input disabled="" type="checkbox"> <code>grep/egrep</code>：过滤字符串，三剑客老三。</li>
+<li><input disabled="" type="checkbox"> <code>join</code>：按两个文件的相同字段合并。</li>
+</ul>
+<h2 id="4-文件压缩及解压缩命令-4个"><a href="#4-文件压缩及解压缩命令-4个" class="headerlink" title="4. 文件压缩及解压缩命令(4个)"></a>4. 文件压缩及解压缩命令(4个)</h2><ul>
+<li><input checked="" disabled="" type="checkbox"> <code>tar</code>：打包压缩。oldboy</li>
+<li><input checked="" disabled="" type="checkbox"> <code>gzip</code>：压缩工具。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>unzip</code>：解压文件。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>zip</code>：压缩工具。</li>
+</ul>
+<h2 id="5-信息显示命令-11个"><a href="#5-信息显示命令-11个" class="headerlink" title="5. 信息显示命令(11个)"></a>5. 信息显示命令(11个)</h2><ul>
+<li><input checked="" disabled="" type="checkbox"> <code>top</code>：实时显示系统资源使用情况。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>hostname</code>：显示或者设置当前系统的主机名。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>du</code>：计算磁盘空间使用情况。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>df</code>：报告文件系统磁盘空间的使用情况。</li>
+<li><input disabled="" type="checkbox"> <code>uname</code>：显示操作系统相关信息的命令。</li>
+<li><input disabled="" type="checkbox"> <code>dmesg</code>：显示开机信息，用于诊断系统故障。</li>
+<li><input disabled="" type="checkbox"> <code>uptime</code>：显示系统运行时间及负载。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>stat</code>：显示文件或文件系统的状态。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>free</code>：查看系统内存。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>date</code>：显示与设置系统时间。</li>
+<li><input disabled="" type="checkbox"> <code>cal</code>：查看日历等时间信息。</li>
+</ul>
+<h2 id="6-搜索文件命令-4个"><a href="#6-搜索文件命令-4个" class="headerlink" title="6. 搜索文件命令(4个)"></a>6. 搜索文件命令(4个)</h2><ul>
+<li><input checked="" disabled="" type="checkbox"> <code>find</code>：从磁盘遍历查找文件或目录。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>whereis</code>：查找二进制命令，按环境变量PATH路径查找。</li>
+<li><input disabled="" type="checkbox"> <code>which</code>：查找二进制命令，按环境变量PATH路径查找。</li>
+<li><input disabled="" type="checkbox"> <code>locate</code>：从数据库 (&#x2F;var&#x2F;lib&#x2F;mlocate&#x2F;mlocate.db) 查找命令，使用updatedb更新库。</li>
+</ul>
+<h2 id="7-用户管理命令-10个"><a href="#7-用户管理命令-10个" class="headerlink" title="7. 用户管理命令(10个)"></a>7. 用户管理命令(10个)</h2><ul>
+<li><input checked="" disabled="" type="checkbox"> <code>su</code>：切换用户身份。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>sudo</code>：以另外一个用户身份(默认root用户)执行事先在sudoers文件允许的命令。</li>
+<li><input disabled="" type="checkbox"> <code>useradd</code>：添加用户。</li>
+<li><input disabled="" type="checkbox"> <code>usermod</code>：修改系统已经存在的用户属性。</li>
+<li><input disabled="" type="checkbox"> <code>userdel</code>：删除用户。</li>
+<li><input disabled="" type="checkbox"> <code>groupadd</code>：添加用户组。</li>
+<li><input disabled="" type="checkbox"> <code>passwd</code>：修改用户密码。</li>
+<li><input disabled="" type="checkbox"> <code>chage</code>：修改用户密码有效期限。</li>
+<li><input disabled="" type="checkbox"> <code>id</code>：查看用户的 uid，gid及归属的用户组。</li>
+<li><input disabled="" type="checkbox"> <code>visudo</code>：编辑&#x2F;etc&#x2F;sudoers文件的专属命令。</li>
+</ul>
+<h2 id="8-基础网络操作命令-11个"><a href="#8-基础网络操作命令-11个" class="headerlink" title="8. 基础网络操作命令(11个)"></a>8. 基础网络操作命令(11个)</h2><ul>
+<li><input checked="" disabled="" type="checkbox"> <code>ifconfig</code>：查看、配置、启用或禁用网络接口的命令。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>ping</code>：测试主机之间网络的连通性。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>telnet</code>：使用 TELNET 协议远程登录。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>ssh</code>：使用SSH加密协议远程登录。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>wget</code>：命令行下载文件。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>scp</code>：全拼secure copy，用于不同主机之间复制文件。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>netstat</code>：查看网络状态。</li>
+<li><input disabled="" type="checkbox"> <code>route</code>：显示和设置 linux 系统的路由表。</li>
+<li><input disabled="" type="checkbox"> <code>ifup</code>：启动网卡。</li>
+<li><input disabled="" type="checkbox"> <code>ifdown</code>：关闭网卡。</li>
+<li><input disabled="" type="checkbox"> <code>ss</code>：查看网络状态。</li>
+</ul>
+<h2 id="9-深入网络操作命令-9个"><a href="#9-深入网络操作命令-9个" class="headerlink" title="9. 深入网络操作命令(9个)"></a>9. 深入网络操作命令(9个)</h2><ul>
+<li><input checked="" disabled="" type="checkbox"> <code>host</code>：查询 DNS 的命令。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>lsof</code>：全名list open files，也就是列举系统中已经被打开的文件。</li>
+<li><input disabled="" type="checkbox"> <code>nmap</code>：网络扫描命令。</li>
+<li><input disabled="" type="checkbox"> <code>mail</code>：发送和接收邮件。</li>
+<li><input disabled="" type="checkbox"> <code>mutt</code>：邮件管理命令。</li>
+<li><input disabled="" type="checkbox"> <code>nslookup</code>：交互式查询互联网DNS服务器的命令。</li>
+<li><input disabled="" type="checkbox"> <code>dig</code>：查找DNS解析过程。</li>
+<li><input disabled="" type="checkbox"> <code>traceroute</code>：追踪数据传输路由状况。</li>
+<li><input disabled="" type="checkbox"> <code>tcpdump</code>：命令行的抓包工具。</li>
+</ul>
+<h2 id="10-有关磁盘与文件系统的命令-16个"><a href="#10-有关磁盘与文件系统的命令-16个" class="headerlink" title="10. 有关磁盘与文件系统的命令(16个)"></a>10. 有关磁盘与文件系统的命令(16个)</h2><ul>
+<li><input disabled="" type="checkbox"> <code>fdisk</code>：磁盘分区命令，适用于2TB以下磁盘分区。</li>
+<li><input disabled="" type="checkbox"> <code>mount</code>：挂载文件系统。</li>
+<li><input disabled="" type="checkbox"> <code>umount</code>：卸载文件系统。</li>
+<li><input disabled="" type="checkbox"> <code>fsck</code>：检查并修复Linux文件系统。</li>
+<li><input disabled="" type="checkbox"> <code>dd</code>：转换或复制文件。</li>
+<li><input disabled="" type="checkbox"> <code>dumpe2fs</code>：导出ext2&#x2F;ext3&#x2F;ext4文件系统信息。</li>
+<li><input disabled="" type="checkbox"> <code>dumpe</code>：xt2&#x2F;3&#x2F;4文件系统备份工具。</li>
+<li><input disabled="" type="checkbox"> <code>parted</code>：磁盘分区命令，没有磁盘大小限制，常用于2TB以下磁盘分区。</li>
+<li><input disabled="" type="checkbox"> <code>mkfs</code>：格式化创建Linux文件系统。</li>
+<li><input disabled="" type="checkbox"> <code>partprobe</code>：更新内核的硬盘分区表信息。</li>
+<li><input disabled="" type="checkbox"> <code>e2fsck</code>：检查ext2&#x2F;ext3&#x2F;ext4类型文件系统。</li>
+<li><input disabled="" type="checkbox"> <code>mkswap</code>：创建Linux交换分区。</li>
+<li><input disabled="" type="checkbox"> <code>swapon</code>：启用交换分区。</li>
+<li><input disabled="" type="checkbox"> <code>swapoff</code>：关闭交换分区。</li>
+<li><input disabled="" type="checkbox"> <code>sync</code>：将内存缓冲区内的数据写入磁盘。</li>
+<li><input disabled="" type="checkbox"> <code>resize2fs</code>：调整ext2&#x2F;ext3&#x2F;ext4文件系统大小。</li>
+</ul>
+<h2 id="11-系统权限及用户授权相关命令-4个"><a href="#11-系统权限及用户授权相关命令-4个" class="headerlink" title="11. 系统权限及用户授权相关命令(4个)"></a>11. 系统权限及用户授权相关命令(4个)</h2><ul>
+<li><input checked="" disabled="" type="checkbox"> <code>chmod</code>：改变文件或目录权限。</li>
+<li><input disabled="" type="checkbox"> <code>chown</code>：改变文件或目录的属主和属组。</li>
+<li><input disabled="" type="checkbox"> <code>chgrp</code>：更改文件用户组。</li>
+<li><input disabled="" type="checkbox"> <code>umask</code>：显示或设置权限掩码。</li>
+</ul>
+<h2 id="12-查看系统用户登陆信息的命令-7个"><a href="#12-查看系统用户登陆信息的命令-7个" class="headerlink" title="12. 查看系统用户登陆信息的命令(7个)"></a>12. 查看系统用户登陆信息的命令(7个)</h2><ul>
+<li><input checked="" disabled="" type="checkbox"> <code>whoami</code>：显示当前有效的用户名称，相当于执行id -un命令。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>who</code>：显示目前登录系统的用户信息。</li>
+<li><input disabled="" type="checkbox"> <code>w</code>：显示已经登陆系统的用户列表，并显示用户正在执行的指令。</li>
+<li><input disabled="" type="checkbox"> <code>last</code>：显示登入系统的用户。</li>
+<li><input disabled="" type="checkbox"> <code>lastlog</code>：显示系统中所有用户最近一次登录信息。</li>
+<li><input disabled="" type="checkbox"> <code>users</code>：显示当前登录系统的所有用户的用户列表。</li>
+<li><input disabled="" type="checkbox"> <code>finger</code>：查找并显示用户信息。</li>
+</ul>
+<h2 id="13-内置命令及其它-19个"><a href="#13-内置命令及其它-19个" class="headerlink" title="13. 内置命令及其它(19个)"></a>13. 内置命令及其它(19个)</h2><ul>
+<li><input checked="" disabled="" type="checkbox"> <code>echo</code>：打印变量，或直接输出指定的字符串</li>
+<li><input disabled="" type="checkbox"> <code>printf</code>：将结果格式化输出到标准输出。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>rpm</code>：管理rpm包的命令。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>yum</code>：自动化简单化地管理rpm包的命令。</li>
+<li><input disabled="" type="checkbox"> <code>watch</code>：周期性的执行给定的命令，并将命令的输出以全屏方式显示。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>alias</code>：设置系统别名。</li>
+<li><input disabled="" type="checkbox"> <code>unalias</code>：取消系统别名。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>date</code>：查看或设置系统时间。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>clear</code>：清除屏幕，简称清屏。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>history</code>：查看命令执行的历史纪录。</li>
+<li><input disabled="" type="checkbox"> <code>eject</code>：弹出光驱。</li>
+<li><input disabled="" type="checkbox"> <code>time</code>：计算命令执行时间。</li>
+<li><input disabled="" type="checkbox"> <code>nc</code>：功能强大的网络工具。</li>
+<li><input disabled="" type="checkbox"> <code>xargs</code>：将标准输入转换成命令行参数。</li>
+<li><input disabled="" type="checkbox"> <code>exec</code>：调用并执行指令的命令。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>export</code>：设置或者显示环境变量。</li>
+<li><input disabled="" type="checkbox"> <code>unset</code>：删除变量或函数。</li>
+<li><input disabled="" type="checkbox"> <code>type</code>：用于判断另外一个命令是否是内置命令。</li>
+<li><input disabled="" type="checkbox"> <code>bc</code>：命令行科学计算器。</li>
+</ul>
+<h2 id="14-系统管理与性能监视命令-9个"><a href="#14-系统管理与性能监视命令-9个" class="headerlink" title="14. 系统管理与性能监视命令(9个)"></a>14. 系统管理与性能监视命令(9个)</h2><ul>
+<li><input disabled="" type="checkbox"> <code>chkconfig</code>：管理Linux系统开机启动项。</li>
+<li><input disabled="" type="checkbox"> <code>vmstat</code>：虚拟内存统计。</li>
+<li><input disabled="" type="checkbox"> <code>mpstat</code>：显示各个可用CPU的状态统计。</li>
+<li><input disabled="" type="checkbox"> <code>iostat</code>：统计系统IO。</li>
+<li><input disabled="" type="checkbox"> <code>sar</code>：全面地获取系统的CPU、运行队列、磁盘 I&#x2F;O、分页(交换区)、内存、 CPU中断和网络等性能数据。</li>
+<li><input disabled="" type="checkbox"> <code>ipcs</code>：用于报告Linux中进程间通信设施的状态，显示的信息包括消息列表、共享内存和信号量的信息。</li>
+<li><input disabled="" type="checkbox"> <code>ipcrm</code>：用来删除一个或更多的消息队列、信号量集或者共享内存标识。</li>
+<li><input disabled="" type="checkbox"> <code>strace</code>：用于诊断、调试Linux用户空间跟踪器。我们用它来监控用户空间进程和内核的交互，比如系统调用、信号传递、进程状态变更等。</li>
+<li><input disabled="" type="checkbox"> <code>ltrace</code>：命令会跟踪进程的库函数调用,它会显现出哪个库函数被调用。</li>
+</ul>
+<h2 id="15-关机-重启-注销和查看系统信息的命令-6个"><a href="#15-关机-重启-注销和查看系统信息的命令-6个" class="headerlink" title="15. 关机&#x2F;重启&#x2F;注销和查看系统信息的命令(6个)"></a>15. 关机&#x2F;重启&#x2F;注销和查看系统信息的命令(6个)</h2><ul>
+<li><input checked="" disabled="" type="checkbox"> <code>shutdown</code>：关机。</li>
+<li><input disabled="" type="checkbox"> <code>halt</code>：关机。</li>
+<li><input disabled="" type="checkbox"> <code>poweroff</code>：关闭电源。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>logout</code>：退出当前登录的Shell。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>exit</code>：退出当前登录的Shell。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>Ctrl+d</code>：退出当前登录的Shell的快捷键。</li>
+</ul>
+<h2 id="16-进程管理相关命令-15个"><a href="#16-进程管理相关命令-15个" class="headerlink" title="16. 进程管理相关命令(15个)"></a>16. 进程管理相关命令(15个)</h2><ul>
+<li><input disabled="" type="checkbox"> <code>bg</code>：将一个在后台暂停的命令，变成继续执行 (在后台执行)。</li>
+<li><input disabled="" type="checkbox"> <code>fg</code>：将后台中的命令调至前台继续运行。</li>
+<li><input disabled="" type="checkbox"> <code>jobs</code>：查看当前有多少在后台运行的命令。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>kill</code>：终止进程。</li>
+<li><input disabled="" type="checkbox"> <code>killall</code>：通过进程名终止进程。</li>
+<li><input disabled="" type="checkbox"> <code>pkill</code>：通过进程名终止进程。</li>
+<li><input disabled="" type="checkbox"> <code>crontab</code>：定时任务命令。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>ps</code>：显示进程的快照。</li>
+<li><input disabled="" type="checkbox"> <code>pstree</code>：树形显示进程。</li>
+<li><input disabled="" type="checkbox"> <code>nice/renice</code>：调整程序运行的优先级。</li>
+<li><input checked="" disabled="" type="checkbox"> <code>nohup</code>：忽略挂起信号运行指定的命令。</li>
+<li><input disabled="" type="checkbox"> <code>pgrep</code>：查找匹配条件的进程。</li>
+<li><input disabled="" type="checkbox"> <code>runlevel</code>：查看系统当前运行级别。</li>
+<li><input disabled="" type="checkbox"> <code>init</code>：切换运行级别。</li>
+<li><input disabled="" type="checkbox"> <code>service</code>：启动、停止、重新启动和关闭系统服务，还可以显示所有系统服务的当前状态。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/14/%E7%9F%A5%E8%AF%86%E7%82%B9/Linux/2.%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB/" data-id="cll6dbymr00019cjw57emdirv" data-title="Linux 命令汇总" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/04/21/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/04.Jackson/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Java 第三方包-Jackson
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/04/07/%E7%9F%A5%E8%AF%86%E7%82%B9/C&C++/HelloWorld/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">The hello wrold in C&amp;C++</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">关于我</h3>
+      <ul class="widget about">
+      
+      
+      <li>专业泼冷水，执着负能量</li>
+      
+    </ul>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><span class="category-list-count">160</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Docker/">Docker</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flume/">Flume</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/HBase/">HBase</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hadoop/">Hadoop</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hive/">Hive</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kubernetes/">Kubernetes</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flume/" rel="tag">Flume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guava/" rel="tag">Guava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jackson/" rel="tag">Jackson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">74</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/" rel="tag">Java8</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LaTex/" rel="tag">LaTex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Quartz/" rel="tag">Quartz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%A7%A3/" rel="tag">图解</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" rel="tag">安全框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" rel="tag">日志框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" rel="tag">第三方包</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%88%B6/" rel="tag">自制</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Docker/" style="font-size: 12.14px;">Docker</a> <a href="/tags/Flink/" style="font-size: 17.14px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Flume/" style="font-size: 10px;">Flume</a> <a href="/tags/Git/" style="font-size: 12.14px;">Git</a> <a href="/tags/Golang/" style="font-size: 15.71px;">Golang</a> <a href="/tags/Guava/" style="font-size: 10.71px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hadoop/" style="font-size: 10.71px;">Hadoop</a> <a href="/tags/Hive/" style="font-size: 10px;">Hive</a> <a href="/tags/Idea-Instructions/" style="font-size: 13.57px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 10.71px;">JVM</a> <a href="/tags/Jackson/" style="font-size: 10px;">Jackson</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java8/" style="font-size: 12.14px;">Java8</a> <a href="/tags/Kubernetes/" style="font-size: 10px;">Kubernetes</a> <a href="/tags/LaTex/" style="font-size: 10px;">LaTex</a> <a href="/tags/Linux/" style="font-size: 16.43px;">Linux</a> <a href="/tags/Maven/" style="font-size: 12.14px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Netty/" style="font-size: 12.86px;">Netty</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/Redis/" style="font-size: 14.29px;">Redis</a> <a href="/tags/Rust/" style="font-size: 11.43px;">Rust</a> <a href="/tags/Scala/" style="font-size: 12.14px;">Scala</a> <a href="/tags/Shell/" style="font-size: 15px;">Shell</a> <a href="/tags/Spring/" style="font-size: 13.57px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 12.86px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Vim/" style="font-size: 11.43px;">Vim</a> <a href="/tags/cmd/" style="font-size: 11.43px;">cmd</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 19.29px;">代码归档</a> <a href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" style="font-size: 12.14px;">内建包</a> <a href="/tags/%E5%9B%BE%E8%A7%A3/" style="font-size: 12.86px;">图解</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 18.57px;">大数据</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" style="font-size: 11.43px;">安全框架</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 12.86px;">容器</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 11.43px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 14.29px;">数据结构与算法</a> <a href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" style="font-size: 11.43px;">日志框架</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 16.43px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 16.43px;">杂记</a> <a href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" style="font-size: 17.86px;">第三方包</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.57px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%87%AA%E5%88%B6/" style="font-size: 11.43px;">自制</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 12.14px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 12.14px;">计算机网络</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
