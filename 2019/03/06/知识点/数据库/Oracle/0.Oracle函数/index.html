@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Oracle 常用函数 | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Oracle 中常用的函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oracle 常用函数">
+<meta property="og:url" content="http://example.com/2019/03/06/%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%95%B0%E6%8D%AE%E5%BA%93/Oracle/0.Oracle%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="Oracle 中常用的函数">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-03-06T07:39:00.000Z">
+<meta property="article:modified_time" content="2020-06-16T02:21:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="Oracle">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/数据库/Oracle/0.Oracle函数" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/03/06/%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%95%B0%E6%8D%AE%E5%BA%93/Oracle/0.Oracle%E5%87%BD%E6%95%B0/" class="article-date">
+  <time class="dt-published" datetime="2019-03-06T07:39:00.000Z" itemprop="datePublished">2019-03-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Oracle 常用函数
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-通用函数"><a href="#1-通用函数" class="headerlink" title="1. 通用函数"></a>1. 通用函数</h2><ul>
+<li><p><code>sign(n)</code>: 比较大小函数，取数字n的符号，大于0返回1，小于0返回-1，等于0返回0。</p>
+</li>
+<li><p><code>decode(条件,值1,翻译值1,值2,翻译值2,...值n,翻译值n,缺省值)</code>: 流程控制函数，如果条件等于值1，则取翻译值1，等于2，则取翻译值2，……，否则，取缺省值。</p>
+</li>
+<li><p><code>coalesce(expr1, expr2...exprn)</code>: 获取非空值，返回参数列表中第一个非空表达式。必须指定最少两个参数。如果所有的参数都是null，则返回null。</p>
+</li>
+<li><p><code>merge</code>: 插入或更新</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 语法</span></span><br><span class="line"><span class="keyword">MERGE</span> <span class="keyword">INTO</span> [target<span class="operator">-</span><span class="keyword">table</span>] A <span class="keyword">USING</span> [source<span class="operator">-</span><span class="keyword">table</span> <span class="keyword">sql</span>] B </span><br><span class="line"><span class="keyword">ON</span>([conditional expression] <span class="keyword">and</span> [...]...)</span><br><span class="line"><span class="keyword">WHEN</span> MATCHED <span class="keyword">THEN</span></span><br><span class="line">  [<span class="keyword">UPDATE</span> <span class="keyword">sql</span>]</span><br><span class="line"><span class="keyword">WHEN</span> <span class="keyword">NOT</span> MATCHED <span class="keyword">THEN</span></span><br><span class="line">  [<span class="keyword">INSERT</span> <span class="keyword">sql</span>]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>时间函数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--获取系统时间</span></span><br><span class="line"><span class="keyword">select</span> sysdate <span class="keyword">from</span> dual;<span class="comment">--2019/5/14 12:39:23</span></span><br><span class="line"><span class="keyword">select</span> to_char(sysdate,<span class="string">&#x27;yyyy-MM-dd HH24:mi:ss&#x27;</span>) <span class="keyword">from</span> dual;<span class="comment">--2019-05-14 12:39:24</span></span><br><span class="line"><span class="comment">--hh为12小时制，如果时间超过12会报错</span></span><br><span class="line"><span class="keyword">SELECT</span> to_date(<span class="string">&#x27;2009-12-25 14:23:31&#x27;</span>,<span class="string">&#x27;yyyy-mm-dd,hh:mi:ss&#x27;</span>) <span class="keyword">FROM</span> dual;<span class="comment">--报错</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>with as</code>: 提取出重复数据，优化查询，with 必须紧跟引用的 select 语句，且创建的临时表必须被引用，否则报错</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 语法</span></span><br><span class="line"><span class="keyword">WITH</span> </span><br><span class="line"><span class="operator">&lt;</span>subquery_name<span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line">(<span class="operator">&lt;</span>the aggregation <span class="keyword">SQL</span> statement<span class="operator">&gt;</span>)</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line"><span class="operator">&lt;</span>query naming subquery_name<span class="operator">&gt;</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="2-分析函数"><a href="#2-分析函数" class="headerlink" title="2. 分析函数"></a>2. 分析函数</h2><h3 id="1-聚合函数"><a href="#1-聚合函数" class="headerlink" title="1. 聚合函数"></a>1. 聚合函数</h3><p>聚合函数（如 <code>sum()</code>、<code>max()</code> 等）可以计算基于组的某种聚合值，但是聚合函数对于某个组只能返回一行记录。若想对于某组返回多行记录，则需要使用分析函数</p>
+<h3 id="2-over-partition-by-…-order-by-…"><a href="#2-over-partition-by-…-order-by-…" class="headerlink" title="2. over(partition by … order by …)"></a>2. over(partition by … order by …)</h3><ul>
+<li><code>partition by</code>: 按哪个字段划分组</li>
+<li><code>order by</code>: 按哪个字段排序</li>
+</ul>
+<h3 id="3-rank-dense-rank-over-partition-by-…-order-by-…"><a href="#3-rank-dense-rank-over-partition-by-…-order-by-…" class="headerlink" title="3. rank()&#x2F;dense_rank over(partition by … order by …)"></a>3. rank()&#x2F;dense_rank over(partition by … order by …)</h3><h3 id="4-min-max-over-partition-by-…"><a href="#4-min-max-over-partition-by-…" class="headerlink" title="4. min()&#x2F;max() over(partition by …)"></a>4. min()&#x2F;max() over(partition by …)</h3><ul>
+<li><code>MAX() OVER(PARTITION BY .. ORDER BY .. DESC)</code>: 排序规则只能为desc，否则不起作用，将查询到目前为止排序值最高字段的对应值</li>
+<li><code>MIN() OVER(PARTITION BY .. ORDER BY .. ASC )</code>: 排序规则只能为asc，否则不起作用，将查询到目前为止排序值最低的字段的对应值</li>
+</ul>
+<h3 id="5-lead-lag-over-partition-by-…-order-by-…-：取前面-后面第n行记录"><a href="#5-lead-lag-over-partition-by-…-order-by-…-：取前面-后面第n行记录" class="headerlink" title="5. lead()&#x2F;lag() over(partition by … order by …)：取前面&#x2F;后面第n行记录"></a>5. lead()&#x2F;lag() over(partition by … order by …)：取前面&#x2F;后面第n行记录</h3><ul>
+<li><code>lead(列名,n,m)</code>: 当前记录后面第n行记录的&lt;列名&gt;的值，没有则默认值为m；如果不带参数n,m，则查找当前记录后面第一行的记录&lt;列名&gt;的值，没有则默认值为null</li>
+<li><code>lag(列名,n,m)</code>: 当前记录前面第n行记录的&lt;列名&gt;的值，没有则默认值为m；如果不带参数n,m，则查找当前记录前面第一行的记录&lt;列名&gt;的值，没有则默认值为null</li>
+</ul>
+<h3 id="6-first-value-last-value-over-partition-by-…-：取首尾记录"><a href="#6-first-value-last-value-over-partition-by-…-：取首尾记录" class="headerlink" title="6. first_value&#x2F;last_value(..) over(partition by …)：取首尾记录"></a>6. first_value&#x2F;last_value(..) over(partition by …)：取首尾记录</h3><h3 id="7-row-number-over-partition-by-order-by-：排序（应用：分页）"><a href="#7-row-number-over-partition-by-order-by-：排序（应用：分页）" class="headerlink" title="7. row_number() over(partition by.. order by ..)：排序（应用：分页）"></a>7. row_number() over(partition by.. order by ..)：排序（应用：分页）</h3><h3 id="8-sum-avg-count-over-partition-by"><a href="#8-sum-avg-count-over-partition-by" class="headerlink" title="8. sum()&#x2F;avg()&#x2F;count() over(partition by ..)"></a>8. sum()&#x2F;avg()&#x2F;count() over(partition by ..)</h3><h3 id="9-rows-range-between-…-preceding-and-…-following：上下范围内求值"><a href="#9-rows-range-between-…-preceding-and-…-following：上下范围内求值" class="headerlink" title="9. rows&#x2F;range between … preceding and … following：上下范围内求值"></a>9. rows&#x2F;range between … preceding and … following：上下范围内求值</h3><ul>
+<li><code>unbounded preceding and unbouned following</code>：针对当前所有记录的前一条、后一条记录，也就是表中的所有记录</li>
+<li><code>unbounded</code>：不受控制的，无限的</li>
+<li><code>preceding</code>：在…之前</li>
+<li><code>following</code>：在…之后</li>
+</ul>
+<h2 id="3-排序函数"><a href="#3-排序函数" class="headerlink" title="3. 排序函数"></a>3. 排序函数</h2><h3 id="1-row-number"><a href="#1-row-number" class="headerlink" title="1. row_number"></a>1. row_number</h3><p>顺序排序，它会为查询出来的每一行记录生成一个序号，依次排序且不会重复，注意使用row_number函数时必须要用over子句选择对某一列进行排序才能生成序号。</p>
+<h3 id="2-rank"><a href="#2-rank" class="headerlink" title="2. rank"></a>2. rank</h3><p>跳跃排序，如果有两个第一级别时，接下来是第三级别，用于返回结果集的分区内每行的排名，行的排名是相关行之前的排名数加一。</br><br>简单来说rank函数就是对查询出来的记录进行排名，与row_number函数不同的是，rank函数考虑到了over子句中排序字段值相同的情况，如果使用rank函数来生成序号，over子句中排序字段值相同的序号是一样的，后面字段值不相同的序号将跳过相同的排名号排下一个，也就是相关行之前的排名数加一，可以理解为根据当前的记录数生成序号，后面的记录依此类推。</p>
+<h3 id="3-dense-rank"><a href="#3-dense-rank" class="headerlink" title="3. dense_rank"></a>3. dense_rank</h3><p>连续排序，如果有两个第一级别时，接下来是第二级别。</br><br>与 rank 函数类似，dense_rank 函数在生成序号时是连续的，而 rank 函数生成的序号有可能不连续。dense_rank 函数出现相同排名时，将不跳过相同排名号，rank值紧接上一次的rank值。在各个分组内，rank()是跳跃排序，有两个第一名时接下来就是第三名，dense_rank()是连续排序，有两个第一名时仍然跟着第二名。</p>
+<h2 id="4-集合函数"><a href="#4-集合函数" class="headerlink" title="4. 集合函数"></a>4. 集合函数</h2><ul>
+<li><code>Union</code>: 去重并集，对两个结果集进行并集操作，不包括重复行，同时进行默认规则的排序</li>
+<li><code>Union All</code>: 并集，对两个结果集进行并集操作，包括重复行，不进行排序</li>
+<li><code>Intersect</code>: 去重交集，对两个结果集进行交集操作，不包括重复行，同时进行默认规则的排序</li>
+<li><code>Minus</code>: 去重差集，对两个结果集进行差操作，不包括重复行，MINUS前面的结果集减后面的结果集，同时进行默认规则的排序</li>
+</ul>
+<h2 id="5-分组处理函数"><a href="#5-分组处理函数" class="headerlink" title="5. 分组处理函数"></a>5. 分组处理函数</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ivictor/p/4661561.html?utm_source=tuicool">GROUP函数-GROUP_ID,GROUPING,GROUPING_ID</a></p>
+<h3 id="1-rollup"><a href="#1-rollup" class="headerlink" title="1. rollup"></a>1. rollup</h3><h4 id="1-group-by-rollup-A-B-C"><a href="#1-group-by-rollup-A-B-C" class="headerlink" title="1. group by rollup(A, B, C)"></a>1. <code>group by rollup(A, B, C)</code></h4><p>首先会对 (A、B、C) 进行 group by，然后对 (A、B) 进行 group by，然后是 (A) 进行 group by，最后对全表进行 group by 操作。</br></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*rollup两个字段*/</span></span><br><span class="line"><span class="keyword">select</span> group_id,job,<span class="built_in">sum</span>(salary) <span class="keyword">from</span> tmp_group_test <span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">rollup</span>(group_id,job);</span><br><span class="line"><span class="comment">/*等同于A，B分组求和，union all，仅A分组求和，union all，全表求和*/</span></span><br><span class="line"><span class="keyword">select</span> group_id,job,<span class="built_in">sum</span>(salary) <span class="keyword">from</span> tmp_group_test <span class="keyword">group</span> <span class="keyword">by</span> group_id,job</span><br><span class="line"><span class="keyword">union</span> <span class="keyword">all</span></span><br><span class="line"><span class="keyword">select</span> group_id,<span class="keyword">NULL</span>,<span class="built_in">sum</span>(salary) <span class="keyword">from</span> tmp_group_test <span class="keyword">group</span> <span class="keyword">by</span> group_id</span><br><span class="line"><span class="keyword">union</span> <span class="keyword">all</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">NULL</span>,<span class="keyword">NULL</span>,<span class="built_in">sum</span>(salary) <span class="keyword">from</span> tmp_group_test;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-cube"><a href="#2-cube" class="headerlink" title="2. cube"></a>2. cube</h3><h4 id="1-group-by-cube-A-B-C"><a href="#1-group-by-cube-A-B-C" class="headerlink" title="1. group by cube(A, B, C)"></a>1. <code>group by cube(A, B, C)</code></h4><p>首先会对 (A、B、C) 进行 group by，然后依次是 (A、B)，(A、C)，(A)，(B、C)，(B)，(C)，最后对全表进行 group 操作。</br></p>
+<h3 id="3-group"><a href="#3-group" class="headerlink" title="3. group"></a>3. group</h3><h4 id="1-grouping"><a href="#1-grouping" class="headerlink" title="1. grouping()"></a>1. <code>grouping()</code></h4><p>grouping()用于区分分组后的普通行和聚合行。如果是聚合行，则返回1，反之，则是0。</p>
+<h4 id="2-grouping-id"><a href="#2-grouping-id" class="headerlink" title="2. grouping_id()"></a>2. <code>grouping_id()</code></h4><p>grouping_id() 是 grouping 的增强版，与 grouping 只能带一个表达式不同，它能带多个表达式。grouping_id 在功能上相当于将多个 grouping 函数的结果串接成二进制数，返回的是这个二进制数对应的十进制数。</p>
+<h4 id="3-group-id"><a href="#3-group-id" class="headerlink" title="3. group_id()"></a>3. <code>group_id()</code></h4><p>用于区分相同分组标准的分组统计结果。可通过 having group_id() &lt; 1 来剔除重复的分组。</p>
+<h2 id="6-DBA-函数"><a href="#6-DBA-函数" class="headerlink" title="6. DBA 函数"></a>6. DBA 函数</h2><h3 id="1-锁表与解锁"><a href="#1-锁表与解锁" class="headerlink" title="1. 锁表与解锁"></a>1. 锁表与解锁</h3><h4 id="1-查询被锁表"><a href="#1-查询被锁表" class="headerlink" title="1. 查询被锁表"></a>1. 查询被锁表</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询锁表</span></span><br><span class="line"><span class="keyword">select</span> object_name</span><br><span class="line">      ,machine</span><br><span class="line">      ,sql_exec_start</span><br><span class="line">      ,s.sid</span><br><span class="line">      ,s.serial#</span><br><span class="line">  <span class="keyword">from</span> v$locked_object l</span><br><span class="line">      ,dba_objects     o</span><br><span class="line">      ,v$session       s</span><br><span class="line"> <span class="keyword">where</span> l.object_id <span class="operator">=</span> o.object_id </span><br><span class="line">   <span class="keyword">and</span> l.session_id<span class="operator">=</span>s.sid;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-解除锁表"><a href="#2-解除锁表" class="headerlink" title="2. 解除锁表"></a>2. 解除锁表</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 解除锁表：sid,serial#</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">system</span> kill session <span class="string">&#x27;977,117&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-表大小"><a href="#2-表大小" class="headerlink" title="2. 表大小"></a>2. 表大小</h3><h4 id="1-hello-用户下，所有表"><a href="#1-hello-用户下，所有表" class="headerlink" title="1. hello 用户下，所有表"></a>1. hello 用户下，所有表</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> table_name,tablespace_name,partitioned <span class="keyword">from</span> user_tables <span class="keyword">where</span> <span class="keyword">user</span><span class="operator">=</span><span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> all_tables <span class="keyword">where</span> table_name<span class="operator">=</span><span class="string">&#x27;t_tmp_d&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-表大小-1"><a href="#2-表大小-1" class="headerlink" title="2. 表大小"></a>2. 表大小</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> t1.table_name,tablespace_name,partitioned,&quot;Size(G)&quot;,MMX,MMI,cnt <span class="keyword">from</span>(</span><br><span class="line"><span class="keyword">select</span> table_name,tablespace_name,partitioned <span class="keyword">from</span> user_tables <span class="keyword">where</span> <span class="keyword">user</span><span class="operator">=</span><span class="string">&#x27;hello&#x27;</span></span><br><span class="line">) t1</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> (</span><br><span class="line"><span class="keyword">select</span>  Owner,Segment_name, <span class="built_in">sum</span>(bytes) <span class="operator">/</span> <span class="number">1024</span> <span class="operator">/</span> <span class="number">1024</span> <span class="operator">/</span> <span class="number">1024</span> <span class="keyword">as</span> &quot;Size(G)&quot;</span><br><span class="line">  <span class="keyword">From</span> Dba_segments</span><br><span class="line"> <span class="keyword">Where</span> tablespace_name <span class="keyword">like</span> <span class="string">&#x27;hello_data&#x27;</span> </span><br><span class="line"> <span class="keyword">group</span> <span class="keyword">by</span> Owner,Segment_name</span><br><span class="line">) t2 <span class="keyword">on</span> t1.table_name<span class="operator">=</span>t2.Segment_name</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span>(<span class="keyword">select</span> table_name,<span class="built_in">max</span>(partition_name) <span class="keyword">AS</span> MMX,<span class="built_in">min</span>(partition_name) <span class="keyword">AS</span> MMI,<span class="built_in">count</span>(<span class="number">1</span>) <span class="keyword">AS</span> CNT <span class="keyword">from</span> user_tab_partitions <span class="keyword">where</span> table_name <span class="keyword">IN</span> (</span><br><span class="line"><span class="keyword">select</span> table_name <span class="keyword">from</span> user_tables <span class="keyword">where</span> <span class="keyword">user</span><span class="operator">=</span><span class="string">&#x27;hello&#x27;</span> <span class="keyword">and</span> partitioned<span class="operator">=</span><span class="string">&#x27;YES&#x27;</span> <span class="keyword">and</span> partition_name <span class="keyword">not</span> <span class="keyword">in</span> (<span class="string">&#x27;P19000101&#x27;</span>,<span class="string">&#x27;P99999999&#x27;</span>,<span class="string">&#x27;P999999&#x27;</span>,<span class="string">&#x27;P190001&#x27;</span>))</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> table_name</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> table_name) t3 <span class="keyword">on</span> t1.table_name<span class="operator">=</span>t3.table_name</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> table_name;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-查看表状态"><a href="#3-查看表状态" class="headerlink" title="3. 查看表状态"></a>3. 查看表状态</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> user_tab_partitions <span class="keyword">where</span> tablespace_name<span class="operator">=</span><span class="string">&#x27;BOARD_DATA&#x27;</span> <span class="keyword">and</span> table_name<span class="operator">=</span><span class="string">&#x27;FACT_KB_FM_ANL_D&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-查看表最大，最小分区"><a href="#4-查看表最大，最小分区" class="headerlink" title="4. 查看表最大，最小分区"></a>4. 查看表最大，最小分区</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> table_name,<span class="built_in">max</span>(partition_name),<span class="built_in">min</span>(partition_name),<span class="built_in">count</span>(<span class="number">1</span>) <span class="keyword">from</span> user_tab_partitions <span class="keyword">where</span> table_name <span class="keyword">IN</span> (</span><br><span class="line"><span class="keyword">select</span> table_name <span class="keyword">from</span> user_tables <span class="keyword">where</span> <span class="keyword">user</span><span class="operator">=</span><span class="string">&#x27;BOARD&#x27;</span> <span class="keyword">and</span> partitioned<span class="operator">=</span><span class="string">&#x27;YES&#x27;</span> <span class="keyword">and</span> partition_name <span class="keyword">not</span> <span class="keyword">in</span> (<span class="string">&#x27;P19000101&#x27;</span>,<span class="string">&#x27;P99999999&#x27;</span>,<span class="string">&#x27;P999999&#x27;</span>,<span class="string">&#x27;P190001&#x27;</span>))</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> table_name</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> table_name;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-查询分区"><a href="#5-查询分区" class="headerlink" title="5. 查询分区"></a>5. 查询分区</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> user_tab_partitions <span class="keyword">where</span> table_name<span class="operator">=</span><span class="string">&#x27;TB_ALO_LOG_VISIT&#x27;</span> <span class="keyword">order</span> <span class="keyword">by</span> partition_name;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-表空间"><a href="#6-表空间" class="headerlink" title="6. 表空间"></a>6. 表空间</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">　　total.tablespace_name,</span><br><span class="line">　　round(total.GB,<span class="number">2</span>) <span class="keyword">as</span> Total_GB,</span><br><span class="line">　　round(total.GB<span class="operator">-</span>free.GB, <span class="number">2</span>) <span class="keyword">as</span> Used_GB,</span><br><span class="line">    round(free.GB, <span class="number">2</span>) <span class="keyword">as</span> free_GB,</span><br><span class="line">　　round((<span class="number">1</span><span class="operator">-</span>free.GB<span class="operator">/</span>total.GB)<span class="operator">*</span><span class="number">100</span>, <span class="number">2</span>) <span class="keyword">as</span> Used_Pct</span><br><span class="line">　　<span class="keyword">from</span></span><br><span class="line">　　(<span class="keyword">select</span> tablespace_name, <span class="built_in">sum</span>(bytes)<span class="operator">/</span><span class="number">1024</span><span class="operator">/</span><span class="number">1024</span><span class="operator">/</span><span class="number">1024</span> <span class="keyword">as</span> GB <span class="keyword">from</span> dba_free_space <span class="keyword">group</span> <span class="keyword">by</span> tablespace_name) <span class="keyword">free</span>,</span><br><span class="line">　　(<span class="keyword">select</span> tablespace_name, <span class="built_in">sum</span>(bytes)<span class="operator">/</span><span class="number">1024</span><span class="operator">/</span><span class="number">1024</span><span class="operator">/</span><span class="number">1024</span> <span class="keyword">as</span> GB <span class="keyword">from</span> dba_data_files <span class="keyword">group</span> <span class="keyword">by</span> tablespace_name) total</span><br><span class="line">　　<span class="keyword">where</span></span><br><span class="line">　　free.tablespace_name<span class="operator">=</span>total.tablespace_name;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-表的操作记录"><a href="#3-表的操作记录" class="headerlink" title="3. 表的操作记录"></a>3. 表的操作记录</h3><h4 id="1-首先查找表的操作记录"><a href="#1-首先查找表的操作记录" class="headerlink" title="1. 首先查找表的操作记录"></a>1. 首先查找表的操作记录</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> v$sqlarea a <span class="keyword">where</span> a.SQL_TEXT <span class="keyword">like</span> <span class="string">&#x27;%TABLE_NAME%&#x27;</span> <span class="keyword">order</span> <span class="keyword">by</span> last_load_time <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-从上面的记录中找到-update-语句对应的-sql-id"><a href="#2-从上面的记录中找到-update-语句对应的-sql-id" class="headerlink" title="2. 从上面的记录中找到 update 语句对应的 sql_id"></a>2. 从上面的记录中找到 <code>update</code> 语句对应的 <code>sql_id</code></h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> v$sqltext a,v$sqlarea b <span class="keyword">where</span> a.SQL_ID<span class="operator">=</span>b.SQL_ID <span class="keyword">and</span> b.SQL_ID <span class="keyword">in</span>(<span class="string">&#x27;cq53826tk4u3c&#x27;</span>,<span class="string">&#x27;afftnrfhu5utk&#x27;</span>) <span class="keyword">order</span> <span class="keyword">by</span> b.LAST_ACTIVE_TIME <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-从上面的记录中找到最新的sql操作记录，然后找到用户名和主机"><a href="#3-从上面的记录中找到最新的sql操作记录，然后找到用户名和主机" class="headerlink" title="3. 从上面的记录中找到最新的sql操作记录，然后找到用户名和主机"></a>3. 从上面的记录中找到最新的sql操作记录，然后找到用户名和主机</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> sys.v_$session l,sys.v_$<span class="keyword">sql</span> s <span class="keyword">where</span> s.SQL_ID<span class="operator">=</span><span class="string">&#x27;cq53826tk4u3c&#x27;</span> <span class="keyword">and</span> l.USERNAME <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-drop-掉的表回收站恢复"><a href="#4-drop-掉的表回收站恢复" class="headerlink" title="4. drop 掉的表回收站恢复"></a>4. drop 掉的表回收站恢复</h3><h4 id="1-首先保证开启回收站功能，且确认当前用户的默认表空间不是-system-，否则不会进入回收站"><a href="#1-首先保证开启回收站功能，且确认当前用户的默认表空间不是-system-，否则不会进入回收站" class="headerlink" title="1. 首先保证开启回收站功能，且确认当前用户的默认表空间不是 system ，否则不会进入回收站"></a>1. 首先保证开启回收站功能，且确认当前用户的默认表空间不是 system ，否则不会进入回收站</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 命令窗口执行，保证 recyclebin<span class="operator">=</span><span class="keyword">on</span></span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span> <span class="keyword">show</span> <span class="keyword">parameter</span> recycle;</span><br><span class="line"></span><br><span class="line">NAME                                 TYPE        <span class="keyword">VALUE</span></span><br><span class="line"><span class="comment">------------------------------------ ----------- ------------------------------</span></span><br><span class="line">buffer_pool_recycle                  string      </span><br><span class="line">db_recycle_cache_size                big <span class="type">integer</span> <span class="number">0</span></span><br><span class="line">recyclebin                           string      <span class="keyword">on</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-查找回收站中表的-object-name"><a href="#2-查找回收站中表的-object-name" class="headerlink" title="2. 查找回收站中表的 object_name"></a>2. 查找回收站中表的 object_name</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> object_name,original_name,partition_name,type,ts_name,createtime,droptime <span class="keyword">from</span> recyclebin;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-撤回drop-操作"><a href="#3-撤回drop-操作" class="headerlink" title="3. 撤回drop 操作"></a>3. 撤回drop 操作</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 命令窗口，利用表的 object_name 恢复表</span><br><span class="line"><span class="keyword">SQL</span><span class="operator">&gt;</span> flashback <span class="keyword">table</span> &quot;BIN$qBqFu9FDVG3gU47CAgrjvA==$0&quot; <span class="keyword">to</span> before <span class="keyword">drop</span>;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/03/06/%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%95%B0%E6%8D%AE%E5%BA%93/Oracle/0.Oracle%E5%87%BD%E6%95%B0/" data-id="cllexxr4b0009rgjw2ftc725s" data-title="Oracle 常用函数" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/03/06/%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%95%B0%E6%8D%AE%E5%BA%93/Oracle/3.%E8%A1%A8%E7%A9%BA%E9%97%B4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Oracle 表空间
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/03/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8-3Blue1Brown/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">线性代数的本质-3Blue1Brown</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">关于我</h3>
+      <ul class="widget about">
+      
+      
+      <li>专业泼冷水，执着负能量</li>
+      
+    </ul>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><span class="category-list-count">194</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Docker/">Docker</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flume/">Flume</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/HBase/">HBase</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hadoop/">Hadoop</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hive/">Hive</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kafka/">Kafka</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kubernetes/">Kubernetes</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flume/" rel="tag">Flume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guava/" rel="tag">Guava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jackson/" rel="tag">Jackson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">74</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/" rel="tag">Java8</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LaTex/" rel="tag">LaTex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/" rel="tag">PostgreSQL</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pyqt5/" rel="tag">Pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Quartz/" rel="tag">Quartz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/" rel="tag">Zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyinstaller/" rel="tag">pyinstaller</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%A7%A3/" rel="tag">图解</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" rel="tag">安全框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" rel="tag">日志框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" rel="tag">第三方包</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%88%B6/" rel="tag">自制</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AC%E8%BD%BD/" rel="tag">转载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Docker/" style="font-size: 11.67px;">Docker</a> <a href="/tags/Flink/" style="font-size: 16.67px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Flume/" style="font-size: 10px;">Flume</a> <a href="/tags/Git/" style="font-size: 11.67px;">Git</a> <a href="/tags/Golang/" style="font-size: 15.56px;">Golang</a> <a href="/tags/Guava/" style="font-size: 10.56px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hadoop/" style="font-size: 10.56px;">Hadoop</a> <a href="/tags/Hive/" style="font-size: 10px;">Hive</a> <a href="/tags/Idea-Instructions/" style="font-size: 13.33px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 10.56px;">JVM</a> <a href="/tags/Jackson/" style="font-size: 10px;">Jackson</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java8/" style="font-size: 11.67px;">Java8</a> <a href="/tags/Kafka/" style="font-size: 11.67px;">Kafka</a> <a href="/tags/Kubernetes/" style="font-size: 10px;">Kubernetes</a> <a href="/tags/LaTex/" style="font-size: 10px;">LaTex</a> <a href="/tags/Linux/" style="font-size: 16.11px;">Linux</a> <a href="/tags/Maven/" style="font-size: 11.67px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Mysql/" style="font-size: 10.56px;">Mysql</a> <a href="/tags/Netty/" style="font-size: 12.22px;">Netty</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Oracle/" style="font-size: 15px;">Oracle</a> <a href="/tags/PostgreSQL/" style="font-size: 10.56px;">PostgreSQL</a> <a href="/tags/Pyqt5/" style="font-size: 10px;">Pyqt5</a> <a href="/tags/Python/" style="font-size: 17.22px;">Python</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/Redis/" style="font-size: 13.89px;">Redis</a> <a href="/tags/Rust/" style="font-size: 11.11px;">Rust</a> <a href="/tags/Scala/" style="font-size: 11.67px;">Scala</a> <a href="/tags/Shell/" style="font-size: 14.44px;">Shell</a> <a href="/tags/Spring/" style="font-size: 13.33px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 12.22px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Vim/" style="font-size: 11.11px;">Vim</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/cmd/" style="font-size: 11.11px;">cmd</a> <a href="/tags/pyinstaller/" style="font-size: 10px;">pyinstaller</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 19.44px;">代码归档</a> <a href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" style="font-size: 15px;">内建包</a> <a href="/tags/%E5%9B%BE%E8%A7%A3/" style="font-size: 12.78px;">图解</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 19.44px;">大数据</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" style="font-size: 11.11px;">安全框架</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 12.22px;">容器</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 17.78px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 13.89px;">数据结构与算法</a> <a href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" style="font-size: 11.11px;">日志框架</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 16.11px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 18.33px;">杂记</a> <a href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" style="font-size: 18.89px;">第三方包</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.33px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%87%AA%E5%88%B6/" style="font-size: 11.11px;">自制</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 11.67px;">计算机网络</a> <a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 10px;">转载</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

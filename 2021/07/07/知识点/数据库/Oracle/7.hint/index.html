@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Oracle 中的 hint | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Oracle 的 hint 使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oracle 中的 hint">
+<meta property="og:url" content="http://example.com/2021/07/07/%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%95%B0%E6%8D%AE%E5%BA%93/Oracle/7.hint/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="Oracle 的 hint 使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-07T08:57:00.000Z">
+<meta property="article:modified_time" content="2021-07-07T12:40:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="Oracle">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/数据库/Oracle/7.hint" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/07/07/%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%95%B0%E6%8D%AE%E5%BA%93/Oracle/7.hint/" class="article-date">
+  <time class="dt-published" datetime="2021-07-07T08:57:00.000Z" itemprop="datePublished">2021-07-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Oracle 中的 hint
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-wiki"><a href="#1-wiki" class="headerlink" title="1. wiki"></a>1. wiki</h2><p>Hint 是 Oracle 数据库提供的一种机制，按照 Hint 告诉它的方式生成执行计划。</br><br>提示是 Oracle 为了不破坏和其他数据库引擎之间对 SQL 语句的兼容性而提供的一种扩展功能：</br></p>
+<ul>
+<li><code>&quot;+&quot;</code> 号表示此注释是一个提示，必须紧跟 <code>&quot;/*&quot;</code>，且中间不能有空格</li>
+<li>如果包含多个提示，则每个提示之间需要用一个或多个空格隔开；</li>
+<li>hint 提示只能出现在4个关键字后面，<code>DELET</code>E、<code>INSERT</code>、<code>UPDATE</code> 或 <code>MERGE</code></li>
+</ul>
+<h2 id="2-语法"><a href="#2-语法" class="headerlink" title="2. 语法"></a>2. 语法</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="keyword">DELETE</span><span class="operator">|</span><span class="keyword">INSERT</span><span class="operator">|</span><span class="keyword">SELECT</span><span class="operator">|</span><span class="keyword">UPDATE</span>&#125;<span class="comment">/*+ hint [text] [hint[text]]*/</span></span><br><span class="line">&#123;<span class="keyword">DELETE</span><span class="operator">|</span><span class="keyword">INSERT</span><span class="operator">|</span><span class="keyword">SELECT</span><span class="operator">|</span><span class="keyword">UPDATE</span>&#125; <span class="comment">--+ hint [text] [hint[text]]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-hint-分类"><a href="#3-hint-分类" class="headerlink" title="3. hint 分类"></a>3. hint 分类</h2><h3 id="3-1-优化器相关的"><a href="#3-1-优化器相关的" class="headerlink" title="3.1.优化器相关的"></a>3.1.优化器相关的</h3><p>当对优化器为某个语句所制定的基本执行计划不满意时，最好的方法是通过提示来改变执行计划，并观察改变后是否达到期望的程度。</p>
+<h4 id="3-1-1-OPT-PARAM"><a href="#3-1-1-OPT-PARAM" class="headerlink" title="3.1.1. OPT_PARAM"></a>3.1.1. <code>OPT_PARAM</code></h4><p>作用是使某条语句中指定某个系统参数值。</p>
+<h4 id="1-2-ALL-EOWS"><a href="#1-2-ALL-EOWS" class="headerlink" title="1.2. ALL_EOWS"></a>1.2. <code>ALL_EOWS</code></h4><p>实现查询语句整体最优化而引导优化器制定最少成本的执行计划。优化器会选择一条可最快检索所有查询行的路径，代价就是检索一行时，速度会很慢。</p>
+<h4 id="3-1-3-FIRST-ROWS"><a href="#3-1-3-FIRST-ROWS" class="headerlink" title="3.1.3. FIRST_ROWS"></a>3.1.3. <code>FIRST_ROWS</code></h4><p>为获得最佳响应时间而引导优化器制定最少成本的执行计划。这个提示会使优化器选择可最快检索出查询的第一行(或指定行)数据的路径，而代价就是检索很多行时速度就会很慢。</br><br>利用 <code>FIRST_ROWS(n)</code> 来优化的行数，默认值为1，这个值介于 10 到 1000 之间，其是完全基于代价的方法：</br></p>
+<ul>
+<li>如果 n 值很小，CBO 就会生成包含嵌套循环以及索引查找的计划</li>
+<li>如果 n 很大，CBO 会生成由哈希连接和全表扫描组成的计划(类似ALL_ROWS)。</li>
+</ul>
+<h4 id="3-1-4-CHOOSE"><a href="#3-1-4-CHOOSE" class="headerlink" title="3.1.4. CHOOSE"></a>3.1.4. <code>CHOOSE</code></h4><p>依据 SQL 中所使用到的表的统计信息存在与否，来决定使用 RBO 还是 CBO。在 <code>CHOOSE</code> 模式下，如果能够参考表的统计信息，则将按照 <code>ALL_ROWS</code> 方式执行。</br><br>除非在查询中的所有表都没有经过分析，否则该提示会对整个查询使用基于代价的优化。如果在多表连接中有一个表经过分析过，那么就会对整个查询进行基于代价的优化。</br></p>
+<h4 id="3-1-5-RULE"><a href="#3-1-5-RULE" class="headerlink" title="3.1.5. RULE"></a>3.1.5. <code>RULE</code></h4><p>使用基于规则的优化器来实现最优化执行，即引导优化器根据优先顺序规则来决定查询条件中所使用到的索引或运算符的执行顺序来制定执行计划。</br><br>这个提示强制 oracle 优先使用预定义的一组规则，而不是对数据进行统计，同时该提示还会使这个语句避免使用其他提示，除了 <code>DRIVING_SITE</code> 和 <code>ORDERED</code> (不管是否进行基于规则的优化，<br>这两个提示都可使用)。</p>
+<h3 id="3-2-和访问路径相关的"><a href="#3-2-和访问路径相关的" class="headerlink" title="3.2.和访问路径相关的"></a>3.2.和访问路径相关的</h3><h4 id="3-2-1-FULL"><a href="#3-2-1-FULL" class="headerlink" title="3.2.1. FULL"></a>3.2.1. <code>FULL</code></h4><p>告诉优化器通过全表扫描方式访问数据。这个提示只对所指定的表进行全表扫描，而不是查询中的所有表。FULL提示可以改善性能。这主要是因为它改变了查询中的<br>驱动表，而不是因为全表扫描。在使用其他某些提示时，也必须使用FULL提示。只有访问整个表时，才可利用CACHE提示将表进行缓存。并行组中的某些提示也必须使用全表<br>扫描。</p>
+<h4 id="3-2-2-CLUSTER"><a href="#3-2-2-CLUSTER" class="headerlink" title="3.2.2. CLUSTER"></a>3.2.2. <code>CLUSTER</code></h4><p>引导优化器通过扫描聚簇索引来从索引表中读取数据。</p>
+<h4 id="3-2-3-HASH"><a href="#3-2-3-HASH" class="headerlink" title="3.2.3. HASH"></a>3.2.3. <code>HASH</code></h4><p>引导优化器按照哈希扫描的方式从表中读取数据。</p>
+<h4 id="3-2-4-INDEX"><a href="#3-2-4-INDEX" class="headerlink" title="3.2.4. INDEX"></a>3.2.4. <code>INDEX</code></h4><p>告诉优化器对指定表通过索引的方式访问数据。当访问数据会导致结果集不完整时，优化器将忽略这个 Hint。</p>
+<h4 id="3-2-5-NO-INDEX"><a href="#3-2-5-NO-INDEX" class="headerlink" title="3.2.5. NO_INDEX"></a>3.2.5. <code>NO_INDEX</code></h4><p>告诉优化器对指定表不允许使用索引。这个提示会禁止优化器使用指定索引。可以在删除不必要的索引之前在许多查询中禁止索引。如果使用了 <code>NO_INDEX</code>，但<br>是没有指定任何索引，则会执行全表扫描。如果对某个索引同时使用了 <code>NO_INDEX</code> 和会之产生冲突的提示(如 <code>INDEX</code>)，这时两个提示都会被忽略掉。</p>
+<h4 id="3-2-6-INDEX-ASC"><a href="#3-2-6-INDEX-ASC" class="headerlink" title="3.2.6. INDEX_ASC"></a>3.2.6. <code>INDEX_ASC</code></h4><p>利用索引从表中读取数据时，引导优化器对提示中所指定索引的索引列值按照升序使用范围扫描。</p>
+<h4 id="3-2-7-INDEX-COMBINE"><a href="#3-2-7-INDEX-COMBINE" class="headerlink" title="3.2.7. INDEX_COMBINE"></a>3.2.7. <code>INDEX_COMBINE</code></h4><p>告诉优化器强制选择位图索引。</br><br>这个提示会使优化器合并表上的多个位图索引，而不是选择其中最好的索引(这是 <code>INDEX</code> 提示的用途)。还可以指定单个索引(对于指定位图索引，该提示优先于 <code>INDEX</code> 提示)。对于 B 树索引，可以使用 <code>AND_EQUAL</code> 提示而不是这个提示。</p>
+<h4 id="3-2-8-INDEX-JOIN"><a href="#3-2-8-INDEX-JOIN" class="headerlink" title="3.2.8. INDEX_JOIN"></a>3.2.8. <code>INDEX_JOIN</code></h4><p>索引关联，当谓词中引用的列上都有索引的时候，可以通过索引关联的方式来访问数据。</br><br>这个提示可以将同一个表的各个不同索引进行合并，这样就只需要访问这些索引就可以了，节省了回表查询的时间。但只能在基于代价的优化器中使用该提示。这个提示不仅允许只访问表上的索引， 这样可以扫描更少的代码块，并且它比使用索引并通过rowid扫描整个表快 5 倍。</p>
+<h4 id="3-2-9-INDEX-DESC"><a href="#3-2-9-INDEX-DESC" class="headerlink" title="3.2.9. INDEX_DESC"></a>3.2.9. <code>INDEX_DESC</code></h4><p>利用索引从表中读取数据时，引导优化器对提示中所指定索引的索引列值按照降序使用范围扫描。</p>
+<h4 id="3-2-10-INDEX-FFS"><a href="#3-2-10-INDEX-FFS" class="headerlink" title="3.2.10. INDEX_FFS"></a>3.2.10. <code>INDEX_FFS</code></h4><p>告诉优化器以 <code>index fast full scan</code> 的方式访问数据。</br><br>这个提示会执行一次索引的快速全局扫描。它只访问索引，而不是对应的表。只有查询需要检索的信息都在索引上时，才使用这个提示。特别在表有很多列时，使用该提示可以极大地改善性能。</p>
+<h4 id="3-2-11-INDEX-SS"><a href="#3-2-11-INDEX-SS" class="headerlink" title="3.2.11. INDEX_SS"></a>3.2.11. <code>INDEX_SS</code></h4><p>强制使用 <code>index skip scan</code> 的方式访问索引。</br><br>当在一个联合索引中，某些谓词条件并不在联合索引的第一列时(或者谓词并不在联合索引的第一列时)，可以通过其来访问索引获得数据。当联合索引第一列的唯一值很少时，使用这种方式比全表扫描的方式效率要高。</p>
+<h3 id="3-3-和查询转换相关的"><a href="#3-3-和查询转换相关的" class="headerlink" title="3.3. 和查询转换相关的"></a>3.3. 和查询转换相关的</h3><h4 id="3-3-1-USE-CONCAT"><a href="#3-3-1-USE-CONCAT" class="headerlink" title="3.3.1. USE_CONCAT"></a>3.3.1. <code>USE_CONCAT</code></h4><p>将含有多个 <code>OR</code> 或者 <code>IN</code> 运算符所连接起来的查询语句分解为多个单一查询语句，并为每个单一查询语句选择最优化查询路径，然后再将这些最优化查询路径结合在一起，以实现整体查询语句的最优化目的。只有在驱动查询条件中包含 <code>OR</code> 的时候，才可以使用该提示。</p>
+<h4 id="3-3-2-NO-EXPAND"><a href="#3-3-2-NO-EXPAND" class="headerlink" title="3.3.2. NO_EXPAND"></a>3.3.2. <code>NO_EXPAND</code></h4><p>引导优化器不要为使用 <code>OR</code> 运算符号(或 <code>IN</code> 运算符)的条件制定相互结合的执行计划。正好和 <code>USE_CONCAT</code> 相反。</p>
+<h4 id="3-3-3-REWRITE"><a href="#3-3-3-REWRITE" class="headerlink" title="3.3.3. REWRITE"></a>3.3.3. <code>REWRITE</code></h4><p>当表连接的对象是数据量比较大的表或者需要获得使用统计函数处理过的结果时，为了提高执行速度可预先创建物化视图。当用户要求查询某个查询语句时，优化器会在从表中和从物化视图中读取数据的两种方法中选择一个更有效的方法来读取数据。该执行方法称之为查询重写。使用 <code>REWRITE</code> 提示引导优化器按照该方式执行。</p>
+<h4 id="3-3-4-MERGE"><a href="#3-3-4-MERGE" class="headerlink" title="3.3.4. MERGE"></a>3.3.4. <code>MERGE</code></h4><p>为了能以最优方式从视图或者嵌套视图中读取数据，通过变换查询语句来直接读取视图使用的基表数据，该过程被称之为视图合并。不同的情况其具体使用类型也有所不同。该提示主要在视图未发生合并时被使用。尤其是对比较复杂的视图或者嵌套视图(比如使用了 <code>GROUP BY</code> 或 <code>DISTINC</code> 的视图)使用该提示，有时会取得非常好的效果。</p>
+<h4 id="3-3-5-UNNEST"><a href="#3-3-5-UNNEST" class="headerlink" title="3.3.5. UNNEST"></a>3.3.5. <code>UNNEST</code></h4><p>提示优化器将子查询转换为连接的方式。也就是引导优化器合并子查询和主查询并且将其向连接类型转换。</p>
+<h4 id="3-3-6-NO-UNNEST"><a href="#3-3-6-NO-UNNEST" class="headerlink" title="3.3.6. NO_UNNEST"></a>3.3.6. <code>NO_UNNEST</code></h4><p>引导优化器让子查询能够独立地执行完毕之后再跟外围的查询做 <code>FILTER</code>。</p>
+<h4 id="3-3-7-PUSH-PRED"><a href="#3-3-7-PUSH-PRED" class="headerlink" title="3.3.7. PUSH_PRED"></a>3.3.7. <code>PUSH_PRED</code></h4><p>使用该提示可以将视图或嵌套视图以外的查询条件推入到视图之内。</p>
+<h4 id="3-3-8-NO-PUSH-PRED"><a href="#3-3-8-NO-PUSH-PRED" class="headerlink" title="3.3.8. NO_PUSH_PRED"></a>3.3.8. <code>NO_PUSH_PRED</code></h4><p>使用该提示确保视图或嵌套视图以外的查询条件不被推入到视图内部。</p>
+<h4 id="3-3-9-PUSH-SUBQ"><a href="#3-3-9-PUSH-SUBQ" class="headerlink" title="3.3.9. PUSH_SUBQ"></a>3.3.9. <code>PUSH_SUBQ</code></h4><p>使用该提示引导优化器为不能合并的子查询制定执行计划。不能合并的子查询被优先执行之后，该子查询的执行结果将扮演缩减主查询数据查询范围的提供者角色。通常在无法执行子查询合并的情况下，子查询扮演的都是检验者角色，所以子查询一般被放在最后执行。在无法被合并的子查询拥有较少的结果行，或者该子查询可以缩减主查询查询范围的情况下，可以使用该提示引导优化器最大程度地将该子查询放在前面执行，以提高执行速度。但如果子查询执行的是远程表或者排序合并连接的一部分连接结果，则该提示将不起任何作用。</p>
+<h4 id="3-3-10-NO-PUSH-SUBQ"><a href="#3-3-10-NO-PUSH-SUBQ" class="headerlink" title="3.3.10. NO_PUSH_SUBQ"></a>3.3.10. <code>NO_PUSH_SUBQ</code></h4><p>使用该提示将引导优化器将不能实现合并的子查询放在最后执行。在子查询无法缩减主查询的查询范围，或者执行子查询开销较大的情况下，将这样的子查询放在最后执行可以在某种程度上提高整体的执行效率。也就是说，尽可能地使用其他查询条件最大程度地缩减查询范围之后，再执行子查询。</p>
+<h3 id="3-4-和表连接顺序相关的"><a href="#3-4-和表连接顺序相关的" class="headerlink" title="3.4. 和表连接顺序相关的"></a>3.4. 和表连接顺序相关的</h3><p>这些提示可以调整表连接的顺序。调整表连接的顺序并不是只能使用这些提示，在嵌套循环连接方式中也可以让提示来引导优化器使用由驱动查询条件所创建的索引。</br><br>然而，该方法只有在使用的索引和表连接顺序同时被调整的情况下才比较有效。一般而言，这些提示主要在执行多表连接和表之间的连接顺序比较混乱的情况下才使用，也在排序合并连接或哈希连接方式下，为引导优化器优先执行数据量比较少得表时使用。</p>
+<h4 id="3-4-1-LEADING"><a href="#3-4-1-LEADING" class="headerlink" title="3.4.1. LEADING"></a>3.4.1. <code>LEADING</code></h4><p>在一个多表关联的查询中，其指定由哪个表作为驱动表，即告诉优化器首先要访问那个表上的数据。引导优化器使用 <code>LEADING</code> 指定的表作为表连接顺序中的第一个表。</br><br>该提示既与 <code>FROM</code> 中所描述的表的顺序无关，也与作为调整表连接顺序的 <code>ORDERED</code> 提示不同，并且在使用该提示时并不需要调整FROM中所描述的表的顺序。当该提示与ORDERED提示同时使用时，该提示被忽略。</br><br>这个提示类似 <code>ORDERED</code> 提示，它允许指定驱动查询的表，然后由优化器来判断下一个要访问的表。如果使用这个提示指定多张表，那么就可以忽略这个提示。</p>
+<h4 id="3-4-2-ORDERED"><a href="#3-4-2-ORDERED" class="headerlink" title="3.4.2. ORDERED"></a>3.4.2. <code>ORDERED</code></h4><p>引导优化器按照 <code>FROM</code> 中所描述的表的顺序执行连接。如果和 <code>LEADING</code> 提示被一起使用，则 <code>LEADING</code> 提示将被忽略。由于 <code>ORDERED</code> 只能调整表连接的顺序并不能改变表连接的方式，所以为了改变表的连接方式，经常将 <code>USE_NL</code>、<code>USE_MERGE</code> 提示与 <code>ORDERED</code> 提示放在一起使用。</p>
+<h3 id="3-5-和表连接操作相关的"><a href="#3-5-和表连接操作相关的" class="headerlink" title="3.5. 和表连接操作相关的"></a>3.5. 和表连接操作相关的</h3><h4 id="3-5-1-USE-NL"><a href="#3-5-1-USE-NL" class="headerlink" title="3.5.1. USE_NL"></a>3.5.1. <code>USE_NL</code></h4><p>使用该提示引导优化器按照嵌套循环连接方式执行表连接。它只是指出表连接的方式，对于表连接顺序不会有任何影响。</p>
+<h4 id="3-5-3-USE-MERGE"><a href="#3-5-3-USE-MERGE" class="headerlink" title="3.5.3. USE_MERGE"></a>3.5.3. <code>USE_MERGE</code></h4><p>引导优化器按照排序合并连接方式执行连接。在有必要的情况下，推荐将该提示与 <code>ORDERED</code> 提示一起使用。提示通常用于获得查询的最佳吞吐量。</br><br>假设将两个表连接在一起，从每个表返回的行集将被排序，然后再被合并(也就是合并排序)，从而组成最终的结果集。由于每个行先被排序之后才进行合并，所以在给定查询中<br>检索所有行时，速度将会最快。如果需要以最快速度返回第一行，就应该使用 <code>USE_NL</code> 提示。</p>
+<h4 id="3-5-3-USE-HASH"><a href="#3-5-3-USE-HASH" class="headerlink" title="3.5.3. USE_HASH"></a>3.5.3. <code>USE_HASH</code></h4><p>该提示引导优化器按照哈希连接方式执行连接。在执行哈希连接时，如果由于某一边的表比较小，从而可以在内存中实现哈希连接，那么就能够获得非常好的执<br>行速度。</br><br>由于在大部分情况下优化器会通过对统计信息的分析来决定 Build Input 和 Prove Input，所以建议不要使用ORDERED提示随意改变表的连接顺序。但是当优化<br>器没能做出正确判断时，或者像从嵌套视图中所获得的结果集合那样不具备统计信息时，可以使用该提示。</p>
+<h3 id="3-6-和并行相关的"><a href="#3-6-和并行相关的" class="headerlink" title="3.6.和并行相关的"></a>3.6.和并行相关的</h3><h4 id="3-6-1-PARALLEL"><a href="#3-6-1-PARALLEL" class="headerlink" title="3.6.1. PARALLEL"></a>3.6.1. <code>PARALLEL</code></h4><p>指定SQL执行的并行度，这个值将会覆盖表自身设定的并行度。如果这个值为 default，CBO使用系统参数。从表中读取大量数据和执行 DML 操作时使用该提示来<br>指定SQL的并行操作。一般情况下需要在该提示中指定将要使用的并行线程个数。</br><br>如果在该提示中没有指定并行度的个数，则优化器将使用 <code>PARALLEL_THREADS_PER_CPU</code> 参数所指定的值进行自动计算。如果在定义表时指定了 <code>PARALLEL</code> ，那么在能够使用并行操作的情况下，即使没有使用该提示，优化器也会按照指定的并行级别选择并行操作。但是如果想在 <code>DELETE</code>、<code>INSERT</code>、<code>UPDAT</code>E、<code>MERGE</code> 等 DML 操作中使用并行操作，则必须要在会话中设置 <code>ALTER SESSION ENABLE PARALLEL DML</code>， 在某个会话中所设置 的并行级别也可以被引用在内部的 <code>GROUP BY</code> 或者排序操作中。在并行操作中如果出现了某个限制要素，则该提示将被忽略。</p>
+<h4 id="3-6-2-NOPARALLEL-NO-PARALLEL"><a href="#3-6-2-NOPARALLEL-NO-PARALLEL" class="headerlink" title="3.6.2. NOPARALLEL/NO_PARALLEL"></a>3.6.2. <code>NOPARALLEL/NO_PARALLEL</code></h4><p>在SQL语句禁止使用并行。在有些版本中用NO_PARALLEL提示来代替NOPARALLEL提示。</p>
+<h4 id="3-6-3-PQ-DISTRIBUTE"><a href="#3-6-3-PQ-DISTRIBUTE" class="headerlink" title="3.6.3. PQ_DISTRIBUTE"></a>3.6.3. <code>PQ_DISTRIBUTE</code></h4><p>为了提高并行连接的执行速度，使用该提示来定义使用何种方法在主从进程之间(例如生产者进程和消费者进程)分配各连接表的数据行。</p>
+<h4 id="3-6-4-PARALLEL-INDEX"><a href="#3-6-4-PARALLEL-INDEX" class="headerlink" title="3.6.4. PARALLEL_INDEX"></a>3.6.4. <code>PARALLEL_INDEX</code></h4><p>为了按照并行操作的方式对分区索引进行索引范围扫描而使用该提示，并且可以指定进程的个数。</p>
+<h3 id="3-7-其他相关的"><a href="#3-7-其他相关的" class="headerlink" title="3.7.其他相关的"></a>3.7.其他相关的</h3><h4 id="3-7-1-APPEND"><a href="#3-7-1-APPEND" class="headerlink" title="3.7.1. APPEND"></a>3.7.1. <code>APPEND</code></h4><p>让数据库以直接加载的方式(direct load)将数据加载入库。这个提示不会检查当前是否有插入所需要的块空间，相反它会直接将数据添加到新块中。这样会浪费空<br>间，但可以提高插入的性能。需要注意的是，数据将被存储在 HWM 之上的位置。</p>
+<h4 id="3-7-2-APPEND-VALUES"><a href="#3-7-2-APPEND-VALUES" class="headerlink" title="3.7.2. APPEND_VALUES"></a>3.7.2. <code>APPEND_VALUES</code></h4><p>在11.2中新增的提示，使得INSERT INTO VALUES语句也可以使用直接路径插入。</p>
+<h4 id="3-7-3-CACHE"><a href="#3-7-3-CACHE" class="headerlink" title="3.7.3. CACHE"></a>3.7.3. <code>CACHE</code></h4><p>在全表扫描之后，数据块将留在LRU列表的最活跃端。如果设置表的CACHE属性，它的作用和HINT一样。这个提示会将全表扫描全部缓存到内存中。如果表很大，会占用大量内存。因此适用于用户经常访问的较小的表。</p>
+<h4 id="3-7-4-NOCACHE"><a href="#3-7-4-NOCACHE" class="headerlink" title="3.7.4. NOCACHE"></a>3.7.4. <code>NOCACHE</code></h4><p>引导优化器将通过全表扫描方式获取的数据块缓存在LRU列表的最后位置，这样可以让数据库实例缓存中的这些数据块被优先清除。这是优化器在Buffer Cache 中管理数据块的默认方法(仅针对全表扫描)。</p>
+<h4 id="3-7-5-QB-NAME"><a href="#3-7-5-QB-NAME" class="headerlink" title="3.7.5. QB_NAME"></a>3.7.5. <code>QB_NAME</code></h4><p>使用该提示为查询语句块命名，在其他查询语句块可以直接使用该查询语句块的名称。</p>
+<h4 id="3-7-6-DRIVING-SITE"><a href="#3-7-6-DRIVING-SITE" class="headerlink" title="3.7.6. DRIVING_SITE"></a>3.7.6. <code>DRIVING_SITE</code></h4><p>这个提示在分布式数据库操作中有用。指定表是处理连接所在的位置。可以限制通过网络处理的信息量。此外，还可以建立远程表的本地视图来限制从远程站点检索的行。本地视图应该有 where 子句，从而视图可以在将行发送回本地数据库之前限制从远程数据库返回的行。</p>
+<h4 id="3-7-7-DYNAMIC-SAMPLING"><a href="#3-7-7-DYNAMIC-SAMPLING" class="headerlink" title="3.7.7. DYNAMIC_SAMPLING"></a>3.7.7. <code>DYNAMIC_SAMPLING</code></h4><p>提示SQL执行时动态采样的级别。这个级别为 0~10，它将覆盖系统默认的动态采样级别。等级越高，所获得统计信息的准确率越高。该提示的功能就是为了确保将动态采样原理应用在单个SQL中。</p>
+<h4 id="3-7-8-AND-EQUAL"><a href="#3-7-8-AND-EQUAL" class="headerlink" title="3.7.8. AND_EQUAL"></a>3.7.8. <code>AND_EQUAL</code></h4><p>这个提示会使优化器合并表上的多个索引，而不是选择其中最好的索引(这是INDEX提示的用途)。这个提示与前面的 <code>INDEX_JOIN</code> 提示有区别，以此指定的合并索引随后需访问表，而 <code>INDEX_JOIN</code> 提示则只需访问索引。如果发现需经常用到这个提示，可能需要删除这些单个索引而改用一个组合索引。需要查询条件里面包括所有索引列，然后取得每个索引中得到的 rowid 列表。然后对这些对象做 merge join ，过滤出相同的 rowid 后再去表中获取数据或者直接从索引中获得数据。在10g中，<code>AND_EQUAL</code> 已经废弃了，只能通过 hint 才能生效。</p>
+<h4 id="3-7-9-CARDINALITY"><a href="#3-7-9-CARDINALITY" class="headerlink" title="3.7.9. CARDINALITY"></a>3.7.9. <code>CARDINALITY</code></h4><p>向优化器提供对某个查询语句的整体或部分的预测基数值，并通过参考该基数值来为查询语句制定执行计划。如果在该提示中没有指定表的名称，则该基数值将被视为从该查询语句所获得的最终结果行数。</p>
+<h2 id="4-注"><a href="#4-注" class="headerlink" title="4. 注"></a>4. 注</h2><h3 id="4-1-RBO-与-CBO"><a href="#4-1-RBO-与-CBO" class="headerlink" title="4.1. RBO 与 CBO"></a>4.1. RBO 与 CBO</h3><ul>
+<li><code>RBO(Rule-Based Optimization)</code> : 基于规则的优化器</li>
+<li><code>CBO(Cost-Based Optimization)</code> : 基于代价的优化器</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/07/%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%95%B0%E6%8D%AE%E5%BA%93/Oracle/7.hint/" data-id="cllexxr4q000grgjwcjk99h1w" data-title="Oracle 中的 hint" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/10/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/0.%E5%BE%AE%E6%89%B9%E5%92%8C%E5%AE%9E%E6%97%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Flink 基础-微批和实时(第零章)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/05/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/JavaCompiler/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Java 编译器 JavaCompiler</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">关于我</h3>
+      <ul class="widget about">
+      
+      
+      <li>专业泼冷水，执着负能量</li>
+      
+    </ul>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><span class="category-list-count">194</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Docker/">Docker</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flume/">Flume</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/HBase/">HBase</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hadoop/">Hadoop</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hive/">Hive</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kafka/">Kafka</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kubernetes/">Kubernetes</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flume/" rel="tag">Flume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guava/" rel="tag">Guava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jackson/" rel="tag">Jackson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">74</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/" rel="tag">Java8</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LaTex/" rel="tag">LaTex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/" rel="tag">PostgreSQL</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pyqt5/" rel="tag">Pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Quartz/" rel="tag">Quartz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/" rel="tag">Zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyinstaller/" rel="tag">pyinstaller</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%A7%A3/" rel="tag">图解</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" rel="tag">安全框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" rel="tag">日志框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" rel="tag">第三方包</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%88%B6/" rel="tag">自制</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AC%E8%BD%BD/" rel="tag">转载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Docker/" style="font-size: 11.67px;">Docker</a> <a href="/tags/Flink/" style="font-size: 16.67px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Flume/" style="font-size: 10px;">Flume</a> <a href="/tags/Git/" style="font-size: 11.67px;">Git</a> <a href="/tags/Golang/" style="font-size: 15.56px;">Golang</a> <a href="/tags/Guava/" style="font-size: 10.56px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hadoop/" style="font-size: 10.56px;">Hadoop</a> <a href="/tags/Hive/" style="font-size: 10px;">Hive</a> <a href="/tags/Idea-Instructions/" style="font-size: 13.33px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 10.56px;">JVM</a> <a href="/tags/Jackson/" style="font-size: 10px;">Jackson</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java8/" style="font-size: 11.67px;">Java8</a> <a href="/tags/Kafka/" style="font-size: 11.67px;">Kafka</a> <a href="/tags/Kubernetes/" style="font-size: 10px;">Kubernetes</a> <a href="/tags/LaTex/" style="font-size: 10px;">LaTex</a> <a href="/tags/Linux/" style="font-size: 16.11px;">Linux</a> <a href="/tags/Maven/" style="font-size: 11.67px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Mysql/" style="font-size: 10.56px;">Mysql</a> <a href="/tags/Netty/" style="font-size: 12.22px;">Netty</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Oracle/" style="font-size: 15px;">Oracle</a> <a href="/tags/PostgreSQL/" style="font-size: 10.56px;">PostgreSQL</a> <a href="/tags/Pyqt5/" style="font-size: 10px;">Pyqt5</a> <a href="/tags/Python/" style="font-size: 17.22px;">Python</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/Redis/" style="font-size: 13.89px;">Redis</a> <a href="/tags/Rust/" style="font-size: 11.11px;">Rust</a> <a href="/tags/Scala/" style="font-size: 11.67px;">Scala</a> <a href="/tags/Shell/" style="font-size: 14.44px;">Shell</a> <a href="/tags/Spring/" style="font-size: 13.33px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 12.22px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Vim/" style="font-size: 11.11px;">Vim</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/cmd/" style="font-size: 11.11px;">cmd</a> <a href="/tags/pyinstaller/" style="font-size: 10px;">pyinstaller</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 19.44px;">代码归档</a> <a href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" style="font-size: 15px;">内建包</a> <a href="/tags/%E5%9B%BE%E8%A7%A3/" style="font-size: 12.78px;">图解</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 19.44px;">大数据</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" style="font-size: 11.11px;">安全框架</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 12.22px;">容器</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 17.78px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 13.89px;">数据结构与算法</a> <a href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" style="font-size: 11.11px;">日志框架</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 16.11px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 18.33px;">杂记</a> <a href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" style="font-size: 18.89px;">第三方包</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.33px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%87%AA%E5%88%B6/" style="font-size: 11.11px;">自制</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 11.67px;">计算机网络</a> <a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 10px;">转载</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
