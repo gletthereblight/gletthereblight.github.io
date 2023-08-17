@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Zookeeper-杂记 | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Zookeeper 零碎信息">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zookeeper-杂记">
+<meta property="og:url" content="http://example.com/2020/05/19/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Zookeeper/0.%E9%9B%B6%E7%A2%8E/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="Zookeeper 零碎信息">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-19T08:27:00.000Z">
+<meta property="article:modified_time" content="2023-03-15T08:17:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="杂记">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="Zookeeper">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/大数据部件/Zookeeper/0.零碎" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/05/19/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Zookeeper/0.%E9%9B%B6%E7%A2%8E/" class="article-date">
+  <time class="dt-published" datetime="2020-05-19T08:27:00.000Z" itemprop="datePublished">2020-05-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>►<a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a>►<a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Zookeeper/">Zookeeper</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Zookeeper-杂记
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-wiki"><a href="#1-wiki" class="headerlink" title="1. wiki"></a>1. wiki</h2><h3 id="1-1-数据结构"><a href="#1-1-数据结构" class="headerlink" title="1.1. 数据结构"></a>1.1. 数据结构</h3><p><code>ZK</code>包含文件系统，类似<code>Unix</code>的树形结构，每个节点称为<code>ZNode</code>，默认存储 1MB 数据，通过路径来唯一标识</p>
+<h3 id="1-2-应用场景和通知机制"><a href="#1-2-应用场景和通知机制" class="headerlink" title="1.2. 应用场景和通知机制"></a>1.2. 应用场景和通知机制</h3><ul>
+<li>统一配置管理</li>
+<li>统一集群管理</li>
+<li>分布式锁</li>
+<li>服务器节点动态上下线</li>
+<li>软负载均衡</li>
+</ul>
+<h2 id="2-常用命令"><a href="#2-常用命令" class="headerlink" title="2. 常用命令"></a>2. 常用命令</h2><h3 id="2-1-服务启停"><a href="#2-1-服务启停" class="headerlink" title="2.1. 服务启停"></a>2.1. 服务启停</h3><ul>
+<li>启动<code>ZK</code>服务:     <code>sh bin/zkServer.sh start</code></li>
+<li>查看<code>ZK</code>服务状态: <code>sh bin/zkServer.sh status</code></li>
+<li>停止<code>ZK</code>服务:     <code>sh bin/zkServer.sh stop</code></li>
+<li>重启<code>ZK</code>服务:     <code>sh bin/zkServer.sh restart</code></li>
+</ul>
+<h3 id="2-2-客户端命令"><a href="#2-2-客户端命令" class="headerlink" title="2.2. 客户端命令"></a>2.2. 客户端命令</h3><ul>
+<li><code>./zkCli.sh</code>：连接本地客户端</li>
+<li><code>./zkCli.sh -server ip:port</code>：连接远端客户端</li>
+<li><code>help</code>：查看可以使用的客户端命令</li>
+<li><code>quit</code>：退出客户端</li>
+</ul>
+<p>节点信息：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cZxid = 0x5000a9a4b</span><br><span class="line">ctime = Thu Apr 01 23:03:14 CST 2021</span><br><span class="line">mZxid = 0x5000a9a4c</span><br><span class="line">mtime = Thu Apr 01 23:03:14 CST 2021</span><br><span class="line">pZxid = 0x5000a9a4b</span><br><span class="line">cversion = 0</span><br><span class="line">dataVersion = 1</span><br><span class="line">aclVersion = 0</span><br><span class="line">ephemeralOwner = 0x0</span><br><span class="line">dataLength = 7</span><br><span class="line">numChildren = 0</span><br></pre></td></tr></table></figure>
+
+<p>含义：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">czxid：创建该节点的事务ID</span><br><span class="line">ctime：创建该节点的时间</span><br><span class="line">mZxid：更新该节点的事务ID</span><br><span class="line">mtime：更新该节点的时间</span><br><span class="line">pZxid：操作当前节点的子节点列表的事务ID(这种操作包含增加子节点，删除子节点)</span><br><span class="line">cversion：当前节点的子节点版本号</span><br><span class="line">dataVersion：当前节点的数据版本号</span><br><span class="line">aclVersion：当前节点的acl权限版本号</span><br><span class="line">ephemeralowner：当前节点的如果是临时节点，该属性是临时节点的事务ID</span><br><span class="line">dataLength：当前节点的d的数据长度</span><br><span class="line">numchildren：当前节点的子节点个数</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-1-节点操作命令"><a href="#2-2-1-节点操作命令" class="headerlink" title="2.2.1. 节点操作命令"></a>2.2.1. 节点操作命令</h3><ul>
+<li><p>创建节点</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create [-s] [-e] PATH DATA ACL`</span><br><span class="line">// 参数</span><br><span class="line">-s：顺序节点，会自动在后面添加一串数字</span><br><span class="line">-e：临时节点，若不指定，则表示持久节点；</span><br><span class="line">ACL：权限控制</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>读取节点</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ls PATH：列出目录</span><br><span class="line">ls2 PATH：列出目录，并显示了数据的一些状态信息，等于 ls 加 stat</span><br><span class="line">stat PATH：获取指定节点的状态信息</span><br><span class="line">get PATH：获取节点数据内容和属性信息</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新节点</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set PATH DATA [VERSION]</span><br><span class="line">// 参数</span><br><span class="line">VERSION：指定数据版本，需要和当前节点的数据版本一致</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除节点</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delete PATH [VERSION]：若删除节点存在子节点，那么无法删除该节点，必须先删除子节点，再删除父节点。</span><br><span class="line">rmr PATH [VERSION]：删除当前路径节点及其所有子节点</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3-一些命令"><a href="#3-一些命令" class="headerlink" title="3. 一些命令"></a>3. 一些命令</h2><h3 id="1-四字命令-The-Four-Letter-Words"><a href="#1-四字命令-The-Four-Letter-Words" class="headerlink" title="1. 四字命令 The Four Letter Words"></a>1. 四字命令 <a target="_blank" rel="noopener" href="https://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_4lw">The Four Letter Words</a></h3><p>使用4个字母的短命令，利用 telnet 或 nc 监听向客户端端口发出，主要提供一些集群和连接信息。在 3.5.3 之后需要使用 <code>4lw.commands.whitelist=*</code> 显示开启。</p>
+<table>
+<thead>
+<tr>
+<th>四字命令</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>conf</td>
+<td>3.3.0版本引入的。打印出服务相关配置的详细信息</td>
+</tr>
+<tr>
+<td>cons</td>
+<td>3.3.0版本引入的。列出所有连接到这台服务器的客户端全部连接&#x2F;会话详细信息。包括”接受&#x2F;发送”的包数量、会话id、操作延迟、最后的操作执行等等信息</td>
+</tr>
+<tr>
+<td>crst</td>
+<td>3.3.0版本引入的。重置所有连接的连接和会话统计信息</td>
+</tr>
+<tr>
+<td>dump</td>
+<td>列出那些比较重要的会话和临时节点。这个命令只能在leader节点上有用</td>
+</tr>
+<tr>
+<td>envi</td>
+<td>打印出服务环境的详细信息</td>
+</tr>
+<tr>
+<td>reqs</td>
+<td>列出未经处理的请</td>
+</tr>
+<tr>
+<td>ruok</td>
+<td>测试服务是否处于正确状态。如果确实如此，那么服务返回”imok”，否则不做任何相应</td>
+</tr>
+<tr>
+<td>stat</td>
+<td>输出关于性能和连接的客户端的列表</td>
+</tr>
+<tr>
+<td>srst</td>
+<td>重置服务器的统计</td>
+</tr>
+<tr>
+<td>srvr</td>
+<td>3.3.0版本引入的。列出连接服务器的详细信</td>
+</tr>
+<tr>
+<td>wchs</td>
+<td>3.3.0版本引入的。列出服务器watch的详细信息</td>
+</tr>
+<tr>
+<td>wchc</td>
+<td>3.3.0版本引入的。通过session列出服务器watch的详细信息，它的输出是一个与watch相关的会话的列表</td>
+</tr>
+<tr>
+<td>wchp</td>
+<td>3.3.0版本引入的。通过路径列出服务器watch的详细信息。它输出一个与session相关的路径</td>
+</tr>
+<tr>
+<td>mntr</td>
+<td>3.4.0版本引入的。输出可用于检测集群健康状态的变量列表</td>
+</tr>
+</tbody></table>
+<h3 id="2-http-服务-The-AdminServer"><a href="#2-http-服务-The-AdminServer" class="headerlink" title="2. http 服务 The AdminServer"></a>2. http 服务 <a target="_blank" rel="noopener" href="https://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_adminserver">The AdminServer</a></h3><p>利用内嵌 jetty 服务，来提供一些查询集群信息的接口服务。始于 3.5.0 版本之后，默认开启，地址为 <code>http://localhost:8080/commands</code>，使用 <code>admin.enableServer=false</code> 关闭，使用 <code>admin.serverPort=8081</code> 指定端口。</p>
+<h3 id="3-ACL-权限-zookeeper的ACL权限控制"><a href="#3-ACL-权限-zookeeper的ACL权限控制" class="headerlink" title="3. ACL 权限 zookeeper的ACL权限控制"></a>3. ACL 权限 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/qlqwjy/p/10517231.html">zookeeper的ACL权限控制</a></h3><p><code>ACL(Access Control List)</code>，访问控制列表。ZooKeeper 的权限控制是基于每个 znode 节点，子节点不会继承父节点的权限，且每个 znode 支持设置多种权限控制方案和多个权限，使用 <code>scheme:id:perm</code> 来标识，主要涵盖 3 个方面：</p>
+<ul>
+<li><code>Scheme</code> : 权限模式，授权的策略</li>
+<li><code>ID</code> : 授权对象，授权的对象</li>
+<li><code>Permission</code>权限，授予的权限</li>
+</ul>
+<h4 id="1-Scheme-采用何种方式授权"><a href="#1-Scheme-采用何种方式授权" class="headerlink" title="1. Scheme 采用何种方式授权"></a>1. <code>Scheme</code> 采用何种方式授权</h4><p>支持 4 种方式: </p>
+<ul>
+<li><code>world</code> : 默认方式，相当于全部都能访问</li>
+<li><code>auth</code> : 代表已经认证通过的用户，命令行中可以通过 <code>addauth digest user:pwd</code> 来添加当前上下文中的授权用户</li>
+<li><code>digest</code> : 即 <code>用户名:密码</code> 方式认证，这也是业务系统中最常用的。用 username:password 字符串来产生一个 MD5 串，然后该串被用来作为ACL ID。认证是通过明文发送 username:password  来进行的，当用在 ACL 时，表达式为 username:base64 ，base64 是 password 的 SHA1 摘要的编码</li>
+<li><code>ip</code> : 使用客户端的主机 IP 作为 ACL ID 。这个 ACL 表达式的格式为 <code>addr/bits</code>，此时 addr 中的有效位与客户端 addr 中的有效位进行比对</li>
+</ul>
+<h4 id="2-ID-给谁授予权限"><a href="#2-ID-给谁授予权限" class="headerlink" title="2. ID 给谁授予权限"></a>2. <code>ID</code> 给谁授予权限</h4><p>授权对象 ID 是指权限赋予的用户或者一个实体，例如：IP 地址或者机器。有 4 中权限模式:</p>
+<ul>
+<li><code>IP</code> : 通常是一个 ip 或者 ip 段，如 “192.168.0.1” 或 “192.168.0.1&#x2F;24”</li>
+<li><code>Digest</code> : 自定义，通常是 <code>username:BASE64(SHA-1(username:password))</code>，如 “foo:kWN6aNSbjcKWPqjjV7cg0N24raU&#x3D;&#x3D;”</li>
+<li><code>World</code> : 只有一个 ID，”anyone”</li>
+<li><code>Super</code> : 同 <code>Digest</code></li>
+</ul>
+<h4 id="3-Permission-授予什么权限"><a href="#3-Permission-授予什么权限" class="headerlink" title="3. Permission 授予什么权限"></a>3. <code>Permission</code> 授予什么权限</h4><p>有增、删、改、查、管理，共 5 种权限:</p>
+<ul>
+<li><code>CREATE</code> : 符号 <code>c</code>, 可以创建子节点</li>
+<li><code>DELETE</code> : 符号 <code>d</code>, 可以删除子节点（仅下一级节点）</li>
+<li><code>READ</code> : 符号 <code>r</code>, 可以读取节点数据及显示子节点列表</li>
+<li><code>WRITE</code> : 符号 <code>w</code>, 可以设置节点数据</li>
+<li><code>ADMIN</code> : 符号 <code>a</code>, 可以设置节点访问控制列表权限</li>
+</ul>
+<h4 id="4-相关命令"><a href="#4-相关命令" class="headerlink" title="4. 相关命令"></a>4. 相关命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getAcl &lt;path&gt;               # 读取ACL权限</span><br><span class="line">setAcl &lt;path&gt; &lt;acl&gt;         # 设置ACL权限</span><br><span class="line">addauth &lt;scheme&gt; &lt;auth&gt;     # 添加认证用户</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-实战"><a href="#5-实战" class="headerlink" title="5. 实战"></a>5. 实战</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 查看根节点权限</span><br><span class="line">getAcl /</span><br><span class="line">// 添加用户</span><br><span class="line">addauth digest zk:zk</span><br><span class="line">// 根节点添加权限</span><br><span class="line">setAcl / auth::cdrwa</span><br><span class="line">// 删除权限</span><br><span class="line">setAcl / world:anyone:cdrwa</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-查看日志"><a href="#4-查看日志" class="headerlink" title="4. 查看日志"></a>4. 查看日志</h3><p>日志信息为二进制格式的，需要使用 zookeeper 自带的解析器来查看，命令如下:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// linux</span><br><span class="line">java -cp .:slf4j-api-1.7.25.jar:zookeeper-3.6.2.jar:zookeeper-jute-3.6.2.jar org.apache.zookeeper.server.LogFormatter version-2\log.10e</span><br><span class="line">// win</span><br><span class="line">java -cp .;slf4j-api-1.7.25.jar;zookeeper-3.6.2.jar;zookeeper-jute-3.6.2.jar org.apache.zookeeper.server.LogFormatter version-2\log.10e</span><br></pre></td></tr></table></figure>
+
+<p>snapshot.xxx 文件是一个快照文件，用于记录 zookeeper 的树结构，查看命令:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// linux</span><br><span class="line">java -cp .:slf4j-api-1.7.25.jar:zookeeper-3.6.2.jar:zookeeper-jute-3.6.2.jar org.apache.zookeeper.server.SnapshotFormatter snapshot.10d</span><br><span class="line">// win</span><br><span class="line">java -cp .;slf4j-api-1.7.25.jar;zookeeper-3.6.2.jar;zookeeper-jute-3.6.2.jar org.apache.zookeeper.server.SnapshotFormatter snapshot.10d</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/05/19/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Zookeeper/0.%E9%9B%B6%E7%A2%8E/" data-id="clleuatg40000vgjw6cf3gvfi" data-title="Zookeeper-杂记" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Zookeeper/" rel="tag">Zookeeper</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/05/25/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Docker/4.%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Docker 常见问题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/15/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/HBase/0.%E6%80%BB%E8%A7%88/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">HBase 基础架构</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">关于我</h3>
+      <ul class="widget about">
+      
+      
+      <li>专业泼冷水，执着负能量</li>
+      
+    </ul>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><span class="category-list-count">180</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Docker/">Docker</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flume/">Flume</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/HBase/">HBase</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hadoop/">Hadoop</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hive/">Hive</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kafka/">Kafka</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kubernetes/">Kubernetes</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flume/" rel="tag">Flume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guava/" rel="tag">Guava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jackson/" rel="tag">Jackson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">74</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/" rel="tag">Java8</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LaTex/" rel="tag">LaTex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pyqt5/" rel="tag">Pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Quartz/" rel="tag">Quartz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/" rel="tag">Zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyinstaller/" rel="tag">pyinstaller</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%A7%A3/" rel="tag">图解</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" rel="tag">安全框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" rel="tag">日志框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" rel="tag">第三方包</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%88%B6/" rel="tag">自制</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AC%E8%BD%BD/" rel="tag">转载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Docker/" style="font-size: 11.76px;">Docker</a> <a href="/tags/Flink/" style="font-size: 17.06px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Flume/" style="font-size: 10px;">Flume</a> <a href="/tags/Git/" style="font-size: 11.76px;">Git</a> <a href="/tags/Golang/" style="font-size: 15.88px;">Golang</a> <a href="/tags/Guava/" style="font-size: 10.59px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hadoop/" style="font-size: 10.59px;">Hadoop</a> <a href="/tags/Hive/" style="font-size: 10px;">Hive</a> <a href="/tags/Idea-Instructions/" style="font-size: 13.53px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 10.59px;">JVM</a> <a href="/tags/Jackson/" style="font-size: 10px;">Jackson</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java8/" style="font-size: 11.76px;">Java8</a> <a href="/tags/Kafka/" style="font-size: 11.76px;">Kafka</a> <a href="/tags/Kubernetes/" style="font-size: 10px;">Kubernetes</a> <a href="/tags/LaTex/" style="font-size: 10px;">LaTex</a> <a href="/tags/Linux/" style="font-size: 16.47px;">Linux</a> <a href="/tags/Maven/" style="font-size: 11.76px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Netty/" style="font-size: 12.35px;">Netty</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Pyqt5/" style="font-size: 10px;">Pyqt5</a> <a href="/tags/Python/" style="font-size: 17.65px;">Python</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/Redis/" style="font-size: 14.12px;">Redis</a> <a href="/tags/Rust/" style="font-size: 11.18px;">Rust</a> <a href="/tags/Scala/" style="font-size: 11.76px;">Scala</a> <a href="/tags/Shell/" style="font-size: 14.71px;">Shell</a> <a href="/tags/Spring/" style="font-size: 13.53px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 12.35px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Vim/" style="font-size: 11.18px;">Vim</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/cmd/" style="font-size: 11.18px;">cmd</a> <a href="/tags/pyinstaller/" style="font-size: 10px;">pyinstaller</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 19.41px;">代码归档</a> <a href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" style="font-size: 15.29px;">内建包</a> <a href="/tags/%E5%9B%BE%E8%A7%A3/" style="font-size: 12.94px;">图解</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 19.41px;">大数据</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" style="font-size: 11.18px;">安全框架</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 12.35px;">容器</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 11.18px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 14.12px;">数据结构与算法</a> <a href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" style="font-size: 11.18px;">日志框架</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 16.47px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 18.24px;">杂记</a> <a href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" style="font-size: 18.82px;">第三方包</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.53px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%87%AA%E5%88%B6/" style="font-size: 11.18px;">自制</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.76px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 11.76px;">计算机网络</a> <a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 10px;">转载</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
