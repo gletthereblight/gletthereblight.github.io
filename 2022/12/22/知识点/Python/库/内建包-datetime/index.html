@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Python 内建包-datetime | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="datetime 时间操作类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 内建包-datetime">
+<meta property="og:url" content="http://example.com/2022/12/22/%E7%9F%A5%E8%AF%86%E7%82%B9/Python/%E5%BA%93/%E5%86%85%E5%BB%BA%E5%8C%85-datetime/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="datetime 时间操作类">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-22T04:40:00.000Z">
+<meta property="article:modified_time" content="2022-12-22T06:30:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="内建包">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Python/库/内建包-datetime" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/12/22/%E7%9F%A5%E8%AF%86%E7%82%B9/Python/%E5%BA%93/%E5%86%85%E5%BB%BA%E5%8C%85-datetime/" class="article-date">
+  <time class="dt-published" datetime="2022-12-22T04:40:00.000Z" itemprop="datePublished">2022-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Python 内建包-datetime
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-datetime"><a href="#1-datetime" class="headerlink" title="1 datetime"></a>1 datetime</h2><p><code>datetime</code> 模块定义了几个类:</p>
+<ul>
+<li><code>datetime.date</code> ：表示日期的类, 常用的属性有 <code>year, month, day</code></li>
+<li><code>datetime.time</code> ：表示时间的类, 常用的属性有 <code>hour, minute, second, microsecond</code></li>
+<li><code>datetime.datetime</code> ：表示日期时间</li>
+<li><code>datetime.timedelta</code> ：表示时间间隔, 即两个时间点之间的长度</li>
+<li><code>datetime.tzinfo</code> ：与时区有关的相关信息</li>
+</ul>
+<h3 id="1-1-date-类"><a href="#1-1-date-类" class="headerlink" title="1.1 date 类"></a>1.1 date 类</h3><p><code>date</code> 类表示一个日期。日期由年、月、日组成。构造函数为 <code>class datetime.date(year, month, day)</code></p>
+<ul>
+<li><code>year</code> : 范围 [MINYEAR, MAXYEAR], 即 [1, 9999]</li>
+<li><code>month</code> : 范围 [1, 12]</li>
+<li><code>day</code> : 最大值由 year, month 参数来确定, 如闰年2月份有29天</li>
+</ul>
+<p>常用方法和属性 :</br></p>
+<ul>
+<li><code>date.year、date.month、date.day</code> : 年、月、日</li>
+<li><code>date.max、date.min</code> ：date 对象所能表示的最大、最小日期</li>
+<li><code>date.resolution</code> ：date 对象表示日期的最小单位, 这里是天</li>
+<li><code>date.today()</code> ：返回一个表示当前本地日期的 date 对象</li>
+<li><code>date.replace(year, month, day)</code> : 生成一个新的日期对象, 用参数指定的年, 月, 日代替原有对象中的属性.（原有对象仍保持不变）</li>
+<li><code>date.timetuple()</code> : 返回日期对应的 time.struct_time 对象</li>
+<li><code>date.weekday()</code> : 返回 weekday, 如果是星期一, 返回0如果是星期2, 返回1, 以此类推</li>
+<li><code>data.isoweekday()</code> : 返回 weekday, 如果是星期一, 返回1如果是星期2, 返回2, 以此类推</li>
+<li><code>date.isocalendar()</code> : 返回格式如(year, month, day)的元组</li>
+<li><code>date.isoformat()</code> : 返回格式如’YYYY-MM-DD’的字符串</li>
+<li><code>date.strftime(fmt)</code> : 自定义格式化字符串.在下面详细讲解.</li>
+<li><code>date.fromtimestamp(timestamp)</code> ：根据给定的时间戮, 返回一个 date 对象</li>
+<li><code>date.toordinal()</code> : 返回日期对应的 Gregorian Calendar 日期</li>
+<li><code>datetime.fromordinal(ordinal)</code> ：将 Gregorian 日历时间转换为date对象(Gregoria Calendar:一种日历表示方法)</li>
+</ul>
+<p><code>date</code> 类还对某些操作进行了重载，它允许对日期加减和比较操作:</p>
+<ul>
+<li><code>date2 = date1 + timedelta</code> : 日期加上一个间隔，返回一个新的日期对象</li>
+<li><code>date2 = date1 - timedelta</code> : 日期隔去间隔，返回一个新的日期对象</li>
+<li><code>timedelta = date1 - date2</code> : 两个日期相减，返回一个时间间隔对象</li>
+<li><code>date1 &lt; date2</code> : 两个日期进行比较</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> *  </span><br><span class="line"><span class="keyword">import</span> time  </span><br><span class="line">  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;date.max:&#x27;</span>, date.<span class="built_in">max</span>  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;date.min:&#x27;</span>, date.<span class="built_in">min</span>  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;date.today():&#x27;</span>, date.today()  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;date.fromtimestamp():&#x27;</span>, date.fromtimestamp(time.time())  </span><br><span class="line"></span><br><span class="line">now = date(<span class="number">2010</span>, 04, 06)  </span><br><span class="line">tomorrow = now.replace(day = 07)  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;now:&#x27;</span>, now, <span class="string">&#x27;, tomorrow:&#x27;</span>, tomorrow  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;timetuple():&#x27;</span>, now.timetuple()  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;weekday():&#x27;</span>, now.weekday()  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;isoweekday():&#x27;</span>, now.isoweekday()  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;isocalendar():&#x27;</span>, now.isocalendar()  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;isoformat():&#x27;</span>, now.isoformat()</span><br><span class="line"></span><br><span class="line">now = date.today()  </span><br><span class="line">tomorrow = now.replace(day = <span class="number">7</span>)  </span><br><span class="line">delta = tomorrow - now  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;now:&#x27;</span>, now, <span class="string">&#x27; tomorrow:&#x27;</span>, tomorrow  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;timedelta:&#x27;</span>, delta  </span><br><span class="line"><span class="built_in">print</span> now + delta  </span><br><span class="line"><span class="built_in">print</span> tomorrow &gt; now  </span><br><span class="line"></span><br><span class="line"><span class="comment"># # ---- 结果 ----  </span></span><br><span class="line"><span class="comment"># date.max: 9999-12-31  </span></span><br><span class="line"><span class="comment"># date.min: 0001-01-01  </span></span><br><span class="line"><span class="comment"># date.today(): 2010-04-06  </span></span><br><span class="line"><span class="comment"># date.fromtimestamp(): 2010-04-06 </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># now: 2010-04-06 , tomorrow: 2010-04-07  </span></span><br><span class="line"><span class="comment"># timetuple(): (2010, 4, 6, 0, 0, 0, 1, 96, -1)  </span></span><br><span class="line"><span class="comment"># weekday(): 1  </span></span><br><span class="line"><span class="comment"># isoweekday(): 2  </span></span><br><span class="line"><span class="comment"># isocalendar(): (2010, 14, 2)  </span></span><br><span class="line"><span class="comment"># isoformat(): 2010-04-06 </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># now: 2010-04-06  tomorrow: 2010-04-07  </span></span><br><span class="line"><span class="comment"># timedelta: 1 day, 0:00:00  </span></span><br><span class="line"><span class="comment"># 2010-04-07  </span></span><br><span class="line"><span class="comment"># True </span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-Time类"><a href="#1-2-Time类" class="headerlink" title="1.2 Time类"></a>1.2 Time类</h3><p><code>time</code> 类表示时间，由时、分、秒以及微秒组成。构造函数为 <code>class datetime.time(hour[, minute[, second[, microsecond[, tzinfo]]]])</code>, tzinfo 表示时区信息</p>
+<ul>
+<li><code>hour</code> : 范围 [0, 24)</li>
+<li><code>minute</code> : 范围 [0, 60)</li>
+<li><code>second</code> : 范围 [0, 60)</li>
+<li><code>microsecond</code> : 范围 [0, 1000000)</li>
+</ul>
+<p>常用方法和属性 :</br></p>
+<ul>
+<li><code>time.min、time.max</code> : time 类所能表示的最小、最大时间, 即 [time(0, 0, 0, 0), time(23, 59, 59, 999999)]</li>
+<li><code>time.resolution</code> : 时间的最小单位, 这里是1微秒</li>
+<li><code>time.hour、time.minute、time.second、time.microsecond</code> : 时、分、秒、微秒</li>
+<li><code>time.tzinfo</code> : 时区信息</li>
+<li><code>time.replace([hour[, minute[, second[, microsecond[, tzinfo]]]]])</code> : 创建一个新的时间对象, 用参数指定的时、分、秒、微秒代替原有对象中的属性（原有对象仍保持不变）</li>
+<li><code>time.isoformat()</code> : 返回型如”HH:MM:SS”格式的字符串表示</li>
+<li><code>time.strftime(fmt)</code> : 返回自定义格式化字符串</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> *  </span><br><span class="line">tm = time(<span class="number">23</span>, <span class="number">46</span>, <span class="number">10</span>)  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;tm:&#x27;</span>, tm  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;hour: %d, minute: %d, second: %d, microsecond: %d&#x27;</span> /  </span><br><span class="line">        % (tm.hour, tm.minute, tm.second, tm.microsecond)  </span><br><span class="line">tm1 = tm.replace(hour = <span class="number">20</span>)  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;tm1:&#x27;</span>, tm1  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;isoformat():&#x27;</span>, tm.isoformat()  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># # ---- 结果 ----  </span></span><br><span class="line"><span class="comment"># tm: 23:46:10  </span></span><br><span class="line"><span class="comment"># hour: 23, minute: 46, second: 10, microsecond: 0  </span></span><br><span class="line"><span class="comment"># tm1: 20:46:10  </span></span><br><span class="line"><span class="comment"># isoformat(): 23:46:10  </span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-datetime类"><a href="#1-3-datetime类" class="headerlink" title="1.3 datetime类"></a>1.3 datetime类</h3><p><code>datetime</code> 是 <code>date</code> 与 <code>time</code> 的结合体，包括 <code>date</code> 与 <code>time</code> 的所有信息。构造函数为 <code>datetime.datetime(year, month, day[, hour[, minute[, second[, microsecond[, tzinfo]]]]])</code> 各参数的含义与 <code>date</code>,<code>time</code> 一样，要注意参数值的范围</p>
+<p>常用方法和属性 :</br></p>
+<ul>
+<li><code>datetime.min、datetime.max</code> : datetime 所能表示的最小值与最大值</li>
+<li><code>datetime.resolution</code> : datetime 最小单位</li>
+<li><code>datetime.today()</code> : 返回一个表示当前本地时间的 datetime 对象</li>
+<li><code>datetime.now([tz])</code> : 返回一个表示当前本地时间的 datetime 对象, 如果提供了参数 tz, 则获取 tz 参数所指时区的本地时间</li>
+<li><code>datetime.utcnow()</code> : 返回一个当前 utc 时间的 datetime 对象</li>
+<li><code>datetime.fromtimestamp(timestamp[, tz])</code> : 根据时间戮创建一个 datetime 对象, 参数 tz 指定时区信息</li>
+<li><code>datetime.utcfromtimestamp(timestamp)</code> : 根据时间戮创建一个 datetime 对象</li>
+<li><code>datetime.combine(date, time)</code> : 根据 date 和 time, 创建一个 datetime 对象</li>
+<li><code>datetime.strptime(date_string, format)</code> : 将格式字符串转换为 datetime 对象</li>
+<li><code>datetime.year、month、day、hour、minute、second、microsecond、tzinfo</code> :</li>
+<li><code>datetime.date()</code> :获取date对象</li>
+<li><code>datetime.time()</code> :获取time对象</li>
+<li><code>datetime.replace([year[, month[, day[, hour[, minute[, second[, microsecond[, tzinfo]]]]]]]])</code></li>
+<li><code>datetime.timetuple()</code></li>
+<li><code>datetime.utctimetuple()</code></li>
+<li><code>datetime.toordinal()</code></li>
+<li><code>datetime.weekday()</code></li>
+<li><code>datetime.isocalendar()</code></li>
+<li><code>datetime.isoformat([sep])</code></li>
+<li><code>datetime.ctime()</code> : 返回一个日期时间的C格式字符串, 等效于time.ctime(time.mktime(dt.timetuple()))</li>
+<li><code>datetime.strftime(format)</code></li>
+</ul>
+<p>像 date 一样，也可以对两个 datetime 对象进行比较，或者相减返回一个时间间隔对象，或者日期时间加上一个间隔返回一个新的日期时间对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> *  </span><br><span class="line"><span class="keyword">import</span> time  </span><br><span class="line">  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;datetime.max:&#x27;</span>, datetime.<span class="built_in">max</span>  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;datetime.min:&#x27;</span>, datetime.<span class="built_in">min</span>  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;datetime.resolution:&#x27;</span>, datetime.resolution  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;today():&#x27;</span>, datetime.today()  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;now():&#x27;</span>, datetime.now()  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;utcnow():&#x27;</span>, datetime.utcnow()  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;fromtimestamp(tmstmp):&#x27;</span>, datetime.fromtimestamp(time.time())  </span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;utcfromtimestamp(tmstmp):&#x27;</span>, datetime.utcfromtimestamp(time.time())  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># ---- 结果 ----  </span></span><br><span class="line"><span class="comment"># datetime.max: 9999-12-31 23:59:59.999999  </span></span><br><span class="line"><span class="comment"># datetime.min: 0001-01-01 00:00:00  </span></span><br><span class="line"><span class="comment"># datetime.resolution: 0:00:00.000001  </span></span><br><span class="line"><span class="comment"># today(): 2010-04-07 09:48:16.234000  </span></span><br><span class="line"><span class="comment"># now(): 2010-04-07 09:48:16.234000  </span></span><br><span class="line"><span class="comment"># utcnow(): 2010-04-07 01:48:16.234000  # 中国位于+8时间，与本地时间相差8  </span></span><br><span class="line"><span class="comment"># fromtimestamp(tmstmp): 2010-04-07 09:48:16.234000  </span></span><br><span class="line"><span class="comment"># utcfromtimestamp(tmstmp): 2010-04-07 01:48:16.234000 </span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-格式字符串"><a href="#1-4-格式字符串" class="headerlink" title="1.4 格式字符串"></a>1.4 格式字符串</h3><p><code>datetime, date, time</code> 都提供了 <code>strftime()</code> 方法，该方法接收一个格式字符串，输出日期时间的字符串表示</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">%a: 星期的简写。如 星期三为Web</span><br><span class="line">%A: 星期的全写。如 星期三为Wednesday</span><br><span class="line">%b: 月份的简写。如<span class="number">4</span>月份为Apr</span><br><span class="line">%B: 月份的全写。如<span class="number">4</span>月份为April</span><br><span class="line">%c: 日期时间的字符串表示。(如： 04/07/<span class="number">10</span> <span class="number">10</span>:<span class="number">43</span>:<span class="number">39</span>)</span><br><span class="line">%d: 日在这个月中的天数(是这个月的第几天)</span><br><span class="line">%f: 微秒(范围[<span class="number">0</span>,<span class="number">999999</span>])</span><br><span class="line">%H: 小时(<span class="number">24</span>小时制，[<span class="number">0</span>, <span class="number">23</span>])</span><br><span class="line">%I: 小时(<span class="number">12</span>小时制，[<span class="number">0</span>, <span class="number">11</span>])</span><br><span class="line">%j: 日在年中的天数 [001,<span class="number">366</span>](是当年的第几天)</span><br><span class="line">%m: 月份([01,<span class="number">12</span>])</span><br><span class="line">%M: 分钟([<span class="number">00</span>,<span class="number">59</span>])</span><br><span class="line">%p: AM或者PM</span><br><span class="line">%S: 秒(范围为[<span class="number">00</span>,<span class="number">61</span>]，为什么不是[<span class="number">00</span>, <span class="number">59</span>]，参考python手册~_~)</span><br><span class="line">%U: 周在当年的周数当年的第几周)，星期天作为周的第一天</span><br><span class="line">%w: 今天在这周的天数，范围为[<span class="number">0</span>, <span class="number">6</span>]，<span class="number">6</span>表示星期天</span><br><span class="line">%W: 周在当年的周数(是当年的第几周)，星期一作为周的第一天</span><br><span class="line">%x: 日期字符串(如：04/07/<span class="number">10</span>)</span><br><span class="line">%X: 时间字符串(如：<span class="number">10</span>:<span class="number">43</span>:<span class="number">39</span>)</span><br><span class="line">%y: <span class="number">2</span>个数字表示的年份</span><br><span class="line">%Y: <span class="number">4</span>个数字表示的年份</span><br><span class="line">%z: 与utc时间的间隔 (如果是本地时间，返回空字符串)</span><br><span class="line">%Z: 时区名称(如果是本地时间，返回空字符串)</span><br><span class="line">%%: %% =&gt; %</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/12/22/%E7%9F%A5%E8%AF%86%E7%82%B9/Python/%E5%BA%93/%E5%86%85%E5%BB%BA%E5%8C%85-datetime/" data-id="cllet6x6u000bxgjwguam44yh" data-title="Python 内建包-datetime" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/01/14/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/%E8%87%AA%E5%88%B6/%E8%87%AA%E5%AE%9A%E4%B9%89http%E8%AF%B7%E6%B1%82/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Java 代码之自定义 http 请求
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/12/14/%E7%9F%A5%E8%AF%86%E7%82%B9/Linux/shell/shell-%E5%88%A4%E6%96%AD/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Shell 命令之判断</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">关于我</h3>
+      <ul class="widget about">
+      
+      
+      <li>专业泼冷水，执着负能量</li>
+      
+    </ul>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><span class="category-list-count">175</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Docker/">Docker</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flume/">Flume</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/HBase/">HBase</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hadoop/">Hadoop</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hive/">Hive</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kubernetes/">Kubernetes</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flume/" rel="tag">Flume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guava/" rel="tag">Guava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jackson/" rel="tag">Jackson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">74</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/" rel="tag">Java8</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LaTex/" rel="tag">LaTex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pyqt5/" rel="tag">Pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Quartz/" rel="tag">Quartz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyinstaller/" rel="tag">pyinstaller</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%A7%A3/" rel="tag">图解</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" rel="tag">安全框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" rel="tag">日志框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" rel="tag">第三方包</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%88%B6/" rel="tag">自制</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AC%E8%BD%BD/" rel="tag">转载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Docker/" style="font-size: 11.76px;">Docker</a> <a href="/tags/Flink/" style="font-size: 17.06px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Flume/" style="font-size: 10px;">Flume</a> <a href="/tags/Git/" style="font-size: 11.76px;">Git</a> <a href="/tags/Golang/" style="font-size: 15.88px;">Golang</a> <a href="/tags/Guava/" style="font-size: 10.59px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hadoop/" style="font-size: 10.59px;">Hadoop</a> <a href="/tags/Hive/" style="font-size: 10px;">Hive</a> <a href="/tags/Idea-Instructions/" style="font-size: 13.53px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 10.59px;">JVM</a> <a href="/tags/Jackson/" style="font-size: 10px;">Jackson</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java8/" style="font-size: 11.76px;">Java8</a> <a href="/tags/Kubernetes/" style="font-size: 10px;">Kubernetes</a> <a href="/tags/LaTex/" style="font-size: 10px;">LaTex</a> <a href="/tags/Linux/" style="font-size: 16.47px;">Linux</a> <a href="/tags/Maven/" style="font-size: 11.76px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Netty/" style="font-size: 12.35px;">Netty</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Pyqt5/" style="font-size: 10px;">Pyqt5</a> <a href="/tags/Python/" style="font-size: 17.65px;">Python</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/Redis/" style="font-size: 14.12px;">Redis</a> <a href="/tags/Rust/" style="font-size: 11.18px;">Rust</a> <a href="/tags/Scala/" style="font-size: 11.76px;">Scala</a> <a href="/tags/Shell/" style="font-size: 14.71px;">Shell</a> <a href="/tags/Spring/" style="font-size: 13.53px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 12.35px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Vim/" style="font-size: 11.18px;">Vim</a> <a href="/tags/cmd/" style="font-size: 11.18px;">cmd</a> <a href="/tags/pyinstaller/" style="font-size: 10px;">pyinstaller</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 19.41px;">代码归档</a> <a href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" style="font-size: 15.29px;">内建包</a> <a href="/tags/%E5%9B%BE%E8%A7%A3/" style="font-size: 12.94px;">图解</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 18.82px;">大数据</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" style="font-size: 11.18px;">安全框架</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 12.35px;">容器</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 11.18px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 14.12px;">数据结构与算法</a> <a href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" style="font-size: 11.18px;">日志框架</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 16.47px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 17.65px;">杂记</a> <a href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" style="font-size: 18.24px;">第三方包</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.53px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%87%AA%E5%88%B6/" style="font-size: 11.18px;">自制</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.76px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 11.76px;">计算机网络</a> <a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 10px;">转载</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

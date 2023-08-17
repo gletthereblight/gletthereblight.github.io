@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Python 内建包-signal | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="signal 用来进程间传递信号">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 内建包-signal">
+<meta property="og:url" content="http://example.com/2021/07/24/%E7%9F%A5%E8%AF%86%E7%82%B9/Python/%E5%BA%93/%E5%86%85%E5%BB%BA%E5%8C%85-signal/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="signal 用来进程间传递信号">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-24T12:26:00.000Z">
+<meta property="article:modified_time" content="2021-07-24T13:48:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="内建包">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Python/库/内建包-signal" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/07/24/%E7%9F%A5%E8%AF%86%E7%82%B9/Python/%E5%BA%93/%E5%86%85%E5%BB%BA%E5%8C%85-signal/" class="article-date">
+  <time class="dt-published" datetime="2021-07-24T12:26:00.000Z" itemprop="datePublished">2021-07-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Python 内建包-signal
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-wiki"><a href="#1-wiki" class="headerlink" title="1. wiki"></a>1. wiki</h2><p>全称为软中断信号，作用是通知进程发生了异步事件。进程之间可以调用系统来传递信号，本身内核也可以发送信号给进程， 告诉该进程发生了某个事件。</br><br>信号只是用来通知某进程发生了什么事件，并不给该进程传递任何数据。</br></p>
+<h3 id="1-1-信号类型"><a href="#1-1-信号类型" class="headerlink" title="1.1. 信号类型"></a>1.1. 信号类型</h3><p>不同系统中同一个数值对应的信号类型不一样，信号的数值越小，优先级越高。</br></p>
+<p>Linux 系统有 2 大类信号：</p>
+<ul>
+<li>POSIX标准的规则信号(regular signal 1-31编号)</li>
+<li>实时信号(real-time signal 32-63)</li>
+</ul>
+<p>linux 使用的规则信号可以参看最后附录</br></p>
+<h3 id="1-2-信号处理"><a href="#1-2-信号处理" class="headerlink" title="1.2. 信号处理"></a>1.2. 信号处理</h3><p>接收信号的进程对不同的信号有 3 种处理方法：</br></p>
+<ul>
+<li>指定处理函数</li>
+<li>忽略</li>
+<li>根据系统默认值处理，大部分信号的默认处理是终止进程</li>
+</ul>
+<h2 id="2-使用"><a href="#2-使用" class="headerlink" title="2. 使用"></a>2. 使用</h2><p>一般使用方法是：</br></p>
+<ol>
+<li>自定义信号处理函数，来处理接受到不同信号时采用什么函数，并向进程发送信号</li>
+<li>处理信号，调用 <code>signal.signal(signalnum, handler)</code> 将信号和相应函数传入</li>
+</ol>
+<h3 id="2-1-定义信号处理函数"><a href="#2-1-定义信号处理函数" class="headerlink" title="2.1. 定义信号处理函数"></a>2.1. 定义信号处理函数</h3><p>与一般的函数无差别，但需要再接收信号后，向进程发送相应信号，比如退出(<code>signal.SIGQUIT</code>)、中断(<code>signal.SIGTERM</code>)等。常用的发送信号函数有：</br></p>
+<ul>
+<li><code>signal</code> 包 : <code>signal.alarm(time)</code> ，在 time 秒后向进程自身发送 SIGALRM 信号</li>
+<li><code>subprocess</code> 包 : <code>child_process.send_signal(sid)</code></li>
+<li><code>os</code> 包<ul>
+<li><code>os.kill(pid, sid)</code> ，类似 kill 命令</li>
+<li><code>os.killpg(pgid, sid)</code> ，类似 kill 命令</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-处理信号"><a href="#2-2-处理信号" class="headerlink" title="2.2. 处理信号"></a>2.2. 处理信号</h3><p>在接收到 <code>signalnum</code> 信号时，调用 <code>handler</code> 函数</br></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">signal.signal(signalnum, handler)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>signalnum</code> : 具体的信号量，可以是数字值(如 2 )，也可以是符号类型(如 signal.SIGINT)</li>
+<li><code>handler</code> 该信号的处理函数，主要对应上面说的 3 种处理办法<ul>
+<li>当 <code>handler</code> 为一个函数名时，进程采取函数中定义的操作</li>
+<li>当 <code>handler</code> 为 <code>signal.SIG_IGN</code> 时，信号被无视（ignore）</li>
+<li>当 <code>handler</code> 为 <code>singal.SIG_DFL</code>，进程采取默认操作（default）</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-其他函数"><a href="#2-3-其他函数" class="headerlink" title="2.3. 其他函数"></a>2.3. 其他函数</h3><ul>
+<li><code>signal.pause()</code> : 阻塞进程执行以等待信号，简单来说当接收到信号后使进程停止</li>
+<li><code>signal.getsignal(signalnum)</code> : 获取当前程序注册 signalnum 信号量的处理函数</li>
+</ul>
+<h2 id="3-举例"><a href="#3-举例" class="headerlink" title="3. 举例"></a>3. 举例</h2><p>定义信号处理函数 <code>suicide()</code>，使用 <code>register_signal()</code> 函数来处理相应信号</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">suicide</span>(<span class="params">signum, e</span>):</span><br><span class="line">    <span class="keyword">global</span> child_process</span><br><span class="line">    <span class="built_in">print</span> &gt;&gt; sys.stderr, <span class="string">&quot;[Error] DataX receive unexpected signal %d, starts to suicide.&quot;</span> % (signum)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> child_process:</span><br><span class="line">        child_process.send_signal(signal.SIGQUIT)</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line">        child_process.kill()</span><br><span class="line">    <span class="built_in">print</span> &gt;&gt; sys.stderr, <span class="string">&quot;DataX Process was killed ! you did ?&quot;</span></span><br><span class="line">    sys.exit(RET_STATE[<span class="string">&quot;KILL&quot;</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">register_signal</span>():</span><br><span class="line">    <span class="keyword">global</span> child_process</span><br><span class="line">    signal.signal(signal.SIGINT, suicide)</span><br><span class="line">    signal.signal(signal.SIGQUIT, suicide)</span><br><span class="line">    signal.signal(signal.SIGTERM, suicide)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    startCommand = <span class="string">&quot;ls -la&quot;</span></span><br><span class="line">    child_process = subprocess.Popen(startCommand, shell=<span class="literal">True</span>)</span><br><span class="line">    register_signal()</span><br></pre></td></tr></table></figure>
+
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h3 id="1-规则信号"><a href="#1-规则信号" class="headerlink" title="1. 规则信号"></a>1. 规则信号</h3><table>
+<thead>
+<tr>
+<th>信号编号</th>
+<th>名称</th>
+<th>默认动作</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>SIGHUP</td>
+<td>终止</td>
+<td>终止控制终端或进程</td>
+</tr>
+<tr>
+<td>2</td>
+<td>SIGINT</td>
+<td>终止</td>
+<td>由键盘引起的终端(Ctrl-c)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>SIGQUIT</td>
+<td>dump</td>
+<td>控制终端发送给进程的信号, 键盘产生的退出(Ctrl-),</td>
+</tr>
+<tr>
+<td>4</td>
+<td>GIGILL</td>
+<td>dusmp</td>
+<td>非法指令引起</td>
+</tr>
+<tr>
+<td>5</td>
+<td>SIGTRAP</td>
+<td>dump</td>
+<td>debug中断</td>
+</tr>
+<tr>
+<td>6</td>
+<td>SIGABRT&#x2F;SIGIOT</td>
+<td>dump</td>
+<td>异常中止</td>
+</tr>
+<tr>
+<td>7</td>
+<td>SIGBUS&#x2F;SIGEMT</td>
+<td>dump</td>
+<td>总线异常&#x2F;EMT指令</td>
+</tr>
+<tr>
+<td>8</td>
+<td>SIGFPE</td>
+<td>dump</td>
+<td>浮点运算溢出</td>
+</tr>
+<tr>
+<td>9</td>
+<td>SIGKILL</td>
+<td>终止</td>
+<td>强制杀死进程(大招, 进程不可捕获)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>SIGUSR1</td>
+<td>终止</td>
+<td>用户信号, 进程可自定义用途</td>
+</tr>
+<tr>
+<td>11</td>
+<td>SIGSEGV</td>
+<td>dump</td>
+<td>非法内存地址引起</td>
+</tr>
+<tr>
+<td>12</td>
+<td>SIGUSR2</td>
+<td>终止</td>
+<td>用户信号, 进程可自定义用途</td>
+</tr>
+<tr>
+<td>13</td>
+<td>SIGPIPE</td>
+<td>终止</td>
+<td>向某个没有读取的管道中写入数据</td>
+</tr>
+<tr>
+<td>14</td>
+<td>SIGALRM</td>
+<td>终止</td>
+<td>时钟中断(闹钟)</td>
+</tr>
+<tr>
+<td>15</td>
+<td>SIGTERM</td>
+<td>终止</td>
+<td>进程终止(进程可捕获)</td>
+</tr>
+<tr>
+<td>16</td>
+<td>SIGSTKFLT</td>
+<td>终止</td>
+<td>协处理器栈错误</td>
+</tr>
+<tr>
+<td>17</td>
+<td>SIGCHLD</td>
+<td>忽略</td>
+<td>子进程退出或中断</td>
+</tr>
+<tr>
+<td>18</td>
+<td>SIGCONT</td>
+<td>继续</td>
+<td>如进程停止状态则开始运行</td>
+</tr>
+<tr>
+<td>19</td>
+<td>SIGSTOP</td>
+<td>停止</td>
+<td>停止进程运行</td>
+</tr>
+<tr>
+<td>20</td>
+<td>SIGSTP</td>
+<td>停止</td>
+<td>键盘产生的停止</td>
+</tr>
+<tr>
+<td>21</td>
+<td>SIGTTIN</td>
+<td>停止</td>
+<td>后台进程请求输入</td>
+</tr>
+<tr>
+<td>22</td>
+<td>SIGTTOU</td>
+<td>停止</td>
+<td>后台进程请求输出</td>
+</tr>
+<tr>
+<td>23</td>
+<td>SIGURG</td>
+<td>忽略</td>
+<td>socket发送紧急情况</td>
+</tr>
+<tr>
+<td>24</td>
+<td>SIGXCPU</td>
+<td>dump</td>
+<td>CPU时间限制被打破</td>
+</tr>
+<tr>
+<td>25</td>
+<td>SIGXFSZ</td>
+<td>dump</td>
+<td>文件大小限制被打破</td>
+</tr>
+<tr>
+<td>26</td>
+<td>SIGVTALRM</td>
+<td>终止</td>
+<td>虚拟定时时钟</td>
+</tr>
+<tr>
+<td>27</td>
+<td>SIGPROF</td>
+<td>终止</td>
+<td>profile timer clock</td>
+</tr>
+<tr>
+<td>28</td>
+<td>SIGWINCH</td>
+<td>忽略</td>
+<td>窗口尺寸调整</td>
+</tr>
+<tr>
+<td>29</td>
+<td>SIGIO&#x2F;SIGPOLL</td>
+<td>终止</td>
+<td>I&#x2F;O可用</td>
+</tr>
+<tr>
+<td>30</td>
+<td>SIGPWR</td>
+<td>终止</td>
+<td>电源异常</td>
+</tr>
+<tr>
+<td>31</td>
+<td>SIGSYS&#x2F;SYSUNUSED</td>
+<td>dump</td>
+<td>系统调用异常</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/24/%E7%9F%A5%E8%AF%86%E7%82%B9/Python/%E5%BA%93/%E5%86%85%E5%BB%BA%E5%8C%85-signal/" data-id="cllet6x6k0006xgjw37idc801" data-title="Python 内建包-signal" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/24/%E7%9F%A5%E8%AF%86%E7%82%B9/Python/%E5%BA%93/%E5%86%85%E5%BB%BA%E5%8C%85-json/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Python 内建包-json
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/24/%E7%9F%A5%E8%AF%86%E7%82%B9/Python/%E5%BA%93/%E5%86%85%E5%BB%BA%E5%8C%85-subprocess/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Python 内建包-subprocess</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">关于我</h3>
+      <ul class="widget about">
+      
+      
+      <li>专业泼冷水，执着负能量</li>
+      
+    </ul>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><span class="category-list-count">175</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Docker/">Docker</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flume/">Flume</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/HBase/">HBase</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hadoop/">Hadoop</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hive/">Hive</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kubernetes/">Kubernetes</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flume/" rel="tag">Flume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guava/" rel="tag">Guava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jackson/" rel="tag">Jackson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">74</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/" rel="tag">Java8</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LaTex/" rel="tag">LaTex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pyqt5/" rel="tag">Pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Quartz/" rel="tag">Quartz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyinstaller/" rel="tag">pyinstaller</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%A7%A3/" rel="tag">图解</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" rel="tag">安全框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" rel="tag">日志框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" rel="tag">第三方包</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%88%B6/" rel="tag">自制</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AC%E8%BD%BD/" rel="tag">转载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Docker/" style="font-size: 11.76px;">Docker</a> <a href="/tags/Flink/" style="font-size: 17.06px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Flume/" style="font-size: 10px;">Flume</a> <a href="/tags/Git/" style="font-size: 11.76px;">Git</a> <a href="/tags/Golang/" style="font-size: 15.88px;">Golang</a> <a href="/tags/Guava/" style="font-size: 10.59px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hadoop/" style="font-size: 10.59px;">Hadoop</a> <a href="/tags/Hive/" style="font-size: 10px;">Hive</a> <a href="/tags/Idea-Instructions/" style="font-size: 13.53px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 10.59px;">JVM</a> <a href="/tags/Jackson/" style="font-size: 10px;">Jackson</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java8/" style="font-size: 11.76px;">Java8</a> <a href="/tags/Kubernetes/" style="font-size: 10px;">Kubernetes</a> <a href="/tags/LaTex/" style="font-size: 10px;">LaTex</a> <a href="/tags/Linux/" style="font-size: 16.47px;">Linux</a> <a href="/tags/Maven/" style="font-size: 11.76px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Netty/" style="font-size: 12.35px;">Netty</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Pyqt5/" style="font-size: 10px;">Pyqt5</a> <a href="/tags/Python/" style="font-size: 17.65px;">Python</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/Redis/" style="font-size: 14.12px;">Redis</a> <a href="/tags/Rust/" style="font-size: 11.18px;">Rust</a> <a href="/tags/Scala/" style="font-size: 11.76px;">Scala</a> <a href="/tags/Shell/" style="font-size: 14.71px;">Shell</a> <a href="/tags/Spring/" style="font-size: 13.53px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 12.35px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Vim/" style="font-size: 11.18px;">Vim</a> <a href="/tags/cmd/" style="font-size: 11.18px;">cmd</a> <a href="/tags/pyinstaller/" style="font-size: 10px;">pyinstaller</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 19.41px;">代码归档</a> <a href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" style="font-size: 15.29px;">内建包</a> <a href="/tags/%E5%9B%BE%E8%A7%A3/" style="font-size: 12.94px;">图解</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 18.82px;">大数据</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" style="font-size: 11.18px;">安全框架</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 12.35px;">容器</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 11.18px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 14.12px;">数据结构与算法</a> <a href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" style="font-size: 11.18px;">日志框架</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 16.47px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 17.65px;">杂记</a> <a href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" style="font-size: 18.24px;">第三方包</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.53px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%87%AA%E5%88%B6/" style="font-size: 11.18px;">自制</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.76px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 11.76px;">计算机网络</a> <a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 10px;">转载</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

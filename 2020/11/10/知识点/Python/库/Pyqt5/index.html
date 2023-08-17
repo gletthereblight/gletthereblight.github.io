@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Python 第三方包之 Pyqt5 | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Python 桌面工具类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 第三方包之 Pyqt5">
+<meta property="og:url" content="http://example.com/2020/11/10/%E7%9F%A5%E8%AF%86%E7%82%B9/Python/%E5%BA%93/Pyqt5/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="Python 桌面工具类">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-11-10T03:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-29T01:48:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Pyqt5">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/Python/库/Pyqt5" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/11/10/%E7%9F%A5%E8%AF%86%E7%82%B9/Python/%E5%BA%93/Pyqt5/" class="article-date">
+  <time class="dt-published" datetime="2020-11-10T03:00:00.000Z" itemprop="datePublished">2020-11-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Python 第三方包之 Pyqt5
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-分类"><a href="#1-分类" class="headerlink" title="1. 分类"></a>1. 分类</h2><ul>
+<li><code>QWidget</code></li>
+<li><code>QMainWindow</code></li>
+<li><code>QDialog</code></li>
+</ul>
+<h2 id="2-组件"><a href="#2-组件" class="headerlink" title="2. 组件"></a>2. 组件</h2><h3 id="1-QLabel-文本块"><a href="#1-QLabel-文本块" class="headerlink" title="1. QLabel 文本块"></a>1. <code>QLabel</code> 文本块</h3><h3 id="2-QLineEdit-单行文本输入框"><a href="#2-QLineEdit-单行文本输入框" class="headerlink" title="2. QLineEdit 单行文本输入框"></a>2. <code>QLineEdit</code> 单行文本输入框</h3><h3 id="3-QTextEdit-文本编辑框"><a href="#3-QTextEdit-文本编辑框" class="headerlink" title="3. QTextEdit 文本编辑框"></a>3. <code>QTextEdit</code> 文本编辑框</h3><ul>
+<li><code>setText()</code>用来设置文本</li>
+<li><code>toPlainText()</code>用来获取文本</li>
+<li><code>textChanged</code>文本发生改变的时候，会发出信号，之后可利用<code>connect(&lt;func&gt;)</code>调用槽函数</li>
+<li><code>toPlainText()</code>获取文本</li>
+</ul>
+<h3 id="4-QTextBrowser-文本浏览框"><a href="#4-QTextBrowser-文本浏览框" class="headerlink" title="4. QTextBrowser 文本浏览框"></a>4. <code>QTextBrowser</code> 文本浏览框</h3><ul>
+<li>会执行<code>html</code>代码</li>
+<li><code>setText()</code>用来设置文本</li>
+<li><code>toPlainText()</code>用来获取文本</li>
+</ul>
+<h3 id="5-QPushButton-一般按钮"><a href="#5-QPushButton-一般按钮" class="headerlink" title="5. QPushButton 一般按钮"></a>5. <code>QPushButton</code> 一般按钮</h3><h4 id="1-事件"><a href="#1-事件" class="headerlink" title="1. 事件"></a>1. 事件</h4><ul>
+<li><code>clicked</code>：点击</li>
+<li><code>pressed</code>：点击左键触发</li>
+<li><code>released</code>：释放左键触发</li>
+<li><code>toggled</code>：按钮标记状态发生变化的信号</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">self.my_button.clicked.connect(self.print_hello)</span><br><span class="line">self.my_button.pressed.connect(self.press_me)</span><br><span class="line">self.my_button.released.connect(self.release_me)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-状态"><a href="#2-状态" class="headerlink" title="2. 状态"></a>2. 状态</h4><ul>
+<li><code>setCheckable(True)</code>：设置可标记</li>
+<li><code>isChecked()</code>：返回值判断按钮是否为标记状态，True为标记</li>
+<li><code>setIcon(QIcon(&#39;button.png&#39;))</code>：设置图标</li>
+</ul>
+<h3 id="6-QToolButton-工具操作相关的按钮"><a href="#6-QToolButton-工具操作相关的按钮" class="headerlink" title="6. QToolButton 工具操作相关的按钮"></a>6. <code>QToolButton</code> 工具操作相关的按钮</h3><ul>
+<li>通常和<code>QToolBar</code>搭配使用</li>
+<li>设置文本需要通过<code>setText()</code>方法</li>
+</ul>
+<h3 id="7-QRadioButton-单选按钮"><a href="#7-QRadioButton-单选按钮" class="headerlink" title="7. QRadioButton 单选按钮"></a>7. <code>QRadioButton</code> 单选按钮</h3><ul>
+<li><code>setChecked(True)</code>设为选中状态</li>
+</ul>
+<h3 id="8-QCheckBox-复选框"><a href="#8-QCheckBox-复选框" class="headerlink" title="8. QCheckBox 复选框"></a>8. <code>QCheckBox</code> 复选框</h3><ul>
+<li>复选框一共有三种状态：全选中、半选中和无选中，存在于父选项和子选项间子选项</li>
+<li><code>setCheckState()</code>：参数可以是选中状态<code>Qt.Checked</code>，无选中状态<code>Qt.Unchecked</code>和半选中状态<code>Qt.PartiallyChecked</code></li>
+<li><code>stateChanged</code>信号会在复选框状态发生改变的时候发出，之后可利用<code>connect(lambda:&lt;func&gt;)</code>调用槽函数</li>
+<li><code>checkState()</code>方法可以获取当前复选框的状态，返回值为int类型，0为无选中状态，1为半选中状态，2位选中状态</li>
+</ul>
+<h2 id="3-布局"><a href="#3-布局" class="headerlink" title="3. 布局"></a>3. 布局</h2><h3 id="1-分类-1"><a href="#1-分类-1" class="headerlink" title="1. 分类"></a>1. 分类</h3><ul>
+<li><code>QVBoxLayout</code>垂直布局</li>
+<li><code>QHBoxLayout</code>水平布局</li>
+<li><code>QFormLayout</code>表单布局</li>
+<li><code>QGridLayout</code>网格布局</li>
+</ul>
+<h3 id="2-注意"><a href="#2-注意" class="headerlink" title="2. 注意"></a>2. 注意</h3><ol>
+<li><code>addWidget()</code>方法用来添加控件，<code>addLayout()</code>方法用来添加布局</li>
+<li>前三种添加控件语法：<code>addWidget(widget)</code></li>
+<li>网格布局语法添加控件语法：<code>addWidget(widget, row, column, rowSpan, columnSpan)</code></li>
+<li><code>addStretch(1)</code> 添加大小为1的占位符，可以通过两侧添加相同的占位符来居中控件</li>
+<li><code>setAlignment(Qt.AlignCenter)</code> 可使用控件直接居中</li>
+<li><code>setWindowTitle</code>方法可以设置窗口标题</li>
+</ol>
+<h2 id="4-弹框-QMessageBox"><a href="#4-弹框-QMessageBox" class="headerlink" title="4. 弹框 QMessageBox"></a>4. 弹框 <code>QMessageBox</code></h2><h3 id="1-分类-2"><a href="#1-分类-2" class="headerlink" title="1. 分类"></a>1. 分类</h3><ul>
+<li><code>information</code>信息框</li>
+<li><code>question</code>问答框</li>
+<li><code>warning</code>警告框</li>
+<li><code>critical</code>错误框</li>
+<li><code>about</code>关于框</li>
+</ul>
+<h3 id="2-语法"><a href="#2-语法" class="headerlink" title="2. 语法"></a>2. 语法</h3><p>语法：<code>QMessageBox.information(self, &#39;弹框名&#39;, &#39;内容&#39;, QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)</code></br><br>可选的按钮：</br></p>
+<ul>
+<li><code>QMessageBox.Ok</code></li>
+<li><code>QMessageBox.Yes</code></li>
+<li><code>QMessageBox.No</code></li>
+<li><code>QMessageBox.Close</code></li>
+<li><code>QMessageBox.Cancel</code></li>
+<li><code>QMessage.Open</code></li>
+<li><code>QMessage.Save</code></li>
+</ul>
+<h3 id="3-注意"><a href="#3-注意" class="headerlink" title="3. 注意"></a>3. 注意</h3><ol>
+<li>可以不指定按钮</li>
+<li>获取弹框返回值可以做到信息框交互</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">choice = QMessageBox.information(self, <span class="string">&#x27;弹框名&#x27;</span>, <span class="string">&#x27;内容&#x27;</span>, QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel) </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> choice == QMessageBox.Yes:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;I am sure&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> choice == QMessageBox.No:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;I am not sure&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Whatever&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-控件"><a href="#5-控件" class="headerlink" title="5. 控件"></a>5. 控件</h2><h3 id="1-进度条-QSlider"><a href="#1-进度条-QSlider" class="headerlink" title="1. 进度条 QSlider"></a>1. 进度条 <code>QSlider</code></h3><h4 id="1-语法"><a href="#1-语法" class="headerlink" title="1. 语法"></a>1. 语法</h4><p><code>QSlider(Qt.Horizontal, self)</code></br></p>
+<ul>
+<li><code>Qt.Horizontal</code>水平滑动条</li>
+<li><code>Qt.Vertical</code>垂直滑动条</li>
+</ul>
+<h4 id="2-方法"><a href="#2-方法" class="headerlink" title="2. 方法"></a>2. 方法</h4><ul>
+<li><code>setRange(0, 100)</code>设置滑动条范围</li>
+<li><code>setMinimum()</code>设置滑动条最小值</li>
+<li><code>setMaximum()</code>设置滑动条最大值</li>
+<li><code>valueChanged</code>信号会在数值发生改变时发出，之后可利用<code>connect(lambda:&lt;func&gt;)</code>调用槽函数</li>
+<li><code>value()</code>获取当前滑动条数值</li>
+</ul>
+<h3 id="2-仪表盘-QDial"><a href="#2-仪表盘-QDial" class="headerlink" title="2. 仪表盘 QDial"></a>2. 仪表盘 <code>QDial</code></h3><h4 id="1-语法-1"><a href="#1-语法-1" class="headerlink" title="1. 语法"></a>1. 语法</h4><p><code>QDial(self)</code></p>
+<h4 id="2-方法-1"><a href="#2-方法-1" class="headerlink" title="2. 方法"></a>2. 方法</h4><ul>
+<li><code>setFixedSize(100, 100)</code>设置仪表盘大小，如果不设置该方法，在改变表盘数值时，表盘的大小会发生改变</li>
+<li><code>setRange(0, 100)</code>设置表盘数值范围</li>
+<li><code>setMinimum()</code>设置表盘最小值</li>
+<li><code>setMaximum()</code>设置表盘最大值</li>
+<li><code>setNotchesVisible(True)</code>可以显示刻度</li>
+<li><code>valueChanged</code>信号会在数值发生改变时发出，之后可利用<code>connect(lambda:&lt;func&gt;)</code>调用槽函数</li>
+<li><code>value()</code>获取当前表盘数值</li>
+</ul>
+<h3 id="3-定时器-QTimer"><a href="#3-定时器-QTimer" class="headerlink" title="3. 定时器 QTimer"></a>3. 定时器 <code>QTimer</code></h3><h4 id="1-语法-2"><a href="#1-语法-2" class="headerlink" title="1. 语法"></a>1. 语法</h4><p><code>QTimer(self)</code></p>
+<h4 id="2-方法-2"><a href="#2-方法-2" class="headerlink" title="2. 方法"></a>2. 方法</h4><ul>
+<li><code>timeout</code>信号会在随计数器数值改变发出，之后可利用<code>connect(&lt;func&gt;)</code>调用槽函数</li>
+<li><code>setSingleShot(True)</code>只会在触发<code>timeout</code>信号后调用一次绑定的槽函数</li>
+<li><code>start(100)</code>开始定时器，每过100ms，定时器会触发<code>timeout</code>信号</li>
+<li><code>stop()</code>停止定时器</li>
+<li><code>isActive()</code>判断定时器是否处于激活状态</li>
+</ul>
+<h3 id="4-进度条-QProgressBar"><a href="#4-进度条-QProgressBar" class="headerlink" title="4. 进度条 QProgressBar"></a>4. 进度条 <code>QProgressBar</code></h3><h4 id="1-语法-3"><a href="#1-语法-3" class="headerlink" title="1. 语法"></a>1. 语法</h4><p><code>QProgressBar(self)</code>默认是水平的</p>
+<h4 id="2-方法-3"><a href="#2-方法-3" class="headerlink" title="2. 方法"></a>2. 方法</h4><ul>
+<li><code>setOrientation(Qt.Horizontal)</code>设置水平还是垂直</li>
+<li><code>setRange(0, 100)</code>设置进度条范围</li>
+<li><code>setMinimum()</code>设置进度条最小值</li>
+<li><code>setMaximum()</code>设置进度条最大值</li>
+<li><code>setValue()</code>设置进度条的值</li>
+<li><code>progressbar.reset()</code>进度条重置</li>
+</ul>
+<h3 id="5-液晶数字显示屏-QLCDNumber"><a href="#5-液晶数字显示屏-QLCDNumber" class="headerlink" title="5. 液晶数字显示屏 QLCDNumber"></a>5. 液晶数字显示屏 <code>QLCDNumber</code></h3><h4 id="1-语法-4"><a href="#1-语法-4" class="headerlink" title="1. 语法"></a>1. 语法</h4><p><code>QLCDNumber(self)</code></p>
+<h4 id="2-方法-4"><a href="#2-方法-4" class="headerlink" title="2. 方法"></a>2. 方法</h4><ul>
+<li><code>setDigitCount(10)</code>设置一共可以显示多少位数</li>
+<li><code>setSegmentStyle(QLCDNumber.Outline)</code>设置显示屏数字样式<ul>
+<li><code>QLCDNumber.Outline</code>：内容浮现，颜色与显示屏背景颜色相同</li>
+<li><code>QLCDNumber.Filled</code>：内容浮现，颜色与窗口标题颜色相同</li>
+<li><code>QLCDNumber.Flat</code>：内容扁平化，颜色与窗口标题颜色相同</li>
+</ul>
+</li>
+<li><code>setSmallDecimalPoint(True)</code>设置小数点的显示方式<ul>
+<li><code>True</code>：小数点会在两个数字之间显示出来，不会单独占一个位置</li>
+<li><code>False</code>：默认</li>
+</ul>
+</li>
+<li><code>setMode(QLCDNumber.Hex)</code>数字显示方式<ul>
+<li><code>QLCDNumber.Hex</code>数字以十六进制方式显示</li>
+<li><code>QLCDNumber.Dec</code>数字以十进制方式显示</li>
+<li><code>QLCDNumber.Oct</code>数字以八进制方式显示</li>
+<li><code>QLCDNumber.Bin</code>数字以二进制方式显示</li>
+</ul>
+</li>
+<li><code>display(1234567890)</code>用于显示数字</li>
+</ul>
+<h3 id="6-不可编辑日历控件-QCalendarWidget"><a href="#6-不可编辑日历控件-QCalendarWidget" class="headerlink" title="6. 不可编辑日历控件 QCalendarWidget"></a>6. 不可编辑日历控件 <code>QCalendarWidget</code></h3><h4 id="1-语法-5"><a href="#1-语法-5" class="headerlink" title="1. 语法"></a>1. 语法</h4><p><code>QCalendarWidget(self)</code></p>
+<h4 id="2-方法-5"><a href="#2-方法-5" class="headerlink" title="2. 方法"></a>2. 方法</h4><ul>
+<li><code>setDateRange(QDate(1949, 10, 1), QDate(6666, 6, 6))</code>设置日历范围</li>
+<li><code>setMaximumDate(QDate(1949, 10, 1))</code>设置日历最大日期</li>
+<li><code>setMinimumDate(QDate(6666, 6, 6))</code>设置日历最小日期</li>
+<li><code> self.calendar.setFirstDayOfWeek(Qt.Monday)</code>设置一个星期的第一天，默认第一天为星期天<ul>
+<li><code>Qt.Monday</code></li>
+<li><code>Qt.Tuesday</code></li>
+<li><code>Qt.Wednesday</code></li>
+<li><code>Qt.Thursday</code></li>
+<li><code>Qt.Friday</code></li>
+<li><code>Qt.Saturday</code></li>
+<li><code>Qt.Sunday</code></li>
+</ul>
+</li>
+<li><code>setSelectedDate(QDate(2020, 11, 11))</code>设置日历初始化时所显示的日期，默认是当天日期</li>
+<li><code>setGridVisible(True)</code>设置是否在日历上显示网格<ul>
+<li><code>True</code>：显示网格</li>
+<li><code>False</code>：不显示网格</li>
+</ul>
+</li>
+<li><code>selectedDate()</code>获取到当前所选日期，接着通过<code>toString(&quot;yyyy.MM.dd&quot;)</code>方法获取星期的缩写</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/11/10/%E7%9F%A5%E8%AF%86%E7%82%B9/Python/%E5%BA%93/Pyqt5/" data-id="cllet7s510000ikjwglpd47ro" data-title="Python 第三方包之 Pyqt5" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pyqt5/" rel="tag">Pyqt5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/11/19/%E7%9F%A5%E8%AF%86%E7%82%B9/Redis/6.redis%E7%BC%96%E8%AF%91%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Redis 基础-编译(第五章)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/10/22/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Maven/1.Mavenplugins%E6%80%BB%E8%A7%88/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Maven plugins 总览</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">关于我</h3>
+      <ul class="widget about">
+      
+      
+      <li>专业泼冷水，执着负能量</li>
+      
+    </ul>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><span class="category-list-count">175</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Docker/">Docker</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flume/">Flume</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/HBase/">HBase</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hadoop/">Hadoop</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hive/">Hive</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kubernetes/">Kubernetes</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flume/" rel="tag">Flume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guava/" rel="tag">Guava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jackson/" rel="tag">Jackson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">74</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/" rel="tag">Java8</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LaTex/" rel="tag">LaTex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pyqt5/" rel="tag">Pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Quartz/" rel="tag">Quartz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyinstaller/" rel="tag">pyinstaller</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%A7%A3/" rel="tag">图解</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" rel="tag">安全框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" rel="tag">日志框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" rel="tag">第三方包</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%88%B6/" rel="tag">自制</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AC%E8%BD%BD/" rel="tag">转载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Docker/" style="font-size: 11.76px;">Docker</a> <a href="/tags/Flink/" style="font-size: 17.06px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Flume/" style="font-size: 10px;">Flume</a> <a href="/tags/Git/" style="font-size: 11.76px;">Git</a> <a href="/tags/Golang/" style="font-size: 15.88px;">Golang</a> <a href="/tags/Guava/" style="font-size: 10.59px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hadoop/" style="font-size: 10.59px;">Hadoop</a> <a href="/tags/Hive/" style="font-size: 10px;">Hive</a> <a href="/tags/Idea-Instructions/" style="font-size: 13.53px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 10.59px;">JVM</a> <a href="/tags/Jackson/" style="font-size: 10px;">Jackson</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java8/" style="font-size: 11.76px;">Java8</a> <a href="/tags/Kubernetes/" style="font-size: 10px;">Kubernetes</a> <a href="/tags/LaTex/" style="font-size: 10px;">LaTex</a> <a href="/tags/Linux/" style="font-size: 16.47px;">Linux</a> <a href="/tags/Maven/" style="font-size: 11.76px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Netty/" style="font-size: 12.35px;">Netty</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Pyqt5/" style="font-size: 10px;">Pyqt5</a> <a href="/tags/Python/" style="font-size: 17.65px;">Python</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/Redis/" style="font-size: 14.12px;">Redis</a> <a href="/tags/Rust/" style="font-size: 11.18px;">Rust</a> <a href="/tags/Scala/" style="font-size: 11.76px;">Scala</a> <a href="/tags/Shell/" style="font-size: 14.71px;">Shell</a> <a href="/tags/Spring/" style="font-size: 13.53px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 12.35px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Vim/" style="font-size: 11.18px;">Vim</a> <a href="/tags/cmd/" style="font-size: 11.18px;">cmd</a> <a href="/tags/pyinstaller/" style="font-size: 10px;">pyinstaller</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 19.41px;">代码归档</a> <a href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" style="font-size: 15.29px;">内建包</a> <a href="/tags/%E5%9B%BE%E8%A7%A3/" style="font-size: 12.94px;">图解</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 18.82px;">大数据</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" style="font-size: 11.18px;">安全框架</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 12.35px;">容器</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 11.18px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 14.12px;">数据结构与算法</a> <a href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" style="font-size: 11.18px;">日志框架</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 16.47px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 17.65px;">杂记</a> <a href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" style="font-size: 18.24px;">第三方包</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.53px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%87%AA%E5%88%B6/" style="font-size: 11.18px;">自制</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.76px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 11.76px;">计算机网络</a> <a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 10px;">转载</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
