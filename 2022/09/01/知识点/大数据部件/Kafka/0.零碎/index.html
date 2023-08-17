@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Kafka-杂记 | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Kafka 零碎信息记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kafka-杂记">
+<meta property="og:url" content="http://example.com/2022/09/01/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kafka/0.%E9%9B%B6%E7%A2%8E/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="Kafka 零碎信息记录">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-31T16:40:00.000Z">
+<meta property="article:modified_time" content="2021-05-06T02:22:00.000Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="杂记">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="Kafka">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/大数据部件/Kafka/0.零碎" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/09/01/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kafka/0.%E9%9B%B6%E7%A2%8E/" class="article-date">
+  <time class="dt-published" datetime="2022-08-31T16:40:00.000Z" itemprop="datePublished">2022-09-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>►<a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a>►<a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kafka/">Kafka</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Kafka-杂记
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="零碎"><a href="#零碎" class="headerlink" title="零碎"></a>零碎</h2><ol>
+<li>每个 <code>topic</code> 是分区的，消息按照 <code>topic</code> 分类</li>
+<li>一个 <code>partition</code> 同时只能被同一个 <code>consumer group</code> 中的某一个 <code>consumer</code> 消费</li>
+<li><code>topic</code> 是逻辑上概念，<code>partition</code> 是物理概念</li>
+<li>一般修改<code>kafka</code>的<code>config</code>配置文件<code>server.properties</code><ul>
+<li><code>broker.id</code>：唯一整数</li>
+<li><code>delete.topic.enable=true</code>：能否删除主题</li>
+<li><code>log.dirs</code>：运行日志存储地址</li>
+<li><code>zookeeper.connect</code>：<code>zk</code>集群地址</li>
+</ul>
+</li>
+<li>创建 <code>topic</code> 后，会在配置的 <code>log.dirs</code> 下生成文件名为 <code>[topicName]-[partitionName]</code> 的几个文件夹，用来存放数据<ul>
+<li><code>00000000000000000000.log</code>：配置项为 <code>log.segment.bytes</code>，只存储数据，默认存7天，默认大小1G，超过了就会重新创建，其命名以当前 <code>segment</code> 的第一条消息的 <code>offset</code> 命名</li>
+<li><code>00000000000000000000.index</code>：存储相应 <code>log</code> 的索引与偏移量、大小等，之后去 <code>log</code> 中迅速查找消息</li>
+<li><code>00000000000000000000.timeindex</code>：</li>
+<li><code>leader-epoch-checkpoint</code>：</li>
+</ul>
+</li>
+<li>每个 <code>partition</code> 中维护一个从头开始的 <code>offset</code>，仅区内有序，不一定全局有序</li>
+</ol>
+<h2 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h2><h3 id="1-分区策略"><a href="#1-分区策略" class="headerlink" title="1. 分区策略"></a>1. 分区策略</h3><ol>
+<li>指明 <code>partition</code> ，直接使用其值 </li>
+<li>未指明 <code>partition</code> 但有 <code>key</code> 值，将 <code>key</code> 的 <code>hash</code> 值与 <code>topic</code> 的 <code>partition</code> 数取余，作为 <code>partition</code> 数</li>
+<li>未指明 <code>partition</code> 也没有 <code>key</code> 值，第一次调用时生成一个随机整数的绝对值（之后再其上自增），将其值与 <code>topic</code> 的可用 <code>partition</code> 数取余，作为 <code>partition</code> 数，这种方式称为 <code>round-robin 算法</code>（轮询算法）</li>
+</ol>
+<h3 id="2-数据可靠保证-ISR"><a href="#2-数据可靠保证-ISR" class="headerlink" title="2. 数据可靠保证(ISR)"></a>2. 数据可靠保证(ISR)</h3><p><code>topic</code>的每个<code>partition</code>的<code>leader</code>收到生产者发送的数据后，会向生产者发送<code>ack</code> ，生产者收到后会进行下一轮发送，否则会重新发送</p>
+<h4 id="2-1-副本数据同步策略（发送-ack-时机）"><a href="#2-1-副本数据同步策略（发送-ack-时机）" class="headerlink" title="2.1. 副本数据同步策略（发送 ack 时机）"></a>2.1. 副本数据同步策略（发送 ack 时机）</h4><table>
+<thead>
+<tr>
+<th>策略</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>半数以上完成</td>
+<td>延迟低</td>
+<td>选举新<code>leader</code>时，容忍<code>n</code>台节点故障，需要<code>2n+1</code>个副本</td>
+</tr>
+<tr>
+<td>全部完成</td>
+<td>选举新<code>leader</code>时，容忍<code>n</code>台节点故障，需要<code>n+1</code>个副本</td>
+<td>延迟高</td>
+</tr>
+</tbody></table>
+<h4 id="2-2-kafka的同步策略（全部完成的升级版）"><a href="#2-2-kafka的同步策略（全部完成的升级版）" class="headerlink" title="2.2. kafka的同步策略（全部完成的升级版）"></a>2.2. <code>kafka</code>的同步策略（全部完成的升级版）</h4><p><code>ISR(in-sysc replica set)</code>，由<code>leader</code>维护，意为与<code>leader</code>保持同步的的<code>follower</code>集合，集合中的<code>follower</code>完成数据同步后，则会发送<code>ack</code>。当其长时间未向<code>leader</code>同步数据，则将该<code>follower</code>踢出<code>ISR</code>。时间阈值配置项为<code>replica.lag.time.max.ms</code>。</p>
+<h4 id="2-3-ack应答机制"><a href="#2-3-ack应答机制" class="headerlink" title="2.3. ack应答机制"></a>2.3. <code>ack</code>应答机制</h4><p>对于不太重要的数据，允许少量丢失，所以没必要等待<code>ISR</code>全部接收成功，此时提供了三种可靠性级别，即<code>ack</code> 参数</p>
+<ul>
+<li><code>0</code>：生产者不等待<code>broker</code>的<code>ack</code>，延迟最低。<code>broker</code>一接收到还没有落盘就返回，<code>broker</code>故障时可能丢失数据</li>
+<li><code>1</code>：生产者等待<code>broker</code>的<code>ack</code>，<code>partition</code>的<code>leader</code>落盘成功后返回<code>ack</code>。如果在<code>follower</code>同步成功前<code>leader</code>故障，可能丢失数据</li>
+<li><code>-1(all)</code>：生产者等待<code>broker</code>的<code>ack</code>，并且在<code>follower</code>同步成功前后返回<code>ack</code>。如果在<code>follower</code>同步成功后，<code>broker</code>发送<code>ack</code>前，<code>leader</code>故障，则会造成重复数据</li>
+</ul>
+<h4 id="2-4-副本数据一致性"><a href="#2-4-副本数据一致性" class="headerlink" title="2.4. 副本数据一致性"></a>2.4. 副本数据一致性</h4><ul>
+<li><code>LEO(Log End Offset)</code>：每个副本中最后一个（即最大的）<code>offset</code></li>
+<li><code>HW(High Watermark)</code>：指消费者所能见到的最大的<code>offset</code>，<code>ISR</code>中最小的<code>LEO</code>，<code>HW</code>之前的数据才对消费者可见</li>
+</ul>
+<h5 id="2-4-1-follower故障"><a href="#2-4-1-follower故障" class="headerlink" title="2.4.1. follower故障"></a>2.4.1. <code>follower</code>故障</h5><p><code>follower</code>故障后，会被临时踢出<code>ISR</code>，恢复后会读取本地磁盘的<code>HW</code>，并将高于部分截掉，从<code>HW</code>重新开始同步，等到其<code>LEO</code>大于等于该<code>partition</code>的<code>HW</code>时，重新加入<code>ISR</code></p>
+<h5 id="2-4-2-leader故障"><a href="#2-4-2-leader故障" class="headerlink" title="2.4.2. leader故障"></a>2.4.2. <code>leader</code>故障</h5><p><code>leader</code>故障后，会选举出新的<code>leader</code>，其余<code>follower</code>会将各自高于<code>HW</code>的部分截掉，从新的<code>leader</code>开始同步</p>
+<h3 id="3-Exactly-Once"><a href="#3-Exactly-Once" class="headerlink" title="3. Exactly-Once"></a>3. Exactly-Once</h3><h4 id="3-1-几个概念"><a href="#3-1-几个概念" class="headerlink" title="3.1. 几个概念"></a>3.1. 几个概念</h4><ul>
+<li><code>At Least Once</code>：至少一次，即<code>ack=-1</code>时，此时不会丢数据，但可能重复数据</li>
+<li><code>At Most Once</code>：只多一次，即<code>ack=0</code>时，此时保证每条消息只会被发送一次，不会重复数据，但可能会丢数据</li>
+<li><code>幂等性</code>：无论发送多少次重复数据，都只会保留一条。配置项为 <code>enable.idompotence=true</code></li>
+<li><code>Exactly-Once</code>：等于<code>At Least Once</code>+<code>幂等性</code></li>
+</ul>
+<h4 id="3-2-语义实现"><a href="#3-2-语义实现" class="headerlink" title="3.2. 语义实现"></a>3.2. 语义实现</h4><p>开启幂等性的生产者初始化时会生成一个<code>PID</code>，发往同一个<code>partition</code>的消息会附带<code>sequence number</code>，而<code>broker</code>端会对<code>&lt;PID,partition,sequence number&gt;</code>做缓存，相同主键的消息只会持久化一条。但是由于<code>PID</code>重启生产者会变化，不同的<code>partition</code>也有不同主键，所以无法做到跨分区跨回话的<code>Exactly-Once</code></p>
+<h2 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h2><h3 id="1-消费方式"><a href="#1-消费方式" class="headerlink" title="1. 消费方式"></a>1. 消费方式</h3><p><code>pull</code>模式，优点是适应了消费能力，缺点是如果没有数据会陷入循环中。可使用<code>timeout</code>，消费者会等待一段时间才返回</p>
+<h3 id="2-分区分配策略"><a href="#2-分区分配策略" class="headerlink" title="2. 分区分配策略"></a>2. 分区分配策略</h3><h4 id="2-1-RoundRobin"><a href="#2-1-RoundRobin" class="headerlink" title="2.1. RoundRobin"></a>2.1. <code>RoundRobin</code></h4><p>消费者组的所有消费者，必须订阅相同的主题时，其将所有订阅的主题看成一个整体，按照<code>hash</code>值排序，按照顺序依次分配</p>
+<h4 id="2-2-Range"><a href="#2-2-Range" class="headerlink" title="2.2. Range"></a>2.2. <code>Range</code></h4><p>按照相同的<code>topic</code>分别分组，之后在按顺序分配</p>
+<h3 id="3-offset"><a href="#3-offset" class="headerlink" title="3. offset"></a>3. <code>offset</code></h3><p>消费者组+<code>topic</code>+<code>partition</code>，唯一确定一个<code>offset</code></p>
+<h4 id="3-1-保存位置"><a href="#3-1-保存位置" class="headerlink" title="3.1. 保存位置"></a>3.1. 保存位置</h4><ul>
+<li>0.9之前：默认将 <code>offset</code> 保存在 <code>Zookeeper</code></li>
+<li>0.9开始：默认将 <code>offset</code> 保存在 <code>Kafka</code> 一个内置<code>topic</code>，叫<code>__consumer_offsets</code>中</li>
+</ul>
+<h4 id="3-2-如何查看"><a href="#3-2-如何查看" class="headerlink" title="3.2. 如何查看"></a>3.2. 如何查看</h4><h2 id="高效读写"><a href="#高效读写" class="headerlink" title="高效读写"></a>高效读写</h2><ul>
+<li>顺序写磁盘</li>
+<li>零拷贝</li>
+</ul>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>为了实现跨分区会话事务，引入了<code>TransactionID</code>，其与<code>PID</code>绑定，当生产者重启后，可以通过它找回原先的<code>PID</code></p>
+<h2 id="consumer-offsets"><a href="#consumer-offsets" class="headerlink" title="__consumer_offsets"></a><code>__consumer_offsets</code></h2><p>由于 <code>zookeeper</code> 不擅长大批量的频繁写操作，<code>kafka_1.0.2</code> 将 <code>consumer</code> 的位移信息保存在内部的 <code>topic</code> 中，即 <code>__consumer_offsets</code>  ，并提供了 <code>kafka_consumer_groups.sh</code> 脚本供用户查看 <code>consumer</code> 信息</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/09/01/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kafka/0.%E9%9B%B6%E7%A2%8E/" data-id="clleu2qy60000rsjwahqc5ugn" data-title="Kafka-杂记" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/10/19/%E7%9F%A5%E8%AF%86%E7%82%B9/Python/python%E9%AB%98%E7%BA%A7%E7%9F%A5%E8%AF%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Python 零碎知识之高级版
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/08/28/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/%E8%87%AA%E5%88%B6/%E8%87%AA%E5%88%B6mock/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Java 代码之自制 mock</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">关于我</h3>
+      <ul class="widget about">
+      
+      
+      <li>专业泼冷水，执着负能量</li>
+      
+    </ul>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><span class="category-list-count">179</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><span class="category-list-count">27</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Docker/">Docker</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flume/">Flume</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/HBase/">HBase</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hadoop/">Hadoop</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hive/">Hive</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kafka/">Kafka</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kubernetes/">Kubernetes</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flume/" rel="tag">Flume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guava/" rel="tag">Guava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jackson/" rel="tag">Jackson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">74</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/" rel="tag">Java8</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LaTex/" rel="tag">LaTex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pyqt5/" rel="tag">Pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Quartz/" rel="tag">Quartz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyinstaller/" rel="tag">pyinstaller</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%A7%A3/" rel="tag">图解</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">27</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" rel="tag">安全框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" rel="tag">日志框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" rel="tag">第三方包</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%88%B6/" rel="tag">自制</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AC%E8%BD%BD/" rel="tag">转载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/Docker/" style="font-size: 11.67px;">Docker</a> <a href="/tags/Flink/" style="font-size: 16.67px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Flume/" style="font-size: 10px;">Flume</a> <a href="/tags/Git/" style="font-size: 11.67px;">Git</a> <a href="/tags/Golang/" style="font-size: 15.56px;">Golang</a> <a href="/tags/Guava/" style="font-size: 10.56px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hadoop/" style="font-size: 10.56px;">Hadoop</a> <a href="/tags/Hive/" style="font-size: 10px;">Hive</a> <a href="/tags/Idea-Instructions/" style="font-size: 13.33px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 10.56px;">JVM</a> <a href="/tags/Jackson/" style="font-size: 10px;">Jackson</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java8/" style="font-size: 11.67px;">Java8</a> <a href="/tags/Kafka/" style="font-size: 11.67px;">Kafka</a> <a href="/tags/Kubernetes/" style="font-size: 10px;">Kubernetes</a> <a href="/tags/LaTex/" style="font-size: 10px;">LaTex</a> <a href="/tags/Linux/" style="font-size: 16.11px;">Linux</a> <a href="/tags/Maven/" style="font-size: 11.67px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Netty/" style="font-size: 12.22px;">Netty</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Pyqt5/" style="font-size: 10px;">Pyqt5</a> <a href="/tags/Python/" style="font-size: 17.22px;">Python</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/Redis/" style="font-size: 13.89px;">Redis</a> <a href="/tags/Rust/" style="font-size: 11.11px;">Rust</a> <a href="/tags/Scala/" style="font-size: 11.67px;">Scala</a> <a href="/tags/Shell/" style="font-size: 14.44px;">Shell</a> <a href="/tags/Spring/" style="font-size: 13.33px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 12.22px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/Vim/" style="font-size: 11.11px;">Vim</a> <a href="/tags/cmd/" style="font-size: 11.11px;">cmd</a> <a href="/tags/pyinstaller/" style="font-size: 10px;">pyinstaller</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 19.44px;">代码归档</a> <a href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" style="font-size: 15px;">内建包</a> <a href="/tags/%E5%9B%BE%E8%A7%A3/" style="font-size: 12.78px;">图解</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 18.89px;">大数据</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" style="font-size: 11.11px;">安全框架</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 12.22px;">容器</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 11.11px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 13.89px;">数据结构与算法</a> <a href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" style="font-size: 11.11px;">日志框架</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 16.11px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 17.78px;">杂记</a> <a href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" style="font-size: 18.33px;">第三方包</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.33px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%87%AA%E5%88%B6/" style="font-size: 11.11px;">自制</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.67px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 11.67px;">计算机网络</a> <a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 10px;">转载</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
