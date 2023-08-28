@@ -490,6 +490,127 @@
 <li><code>fdisk</code> : 主要用于创建或删除硬盘分区</li>
 </ul>
 <h1 id="26-查看文件被进程占用"><a href="#26-查看文件被进程占用" class="headerlink" title="26. 查看文件被进程占用"></a>26. 查看文件被进程占用</h1><p><code>lsof |grep /tmp/.lock</code></p>
+<h1 id="26-文件查看"><a href="#26-文件查看" class="headerlink" title="26. 文件查看"></a>26. 文件查看</h1><h2 id="1-view"><a href="#1-view" class="headerlink" title="1. view"></a>1. <code>view</code></h2><p>语法格式: <code>view [参数] 文件名</code>，是 <code>vi</code> 命令的别名命令</br><br>常用参数：</br></p>
+<ul>
+<li><code>+数字</code>: 设置从文件第N行开始编辑 </li>
+<li><code>-b</code>: 使用二进制模式</li>
+<li><code>-c</code>: 加载文件后执行指定命令</li>
+<li><code>-e</code>: 使用Ex模式</li>
+<li><code>-m</code>: 不允许修改文件内容</li>
+<li><code>-n</code>: 不使用交换分区，只用物理内存</li>
+<li><code>-o</code>: 打开指定数量的窗口</li>
+<li><code>-p</code>: 打开指定数量的标签页</li>
+<li><code>-R</code>: 使用只读模式</li>
+<li><code>-s</code>: 静默执行模式</li>
+<li><code>-T</code>: 设置使用的终端</li>
+<li><code>-u</code>: 使用vimrc，而不是.vimrc</li>
+<li><code>-v</code>: 使用Vi模式</li>
+<li><code>-y</code>: 使用简易模式</li>
+<li><code>-Z</code>: 使用受限模式</li>
+<li><code>--help</code>: 显示帮助信息</li>
+<li><code>--literal</code>: 不扩展通配符</li>
+<li><code>--noplugin</code>: 跳过指定插件</li>
+<li><code>--remote</code>: 连接至远程服务器</li>
+<li><code>--version</code>: 显示版本信息</li>
+</ul>
+<h2 id="2-more-less"><a href="#2-more-less" class="headerlink" title="2. more, less"></a>2. <code>more, less</code></h2><p>区别:</br></p>
+<ul>
+<li><code>less</code> 可以按键盘上下方向键显示上下内容</li>
+<li><code>less</code> 不必读整个文件，加载速度比 <code>more</code> 更快</li>
+<li><code>less</code> 退出后，在屏幕上不会留下刚显示的内容</li>
+<li><code>less</code> 是 GNU 的一部分，<code>more</code> 是 util-linux 软件包的一部分，可以从 Linux 内核中获取</li>
+</ul>
+<h3 id="1-more"><a href="#1-more" class="headerlink" title="1. more"></a>1. <code>more</code></h3><p>语法格式: <code>more [-dlfpcsu ] [-num ] [+/ pattern] [+ linenum] [file ... ]</code> </br><br>常用参数：</br></p>
+<ul>
+<li><code>+n</code>: 从笫n行开始显示</li>
+<li><code>-n</code>: 定义屏幕大小为n行</li>
+<li><code>+/pattern</code>: 在每个档案显示前搜寻该字串（pattern），然后从该字串前两行之后开始显示  </li>
+<li><code>-c</code>: 从顶部清屏，然后显示</li>
+<li><code>-d</code>: 提示 “Press space to continue，’q’ to quit（按空格键继续，按q键退出）”，禁用响铃&#96;- 功能</li>
+<li><code>-l</code>: 忽略Ctrl+l（换页）字符</li>
+<li><code>-p</code>: 通过清除窗口而不是滚屏来对文件进行换页，与-c选项相似</li>
+<li><code>-s</code>: 把连续的多个空行显示为一行</li>
+<li><code>-u</code>: 把文件内容中的下画线去掉</li>
+</ul>
+<p>常用操作：</br></p>
+<ul>
+<li><code>Enter</code>: 向下n行，需要定义，默认为1行</li>
+<li><code>Ctrl+F</code>，<code>空格键</code>: 向下滚动一屏</li>
+<li><code>Ctrl+B</code>: 返回上一屏</li>
+<li><code>=</code>: 输出当前行的行号</li>
+<li><code>:f</code>: 输出文件名和当前行的行号</li>
+<li><code>V</code>: 调用vi编辑器</li>
+<li><code>!命令</code>: 调用Shell，并执行命令</li>
+<li><code>q</code>: 退出more</li>
+</ul>
+<h3 id="2-less"><a href="#2-less" class="headerlink" title="2. less"></a>2. <code>less</code></h3><p>语法格式: <code>less [参数]  文件</code> </br><br>常用参数：</br></p>
+<ul>
+<li><code>-b &lt;缓冲区大小&gt;</code>: 设置缓冲区的大小</li>
+<li><code>-e</code>: 当文件显示结束后，自动离开</li>
+<li><code>-f</code>: 强迫打开特殊文件，例如外围设备代号、目录和二进制文件</li>
+<li><code>-g</code>: 只标志最后搜索的关键词</li>
+<li><code>-i</code>: 忽略搜索时的大小写</li>
+<li><code>-m</code>: 显示类似 more 命令的百分比</li>
+<li><code>-N</code>: 显示每行的行号</li>
+<li><code>-o</code>: &lt;文件名&gt; 将less 输出的内容在指定文件中保存起来</li>
+<li><code>-Q</code>: 不使用警告音</li>
+<li><code>-s</code>: 显示连续空行为一行</li>
+<li><code>-S</code>: 行过长时间将超出部分舍弃</li>
+<li><code>-x &lt;数字&gt;</code>: 将“tab”键显示为规定的数字空格</li>
+<li><code>/字符串</code>: 向下搜索“字符串”的功能</li>
+<li><code>?字符串</code>: 向上搜索“字符串”的功能</li>
+<li><code>n</code>: 重复前一个搜索（与 &#x2F; 或 ? 有关）</li>
+<li><code>N</code>: 反向重复前一个搜索（与 &#x2F; 或 ? 有关）</li>
+</ul>
+<p>常用操作：</br></p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>键位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>向前移动一行</td>
+<td><code>k</code>、<code>上键</code>、<code>y</code></td>
+</tr>
+<tr>
+<td>向后移动一行</td>
+<td><code>j</code>、<code>下键</code>、<code>e</code>、<code>回车键</code></td>
+</tr>
+<tr>
+<td>向前翻一页</td>
+<td><code>b</code>、<code>[pageup]键</code></td>
+</tr>
+<tr>
+<td>向后翻一页</td>
+<td><code>空格键</code>、<code>[pagedown]键</code></td>
+</tr>
+<tr>
+<td>向前翻半页</td>
+<td><code>u</code></td>
+</tr>
+<tr>
+<td>向后翻半页</td>
+<td><code>d</code></td>
+</tr>
+<tr>
+<td>移动到最后一行</td>
+<td><code>G</code></td>
+</tr>
+<tr>
+<td>移动到第一行</td>
+<td><code>g</code></td>
+</tr>
+<tr>
+<td>显示帮助界面</td>
+<td><code>H</code>、<code>h</code></td>
+</tr>
+<tr>
+<td>退出less 命令</td>
+<td><code>Q</code>、<code>q</code></td>
+</tr>
+</tbody></table>
 
       
     </div>
