@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>CDGA 章节重点冲刺系列-第四章 数据架构 | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="数据架构，10分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CDGA 章节重点冲刺系列-第四章 数据架构">
+<meta property="og:url" content="http://example.com/2023/09/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/DAMA-DMBOK2/CDGA%E5%86%B2%E5%88%BA-04%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="数据架构，10分">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/dama/%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%8401.png">
+<meta property="og:image" content="http://example.com/images/dama/%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%8402.png">
+<meta property="article:published_time" content="2023-09-01T17:24:00.000Z">
+<meta property="article:modified_time" content="2023-09-02T08:48:10.667Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="DAMA-DMBOK">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/dama/%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%8401.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-读书笔记/DAMA-DMBOK2/CDGA冲刺-04数据架构" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/DAMA-DMBOK2/CDGA%E5%86%B2%E5%88%BA-04%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84/" class="article-date">
+  <time class="dt-published" datetime="2023-09-01T17:24:00.000Z" itemprop="datePublished">2023-09-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      CDGA 章节重点冲刺系列-第四章 数据架构
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-数据架构"><a href="#1-数据架构" class="headerlink" title="1. 数据架构"></a>1. 数据架构</h2><p><img src="/../../../images/dama/%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%8401.png" alt="数据架构语境关系图"></p>
+<h3 id="1-企业架构"><a href="#1-企业架构" class="headerlink" title="1. 企业架构"></a>1. 企业架构</h3><h4 id="1-类型和框架"><a href="#1-类型和框架" class="headerlink" title="1. 类型和框架"></a>1. 类型和框架</h4><ul>
+<li>类型：业务架构、 数据架构、 应用架构、技术架构等</li>
+<li>框架：Zachman 框架</li>
+</ul>
+<p><img src="/../../../images/dama/%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%8402.png" alt="企业架构类型"></p>
+<h3 id="2-数据架构构件"><a href="#2-数据架构构件" class="headerlink" title="2. 数据架构构件"></a>2. 数据架构构件</h3><p>当前状态的描述、数据需求的定义、数据整合的指引、数据资产管理规范</p>
+<h3 id="3-数据架构主要职责-驱动因素"><a href="#3-数据架构主要职责-驱动因素" class="headerlink" title="3. 数据架构主要职责&#x2F;驱动因素"></a>3. 数据架构主要职责&#x2F;驱动因素</h3><p>在业务战略和技术实现之间建立起一座通畅的桥梁。</p>
+<ul>
+<li>利用新兴技术所带来的业务优势，从战略上帮助组织快速改变产品、服务和数据</li>
+<li>将业务需求转换为数据和应用需求，以确保能够为业务流程处理提供有效数据</li>
+<li>管理复杂数据和信息，并传递至整个企业</li>
+<li>确保业务和 IT 技术保持一致</li>
+<li>为企业改革、转型和提高适应性提供支撑</li>
+</ul>
+<h3 id="4-数据架构师的主要工作"><a href="#4-数据架构师的主要工作" class="headerlink" title="4. 数据架构师的主要工作"></a>4. 数据架构师的主要工作</h3><ul>
+<li>定义数据当前状态</li>
+<li>提供数据和组件的标准业务词汇</li>
+<li>确保数据架构和企业战略、业务架构一致性</li>
+<li>描述数据战略需求</li>
+<li>高阶数据整合概要设计</li>
+<li>整合企业数据架构蓝图</li>
+</ul>
+<h3 id="5-数据架构活动（见语境关系图）"><a href="#5-数据架构活动（见语境关系图）" class="headerlink" title="5. 数据架构活动（见语境关系图）"></a>5. 数据架构活动（见语境关系图）</h3><p>简化数据和企业架构所面临的复杂问题，两种方法论：</p>
+<ul>
+<li>面向质量：与传统一致</li>
+<li>面向创新：不用面面俱到</li>
+</ul>
+<h4 id="1-建立企业数据架构工作"><a href="#1-建立企业数据架构工作" class="headerlink" title="1. 建立企业数据架构工作"></a>1. 建立企业数据架构工作</h4><ul>
+<li>战略：选择框架，制定方法，开发路线图</li>
+<li>沟通与文化：建立沟通机制，并激励积极参与者</li>
+<li>组织：通过明确责任和职责来组织数据框架工作</li>
+<li>工作方法：与企业架构保持一致，在开发项目中定义最佳实践并执行数据架构工作</li>
+<li>结果：在总体路线图中产出数据架构产品</li>
+</ul>
+<h4 id="2-企业数据架构项目相关的活动"><a href="#2-企业数据架构项目相关的活动" class="headerlink" title="2. 企业数据架构项目相关的活动"></a>2. 企业数据架构项目相关的活动</h4><ul>
+<li>定义范围</li>
+<li>理解业务需求</li>
+<li>设计</li>
+<li>实施：开发过程方式：瀑布、迭代、敏捷</li>
+</ul>
+<h3 id="6-数据架构工具"><a href="#6-数据架构工具" class="headerlink" title="6. 数据架构工具"></a>6. 数据架构工具</h3><ul>
+<li>数据建模工具：数据血缘和关系跟踪功能</li>
+<li>资产管理软件：用于管理数据资源目录，描述其内容以及跟踪它们之间的关系</li>
+<li>图形设计应用：创建架构设计图形、数据流、数据价值链和其他架构构件</li>
+</ul>
+<h3 id="7-数据架构方法"><a href="#7-数据架构方法" class="headerlink" title="7. 数据架构方法"></a>7. 数据架构方法</h3><ul>
+<li>生命周期预测</li>
+<li>图标使用规范</li>
+</ul>
+<h3 id="8-就绪评估和风险评估"><a href="#8-就绪评估和风险评估" class="headerlink" title="8. 就绪评估和风险评估"></a>8. 就绪评估和风险评估</h3><ul>
+<li>缺少管理层支持</li>
+<li>成功与否缺乏证据</li>
+<li>缺乏管理者的信任</li>
+<li>管理层不正确的决策</li>
+<li>文化冲击</li>
+<li>缺乏有经验的项目经理</li>
+<li>单一维度视角</li>
+</ul>
+<h3 id="9-数据构架治理"><a href="#9-数据构架治理" class="headerlink" title="9. 数据构架治理"></a>9. 数据构架治理</h3><h4 id="1-数据架构治理活动"><a href="#1-数据架构治理活动" class="headerlink" title="1. 数据架构治理活动"></a>1. 数据架构治理活动</h4><ul>
+<li>项目监督</li>
+<li>管理架构设计、生命周期和工具</li>
+<li>定义标准</li>
+<li>创建数据相关构件</li>
+</ul>
+<h4 id="2-数据架构治理度量指标"><a href="#2-数据架构治理度量指标" class="headerlink" title="2. 数据架构治理度量指标"></a>2. 数据架构治理度量指标</h4><ul>
+<li>架构标准接受率：测量项目与已建立的数据构架的紧密程度及项目与企业架构参与流程的遵循度</li>
+<li>实施趋势：使用&#x2F;重用&#x2F;代替&#x2F;废弃测量、项目执行效率测量</li>
+<li>业务价值度量指标：业务敏捷性改进、业务质量、业务操作质量、业务环境改进</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/09/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/DAMA-DMBOK2/CDGA%E5%86%B2%E5%88%BA-04%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84/" data-id="clm1s9iq50000e8jw593l80lt" data-title="CDGA 章节重点冲刺系列-第四章 数据架构" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DAMA-DMBOK/" rel="tag">DAMA-DMBOK</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/08/31/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/DAMA-DMBOK2/CDGA%E5%86%B2%E5%88%BA-02%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%BC%A6%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">CDGA 章节重点冲刺系列-第二章 数据处理伦理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">关于我</h3>
+      <ul class="widget about">
+      
+      
+      <li>专业泼冷水，执着负能量</li>
+      
+    </ul>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近更新</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/09/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/DAMA-DMBOK2/CDGA%E5%86%B2%E5%88%BA-04%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84/">CDGA 章节重点冲刺系列-第四章 数据架构</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/31/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/DAMA-DMBOK2/CDGA%E5%86%B2%E5%88%BA-02%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%BC%A6%E7%90%86/">CDGA 章节重点冲刺系列-第二章 数据处理伦理</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/30/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/DAMA-DMBOK2/CDGA%E5%86%B2%E5%88%BA-01%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/">CDGA 章节重点冲刺系列-第一章 数据管理</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/31/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/DAMA-DMBOK2/CDGA%E5%86%B2%E5%88%BA-03%E6%95%B0%E6%8D%AE%E6%B2%BB%E7%90%86/">CDGA 章节重点冲刺系列-第三章 数据治理</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/01/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/5.JVM%E8%B0%83%E4%BC%98/">JVM 调优</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><span class="category-list-count">217</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Docker/">Docker</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flume/">Flume</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/HBase/">HBase</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hadoop/">Hadoop</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hive/">Hive</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kafka/">Kafka</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kubernetes/">Kubernetes</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/" rel="tag">AngularJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DAMA-DMBOK/" rel="tag">DAMA-DMBOK</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Electron/" rel="tag">Electron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flume/" rel="tag">Flume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guava/" rel="tag">Guava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jackson/" rel="tag">Jackson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">74</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/" rel="tag">Java8</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LaTex/" rel="tag">LaTex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/" rel="tag">PostgreSQL</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pyqt5/" rel="tag">Pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Quartz/" rel="tag">Quartz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/" rel="tag">TypeScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/" rel="tag">Zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyinstaller/" rel="tag">pyinstaller</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%A7%A3/" rel="tag">图解</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" rel="tag">安全框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" rel="tag">日志框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" rel="tag">第三方包</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%88%B6/" rel="tag">自制</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AC%E8%BD%BD/" rel="tag">转载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/AngularJS/" style="font-size: 10px;">AngularJS</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/CSS/" style="font-size: 10.59px;">CSS</a> <a href="/tags/DAMA-DMBOK/" style="font-size: 11.76px;">DAMA-DMBOK</a> <a href="/tags/Docker/" style="font-size: 11.76px;">Docker</a> <a href="/tags/Electron/" style="font-size: 10px;">Electron</a> <a href="/tags/Flink/" style="font-size: 17.06px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Flume/" style="font-size: 10px;">Flume</a> <a href="/tags/Git/" style="font-size: 11.76px;">Git</a> <a href="/tags/Golang/" style="font-size: 15.88px;">Golang</a> <a href="/tags/Guava/" style="font-size: 10.59px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hadoop/" style="font-size: 10.59px;">Hadoop</a> <a href="/tags/Hive/" style="font-size: 10px;">Hive</a> <a href="/tags/Idea-Instructions/" style="font-size: 13.53px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 10.59px;">JVM</a> <a href="/tags/Jackson/" style="font-size: 10px;">Jackson</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java8/" style="font-size: 11.76px;">Java8</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Kafka/" style="font-size: 11.76px;">Kafka</a> <a href="/tags/Kubernetes/" style="font-size: 10px;">Kubernetes</a> <a href="/tags/LaTex/" style="font-size: 10px;">LaTex</a> <a href="/tags/Linux/" style="font-size: 16.47px;">Linux</a> <a href="/tags/Maven/" style="font-size: 11.76px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Mysql/" style="font-size: 10.59px;">Mysql</a> <a href="/tags/Netty/" style="font-size: 12.35px;">Netty</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Oracle/" style="font-size: 15.29px;">Oracle</a> <a href="/tags/PostgreSQL/" style="font-size: 10.59px;">PostgreSQL</a> <a href="/tags/Pyqt5/" style="font-size: 10px;">Pyqt5</a> <a href="/tags/Python/" style="font-size: 17.65px;">Python</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/Redis/" style="font-size: 14.12px;">Redis</a> <a href="/tags/Rust/" style="font-size: 11.18px;">Rust</a> <a href="/tags/Scala/" style="font-size: 11.76px;">Scala</a> <a href="/tags/Shell/" style="font-size: 14.71px;">Shell</a> <a href="/tags/Spring/" style="font-size: 13.53px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 12.35px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/TypeScript/" style="font-size: 11.76px;">TypeScript</a> <a href="/tags/Vim/" style="font-size: 11.18px;">Vim</a> <a href="/tags/Vue/" style="font-size: 12.35px;">Vue</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/cmd/" style="font-size: 11.18px;">cmd</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/pyinstaller/" style="font-size: 10px;">pyinstaller</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 19.41px;">代码归档</a> <a href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" style="font-size: 15.29px;">内建包</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 17.65px;">前端</a> <a href="/tags/%E5%9B%BE%E8%A7%A3/" style="font-size: 12.94px;">图解</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 19.41px;">大数据</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" style="font-size: 11.18px;">安全框架</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 12.35px;">容器</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.24px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 14.12px;">数据结构与算法</a> <a href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" style="font-size: 11.18px;">日志框架</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 16.47px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 19.41px;">杂记</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 10.59px;">树莓派</a> <a href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" style="font-size: 18.82px;">第三方包</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13.53px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%87%AA%E5%88%B6/" style="font-size: 11.18px;">自制</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.76px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 11.76px;">计算机网络</a> <a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 10px;">转载</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
