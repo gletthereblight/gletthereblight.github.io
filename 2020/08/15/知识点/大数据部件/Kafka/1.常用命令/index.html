@@ -14,7 +14,7 @@
 <meta property="og:description" content="Kafka 常用命令">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-15T02:33:00.000Z">
-<meta property="article:modified_time" content="2023-02-28T08:32:00.000Z">
+<meta property="article:modified_time" content="2023-09-11T03:29:36.829Z">
 <meta property="article:author" content="Gao Peng">
 <meta property="article:tag" content="大数据">
 <meta property="article:tag" content="Kafka">
@@ -112,26 +112,29 @@
 <li>启动 <code>kafka</code> : <code>./bin/kafka-server-start.sh -daemon config/server.properties</code></li>
 <li>停止 <code>kafka</code> : <code>./bin/kafka-server-stop.sh</code></li>
 </ul>
-<h2 id="2-topic命令"><a href="#2-topic命令" class="headerlink" title="2. topic命令"></a>2. <code>topic</code>命令</h2><h3 id="1-查看"><a href="#1-查看" class="headerlink" title="1. 查看"></a>1. 查看</h3><ul>
-<li>查看所有 : <code>./bin/kafka-topics.sh --list --zookeeper 10.10.10.10:2181</code></li>
-<li>查看某个 : <code>./bin/kafka-topics.sh --describe  --zookeeper 10.10.10.10:2181 --topic TPNAME</code></li>
+<h2 id="2-topic命令"><a href="#2-topic命令" class="headerlink" title="2. topic命令"></a>2. <code>topic</code>命令</h2><p>旧版将 topic 存储在 zookeeper 中，所以使用 <code>zookeeper</code> 参数，新版全部存储在本身一个 topic 中，叫 <code>__consumer_offsets</code>，因此改用 <code>bootstrap-server</code> 参数</p>
+<h3 id="1-查看"><a href="#1-查看" class="headerlink" title="1. 查看"></a>1. 查看</h3><ul>
+<li>查看所有 : <code>./bin/kafka-topics.sh --list --bootstrap-server 10.10.10.10:9092</code></li>
+<li>查看某个 : <code>./bin/kafka-topics.sh --describe --bootstrap-server 10.10.10.10:9092 --topic TPNAME</code></li>
 </ul>
-<h3 id="2-创建"><a href="#2-创建" class="headerlink" title="2. 创建"></a>2. 创建</h3><p><code>./bin/kafka-topics.sh --create --zookeeper 10.10.10.10:2181 --topic TPNAME --replication-factor 1 --partitions 1</code></p>
+<h3 id="2-创建"><a href="#2-创建" class="headerlink" title="2. 创建"></a>2. 创建</h3><p><code>./bin/kafka-topics.sh --create --bootstrap-server 10.10.10.10:9092 --topic TPNAME --replication-factor 1 --partitions 1</code></p>
 <p>参数</p>
 <ul>
 <li><code>--topic</code> : 定义 topic 名</li>
 <li><code>--replication-factor</code> : 定义副本数</li>
 <li><code>--partition</code> : 定义分区数</li>
 </ul>
-<h3 id="3-删除"><a href="#3-删除" class="headerlink" title="3. 删除"></a>3. 删除</h3><p><code>./bin/kafka-topics.sh --delete --zookeeper 10.10.10.10:2181 --topic TPNAME</code></p>
+<h3 id="3-删除"><a href="#3-删除" class="headerlink" title="3. 删除"></a>3. 删除</h3><p><code>./bin/kafka-topics.sh --delete --bootstrap-server 10.10.10.10:9092 --topic TPNAME</code></p>
 <h3 id="4-修改"><a href="#4-修改" class="headerlink" title="4. 修改"></a>4. 修改</h3><ul>
-<li>修改分区数 : <code>bin/kafka-topics.sh --alter --zookeeper 10.10.10.10:2181 --topic TPNAME --partition 3</code></li>
+<li>修改分区数 : <code>bin/kafka-topics.sh --alter --bootstrap-server 10.10.10.10:9092 --topic TPNAME --partition 3</code></li>
 </ul>
 <h3 id="5-查看版本"><a href="#5-查看版本" class="headerlink" title="5. 查看版本"></a>5. 查看版本</h3><p><code>find / -name \*kafka_\* | head -1 | grep -o &#39;\kafka[^\n]*&#39;</code></p>
 <h2 id="3-消费组命令"><a href="#3-消费组命令" class="headerlink" title="3. 消费组命令"></a>3. 消费组命令</h2><h3 id="1-查看-1"><a href="#1-查看-1" class="headerlink" title="1. 查看"></a>1. 查看</h3><ul>
 <li>配置文件方式 : 查看 <code>consumer.properties</code> 中的 <code>group.id=test-consumer-group</code></li>
-<li>命令行方式 :<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">新版</span></span><br><span class="line">./bin/kafka-consumer-groups.sh --bootstrap-server 172.17.0.3:9092 --list</span><br><span class="line">./bin/kafka-consumer-groups.sh --bootstrap-server 172.17.0.3:9092 --group test-consumer-group --describe</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">旧版</span></span><br><span class="line">./bin/kafka-consumer-groups.sh --zookeeper 172.17.0.2:2181 --list</span><br><span class="line">./bin/kafka-consumer-groups.sh --zookeeper 172.17.0.2:2181 --group test-consumer-group --describe</span><br></pre></td></tr></table></figure></li>
+<li>命令行方式 :</li>
 </ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">新版</span></span><br><span class="line">./bin/kafka-consumer-groups.sh --bootstrap-server 172.17.0.3:9092 --list</span><br><span class="line">./bin/kafka-consumer-groups.sh --bootstrap-server 172.17.0.3:9092 --group test-consumer-group --describe</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">旧版</span></span><br><span class="line">./bin/kafka-consumer-groups.sh --zookeeper 172.17.0.2:2181 --list</span><br><span class="line">./bin/kafka-consumer-groups.sh --zookeeper 172.17.0.2:2181 --group test-consumer-group --describe</span><br></pre></td></tr></table></figure>
+
 <h2 id="4-offset-命令"><a href="#4-offset-命令" class="headerlink" title="4. offset 命令"></a>4. <code>offset</code> 命令</h2><h3 id="1-查看最小-offset，即最早的"><a href="#1-查看最小-offset，即最早的" class="headerlink" title="1. 查看最小 offset，即最早的"></a>1. 查看最小 <code>offset</code>，即最早的</h3><p><code>./bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list 192.168.1.1:9092 --topic mykafka --time -2</code></p>
 <h3 id="2-查看最大-offset，即最新的"><a href="#2-查看最大-offset，即最新的" class="headerlink" title="2. 查看最大 offset，即最新的"></a>2. 查看最大 <code>offset</code>，即最新的</h3><p><code>./bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list 192.168.1.1:9092 --topic mykafka --time -1</code></p>
 <h2 id="5-broker-命令"><a href="#5-broker-命令" class="headerlink" title="5. broker 命令"></a>5. <code>broker</code> 命令</h2><h3 id="1-查看-2"><a href="#1-查看-2" class="headerlink" title="1. 查看"></a>1. 查看</h3><p>一般利用 <code>zookeeper</code> 来查看</p>
@@ -489,6 +492,14 @@
       <ul>
         
           <li>
+            <a href="/2020/08/15/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kafka/1.%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Kafka 常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/DAMA-DMBOK2/CDGA%E5%86%B2%E5%88%BA-04%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84/">CDGA 章节重点冲刺系列-第四章 数据架构</a>
+          </li>
+        
+          <li>
             <a href="/2020/08/10/%E7%9F%A5%E8%AF%86%E7%82%B9/Git/git%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">git 常用命令(持续更新)</a>
           </li>
         
@@ -498,14 +509,6 @@
         
           <li>
             <a href="/2023/09/05/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/DAMA-DMBOK2/CDGA%E5%86%B2%E5%88%BA-16%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E7%BB%84%E7%BB%87%E4%B8%8E%E8%A7%92%E8%89%B2%E6%9C%9F%E6%9C%9B/">CDGA 章节重点冲刺系列-第十六章 数据管理组织与角色期望</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/05/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/DAMA-DMBOK2/CDGA%E5%86%B2%E5%88%BA-15%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E6%88%90%E7%86%9F%E5%BA%A6%E8%AF%84%E4%BC%B0/">CDGA 章节重点冲刺系列-第十五章 数据管理成熟度评估</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/05/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/DAMA-DMBOK2/CDGA%E5%86%B2%E5%88%BA-14%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%92%8C%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/">CDGA 章节重点冲刺系列-第十四章 大数据和数据科学</a>
           </li>
         
       </ul>
