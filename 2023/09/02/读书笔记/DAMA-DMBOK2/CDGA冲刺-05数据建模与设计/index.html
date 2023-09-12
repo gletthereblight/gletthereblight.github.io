@@ -17,7 +17,7 @@
 <meta property="og:image" content="http://example.com/images/dama/%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E5%92%8C%E8%AE%BE%E8%AE%A102.png">
 <meta property="og:image" content="http://example.com/images/dama/%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E5%92%8C%E8%AE%BE%E8%AE%A103.png">
 <meta property="article:published_time" content="2023-09-02T09:03:00.000Z">
-<meta property="article:modified_time" content="2023-09-02T13:41:05.899Z">
+<meta property="article:modified_time" content="2023-09-12T14:47:04.962Z">
 <meta property="article:author" content="Gao Peng">
 <meta property="article:tag" content="DAMA-DMBOK">
 <meta name="twitter:card" content="summary">
@@ -111,7 +111,7 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <h2 id="1-数据建模与设计"><a href="#1-数据建模与设计" class="headerlink" title="1. 数据建模与设计"></a>1. 数据建模与设计</h2><p><img src="/../../../images/dama/%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E5%92%8C%E8%AE%BE%E8%AE%A101.png" alt="数据建模和设计语境关系图"></p>
-<h3 id="1-数据模型及建模方法-6-种"><a href="#1-数据模型及建模方法-6-种" class="headerlink" title="1. 数据模型及建模方法 6 种"></a>1. 数据模型及建模方法 6 种</h3><p>关系模式、多维模式、面向对象模式、事实模式、时间序列模式、NoSQL 模<br>式。根据描述详细程度不同，可分为：概念模型、逻辑模型、物理模型</p>
+<h3 id="1-数据模型及建模方法-6-种"><a href="#1-数据模型及建模方法-6-种" class="headerlink" title="1. 数据模型及建模方法 6 种"></a>1. 数据模型及建模方法 6 种</h3><p>常见数据模式有：关系模式、多维模式、面向对象模式、事实模式、时间序列模式、NoSQL 模式。</br><br>根据描述详细程度不同，每种模式可分为 3 种模型：概念模型、逻辑模型、物理模型。</br></p>
 <h3 id="2-业务驱动因素"><a href="#2-业务驱动因素" class="headerlink" title="2. 业务驱动因素"></a>2. 业务驱动因素</h3><ul>
 <li>提供有关数据的通用词汇表</li>
 <li>获取、记录组织内数据和系统的详细信息</li>
@@ -131,8 +131,30 @@
 <li>业务事件信息，在操作过程中创建的数据，如客户订单。事件实体有时被称为交易性业务数据</li>
 <li>详细交易信息，通过销售系统、传感器生成，用于分析趋势，常成为大数据。</li>
 </ul>
-<h3 id="5-数据模型组件"><a href="#5-数据模型组件" class="headerlink" title="5. 数据模型组件"></a>5. 数据模型组件</h3><h4 id="1-实体"><a href="#1-实体" class="headerlink" title="1. 实体"></a>1. 实体</h4><p>实体是一个组织收集信息的载体，实体实例是特定实体的具体化或取值</p>
-<h4 id="2-关系"><a href="#2-关系" class="headerlink" title="2. 关系"></a>2. 关系</h4><p>实体之间的关联。</p>
+<h3 id="5-数据模型组件"><a href="#5-数据模型组件" class="headerlink" title="5. 数据模型组件"></a>5. 数据模型组件</h3><h4 id="1-实体"><a href="#1-实体" class="headerlink" title="1. 实体"></a>1. 实体</h4><p>实体是一个组织收集信息的载体，实体实例是特定实体的具体化或取值</br></p>
+<h5 id="1-实体的别名"><a href="#1-实体的别名" class="headerlink" title="1. 实体的别名"></a>1. 实体的别名</h5><ul>
+<li>关系模型：实体</li>
+<li>维度模型：维度、事实表</li>
+<li>面向对象模型：类、对象</li>
+<li>基于时间模型：中心、卫星、链接</li>
+<li>非关系型模型：文件、节点</li>
+<li>概念模型：概念、术语</li>
+<li>逻辑模型：实体</li>
+<li>物理模型：表</li>
+</ul>
+<h4 id="2-关系"><a href="#2-关系" class="headerlink" title="2. 关系"></a>2. 关系</h4><p>实体之间的关联。</br></p>
+<h5 id="1-关系的别名"><a href="#1-关系的别名" class="headerlink" title="1. 关系的别名"></a>1. 关系的别名</h5><ul>
+<li>关系模型：关系</li>
+<li>维度模型：导航路径</li>
+<li>非关系型模型：边界、链接</li>
+<li>物理模型：约束、引用</li>
+</ul>
+<h5 id="2-关系的基数"><a href="#2-关系的基数" class="headerlink" title="2. 关系的基数"></a>2. 关系的基数</h5><p>说明了一个实体和其他实体参与建立关系的数量。</p>
+<ul>
+<li>一元关系：又称递归关系、自我引用关系，只包含一个实体</li>
+<li>二元关系：涉及两个实体</li>
+<li>三元关系：涉及三个实体</li>
+</ul>
 <h4 id="3-属性"><a href="#3-属性" class="headerlink" title="3. 属性"></a>3. 属性</h4><p>定义、 描述或度量实体某个方面的性质。属性可能包含域。属性在图中是在实体矩形内用列表描述。实体中属性的物理展现为表、视图、文档、图形或文件中的列、字段、标记或节点等。</br><br>标识符（Identifiers）也称为键，是唯一标识实体实例的一个或多个属性的集合。</br></p>
 <h5 id="1-键的结构类型"><a href="#1-键的结构类型" class="headerlink" title="1. 键的结构类型"></a>1. 键的结构类型</h5><ul>
 <li>单一键：唯一标识实体实例的一个属性。</li>
@@ -147,7 +169,13 @@
 <li>主键：被选择为实体唯一标识符的候选键。</li>
 <li>备用键：是一个候选键，虽唯一，但没有被选为主键，可用于查找特定实体实例</li>
 </ul>
-<h4 id="4-域"><a href="#4-域" class="headerlink" title="4. 域"></a>4. 域</h4><p>某一属性可被赋予的全部可能取值。提供一种将属性特征标准化的方法。域中所有的值都为有效的值。不在域中的值被称为无效的值。属性中不应当含有其指定的域以外的值。可以附加的规则对域进行限制，限制规则称为约束。</p>
+<h4 id="4-域"><a href="#4-域" class="headerlink" title="4. 域"></a>4. 域</h4><p>某一属性可被赋予的全部可能取值。如属性为性别，域值就为男和女。</br></p>
+<ul>
+<li>它提供一种将属性特征标准化的方法</li>
+<li>域中所有的值都为有效的值，不在域中的值被称为无效的值</li>
+<li>属性中不应当含有其指定的域以外的值</li>
+<li>可以附加的规则对域进行限制，限制规则称为约束</li>
+</ul>
 <h3 id="6-数据建模的方法"><a href="#6-数据建模的方法" class="headerlink" title="6. 数据建模的方法"></a>6. 数据建模的方法</h3><p><img src="/../../../images/dama/%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E5%92%8C%E8%AE%BE%E8%AE%A102.png" alt="数据建模方法"></p>
 <h4 id="1-关系建模"><a href="#1-关系建模" class="headerlink" title="1. 关系建模"></a>1. 关系建模</h4><p>关系模型设计的目的是精确的表达业务数据，消除冗余，适合设计操作型的系统</p>
 <h4 id="2-维度建模"><a href="#2-维度建模" class="headerlink" title="2. 维度建模"></a>2. 维度建模</h4><p>维度建模为了优化海量数据的查询和分析，专注于特定业务流程的业务问题。</p>
@@ -158,7 +186,7 @@
 <li>粒度：事实表中单行数据的含义或描述， 是每行都有的最详细信息。 关键步骤之一。</li>
 <li>一致性维度：基于整个组织。 一致性事实： 使用跨多个数据集市的标准化术语。</li>
 </ul>
-<h4 id="3-UML"><a href="#3-UML" class="headerlink" title="3. UML"></a>3. UML</h4><p>统一建模语言</p>
+<h4 id="3-面向对象"><a href="#3-面向对象" class="headerlink" title="3. 面向对象"></a>3. 面向对象</h4><p>UML 统一建模语言</p>
 <h4 id="4-基于事实的建模"><a href="#4-基于事实的建模" class="headerlink" title="4. 基于事实的建模"></a>4. 基于事实的建模</h4><ul>
 <li>对象角色建模：ORM、ORM2</li>
 <li>完全面向通信的建模：FCO-IM</li>
@@ -186,9 +214,9 @@
 <li>图数据库</li>
 </ul>
 <h3 id="6-数据模型级别"><a href="#6-数据模型级别" class="headerlink" title="6. 数据模型级别"></a>6. 数据模型级别</h3><ul>
-<li>概念模型：企业的 “真实世界” 视图，代表企业当前的最佳模式或经营方式</li>
-<li>外模式</li>
-<li>内模式</li>
+<li>概念数据模型(CDM)：企业的 “真实世界” 视图，代表企业当前的最佳模式或经营方式，用一系列相关主题域的集合来描述概要数据需求</li>
+<li>外模式：即逻辑数据模型(LDM)，对数据需求的详细描述</li>
+<li>内模式：即物理数据模型(PDM)，描述了一种详细的技术解决方案，通常以逻辑数据模型为基础</li>
 </ul>
 <h3 id="7-数据模型和设计活动（见语境关系图）"><a href="#7-数据模型和设计活动（见语境关系图）" class="headerlink" title="7. 数据模型和设计活动（见语境关系图）"></a>7. 数据模型和设计活动（见语境关系图）</h3><ul>
 <li><p>规划数据建模：交付成果：图表、定义、争议和悬而未决的问题、血缘关系</p>
@@ -197,7 +225,7 @@
 <ol>
 <li>概念数据模型建模：选择模型类型、选择表示方法、完成初始概念模型、收集组织中最高级的概念（名称）、收集与这些概念有关的活动（动词）、合并企业术语、获取签署</li>
 <li>逻辑数据模型建模：分析信息需求、分析现有文档、添加关联实体、添加属性、指定域、指定键</li>
-<li>物理数据建模：解决逻辑抽象、添加属性细节、添加参考数据对象、指定代理键、逆规范化、建立索引、分区、创建视图</li>
+<li>物理数据模型建模：解决逻辑抽象、添加属性细节、添加参考数据对象、指定代理键、逆规范化、建立索引、分区、创建视图</li>
 </ol>
 </li>
 <li><p>审核数据建模：通过持续改进实践来控制模型质量</p>
@@ -205,12 +233,12 @@
 <li><p>维护数据建模：保持最新状态</p>
 </li>
 </ul>
-<h4 id="8-其他概念"><a href="#8-其他概念" class="headerlink" title="8. 其他概念"></a>8. 其他概念</h4><h5 id="1-模型"><a href="#1-模型" class="headerlink" title="1. 模型"></a>1. 模型</h5><ul>
+<h3 id="8-其他概念"><a href="#8-其他概念" class="headerlink" title="8. 其他概念"></a>8. 其他概念</h3><h4 id="1-模型"><a href="#1-模型" class="headerlink" title="1. 模型"></a>1. 模型</h4><ul>
 <li>概念数据模型（Conceptual Data Model，CDM）是用一系列相关主题域的集合来描述概要数据需求</li>
 <li>逻辑数据模型（Logical Data Model，LDM）是对数据需求的详细描述，通常用于支持特定用法的语境中（如应用需求）</li>
 <li>物理数据模型（Physical Data Model，PDM）描述了一种详细的技术解决方案，通常以逻辑数据模型为基础，与某一类系统硬件、软件和网络工具相匹配</li>
 </ul>
-<h5 id="2-规范化和逆规范化"><a href="#2-规范化和逆规范化" class="headerlink" title="2. 规范化和逆规范化"></a>2. 规范化和逆规范化</h5><ul>
+<h4 id="2-规范化和逆规范化"><a href="#2-规范化和逆规范化" class="headerlink" title="2. 规范化和逆规范化"></a>2. 规范化和逆规范化</h4><ul>
 <li>逆规范化（Denormalization）是将符合范式规则的逻辑数据模型经过慎重考虑后，转换成一些带冗余数据的物理表。</br></li>
 <li>规范化（Normalization）的基本目标是保证每个属性只在一个位置出现，以消除冗余。<ul>
 <li>第一范式(1NF)：每个实体都有一个有效的主键，每个属性都依赖于键</li>
@@ -222,10 +250,22 @@
 </ul>
 </li>
 </ul>
-<h5 id="3-抽象化"><a href="#3-抽象化" class="headerlink" title="3. 抽象化"></a>3. 抽象化</h5><p>抽象化（Abstraction）就是将细节移除，这样可以在更广泛的情况下扩展适用性，同时保留概念或主题的重要和本质属性。</p>
+<h4 id="3-抽象化"><a href="#3-抽象化" class="headerlink" title="3. 抽象化"></a>3. 抽象化</h4><p>抽象化（Abstraction）就是将细节移除，这样可以在更广泛的情况下扩展适用性，同时保留概念或主题的重要和本质属性。</p>
 <ul>
 <li>泛化：将实体公共属性和关系分组为超类实体</li>
 <li>特化：将实体中的分区属性分类为子类实体，通常基于实体实例中的属性值</li>
+</ul>
+<h4 id="4-数据库设计最佳实践"><a href="#4-数据库设计最佳实践" class="headerlink" title="4. 数据库设计最佳实践"></a>4. 数据库设计最佳实践</h4><p>PRISM 设计原则：</p>
+<ul>
+<li>性能和易用性（Performance and Ease of Use）</li>
+<li>可重用性（Reusability）</li>
+<li>完整性（Integrity）</li>
+<li>安全性（Security）</li>
+<li>可维护性（Maintainability）</li>
+</ul>
+<h4 id="5-建立数据库模型-2-种方式"><a href="#5-建立数据库模型-2-种方式" class="headerlink" title="5. 建立数据库模型 2 种方式"></a>5. 建立数据库模型 2 种方式</h4><ul>
+<li>正向工程：指从需求开始构建新应用程序的过程</li>
+<li>逆向工程：记录现有数据库的过程</li>
 </ul>
 
       
@@ -287,6 +327,10 @@
       <ul>
         
           <li>
+            <a href="/2023/09/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/DAMA-DMBOK2/CDGA%E5%86%B2%E5%88%BA-05%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E4%B8%8E%E8%AE%BE%E8%AE%A1/">CDGA 章节重点冲刺系列-第五章 数据建模与设计</a>
+          </li>
+        
+          <li>
             <a href="/2020/08/15/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kafka/1.%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Kafka 常用命令</a>
           </li>
         
@@ -300,10 +344,6 @@
         
           <li>
             <a href="/2023/09/05/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/DAMA-DMBOK2/CDGA%E5%86%B2%E5%88%BA-17%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E5%92%8C%E7%BB%84%E7%BB%87%E5%8F%98%E9%9D%A9%E7%AE%A1%E7%90%86/">CDGA 章节重点冲刺系列-第十七章 数据管理和组织变革管理</a>
-          </li>
-        
-          <li>
-            <a href="/2023/09/05/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/DAMA-DMBOK2/CDGA%E5%86%B2%E5%88%BA-16%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E7%BB%84%E7%BB%87%E4%B8%8E%E8%A7%92%E8%89%B2%E6%9C%9F%E6%9C%9B/">CDGA 章节重点冲刺系列-第十六章 数据管理组织与角色期望</a>
           </li>
         
       </ul>
