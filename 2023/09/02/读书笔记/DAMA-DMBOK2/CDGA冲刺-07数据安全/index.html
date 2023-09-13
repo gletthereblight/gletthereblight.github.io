@@ -16,7 +16,7 @@
 <meta property="og:image" content="http://example.com/images/dama/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A801.png">
 <meta property="og:image" content="http://example.com/images/dama/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A802.png">
 <meta property="article:published_time" content="2023-09-02T14:57:00.000Z">
-<meta property="article:modified_time" content="2023-09-02T16:33:57.883Z">
+<meta property="article:modified_time" content="2023-09-13T15:32:35.535Z">
 <meta property="article:author" content="Gao Peng">
 <meta property="article:tag" content="DAMA-DMBOK">
 <meta name="twitter:card" content="summary">
@@ -135,7 +135,7 @@
 <ul>
 <li>哈希：将任意长度数据转换为固定长度数据，算法有 MD5、SHA</li>
 <li>对称加密： 使用同一个密钥加解密数据，算法有 DES、3DES、AES、IDEA</li>
-<li>非对称加密： 发送方和接收方使用不同的密钥。发送方使用公开提供的公钥加密，接收方使用私钥解密，算法有 RAS、Diffie-Hellman 密钥交换协<br>议</li>
+<li>非对称加密： 发送方和接收方使用不同的密钥。发送方使用公开提供的公钥加密，接收方使用私钥解密，算法有 RAS、Diffie-Hellman 密钥交换协议</li>
 </ul>
 <h4 id="2-混淆或脱敏"><a href="#2-混淆或脱敏" class="headerlink" title="2. 混淆或脱敏"></a>2. 混淆或脱敏</h4><h5 id="1-脱敏类型"><a href="#1-脱敏类型" class="headerlink" title="1. 脱敏类型"></a>1. 脱敏类型</h5><ul>
 <li>静态脱敏：永久且不可逆转地更改数据，这种类型的脱敏通常不会在生产环境中使用<ul>
@@ -155,6 +155,24 @@
 <li>加密技术（Encryption）：通过密码代码将可识别、 有意义的字符流转换为不可识别的字符流</li>
 <li>表达式脱敏（Expression Masking）：将所有值更改为一个表达式的结果</li>
 <li>键值脱敏（Key Masking）：指定的脱敏算法&#x2F;进程的结果必须是唯一且可重复的，用于数据库键值字段（或类似字段）脱敏</li>
+</ul>
+<h3 id="6-机密级别"><a href="#6-机密级别" class="headerlink" title="6. 机密级别"></a>6. 机密级别</h3><ul>
+<li>对普通受众公开（For General Audiences）</li>
+<li>仅内部使用（Internal Use Only）</li>
+<li>机密（Confidential）</li>
+<li>受限机密（Restricted Confidential）</li>
+<li>绝密（Registered Confidential）</li>
+</ul>
+<h3 id="7-数据安全类型"><a href="#7-数据安全类型" class="headerlink" title="7. 数据安全类型"></a>7. 数据安全类型</h3><ul>
+<li>设施安全</li>
+<li>设备安全</li>
+<li>凭据安全</li>
+<li>电子信息安全</li>
+</ul>
+<h3 id="8-风险分类"><a href="#8-风险分类" class="headerlink" title="8. 风险分类"></a>8. 风险分类</h3><ul>
+<li>关键风险数据（Critical Risk Data，CRD）</li>
+<li>高风险数据（High Risk Data，HRD）</li>
+<li>中等风险数据（Moderate Risk Data，MRD）</li>
 </ul>
 
       
@@ -216,6 +234,10 @@
       <ul>
         
           <li>
+            <a href="/2023/09/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/DAMA-DMBOK2/CDGA%E5%86%B2%E5%88%BA-07%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/">CDGA 章节重点冲刺系列-第七章 数据安全</a>
+          </li>
+        
+          <li>
             <a href="/2023/09/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/DAMA-DMBOK2/CDGA%E5%86%B2%E5%88%BA-06%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E4%B8%8E%E6%93%8D%E4%BD%9C/">CDGA 章节重点冲刺系列-第六章 数据存储与操作</a>
           </li>
         
@@ -229,10 +251,6 @@
         
           <li>
             <a href="/2023/09/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/DAMA-DMBOK2/CDGA%E5%86%B2%E5%88%BA-04%E6%95%B0%E6%8D%AE%E6%9E%B6%E6%9E%84/">CDGA 章节重点冲刺系列-第四章 数据架构</a>
-          </li>
-        
-          <li>
-            <a href="/2020/08/10/%E7%9F%A5%E8%AF%86%E7%82%B9/Git/git%20%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">git 常用命令(持续更新)</a>
           </li>
         
       </ul>
