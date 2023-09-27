@@ -13,12 +13,15 @@
 <meta property="og:site_name" content="Glett的码字间">
 <meta property="og:description" content="计算机系统基础知识、计算机体系结构、安全性、可靠性与系统性能评测基础知识">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E5%AD%98%E5%82%A8%E5%99%A8%E7%9A%84%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E5%BB%89%E4%BB%B7%E5%86%97%E4%BD%99%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97.png">
 <meta property="article:published_time" content="2023-09-26T11:55:00.000Z">
-<meta property="article:modified_time" content="2023-09-26T15:24:58.104Z">
+<meta property="article:modified_time" content="2023-09-27T15:58:13.292Z">
 <meta property="article:author" content="Gao Peng">
 <meta property="article:tag" content="软考">
 <meta property="article:tag" content="软件设计师">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E5%AD%98%E5%82%A8%E5%99%A8%E7%9A%84%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84.png">
   
     <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
   
@@ -176,7 +179,142 @@
 <li>海明码（Hamming Code）：利用奇偶性来查错和纠错的校验方法</li>
 <li>循环冗余校验码（Cyclic Redundancy Check，CRC）：由两部分组成，左边为信息码（数据），右边为校验码</li>
 </ul>
-<h2 id="2-计算机体系结构"><a href="#2-计算机体系结构" class="headerlink" title="2. 计算机体系结构"></a>2. 计算机体系结构</h2><h2 id="3-计算安全"><a href="#3-计算安全" class="headerlink" title="3. 计算安全"></a>3. 计算安全</h2>
+<h2 id="2-计算机体系结构"><a href="#2-计算机体系结构" class="headerlink" title="2. 计算机体系结构"></a>2. 计算机体系结构</h2><h3 id="1-计算机体系结构的发展"><a href="#1-计算机体系结构的发展" class="headerlink" title="1. 计算机体系结构的发展"></a>1. 计算机体系结构的发展</h3><p>从宏观上按处理数量分类：</p>
+<ul>
+<li>单处理系统：单个处理器</li>
+<li>并行处理与多处理系统：多处理器</li>
+<li>分布式处理系统</li>
+</ul>
+<p>从微观上按并行程度分类：</p>
+<ul>
+<li>Flynn 分类：<ul>
+<li>单指令流单数据流（SISD）</li>
+<li>单指令流多数据流（SIMD）</li>
+<li>多指令流单数据流（MISD）</li>
+<li>多指令流多数据流（MIMD）</li>
+</ul>
+</li>
+<li>马泽云分类法<ul>
+<li>字串行位串行（WSBS）</li>
+<li>字并行位串行（WPBS）</li>
+<li>子串行位并行（WSBP）</li>
+<li>子并行位并行（WPBP）</li>
+</ul>
+</li>
+<li>Handler 分类法：基于硬件和计算并行度<ul>
+<li>处理机级</li>
+<li>每个处理机器中算术逻辑单元级</li>
+<li>每个算术逻辑单元中的逻辑门电路</li>
+</ul>
+</li>
+<li>Kuck 分类法<ul>
+<li>单指令流单执行流（SISE）</li>
+<li>单指令流多执行流（SIME）</li>
+<li>多指令流单执行流（MISE）</li>
+<li>多指令流多执行流（MIME）</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-指令系统"><a href="#1-指令系统" class="headerlink" title="1. 指令系统"></a>1. 指令系统</h4><p>指令集系统结构：</p>
+<ul>
+<li>操作数在 CPU 中存储方式，即操作数从内存中取出后保存在哪</li>
+<li>显式操作数的数量，即在典型的指令中有多少个显式命名的操作数</li>
+<li>操作数的位置，即任一个 ALU 指令的操作数能否在主存中，如何定位</li>
+<li>指令的操作，即在指令集中提供哪些操作</li>
+<li>操作数的类型和大小</li>
+</ul>
+<h4 id="2-复杂指令集计算机（CISC）"><a href="#2-复杂指令集计算机（CISC）" class="headerlink" title="2. 复杂指令集计算机（CISC）"></a>2. 复杂指令集计算机（CISC）</h4><p>主要弊端：</p>
+<ul>
+<li>指令集过复杂</li>
+<li>每条复杂指令都需执行一段解释性微程序才能完成，降低了处理速度</li>
+<li>指系统过大，编译程序冗长</li>
+<li>完善的中断控制导致动作复杂</li>
+<li>芯片种类多，出错几率大，成品率低</li>
+</ul>
+<h4 id="3-精简指令集计算机（RISC）"><a href="#3-精简指令集计算机（RISC）" class="headerlink" title="3. 精简指令集计算机（RISC）"></a>3. 精简指令集计算机（RISC）</h4><p>关键技术：</p>
+<ul>
+<li>重叠寄存器窗口技术</li>
+<li>优化编译技术</li>
+<li>超流水及超标量技术</li>
+<li>在微程序技术中结合硬布线逻辑与微程序</li>
+</ul>
+<h4 id="4-指令系统的优化"><a href="#4-指令系统的优化" class="headerlink" title="4. 指令系统的优化"></a>4. 指令系统的优化</h4><p>面向高级语言的优化思路是尽可能缩小高级语言与机器语言之间的语义差异。</br>面向操作系统的优化思路是进一步缩小操作系统与体系架构之间的语义差异。</br></p>
+<h4 id="5-指令流水处理"><a href="#5-指令流水处理" class="headerlink" title="5. 指令流水处理"></a>5. 指令流水处理</h4><p>指令的控制方式有顺序方式、重叠方式和流水方式。</br></p>
+<p>流水线的种类有：</p>
+<ul>
+<li>从流水级别上分：部件级、处理级、系统级</li>
+<li>从流水功能上分：单功能、多功能流水线</li>
+<li>从流水连接上分：静态、动态流水线</li>
+<li>从流水是否反馈回路分：线性、非线性流水线</li>
+<li>从流水流动顺序上分：同步、异步流水线</li>
+<li>从流水线数据表示上分：标量、向量流水线</li>
+</ul>
+<p>RISC 采用的流水技术有三种：超流水线、超标量线、超长指令字</p>
+<h4 id="6-阵列处理机、并行处理机、多处理机"><a href="#6-阵列处理机、并行处理机、多处理机" class="headerlink" title="6. 阵列处理机、并行处理机、多处理机"></a>6. 阵列处理机、并行处理机、多处理机</h4><p>区别：</p>
+<ul>
+<li>阵列处理机：将重复的多个处理单元连成阵列，在单个控制部件的控制下，进行数据处理完成指令</li>
+<li>并行处理机：典型的有 SIMD、MIMD</li>
+<li>多处理机：由多台机器组成，共享一个主存储器和所有外设</li>
+</ul>
+<h3 id="2-存储系统"><a href="#2-存储系统" class="headerlink" title="2. 存储系统"></a>2. 存储系统</h3><p><img src="/../../images/../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E5%AD%98%E5%82%A8%E5%99%A8%E7%9A%84%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84.png" alt="存储器层次结构"></p>
+<p>分类：</p>
+<ul>
+<li>按存储器所处位置分：内存、外存</li>
+<li>按存储器构成材料分：磁存储器、半导体存储器、光存储器</li>
+<li>按存储器工作方式分：读写存储器、只读存储器</li>
+<li>按访问方式分：按地址访问、按内容访问存储器</li>
+<li>按寻址方式分：随机存储器、顺序存储器、直接存储器</li>
+</ul>
+<h4 id="1-高速缓存（Cache）"><a href="#1-高速缓存（Cache）" class="headerlink" title="1. 高速缓存（Cache）"></a>1. 高速缓存（Cache）</h4><ul>
+<li>组成：控制器、存储器</li>
+<li>地址映像方法：直接映像、全相联映像、组相联映像</li>
+<li>替换算法：随机替换算法、先进先出算法、近期最少使用算法、优化替换算法</li>
+<li>性能分析：命中率与容量关系，容量越大，命中率越高</li>
+<li>多级 Cache：一级（L1Cache）、二级(L2Cache)</li>
+</ul>
+<h4 id="2-虚拟存储器"><a href="#2-虚拟存储器" class="headerlink" title="2. 虚拟存储器"></a>2. 虚拟存储器</h4><p>把很大的程序（数据）分成许多较小的块，全部存储在辅存中，运行时把要用到的程序（数据）块先调入主存，并且把马上就要用到的程序块从主存调入高<br>速缓存。这样就可以一边运行程序，一边进行所需程序（数据）块的调进或调出。</br><br>分为页式、段式、段页式虚拟存储器。</p>
+<h4 id="3-外存储器"><a href="#3-外存储器" class="headerlink" title="3. 外存储器"></a>3. 外存储器</h4><p>常用的两种外存储器：</p>
+<ul>
+<li>磁盘存储器：读取快，存储大，常见的有硬盘</li>
+<li>光盘存储器：采用聚焦激光束在介质上非接触地记录高密度信息。分为只读型（CD-ROM）、只写一次型（WORM）、可擦除型光盘。</li>
+</ul>
+<h4 id="4-磁盘阵列"><a href="#4-磁盘阵列" class="headerlink" title="4. 磁盘阵列"></a>4. 磁盘阵列</h4><p>磁盘阵列是由多台磁盘存储器组成的一个快速、大容量、高可靠的外存子系统，常见的磁盘阵列称为廉价冗余磁盘阵列（RAID）。</p>
+<p><img src="/../../images/../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E5%BB%89%E4%BB%B7%E5%86%97%E4%BD%99%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97.png" alt="廉价冗余磁盘阵列"></p>
+<h3 id="3-输入输出技术"><a href="#3-输入输出技术" class="headerlink" title="3. 输入输出技术"></a>3. 输入输出技术</h3><h4 id="1-内存与接口编址方法"><a href="#1-内存与接口编址方法" class="headerlink" title="1. 内存与接口编址方法"></a>1. 内存与接口编址方法</h4><ul>
+<li>独立编址方法：两者是独立的地址空间，且互相隔离。缺点是指令少，功能弱</li>
+<li>统一编址方法：公用地址空间<ul>
+<li>优点：内存指令可用于接口，增强了接口操作工程</li>
+<li>缺点：内存不连续，维护时需要根据参数区分接口和内存指令</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-直接程序控制"><a href="#2-直接程序控制" class="headerlink" title="2. 直接程序控制"></a>2. 直接程序控制</h4><p>直接程序控制是指外设数据的输入&#x2F;输出过程是在 CPU 执行程序的控制下完成的。分为两种情况：</p>
+<ul>
+<li>无条件传送：外设可以随时接收 CPU 数据，并向 CPU 输入数据</li>
+<li>程序查询方式：需要通过程序查询外设状态，降低了 CPU 效率，无法实时响应外设的异常</li>
+</ul>
+<h4 id="3-中断方式"><a href="#3-中断方式" class="headerlink" title="3. 中断方式"></a>3. 中断方式</h4><p>中断方式即由程序控制 I&#x2F;O 的方法，缺点在于 CPU 必须等待 I&#x2F;O 系统完成数据的传输任务，而且要定期查询 I&#x2F;O 系统的状态，降低了性能。</br></p>
+<p>中断处理方法：</p>
+<ul>
+<li>多中断信号线法</li>
+<li>中断软件查询法</li>
+<li>菊花链法</li>
+<li>总线仲裁法</li>
+<li>中断向量表法</li>
+</ul>
+<p>在进行中断优先级控制时解决以下两种情况：</p>
+<ul>
+<li>当不同优先级多个中断源提出请求时，优先响应优先级高的</li>
+<li>对某一中断源服务，又优先级更高的提出，CPU 暂时当前，处理高优先级的，称为中断嵌套</li>
+</ul>
+<h4 id="4-输入输出处理机（IOP）"><a href="#4-输入输出处理机（IOP）" class="headerlink" title="4. 输入输出处理机（IOP）"></a>4. 输入输出处理机（IOP）</h4><p>IOP 数据传送的方式包括字节多路方式、选择传送方式和数组多路方式。</p>
+<h3 id="4-总线结构"><a href="#4-总线结构" class="headerlink" title="4. 总线结构"></a>4. 总线结构</h3><p>任何连接两个以上电子元器件的导线都可以称为总线。可分为：</p>
+<ul>
+<li>数据总线（DB）：在CPU与RAM之间来回传送需要处理或是需要储存的数据</li>
+<li>地址总线（AB）：用来指定在RAM（Random Access Memory）之中储存的数据的地址</li>
+<li>控制总线（CB）：将微处理器控制单元（Control Unit）的信号，传送到周边设备，一般常见的为 USB Bus和1394 Bus</li>
+</ul>
+<h2 id="3-计算安全"><a href="#3-计算安全" class="headerlink" title="3. 计算安全"></a>3. 计算安全</h2>
       
     </div>
     <footer class="article-footer">
