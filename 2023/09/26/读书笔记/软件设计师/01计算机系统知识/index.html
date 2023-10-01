@@ -15,8 +15,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E5%AD%98%E5%82%A8%E5%99%A8%E7%9A%84%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84.png">
 <meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E5%BB%89%E4%BB%B7%E5%86%97%E4%BD%99%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97.png">
+<meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E5%85%B8%E5%9E%8B%E7%9A%84%E5%AE%89%E5%85%A8%E5%A8%81%E8%83%81.png">
+<meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E7%9A%84%E4%BD%93%E5%88%B6%E6%A8%A1%E5%9E%8B.png">
 <meta property="article:published_time" content="2023-09-26T11:55:00.000Z">
-<meta property="article:modified_time" content="2023-09-27T15:58:13.292Z">
+<meta property="article:modified_time" content="2023-10-01T06:33:21.853Z">
 <meta property="article:author" content="Gao Peng">
 <meta property="article:tag" content="软考">
 <meta property="article:tag" content="软件设计师">
@@ -314,7 +316,67 @@
 <li>地址总线（AB）：用来指定在RAM（Random Access Memory）之中储存的数据的地址</li>
 <li>控制总线（CB）：将微处理器控制单元（Control Unit）的信号，传送到周边设备，一般常见的为 USB Bus和1394 Bus</li>
 </ul>
-<h2 id="3-计算安全"><a href="#3-计算安全" class="headerlink" title="3. 计算安全"></a>3. 计算安全</h2>
+<h2 id="3-计算安全"><a href="#3-计算安全" class="headerlink" title="3. 计算安全"></a>3. 计算安全</h2><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><h4 id="1-信息安全的基本要素"><a href="#1-信息安全的基本要素" class="headerlink" title="1. 信息安全的基本要素"></a>1. 信息安全的基本要素</h4><ul>
+<li>机密性: 确保信息不暴露给未授权的实体或进程</li>
+<li>完整性: 只有被允许的人才能修改数据，并能判断数据是否已被篡改</li>
+<li>可用性: 得到授权的实体在需要时可访问数据</li>
+<li>可控性: 可控制授权范围内的信息流向及行为方式</li>
+<li>可审查性: 对出现的安全问题提供调查的依据和手段</li>
+</ul>
+<h4 id="2-计算机的安全等级"><a href="#2-计算机的安全等级" class="headerlink" title="2. 计算机的安全等级"></a>2. 计算机的安全等级</h4><p>计算机系统中的三类安全性是指技术安全性、管理安全性、政策法律安全性。重要的安全评估准则有：</p>
+<ul>
+<li>美国国防部和国家标准局推出的《可信计算机系统评估准则》（TCSEC）。</li>
+<li>加拿大的《可信计算机产品评估准则》（CTCPEC）。</li>
+<li>美国制定的《联邦（最低安全要求）评估准则》（FC）。</li>
+<li>欧洲英、法、德、荷四国国防部门信息安全机构联合制定的《信息技术安全评估准则》（ITSEC）。</li>
+<li>美国制定的《信息技术安全通用评估准则》（CC）。</li>
+</ul>
+<p>《可信计算机系统评估准则》（TCSEC）将系统划分为 4 组 7 个等级：</p>
+<ul>
+<li>A1: 可验证安全设计</li>
+<li>B3: 安全域</li>
+<li>B2: 结构化安全保护</li>
+<li>B1: 标记安全保护</li>
+<li>C2: 受控访问控制</li>
+<li>C1: 自主安全保护</li>
+<li>D: 无安全功能</li>
+</ul>
+<h4 id="3-安全威胁"><a href="#3-安全威胁" class="headerlink" title="3. 安全威胁"></a>3. 安全威胁</h4><p><img src="/../../images/../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E5%85%B8%E5%9E%8B%E7%9A%84%E5%AE%89%E5%85%A8%E5%A8%81%E8%83%81.png" alt="典型的安全威胁"></p>
+<h4 id="4-影响数据安全的因素"><a href="#4-影响数据安全的因素" class="headerlink" title="4. 影响数据安全的因素"></a>4. 影响数据安全的因素</h4><p>主要分为内部因素和外部因素。</p>
+<h3 id="2-加密技术和认证技术"><a href="#2-加密技术和认证技术" class="headerlink" title="2. 加密技术和认证技术"></a>2. 加密技术和认证技术</h3><h4 id="1-加密技术"><a href="#1-加密技术" class="headerlink" title="1. 加密技术"></a>1. 加密技术</h4><p>对数据加密的技术分为对称加密（私人密钥加密）和非对称加密（公开密钥加密）。</br><br>加密 &#x2F; 解密算法的设计通常需要满足 3 个条件： 可逆性、密钥安全和数据安全。</p>
+<h4 id="2-对称加密算法"><a href="#2-对称加密算法" class="headerlink" title="2. 对称加密算法"></a>2. 对称加密算法</h4><p>常见的对称加密算法：</p>
+<ul>
+<li>数据加密标准（DES）：主要采用替换和位移的方法加密</li>
+<li>三重DES（3DES，又称 TDEA）：在 DES 基础上采用三重 DES，效果相当于将密钥的长度加倍</li>
+<li>RC-5：在 RCF2040 中定义，RSA 数据安全公司的很多产品都在使用它</li>
+<li>国际数据加密算法（IDEA）：在 DES 基础上发展来</li>
+<li>高级加密标准（AES）：基于排序和置换运算，排列是对数据重新进行安排，置换是将一个数据单元替换</li>
+</ul>
+<h4 id="3-非对称加密算法"><a href="#3-非对称加密算法" class="headerlink" title="3. 非对称加密算法"></a>3. 非对称加密算法</h4><p>非对称加密需要公钥和私钥，用公钥加密的，只有对应的私钥才能解密；用私钥加密的，只有对应的公钥才能解密。非对称加密算法有两个不同的体制：</p>
+<p><img src="/../../images/../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E7%9A%84%E4%BD%93%E5%88%B6%E6%A8%A1%E5%9E%8B.png" alt="非对称加密算法的体制模型"></p>
+<h4 id="4-认证技术"><a href="#4-认证技术" class="headerlink" title="4. 认证技术"></a>4. 认证技术</h4><p>关键绩效指标（PKI）的基本构成：</p>
+<ul>
+<li>认证机构：数字证书的申请及签发机关（CA）</li>
+<li>数字证书库：存储已签发的数字证书及公钥</li>
+<li>密钥备份及恢复系统</li>
+<li>证书作废系统</li>
+<li>应用接口</li>
+</ul>
+<h4 id="5-数字签名和数字加密"><a href="#5-数字签名和数字加密" class="headerlink" title="5. 数字签名和数字加密"></a>5. 数字签名和数字加密</h4><p>数字签名主要过程：</p>
+<ul>
+<li>信息发送者使用一个单项散列函数（Hash 函数）对信息形成摘要</li>
+<li>信息发送者使用私钥签名信息摘要</li>
+<li>信息发送者把信息本身和已签名的信息摘要一起发送出去</li>
+<li>信息接受者使用同样散列函数对接收信息生成新的信息摘要，再使用发送者公对信息进行验证，来确认信息发送这身份和信息是否被修改</li>
+</ul>
+<p>数字加密主要过程：</p>
+<ul>
+<li>当信息发送者需要发送信息时，首先生成一对密钥，用该对密钥加密要发送的报文</li>
+<li>信息发送者用信息接收者的公钥加密上述对称的密钥</li>
+<li>信息发送者将上述两步结果集合发送接收者，称为数字信封</li>
+<li>信息接收者使用自己的私钥解密被加密的对称密钥，再用对称密钥解密被发送方加密的密文，得到真正的报文</li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
@@ -365,11 +427,11 @@
       <ul>
         
           <li>
-            <a href="/2023/09/26/%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%A4%96/%E8%8B%B1%E8%AF%AD/">英语撷芳</a>
+            <a href="/2023/09/26/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/01%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/">软件设计师学习-第一章 计算机系统知识</a>
           </li>
         
           <li>
-            <a href="/2023/09/26/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/01%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/">软件设计师学习-第一章 计算机系统知识</a>
+            <a href="/2023/09/26/%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%A4%96/%E8%8B%B1%E8%AF%AD/">英语撷芳</a>
           </li>
         
           <li>
