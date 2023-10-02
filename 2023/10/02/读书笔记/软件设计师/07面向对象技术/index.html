@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>软件设计师学习-第七章 面向对象技术 | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="面向对象、UML、设计模式等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件设计师学习-第七章 面向对象技术">
+<meta property="og:url" content="http://example.com/2023/10/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/07%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="面向对象、UML、设计模式等">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E5%85%B3%E7%B3%BB.png">
+<meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E7%B1%BB%E5%9B%BE.png">
+<meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E5%AF%B9%E8%B1%A1%E5%9B%BE.png">
+<meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E7%94%A8%E4%BE%8B%E5%9B%BE.png">
+<meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E5%BA%8F%E5%88%97%E5%9B%BE.png">
+<meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E9%80%9A%E4%BF%A1%E5%9B%BE.png">
+<meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E4%BA%A4%E4%BA%92%E6%A6%82%E8%A7%88%E5%9B%BE.png">
+<meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E6%97%B6%E5%BA%8F%E5%9B%BE.png">
+<meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E7%8A%B6%E6%80%81%E5%9B%BE.png">
+<meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E6%B4%BB%E5%8A%A8%E5%9B%BE.png">
+<meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E6%9E%84%E4%BB%B6%E5%9B%BE.png">
+<meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E7%BB%84%E5%90%88%E7%BB%93%E6%9E%84%E5%9B%BE.png">
+<meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E9%83%A8%E7%BD%B2%E5%9B%BE.png">
+<meta property="og:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E5%8C%85%E5%9B%BE.png">
+<meta property="article:published_time" content="2023-10-02T12:05:00.000Z">
+<meta property="article:modified_time" content="2023-10-02T13:47:16.895Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="软考">
+<meta property="article:tag" content="软件设计师">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E5%85%B3%E7%B3%BB.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-读书笔记/软件设计师/07面向对象技术" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/10/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/07%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/" class="article-date">
+  <time class="dt-published" datetime="2023-10-02T12:05:00.000Z" itemprop="datePublished">2023-10-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      软件设计师学习-第七章 面向对象技术
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="wiki"><a href="#wiki" class="headerlink" title="wiki"></a>wiki</h2><p>本章涉及单选题型和案例分析题型，上午的客观题占 11 分，下午的案例题至少一题</p>
+<h2 id="1-面向对象基础"><a href="#1-面向对象基础" class="headerlink" title="1. 面向对象基础"></a>1. 面向对象基础</h2><h3 id="1-面向对象的概念"><a href="#1-面向对象的概念" class="headerlink" title="1. 面向对象的概念"></a>1. 面向对象的概念</h3><p>面向对象 &#x3D; 对象（object）+ 类（classification）+ 继承（inheritance）+ 消息通信（communication with messages）。</p>
+<h4 id="1-对象"><a href="#1-对象" class="headerlink" title="1. 对象"></a>1. 对象</h4><p>在面向对象的系统中，对象是基本运行时的实体，既包括数据（属性），也包括作用于数据的操作（行为）。</br><br>一个对象把属性和行为封装为一个整体。封装是一种信息隐藏技术，目的是使对象的使用者和生产者分离，使对象的定义和实现分开。从程序设计者来看，对象是一个程序模块；从用户来看，对象为他们提供了所希望的行为。</br><br>对象内进行的操作通常称为方法。一个对象一般由对象名（标识）、属性和方法三个部分组成。</br></p>
+<h4 id="2-消息"><a href="#2-消息" class="headerlink" title="2. 消息"></a>2. 消息</h4><p>对象之间进行通信的一种构造称为消息。当一个消息发送给某个对象时，包含要求接收对象去执行某些活动的信息，接收到信息的对象经过解释，然后予以响应，这种通信机制称为消息传递。</br><br>发送消息的对象不需要知道接收消息的对象如何对请求予以响应。</br></p>
+<h4 id="3-类"><a href="#3-类" class="headerlink" title="3. 类"></a>3. 类</h4><p>类是在对象上的抽象，对象是类的具体化，是类的实例（instance）。在分析和设计时，通常把注意力集中在类上，而不是具体的对象。也不必逐个定义每个对象，只需对类作出定义，而对类的属性进行不同的赋值即可得到该类的对象实例。</p>
+<h4 id="4-继承"><a href="#4-继承" class="headerlink" title="4. 继承"></a>4. 继承</h4><p>继承是父类与子类之间共享数据和方法的机制。这是类之间的一种关系，在定义和实现一个类的时候，可以在一个已经存在的类的基础上进行，并把这个类所定义的内容作为自己的内容，并加入若干新的内容。</p>
+<h4 id="5-多态"><a href="#5-多态" class="headerlink" title="5.多态"></a>5.多态</h4><p>在收到消息时，对象要予以响应。不同的对象收到同一信息可以产生不同的结果，这个现象称为多态（polymorphism）。</br><br>Cardelli 和 Wegner 将其分为通用的（参数的、包含的）和特定的（过载的、强制的）。</p>
+<h4 id="6-动态绑定"><a href="#6-动态绑定" class="headerlink" title="6. 动态绑定"></a>6. 动态绑定</h4><p>绑定是一个把过程调用和响应调用所需要执行的代码加以结合的过程。</br><br>在一般的程序设计语言中，绑定是在编译时进行的，称为静态绑定。</br><br>动态绑定则是在运行时进化的，因此，一个给定的过程调用和代码的结合直到调用发生时才进行。</p>
+<h3 id="2-面向对象分析"><a href="#2-面向对象分析" class="headerlink" title="2. 面向对象分析"></a>2. 面向对象分析</h3><p>面向对象分析（OOA）的目的是获得对应用问题的理解。理解的目的是确定系统的功能和性能要求。面向对象分析技术可以将系统的行为和信息间的关系表示为迭代构造特征。</br><br>面向对象分析包括五个活动：①认定对象；②组织对象；③对象间的相互作用；④定义对象的操作；⑤定义对象的内部信息。</p>
+<h3 id="3-面向对象设计"><a href="#3-面向对象设计" class="headerlink" title="3. 面向对象设计"></a>3. 面向对象设计</h3><p>面向对象设计（OOD）的含义是设计分析模型和实现相应的源代码，在目标代码环境中，这种源代码可以被执行。通常情况下，由概念模型生成的分析模型被装入到相应的执行环境中时，还需要被修改。</br><br>对象标识期间的目标是分析对象，设计过程也是发现对象的过程，称为再处理。</br><br>面向对象是一种程序设计风格，不只是一种具有构造继承性、封装性和多态的程序设计语言族的命名。</br></p>
+<h3 id="4-面向对象程序设计"><a href="#4-面向对象程序设计" class="headerlink" title="4. 面向对象程序设计"></a>4. 面向对象程序设计</h3><p>面向对象程序设计（OOP）的实质是选用一种面向对象程序设计语言（OOPL），采用对象、类及其相关概念所进行的程序设计。</br><br>它的关键在于加入了类和继承性，从而进一步提高了抽象程度。</br></p>
+<h4 id="1-类"><a href="#1-类" class="headerlink" title="1. 类"></a>1. 类</h4><p>通常在介绍 OOP 的书籍中总是先引入对象的概念，然后从对对象进行抽象的角度来引入类的概念。但当设计和实现一个面向对象的程序时，首先接触到的不是对象，而是类和类层次结构。</p>
+<h4 id="2-继承和类层次结构"><a href="#2-继承和类层次结构" class="headerlink" title="2. 继承和类层次结构"></a>2. 继承和类层次结构</h4><p>孤立的类只能描述实体集合的特征一致性，而客观世界中实体集合的划分通常还要考虑实体特征方面有关联的相似性。在 OOP 中使用继承机制解决这一问题；在 OOPL 中，继承一般通过定义类之间的关系来体现。</br><br>在面向对象系统中，子类和父类之间的继承关系构成了这个系统的类层次结构，可以用树（对应于单继承）或格（对应于多继承）这样的图来描述。</br><br>与一般数据类型的实例化过程相比，类的实例化过程是一种实例的合成过程，而不仅仅是根据单个类型进行的空间分配、初始化和绑定。</br></p>
+<h4 id="3-对象、消息传递和方法"><a href="#3-对象、消息传递和方法" class="headerlink" title="3. 对象、消息传递和方法"></a>3. 对象、消息传递和方法</h4><p>对象是类的实例。对象的表示在形式上与一般数据类型十分相似，但是它们之间存在着本质区别：对象之间通过消息传递的方式进行通信。</br><br>信息传递源是一种与通信有关的概念，OOP 使得对象具有交互能力的主要模型就是消息传递模型。对象被看成用传递消息的方式互相联系的通信实体，它们既可以接收，也可以拒绝外界发来的消息。一般情况下，对象接收它能识别的消息，拒绝它识别不了的消息。</p>
+<h4 id="4．对象自身引用"><a href="#4．对象自身引用" class="headerlink" title="4．对象自身引用"></a>4．对象自身引用</h4><p>对象自身引用（self-reference）是 OOPL 中的一种特有结构。这种结构在不同的 OOPL 中有不同的名称，在 C++和 Java 中称为 this，在   Smalltalk-80、Object-C 和其他一些 OOPL 中则称为 self。</p>
+<h4 id="5．重载"><a href="#5．重载" class="headerlink" title="5．重载"></a>5．重载</h4><p>重载或覆盖（overriding）是在子类中重新定义父类中已经定义的方法，其基本思想是通过一种动态绑定机制的支持，使子类在继承父类接口定义的前提下用适合自己要求的实现去置换父类中的相应实现。</p>
+<h4 id="6．类属"><a href="#6．类属" class="headerlink" title="6．类属"></a>6．类属</h4><p>类属是程序设计语言中普遍注重的一种参数多态机制，在 OOPL 中也不例外。值得注意的是，在 C++语言中，类属有专门的术语 template。</p>
+<h4 id="7．无实例的类"><a href="#7．无实例的类" class="headerlink" title="7．无实例的类"></a>7．无实例的类</h4><p>前面我们讲到，类是对象的模板，对象是类的实例。那么，是否每个类都至少有一个实例？如果在类之间没有定义继承关系，回答是肯定的。这是因为若存在没有实例的类，那么这样的类对程序的行为没有任何贡献，因而是冗余的；相反，如果存在继承关系，那么的确有可能在类层次结构的较高层次上看到始终没有实例的类。</p>
+<h3 id="5-面向对象测试"><a href="#5-面向对象测试" class="headerlink" title="5. 面向对象测试"></a>5. 面向对象测试</h3><p>面向对象测试可以分为四个层次：</p>
+<ul>
+<li>算法层。用于测试类中定义的每个方法，基本上相当于传统软件测试中的单元测试。</li>
+<li>类层。用于测试封装在同一个类中的所有方法与属性之间的相互作用。在面向对象软件中，类是基本模块，因此可以认为这是面向对象测试中所特有的模块测试。</li>
+<li>模板层。用于测试一组协同工作的类之间的相互作用。相当于传统软件测试中的集成测试，但是也有面向对象软件的特点，如对象之间通过发送消息相互作用。</li>
+<li>系统层。把各个子系统组装成完整的面向对象软件系统，在组装过程中同时进行测试。</li>
+</ul>
+<p>软件工程中传统的测试用例设计技术，如逻辑覆盖、等价类划分和边界值分析等方法，仍然可以作为测试类中每个方法的主要技术。面向对象测试的主要目标也是用尽可能低的测试成本和尽可能少的测试用例，发现尽可能多的错误。但面向对象程序中特有的封装、继承和多态等机制，也给面向对象测试带来一些新的特点，增加了测试和调试的难度。</p>
+<h2 id="2-UML"><a href="#2-UML" class="headerlink" title="2. UML"></a>2. UML</h2><h3 id="1-事物"><a href="#1-事物" class="headerlink" title="1. 事物"></a>1. 事物</h3><ul>
+<li>结构事物：UML 中静态部分，包括类（class）、接口(interface)、协作（collaboration）、用例（use case）、主动类（active class）、构件（component）、制品（artifact）、结点（node）</li>
+<li>行为事物：UML 中动态部分，包括交互（interaction）、状态机（state machine）、活动（activity）</li>
+<li>分组事物：UML 中组织部分，总重要的是包，包是把元数据组成组的机制，这种机制具有很多用途。结构和行为事物等，都可放进包里。</li>
+<li>注释事物：UML 中解释部分，用来描述、说明、标注模型的任何元素</li>
+</ul>
+<h3 id="2-关系"><a href="#2-关系" class="headerlink" title="2. 关系"></a>2. 关系</h3><p>UML 中有四种关系：依赖、关联、泛化和实现。</br><br>这四种关系是 UML 模型中可以包含的基本关系事物。它们也有变体，例如，依赖的变体有精华、跟踪、包含和延伸。</br></p>
+<p><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E5%85%B3%E7%B3%BB.png" alt="UML关系"></p>
+<h3 id="3-UML-的图"><a href="#3-UML-的图" class="headerlink" title="3. UML 的图"></a>3. UML 的图</h3><h4 id="1-类图"><a href="#1-类图" class="headerlink" title="1. 类图"></a>1. 类图</h4><p>类图展现了一组对象、接口、协作和它们之间的关系。</p>
+<p><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E7%B1%BB%E5%9B%BE.png" alt="类图"></p>
+<h4 id="2-对象图"><a href="#2-对象图" class="headerlink" title="2. 对象图"></a>2. 对象图</h4><p>对象图展现了某一时刻一组对象和它们之间的关系。对象图一般包括对象和链。</p>
+<p><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E5%AF%B9%E8%B1%A1%E5%9B%BE.png" alt="对象图"></p>
+<h4 id="3-用例图"><a href="#3-用例图" class="headerlink" title="3. 用例图"></a>3. 用例图</h4><p>用例图展现了一组用例、参与者和它们之间的关系。</p>
+<p><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E7%94%A8%E4%BE%8B%E5%9B%BE.png" alt="用例图"></p>
+<h4 id="4-交互图"><a href="#4-交互图" class="headerlink" title="4. 交互图"></a>4. 交互图</h4><p>交互图用于对系统的动态方面进行建模。一张交互图表现的是一个交互行程序由一组对象和它们之间的关系组成，包含它们之间可能传递的消息。</br><br>交互图可以分为序列图、通信图、交互概览图和时序图：</p>
+<h5 id="1-序列图"><a href="#1-序列图" class="headerlink" title="1. 序列图"></a>1. 序列图</h5><p>序列图是场景的图形化表示，描述了以时间顺序组织的对象之间的交互活动，<br>强调的是信息时间顺序的交互图。有两个不同于通信图的特征：</p>
+<ul>
+<li>序列图有对象生命线</li>
+<li>序列图有控制焦点</li>
+</ul>
+<p><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E5%BA%8F%E5%88%97%E5%9B%BE.png" alt="序列图"></p>
+<h5 id="2-通信图"><a href="#2-通信图" class="headerlink" title="2. 通信图"></a>2. 通信图</h5><p>通信图强调收发信息的对象的结构组织，在早期版本中也被称为协作图，强调<br>参加交互的对象的组织。有两个不同于序列图的特征：</p>
+<ul>
+<li>通信图有路径</li>
+<li>通信图有顺序号</li>
+</ul>
+<p><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E9%80%9A%E4%BF%A1%E5%9B%BE.png" alt="通信图"></p>
+<h5 id="3-交互概览图"><a href="#3-交互概览图" class="headerlink" title="3. 交互概览图"></a>3. 交互概览图</h5><p>交互概览图是 UML 2.0 新增的交互图之一，它是活动图的变体，描述业务<br>过程中的控制流概览、软件过程中的详细逻辑概览及多个图进行拼接，抽象掉信息和生命线。它使用了活动图的表示法。</p>
+<p><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E4%BA%A4%E4%BA%92%E6%A6%82%E8%A7%88%E5%9B%BE.png" alt="交互概览图"></p>
+<h5 id="4-时序图"><a href="#4-时序图" class="headerlink" title="4. 时序图"></a>4. 时序图</h5><p>另一种新增的、特别适合实时嵌入式系统建模的交互图称为时序图。其关注沿<br>着线性时间轴、生命线内部和生命线之间的条件改变。它描述对象的状态随着时间改变的情况，很像示波器，</p>
+<p><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E6%97%B6%E5%BA%8F%E5%9B%BE.png" alt="时序图"></p>
+<h4 id="5-状态图"><a href="#5-状态图" class="headerlink" title="5. 状态图"></a>5. 状态图</h4><p>状态图通常包括简单状态和组合状态、转换（事件和动作）。</p>
+<p><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E7%8A%B6%E6%80%81%E5%9B%BE.png" alt="状态图"></p>
+<h4 id="6-活动图"><a href="#6-活动图" class="headerlink" title="6. 活动图"></a>6. 活动图</h4><p>活动图专注系统的动态视图，它对于系统的功能建模特别重要，并强调对象间的控制流程。活动图一般包括活动状态和动作状态、转换和对象。</p>
+<p><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E6%B4%BB%E5%8A%A8%E5%9B%BE.png" alt="活动图"></p>
+<h4 id="7-构件图"><a href="#7-构件图" class="headerlink" title="7. 构件图"></a>7. 构件图</h4><p>构件图展现了一组构件之间的组织和依赖关系，专注于系统静态实现视图。</p>
+<p><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E6%9E%84%E4%BB%B6%E5%9B%BE.png" alt="构件图"></p>
+<h4 id="8-组合结构图"><a href="#8-组合结构图" class="headerlink" title="8. 组合结构图"></a>8. 组合结构图</h4><p>组合结构图用于描述一个分类器（如类、构件等）的内部结构，分类器与系统中其他组成部分之间的交互端口，展示一组相互协作的实例如何完成特定的任务，描述设计、架构模式或策略。</p>
+<p><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E7%BB%84%E5%90%88%E7%BB%93%E6%9E%84%E5%9B%BE.png" alt="组合结构图"></p>
+<h4 id="9-部署图"><a href="#9-部署图" class="headerlink" title="9. 部署图"></a>9. 部署图</h4><p>部署图是用来对面向对象系统的物理方面建模的方法，展现了运行时处理结点及其中构件（制品）的配置。一般对系统的静态部署视图进行建模，与构件图相关。</p>
+<p><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E9%83%A8%E7%BD%B2%E5%9B%BE.png" alt="部署图"></p>
+<h4 id="10-包图"><a href="#10-包图" class="headerlink" title="10. 包图"></a>10. 包图</h4><p>包图用于把模型本身组织成层次结构的通用机制，不能执行，展现由模型本身分解而成的组织单元及之间的依赖关系。</p>
+<p><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E5%8C%85%E5%9B%BE.png" alt="包图"></p>
+<h2 id="3-设计模式"><a href="#3-设计模式" class="headerlink" title="3. 设计模式"></a>3. 设计模式</h2><h3 id="1-设计模式的要素"><a href="#1-设计模式的要素" class="headerlink" title="1. 设计模式的要素"></a>1. 设计模式的要素</h3><p>设计模式的核心在于提供了相关问题的解决方案，使人们可以更加简单方便地复用成功的设计和体系结构。</br><br>设计模式的四个基本要素为：①模式名称；②问题；③解决方案；④效果。</p>
+<h3 id="2-创建型设计模式"><a href="#2-创建型设计模式" class="headerlink" title="2. 创建型设计模式"></a>2. 创建型设计模式</h3><p>创建型设计模式抽象了实例化过程，它们帮助一个系统独立于如何创建、组合和表示它的那些对象。一个类的创建型模式使用继承改变被实例化的类，而一个对象创建型模式将实例化委托给另一个对象。</br></p>
+<p>创建型设计模式的基本要素为：</p>
+<ul>
+<li>抽象工厂（Abstract Factory）</li>
+<li>生成器（Builder）</li>
+<li>工厂方法（Factory Method）</li>
+<li>原型（Prototype）</li>
+<li>单例（Singleton）</li>
+</ul>
+<h3 id="3-结构型设计模式"><a href="#3-结构型设计模式" class="headerlink" title="3. 结构型设计模式"></a>3. 结构型设计模式</h3><p>结构型设计模式的基本要素为：</p>
+<ul>
+<li>适配器（Adapter）</li>
+<li>桥接（Bridge）</li>
+<li>组合（Composite）</li>
+<li>装饰（Decorator）</li>
+<li>外观（Facade）</li>
+<li>享元（Flyweight）</li>
+<li>代理（Proxy）</li>
+</ul>
+<h3 id="4-行为型设计模式"><a href="#4-行为型设计模式" class="headerlink" title="4. 行为型设计模式"></a>4. 行为型设计模式</h3><p>行为型设计模式涉及算法和对象间职责的分配。</br><br>行为设计模式不仅描述对象或类的模式，还描述了它们之间的通信模式。这些模式刻画了在运行时难以跟踪的、复杂的控制流。它们将用户的注意力从控制流转移到对象间的联系方式上来。</br></p>
+<p>行为设计模式的基本要素为：</p>
+<ul>
+<li>责任链（Chain of Responsibility）</li>
+<li>命令（Command）</li>
+<li>解释器（Interpreter）</li>
+<li>迭代器（Iterator）</li>
+<li>中介者（Mediator）</li>
+<li>备忘录（Memento）</li>
+<li>观察者（Observer）</li>
+<li>状态（State）</li>
+<li>策略（Strategy）</li>
+<li>模板方法（Template Method）</li>
+<li>访问者（Visitor）</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/10/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/07%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/" data-id="cln8y6pcm0000u4jw7sjkhn3f" data-title="软件设计师学习-第七章 面向对象技术" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/" rel="tag">软件设计师</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E8%80%83/" rel="tag">软考</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/10/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/06%E7%BB%93%E6%9E%84%E5%8C%96%E5%BC%80%E5%8F%91%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">软件设计师学习-第六章 结构化开发方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">关于我</h3>
+      <ul class="widget about">
+      
+      
+      <li>专业泼冷水，执着负能量</li>
+      
+    </ul>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近更新</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/10/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/07%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/">软件设计师学习-第七章 面向对象技术</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/06%E7%BB%93%E6%9E%84%E5%8C%96%E5%BC%80%E5%8F%91%E6%96%B9%E6%B3%95/">软件设计师学习-第六章 结构化开发方法</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/05%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">软件设计师学习-第五章 软件工程基础知识</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/04%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/">软件设计师学习-第四章 操作系统知识</a>
+          </li>
+        
+          <li>
+            <a href="/2023/10/01/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/03%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">软件设计师学习-第三章 数据结构</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%A4%96/">技术之外</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><span class="category-list-count">218</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Docker/">Docker</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flume/">Flume</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/HBase/">HBase</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hadoop/">Hadoop</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hive/">Hive</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kafka/">Kafka</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kubernetes/">Kubernetes</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a><span class="category-list-count">33</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/" rel="tag">AngularJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DAMA-DMBOK/" rel="tag">DAMA-DMBOK</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Electron/" rel="tag">Electron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flume/" rel="tag">Flume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guava/" rel="tag">Guava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jackson/" rel="tag">Jackson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">74</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/" rel="tag">Java8</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LaTex/" rel="tag">LaTex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/" rel="tag">PostgreSQL</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pyqt5/" rel="tag">Pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Quartz/" rel="tag">Quartz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/" rel="tag">TypeScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/" rel="tag">Zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyinstaller/" rel="tag">pyinstaller</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%A7%A3/" rel="tag">图解</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" rel="tag">安全框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" rel="tag">日志框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" rel="tag">第三方包</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%88%B6/" rel="tag">自制</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AC%E8%BD%BD/" rel="tag">转载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/" rel="tag">软件设计师</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%80%83/" rel="tag">软考</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/AngularJS/" style="font-size: 10px;">AngularJS</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/CSS/" style="font-size: 10.59px;">CSS</a> <a href="/tags/DAMA-DMBOK/" style="font-size: 18.24px;">DAMA-DMBOK</a> <a href="/tags/Docker/" style="font-size: 11.76px;">Docker</a> <a href="/tags/Electron/" style="font-size: 10px;">Electron</a> <a href="/tags/Flink/" style="font-size: 16.47px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Flume/" style="font-size: 10px;">Flume</a> <a href="/tags/Git/" style="font-size: 11.76px;">Git</a> <a href="/tags/Golang/" style="font-size: 15.29px;">Golang</a> <a href="/tags/Guava/" style="font-size: 10.59px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hadoop/" style="font-size: 10.59px;">Hadoop</a> <a href="/tags/Hive/" style="font-size: 10px;">Hive</a> <a href="/tags/Idea-Instructions/" style="font-size: 12.94px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 10.59px;">JVM</a> <a href="/tags/Jackson/" style="font-size: 10px;">Jackson</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java8/" style="font-size: 11.76px;">Java8</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Kafka/" style="font-size: 11.76px;">Kafka</a> <a href="/tags/Kubernetes/" style="font-size: 10px;">Kubernetes</a> <a href="/tags/LaTex/" style="font-size: 10px;">LaTex</a> <a href="/tags/Linux/" style="font-size: 15.88px;">Linux</a> <a href="/tags/Maven/" style="font-size: 11.76px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Mysql/" style="font-size: 10.59px;">Mysql</a> <a href="/tags/Netty/" style="font-size: 12.35px;">Netty</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Oracle/" style="font-size: 14.71px;">Oracle</a> <a href="/tags/PostgreSQL/" style="font-size: 10.59px;">PostgreSQL</a> <a href="/tags/Pyqt5/" style="font-size: 10px;">Pyqt5</a> <a href="/tags/Python/" style="font-size: 17.06px;">Python</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/Redis/" style="font-size: 13.53px;">Redis</a> <a href="/tags/Rust/" style="font-size: 11.18px;">Rust</a> <a href="/tags/Scala/" style="font-size: 11.76px;">Scala</a> <a href="/tags/Shell/" style="font-size: 14.12px;">Shell</a> <a href="/tags/Spring/" style="font-size: 12.94px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 12.35px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/TypeScript/" style="font-size: 11.76px;">TypeScript</a> <a href="/tags/Vim/" style="font-size: 11.18px;">Vim</a> <a href="/tags/Vue/" style="font-size: 12.35px;">Vue</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/cmd/" style="font-size: 11.18px;">cmd</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/pyinstaller/" style="font-size: 10px;">pyinstaller</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 19.41px;">代码归档</a> <a href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" style="font-size: 14.71px;">内建包</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 17.06px;">前端</a> <a href="/tags/%E5%9B%BE%E8%A7%A3/" style="font-size: 14.12px;">图解</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 19.41px;">大数据</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" style="font-size: 11.18px;">安全框架</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 12.35px;">容器</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 17.65px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 13.53px;">数据结构与算法</a> <a href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" style="font-size: 11.18px;">日志框架</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 15.88px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 19.41px;">杂记</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 10.59px;">树莓派</a> <a href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" style="font-size: 18.82px;">第三方包</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12.94px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%87%AA%E5%88%B6/" style="font-size: 11.18px;">自制</a> <a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 10px;">英语</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 12.35px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 12.35px;">计算机网络</a> <a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 10px;">转载</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/" style="font-size: 12.94px;">软件设计师</a> <a href="/tags/%E8%BD%AF%E8%80%83/" style="font-size: 12.94px;">软考</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
