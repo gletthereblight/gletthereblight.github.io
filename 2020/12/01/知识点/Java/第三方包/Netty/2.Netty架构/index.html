@@ -9,17 +9,17 @@
   <meta name="description" content="Netty 的架构模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Netty 基础-架构(第二章)">
-<meta property="og:url" content="http://example.com/2020/12/01/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/Netty/2.Netty%E6%9E%B6%E6%9E%84/index.html">
+<meta property="og:url" content="https://gletthereblight.github.io/2020/12/01/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/Netty/2.Netty%E6%9E%B6%E6%9E%84/index.html">
 <meta property="og:site_name" content="Glett的码字间">
 <meta property="og:description" content="Netty 的架构模式">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/netty/Reactor%E6%A8%A1%E5%BC%8F.webp">
-<meta property="og:image" content="http://example.com/images/netty/%E5%8D%95Reactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%BC%8F.webp">
-<meta property="og:image" content="http://example.com/images/netty/%E5%8D%95Reactor%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%BC%8F.webp">
-<meta property="og:image" content="http://example.com/images/netty/%E4%B8%BB%E4%BB%8EReactor%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%BC%8F.webp">
-<meta property="og:image" content="http://example.com/images/netty/netty01.png">
-<meta property="og:image" content="http://example.com/images/netty/netty02.png">
-<meta property="og:image" content="http://example.com/images/netty/netty03.png">
+<meta property="og:image" content="https://gletthereblight.github.io/images/netty/Reactor%E6%A8%A1%E5%BC%8F.webp">
+<meta property="og:image" content="https://gletthereblight.github.io/images/netty/%E5%8D%95Reactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%BC%8F.webp">
+<meta property="og:image" content="https://gletthereblight.github.io/images/netty/%E5%8D%95Reactor%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%BC%8F.webp">
+<meta property="og:image" content="https://gletthereblight.github.io/images/netty/%E4%B8%BB%E4%BB%8EReactor%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%BC%8F.webp">
+<meta property="og:image" content="https://gletthereblight.github.io/images/netty/netty01.png">
+<meta property="og:image" content="https://gletthereblight.github.io/images/netty/netty02.png">
+<meta property="og:image" content="https://gletthereblight.github.io/images/netty/netty03.png">
 <meta property="article:published_time" content="2020-12-01T14:56:00.000Z">
 <meta property="article:modified_time" content="2023-01-17T01:53:00.000Z">
 <meta property="article:author" content="Gao Peng">
@@ -27,7 +27,7 @@
 <meta property="article:tag" content="第三方包">
 <meta property="article:tag" content="Netty">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/netty/Reactor%E6%A8%A1%E5%BC%8F.webp">
+<meta name="twitter:image" content="https://gletthereblight.github.io/images/netty/Reactor%E6%A8%A1%E5%BC%8F.webp">
   
     <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
   
@@ -83,7 +83,7 @@
         <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://gletthereblight.github.io"></form>
       </div>
     </div>
   </div>
@@ -220,7 +220,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/12/01/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/Netty/2.Netty%E6%9E%B6%E6%9E%84/" data-id="cllyz65j300hxkgjw6e5x0ejr" data-title="Netty 基础-架构(第二章)" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <!-- <a data-url="https://gletthereblight.github.io/2020/12/01/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/Netty/2.Netty%E6%9E%B6%E6%9E%84/" data-id="cllyz65j300hxkgjw6e5x0ejr" data-title="Netty 基础-架构(第二章)" class="article-share-link"><span class="fa fa-share">分享</span></a> -->
       
       
       
@@ -276,11 +276,11 @@
       <ul>
         
           <li>
-            <a href="/2023/10/04/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/12%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E5%92%8C%E8%AE%BE%E8%AE%A1/">软件设计师学习-第十二章 软件系统分析和设计</a>
+            <a href="/2023/10/04/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/11%E6%A0%87%E5%87%86%E5%8C%96%E5%92%8C%E8%BD%AF%E4%BB%B6%E7%9F%A5%E8%AF%86%E4%BA%A7%E6%9D%83%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">软件设计师学习-第十一章 标准化和软件知识产权基础知识</a>
           </li>
         
           <li>
-            <a href="/2023/10/04/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/11%E6%A0%87%E5%87%86%E5%8C%96%E5%92%8C%E8%BD%AF%E4%BB%B6%E7%9F%A5%E8%AF%86%E4%BA%A7%E6%9D%83%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">软件设计师学习-第十一章 标准化和软件知识产权基础知识</a>
+            <a href="/2023/10/04/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/12%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E5%92%8C%E8%AE%BE%E8%AE%A1/">软件设计师学习-第十二章 软件系统分析和设计</a>
           </li>
         
           <li>
