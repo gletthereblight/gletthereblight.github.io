@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gletthereblight.github.io/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/IO%E8%BD%AF%E4%BB%B6.png">
 <meta property="article:published_time" content="2023-10-01T17:14:00.000Z">
-<meta property="article:modified_time" content="2023-10-01T17:36:37.905Z">
+<meta property="article:modified_time" content="2023-10-11T08:16:42.500Z">
 <meta property="article:author" content="Gao Peng">
 <meta property="article:tag" content="软考">
 <meta property="article:tag" content="软件设计师">
@@ -114,20 +114,26 @@
 <li>通过资源管理提高计算机系统的效率</li>
 <li>改善人机界面，向用户提供良好的工作环境</li>
 </ul>
-<h3 id="2．OS-特征"><a href="#2．OS-特征" class="headerlink" title="2．OS 特征"></a>2．OS 特征</h3><p>并发性、共享性、虚拟性、不确定性</p>
-<h3 id="3．OS-功能"><a href="#3．OS-功能" class="headerlink" title="3．OS 功能"></a>3．OS 功能</h3><p>进程管理、文件管理、存储管理、设备管理、作业管理</p>
-<h3 id="4．OS-分类"><a href="#4．OS-分类" class="headerlink" title="4．OS 分类"></a>4．OS 分类</h3><p>批处理、分时、实时、网络（集中、C&#x2F;S、对等）、分布式、微型、嵌入式</p>
-<h2 id="2-进程管理"><a href="#2-进程管理" class="headerlink" title="2. 进程管理"></a>2. 进程管理</h2><h3 id="1．进程间通信"><a href="#1．进程间通信" class="headerlink" title="1．进程间通信"></a>1．进程间通信</h3><p>同步与互斥、信号量、PV 操作</p>
+<h3 id="2．OS-基本概念"><a href="#2．OS-基本概念" class="headerlink" title="2．OS 基本概念"></a>2．OS 基本概念</h3><p>特征：并发性、共享性、虚拟性、不确定性。</br><br>功能：进程管理、文件管理、存储管理、设备管理、作业管理。</br><br>分类：批处理、分时、实时、网络（集中、C&#x2F;S、对等）、分布式、微型、嵌入式。</br></p>
+<h2 id="2-进程管理"><a href="#2-进程管理" class="headerlink" title="2. 进程管理"></a>2. 进程管理</h2><h3 id="1．基本概念"><a href="#1．基本概念" class="headerlink" title="1．基本概念"></a>1．基本概念</h3><h4 id="1-前驱图"><a href="#1-前驱图" class="headerlink" title="1. 前驱图"></a>1. 前驱图</h4><p>前驱图是一个有向无环图，由结点和有向边组成。</p>
+<ul>
+<li>结点代表各程序段的操作</li>
+<li>有向边表示程序间存在前驱关系，表示两者有执行先后</li>
+</ul>
+<p>程序有顺序执行、并发执行特征。</br></p>
+<h4 id="2-进程间通信"><a href="#2-进程间通信" class="headerlink" title="2. 进程间通信"></a>2. 进程间通信</h4><ul>
+<li>同步与互斥</li>
+<li>信号量（S）：S &gt;&#x3D; 0 表示资源可用，S &lt; 0，绝对值表示阻塞等待资源的进程数</li>
+<li>PV 操作：P 和 V 操作分别表示申请和释放一个资源</li>
+</ul>
 <h3 id="2．进程的状态"><a href="#2．进程的状态" class="headerlink" title="2．进程的状态"></a>2．进程的状态</h3><p>三态模型（运行，就绪，阻塞）、五态模型（运行，就绪，阻塞，终止，新建）</p>
 <h3 id="3．进程调度"><a href="#3．进程调度" class="headerlink" title="3．进程调度"></a>3．进程调度</h3><ul>
-<li>三级调度</li>
+<li>三级调度：高级、中级、初级</li>
 <li>调度算法：先来先服务、时间片轮转（固定、可变）、优先级调度、多级反馈调度</li>
 <li>进程优先级确定</li>
 </ul>
-<h3 id="4．死锁"><a href="#4．死锁" class="headerlink" title="4．死锁"></a>4．死锁</h3><ul>
-<li>必要条件：互斥、请求保持、不可剥夺、环路。</li>
-<li>处理：预防、避免（银行家算法）、检测、解除</li>
-</ul>
+<h3 id="4．死锁"><a href="#4．死锁" class="headerlink" title="4．死锁"></a>4．死锁</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h4><p>必要条件：互斥、请求保持、不可剥夺、环路。</br><br>处理：预防、避免（银行家算法）、检测、解除。</br><br>进程资源有向图：方框（资源）、圆圈（进程）、有向边（请求和分配资源）组成</br></p>
+<h4 id="2-安全状态"><a href="#2-安全状态" class="headerlink" title="2. 安全状态"></a>2. 安全状态</h4><p>系统能按某种序列为每个进程分配所需资源，直到最大需求，使每个进程都能顺序完成，该序列称为安全序列。</br><br>存在安全序列的，系统处于安全状态，否认，系统处于不安全状态。</br></p>
 <h2 id="3-存储管理"><a href="#3-存储管理" class="headerlink" title="3. 存储管理"></a>3. 存储管理</h2><h3 id="1．存储结构"><a href="#1．存储结构" class="headerlink" title="1．存储结构"></a>1．存储结构</h3><ul>
 <li>寄存器－Cache－主存－外存。</li>
 <li>虚拟地址：又称相对地址、程序地址、逻辑地址等。</li>
@@ -138,15 +144,33 @@
 <li>固定分区。</li>
 <li>可变分区：最佳适应、最差适应、首次适应、循环首次适应。</li>
 </ul>
-<h3 id="3．分页存储"><a href="#3．分页存储" class="headerlink" title="3．分页存储"></a>3．分页存储</h3><ul>
-<li>存分页存储管理：分页原理、地址结构、地址映射。</li>
-<li>快表。</li>
-<li>两级页表机制。</li>
+<h3 id="3．分页存储"><a href="#3．分页存储" class="headerlink" title="3．分页存储"></a>3．分页存储</h3><h4 id="1-分页原理"><a href="#1-分页原理" class="headerlink" title="1. 分页原理"></a>1. 分页原理</h4><p>将进程的地址空间划分成若干大小相等的区域，称为页。</br><br>将主存空间划分成与页大小相同的若干物理块，称为块或页框。</br><br>在为进程分配主存时，将进程中若干页分别装入多个不相邻的块中。</br></p>
+<h4 id="2-地址结构"><a href="#2-地址结构" class="headerlink" title="2. 地址结构"></a>2. 地址结构</h4><p>由两部分组成，页号 P 和偏移量 W ，即页内地址。</br></p>
+<p>如下图，地址长度为 32 位，页内地址为 0-11，大小为 2<sup>12</sup>&#x3D;4KB，，即页面大小为 4KB，页号为 12-31，所以允许的地址空间为 2<sup>20</sup>&#x3D;1MB 个页。</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">31               12 11        0</span><br><span class="line">┌──────────────────┬──────────┐</span><br><span class="line">│       页号       │ 页内地址 │</span><br><span class="line">└──────────────────┴──────────┘</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-页表"><a href="#3-页表" class="headerlink" title="3. 页表"></a>3. 页表</h4><p>系统为每个进程建立了一张页面映射表，简称页表，每个页在页表中占一项，称为页表项，记录该页在主存中对应的物理页号。</p>
+<h4 id="4-快表"><a href="#4-快表" class="headerlink" title="4. 快表"></a>4. 快表</h4><p>页式存储需要至少两次才能访问主存，可增加联想存储器，存放访问频率高的页的相关信息。联想存储器由一组高速存储器组成，称为块表。</p>
+<h4 id="5-两级页表机制"><a href="#5-两级页表机制" class="headerlink" title="5. 两级页表机制"></a>5. 两级页表机制</h4><p>第一级是页目录表，其中每个表目是存放某个页表的物理地址；第二级是页表，其中每个表目存放页的物理块号。</p>
+<h3 id="4．分段存储"><a href="#4．分段存储" class="headerlink" title="4．分段存储"></a>4．分段存储</h3><p>进程的地址空间划分成若干段，每段都有完整的逻辑信息，如主程序段、子程序段、数据段等，都是从 0 开始的编址空间，各段长度不等。</br></p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">31               16 15        0</span><br><span class="line">┌─────────────────┬───────────┐</span><br><span class="line">│      段号s      │ 段内地址d │</span><br><span class="line">└─────────────────┴───────────┘</span><br></pre></td></tr></table></figure>
+
+<p>系统为每个进程建立了一张映射表，简称段表。</br></p>
+<h3 id="5．段页式存储"><a href="#5．段页式存储" class="headerlink" title="5．段页式存储"></a>5．段页式存储</h3><p>基本原理是将整个主存划分成大小相等的存储块（页框），将用户程序按逻辑关系分为若干段，再将段号分成若干项，以页框为单位离散分配。地址结构为：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────┬────────────┬───────────┐</span><br><span class="line">│    段号s    │ 段内页号p  │ 页内地址w │</span><br><span class="line">└─────────────┴────────────┴───────────┘</span><br></pre></td></tr></table></figure>
+
+<p>变换过程如下：</p>
+<ul>
+<li>根据段号 s 查段表，得到页表起始地址</li>
+<li>根据页号 p 查页表，得到物理块号 b</li>
+<li>将物理块号 b 拼页内地址 w 得到物理地址</li>
 </ul>
-<h3 id="4．分段存储"><a href="#4．分段存储" class="headerlink" title="4．分段存储"></a>4．分段存储</h3><h3 id="5．段页式存储"><a href="#5．段页式存储" class="headerlink" title="5．段页式存储"></a>5．段页式存储</h3><h3 id="6．虚拟存储"><a href="#6．虚拟存储" class="headerlink" title="6．虚拟存储"></a>6．虚拟存储</h3><ul>
+<h3 id="6．虚拟存储"><a href="#6．虚拟存储" class="headerlink" title="6．虚拟存储"></a>6．虚拟存储</h3><p>之前的存储管理方案，必须为每个作业分配足够的空间来装入全部信息。</br><br>如果一个作业只部分装入主存便可开始启动运行，其余部分暂时留在磁盘上，在需要时再装入主存，这样的存储器称为虚拟存储器。</p>
+<ul>
 <li>程序局部性原理：时间局部性、空间局部性。</li>
 <li>虚拟存储器的实现：分页、分段、段页。</li>
 <li>页面置换算法：最佳置换、FIFO、LRU、NRU。</li>
+<li>缺页中断</li>
 </ul>
 <h2 id="4-设备管理"><a href="#4-设备管理" class="headerlink" title="4. 设备管理"></a>4. 设备管理</h2><h3 id="1-I-O-软件"><a href="#1-I-O-软件" class="headerlink" title="1. I&#x2F;O 软件"></a>1. I&#x2F;O 软件</h3><p>I&#x2F;O 软件的操作过程如下：</p>
 <p><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/IO%E8%BD%AF%E4%BB%B6.png" alt="IO软件"></p>
@@ -247,6 +271,10 @@
       <ul>
         
           <li>
+            <a href="/2023/10/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/04%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/">软件设计师学习-第四章 操作系统知识</a>
+          </li>
+        
+          <li>
             <a href="/2023/10/07/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E6%B5%B7%E6%98%8E%E7%A0%81/">软件设计师学习-海明码</a>
           </li>
         
@@ -260,10 +288,6 @@
         
           <li>
             <a href="/2023/10/04/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/11%E6%A0%87%E5%87%86%E5%8C%96%E5%92%8C%E8%BD%AF%E4%BB%B6%E7%9F%A5%E8%AF%86%E4%BA%A7%E6%9D%83%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">软件设计师学习-第十一章 标准化和软件知识产权基础知识</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/04/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/12%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E5%92%8C%E8%AE%BE%E8%AE%A1/">软件设计师学习-第十二章 软件系统分析和设计</a>
           </li>
         
       </ul>
