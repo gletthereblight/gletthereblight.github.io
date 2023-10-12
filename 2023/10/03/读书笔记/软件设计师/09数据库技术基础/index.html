@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://gletthereblight.github.io/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png">
 <meta property="og:image" content="https://gletthereblight.github.io/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png">
 <meta property="article:published_time" content="2023-10-03T07:19:00.000Z">
-<meta property="article:modified_time" content="2023-10-03T16:49:43.690Z">
+<meta property="article:modified_time" content="2023-10-12T08:53:50.938Z">
 <meta property="article:author" content="Gao Peng">
 <meta property="article:tag" content="软考">
 <meta property="article:tag" content="软件设计师">
@@ -150,20 +150,28 @@
 <li>用户定义完整性：满足用户要求</li>
 </ul>
 <h3 id="2-基本关系运算"><a href="#2-基本关系运算" class="headerlink" title="2. 基本关系运算"></a>2. 基本关系运算</h3><ul>
-<li>并</li>
-<li>差</li>
-<li>笛卡尔积：相乘</li>
-<li>投影 π：选列</li>
-<li>选择 σ：选行</li>
+<li>并：R∪S&#x3D;{t|t∈R∨t∈S}</li>
+<li>差：R-S&#x3D;{t|t∈R∧t∉S}</li>
+<li>笛卡尔积：R×S&#x3D;{t|t&#x3D;&lt;t<sup>n</sup>,t<sup>m</sup>&gt;∨&lt;t<sup>n</sup>∉R∨t<sup>m</sup>∉S}</li>
+<li>投影 π：选列，从中选出若干列 A 组成新关系，记作 π<sub>A</sub>(R)&#x3D;{t[A]|t∈R}</li>
+<li>选择 σ：选行，从中选出满足条件的元组成新关系，记作 σ<sub>F</sub>(R)&#x3D;{t|t∈R∧F(t)&#x3D;True}</li>
 </ul>
 <p><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%85%B3%E7%B3%BB%E4%BB%A3%E6%95%B0%E8%BF%90%E7%AE%97%E7%AC%A6.png" alt="数据库关系代数运算符"></p>
 <h3 id="3-扩展关系运算"><a href="#3-扩展关系运算" class="headerlink" title="3. 扩展关系运算"></a>3. 扩展关系运算</h3><ul>
-<li>交</li>
+<li>交：R∩S&#x3D;{t|t∈R∧t∈S}</li>
+<li>连接<ul>
+<li>θ连接</li>
+<li>等值连接</li>
 <li>自然连接：去除相同属性的组，而且水平与垂直方向的分量均相等</li>
-<li>除：符号为 ÷</li>
+</ul>
+</li>
+<li>除：符号为 ÷，用关系 S 中与 R 相同的属性组，选取 R 中剩余属性的象集，在 R 中选择包含全部 S 中相同属性的属性。</li>
 <li>外连接：左外连接、右外连接、全外连接</li>
 </ul>
 <p><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%87%AA%E7%84%B6%E8%BF%9E%E6%8E%A5.png" alt="自然连接"><br><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%99%A4.png" alt="除"><br><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%96%E8%BF%9E%E6%8E%A5.png" alt="外连接"></p>
+<h3 id="4-其他概念"><a href="#4-其他概念" class="headerlink" title="4. 其他概念"></a>4. 其他概念</h3><h4 id="1-象集"><a href="#1-象集" class="headerlink" title="1. 象集"></a>1. 象集</h4><p>从 R 表中选择指定的属性值 a 所在的行，投影出剩下的其他属性 Z，建立新表。即选行再选列。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">关系 R：      a1 在 R 中的象集：</span><br><span class="line"> A | B | C     B | C</span><br><span class="line">a1 |b1 |c1    b2 |c2</span><br><span class="line">a1 |b2 |c2    b2 |c1</span><br><span class="line">a2 |b2 |c1    </span><br></pre></td></tr></table></figure>
+
 <h2 id="4-数据库语言-SQL"><a href="#4-数据库语言-SQL" class="headerlink" title="4. 数据库语言 SQL"></a>4. 数据库语言 SQL</h2><p>SQL（Structured Query Language），被 DBMS 普遍采用。包括数据查询（Query）、数据操作（Manipulation）、数据定义（Definition）、数据控制（Control）功能。</br></p>
 <p>9 个核心动词：</p>
 <ul>
@@ -361,6 +369,10 @@
       <ul>
         
           <li>
+            <a href="/2023/10/03/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/09%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80/">软件设计师学习-第九章 数据库技术基础</a>
+          </li>
+        
+          <li>
             <a href="/2023/10/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/04%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/">软件设计师学习-第四章 操作系统知识</a>
           </li>
         
@@ -374,10 +386,6 @@
         
           <li>
             <a href="/2020/09/25/%E7%9F%A5%E8%AF%86%E7%82%B9/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%BD%91%E7%BB%9C/%E5%9B%BE%E8%A7%A3%E7%BD%91%E7%BB%9C/">图解-计算机网络</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/04/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/11%E6%A0%87%E5%87%86%E5%8C%96%E5%92%8C%E8%BD%AF%E4%BB%B6%E7%9F%A5%E8%AF%86%E4%BA%A7%E6%9D%83%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">软件设计师学习-第十一章 标准化和软件知识产权基础知识</a>
           </li>
         
       </ul>
