@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://gletthereblight.github.io/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/McCall%E8%BD%AF%E4%BB%B6%E8%B4%A8%E9%87%8F%E6%A8%A1%E5%9E%8B.png">
 <meta property="og:image" content="https://gletthereblight.github.io/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E9%9D%A2%E5%90%91%E8%A7%84%E6%A8%A1%E7%9A%84%E5%BA%A6%E9%87%8F%E5%85%AC%E5%BC%8F.png">
 <meta property="article:published_time" content="2023-10-02T05:12:00.000Z">
-<meta property="article:modified_time" content="2023-10-17T14:20:46.676Z">
+<meta property="article:modified_time" content="2023-10-18T06:28:39.215Z">
 <meta property="article:author" content="Gao Peng">
 <meta property="article:tag" content="软考">
 <meta property="article:tag" content="软件设计师">
@@ -491,6 +491,73 @@
 <li>组合覆盖：使所有可能的条件取值组合至少执行一次</li>
 <li>路径覆盖：覆盖程序中的所有可能执行的路径</li>
 </ul>
+<h3 id="2-项目活动图"><a href="#2-项目活动图" class="headerlink" title="2. 项目活动图"></a>2. 项目活动图</h3><ul>
+<li>任务：用图中的箭头表示</li>
+<li>关键路径：又称最少时间，从开始到结束得所有路径中，所花时间最长的一条为关键路径</li>
+<li>最早开始时间：指某项活动能够开始的最早时间，即在关键路径上，从开始到该任务的最早执行的时间，加上节点入度任务中最长的</li>
+<li>最晚开始时间：关键路径的总时间减去反向得出该任务的时间，倒退方式，减去节点出度任务中最短的</li>
+<li>松弛时间：又称最多延迟执行的时间，关键路径的总时间减去包含该任务的关键路径花的时间</li>
+</ul>
+<h3 id="3-决策表"><a href="#3-决策表" class="headerlink" title="3. 决策表"></a>3. 决策表</h3><p>决策表有四个部分组成：</p>
+<ul>
+<li>条件桩（Condition Stub）：列出了测试对象的所有条件。一般情况下，列出的条件的次序不会影响测试对象的动作。</li>
+<li>动作桩（Action Stub）：列出了测试对象所有可能执行的操作。一般情况下，这些执行的操作没有先后顺序的约束。</li>
+<li>条件项（Condition Entry）：列出针对特定条件的取值，即条件的真假值。</li>
+<li>动作项（Action Entry）：列出在不同条件项的各种取值组合情况下，测试对象应该执行的动作。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>桩</th>
+<th>规则&#x2F;动作</th>
+<th>规则1</th>
+<th>规则2</th>
+<th>规则3</th>
+<th>规则4</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>条件桩</td>
+<td>条件1</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>条件桩</td>
+<td>条件2</td>
+<td>Y</td>
+<td>N</td>
+<td>Y</td>
+<td>N</td>
+</tr>
+<tr>
+<td>动作桩</td>
+<td>动作1</td>
+<td></td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>动作桩</td>
+<td>动作2</td>
+<td></td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>动作桩</td>
+<td>动作3</td>
+<td></td>
+<td></td>
+<td>Y</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>规则数为 n 时，条件数量为 2<sup>n</sup>，根据规则来判断动作是否满足，并合并相同动作结果的项目，可得条件组合数。</p>
 
       
     </div>
