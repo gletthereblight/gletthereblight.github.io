@@ -15,8 +15,9 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gletthereblight.github.io/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%B3%BB%E7%BB%9F%E8%80%A6%E5%90%88%E7%B1%BB%E5%9E%8B.png">
 <meta property="og:image" content="https://gletthereblight.github.io/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%B3%BB%E7%BB%9F%E5%86%85%E8%81%9A%E7%B1%BB%E5%9E%8B.png">
+<meta property="og:image" content="https://gletthereblight.github.io/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E6%95%B0%E6%8D%AE%E6%B5%81%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%9B%BE%E5%BD%A2%E5%85%83%E7%B4%A0.png">
 <meta property="article:published_time" content="2023-10-02T09:09:00.000Z">
-<meta property="article:modified_time" content="2023-10-02T11:54:42.748Z">
+<meta property="article:modified_time" content="2023-10-24T13:23:21.081Z">
 <meta property="article:author" content="Gao Peng">
 <meta property="article:tag" content="软考">
 <meta property="article:tag" content="软件设计师">
@@ -119,63 +120,75 @@
 <li>建立新系统的逻辑模型</li>
 <li>编写系统方案说明书</li>
 </ul>
-<h3 id="3-基本原理"><a href="#3-基本原理" class="headerlink" title="3. 基本原理"></a>3. 基本原理</h3><ul>
-<li>抽象</li>
-<li>模块化</li>
-<li>信息隐蔽</li>
-<li>模块独立：低耦合、高内聚</li>
-</ul>
+<h3 id="3-基本原理"><a href="#3-基本原理" class="headerlink" title="3. 基本原理"></a>3. 基本原理</h3><p>抽象、模块化、信息隐蔽、模块独立（低耦合、高内聚）</p>
 <p><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%B3%BB%E7%BB%9F%E8%80%A6%E5%90%88%E7%B1%BB%E5%9E%8B.png" alt="系统耦合类型"><br><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E7%B3%BB%E7%BB%9F%E5%86%85%E8%81%9A%E7%B1%BB%E5%9E%8B.png" alt="系统内聚类型"></p>
-<h3 id="4-系统结构设计原则"><a href="#4-系统结构设计原则" class="headerlink" title="4. 系统结构设计原则"></a>4. 系统结构设计原则</h3><ul>
-<li>分解－协调</li>
-<li>自顶向下</li>
-<li>信息隐蔽、抽象</li>
-<li>一致性原则</li>
-<li>明确性原则</li>
-<li>模块间松耦合、模块内高内聚</li>
-<li>模块的扇入系数和扇出系数要合理</li>
-<li>模块规模适当</li>
-</ul>
-<h3 id="5-子系统划分原则"><a href="#5-子系统划分原则" class="headerlink" title="5. 子系统划分原则"></a>5. 子系统划分原则</h3><ul>
-<li>子系统相对独立</li>
-<li>子系统间的依赖小</li>
-<li>数据冗余小</li>
-<li>考虑扩展性</li>
-<li>便于系统分阶段实现</li>
-<li>考虑到各资源的利用情况</li>
-</ul>
-<h3 id="6-子系统结构设计"><a href="#6-子系统结构设计" class="headerlink" title="6. 子系统结构设计"></a>6. 子系统结构设计</h3><ul>
-<li>各个子系统划分成多个模块</li>
-<li>子系统、模块之前的数据及调用关系</li>
-<li>评价并改进模块结构的质量</li>
-<li>从数据流图导出模块结构图</li>
-</ul>
+<h3 id="4-系统结构设计原则"><a href="#4-系统结构设计原则" class="headerlink" title="4. 系统结构设计原则"></a>4. 系统结构设计原则</h3><p>分解－协调、自顶向下、信息隐蔽和抽象、一致性原则、明确性原则、模块间松耦合、模块内高内聚、模块的扇入系数和扇出系数要合理、模块规模适当。</p>
+<h3 id="5-子系统划分原则"><a href="#5-子系统划分原则" class="headerlink" title="5. 子系统划分原则"></a>5. 子系统划分原则</h3><p>子系统相对独立、子系统间的依赖小、数据冗余小、考虑扩展性、便于系统分阶段实现、考虑到各资源的利用情况。</p>
+<h3 id="6-子系统结构设计"><a href="#6-子系统结构设计" class="headerlink" title="6. 子系统结构设计"></a>6. 子系统结构设计</h3><p>各个子系统划分成多个模块、子系统和模块之前的数据及调用关系、评价并改进模块结构的质量、从数据流图导出模块结构图。</p>
 <h3 id="7-系统模块结构设计"><a href="#7-系统模块结构设计" class="headerlink" title="7. 系统模块结构设计"></a>7. 系统模块结构设计</h3><ul>
 <li>模块四要素：输入输出、处理功能、内部数据、程序代码。</li>
 <li>模块结构图</li>
 </ul>
 <h3 id="8-数据存储设计"><a href="#8-数据存储设计" class="headerlink" title="8. 数据存储设计"></a>8. 数据存储设计</h3><ul>
-<li>数据资源分布。</li>
-<li>数据安全保密：八个等级（0～7 级），四种方式（只读、只写、删除、修改）</li>
+<li>数据资源分布</li>
+<li>数据安全保密：8 个等级（0～7 级），4 种方式（只读、只写、删除、修改）</li>
 </ul>
-<h3 id="9-系统文档"><a href="#9-系统文档" class="headerlink" title="9. 系统文档"></a>9. 系统文档</h3><h2 id="2-机构化分析方法"><a href="#2-机构化分析方法" class="headerlink" title="2. 机构化分析方法"></a>2. 机构化分析方法</h2><h3 id="1-结构化分析（SA）概述"><a href="#1-结构化分析（SA）概述" class="headerlink" title="1. 结构化分析（SA）概述"></a>1. 结构化分析（SA）概述</h3><p>抽象（自底向上）、分解（自顶向下）。</p>
-<h3 id="2-数据流图（DFD）"><a href="#2-数据流图（DFD）" class="headerlink" title="2. 数据流图（DFD）"></a>2. 数据流图（DFD）</h3><ul>
-<li>DFD 的基本图形元素：外部实体、加工、数据存储、数据流。</li>
-<li>扩充符号：*（与）、+（或）、⊕（互斥）。</li>
-<li>层次结构：顶层图、0 层图、底层图、父图、子图。</li>
+<h2 id="2-机构化分析方法"><a href="#2-机构化分析方法" class="headerlink" title="2. 机构化分析方法"></a>2. 机构化分析方法</h2><h3 id="1-结构化分析（SA）概述"><a href="#1-结构化分析（SA）概述" class="headerlink" title="1. 结构化分析（SA）概述"></a>1. 结构化分析（SA）概述</h3><p>抽象（自底向上）、分解（自顶向下）。</p>
+<h3 id="2-数据流图（DFD）"><a href="#2-数据流图（DFD）" class="headerlink" title="2. 数据流图（DFD）"></a>2. 数据流图（DFD）</h3><p><img src="/../../../images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/%E6%95%B0%E6%8D%AE%E6%B5%81%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%9B%BE%E5%BD%A2%E5%85%83%E7%B4%A0.png" alt="数据流图基本成分及其图形表示"></p>
+<h4 id="1-基本成分"><a href="#1-基本成分" class="headerlink" title="1. 基本成分"></a>1. 基本成分</h4><ul>
+<li>加工：又称数据处理，表示输入数据在此变换后输出，以数据结构或数据内容作为加工对象<ul>
+<li>用圆、椭圆、圆角矩形表示</li>
+<li>每个加工都有一个名字和编号，名字通常是动词短语，编号反映加工位于的层次或哪个图中</li>
+<li>一个加工必须至少一个输入和一个输出</li>
 </ul>
-<h3 id="3-DFD-审查"><a href="#3-DFD-审查" class="headerlink" title="3. DFD 审查"></a>3. DFD 审查</h3><ul>
-<li>一致性：父图与子图平衡、数据守恒、具备数据存储、输出不能与输入同名</li>
-<li>完整性：奇迹（无入有出）、黑洞（有入无出）、灰洞（无法出）</li>
+</li>
+<li>数据流：由一组固定的数据项组成，箭头方向表示数据的流向，作为数据在系统内的传输通道<ul>
+<li>用箭头表示</li>
+<li>名称反映数据流含义，从存储流入和流出的可以无命名，不能同名</li>
+<li>一个加工有多个数据流，其之间必有联系</li>
+<li><code>*</code> 表示相邻数据流同时出现，与关系</li>
+<li><code>+</code> 表示相邻数据流取一条或者同时出现，或关系</li>
+<li><code>⊕</code> 表示相邻数据流只能去一条，互斥关系</li>
 </ul>
-<h3 id="4-数据字典（DD）"><a href="#4-数据字典（DD）" class="headerlink" title="4. 数据字典（DD）"></a>4. 数据字典（DD）</h3><p>包含 4 个条目：数据流、数据项、数据存储、基本加工。</p>
+</li>
+<li>数据存储：保存数据，可以是数据库、文件系统等<ul>
+<li>用双横线表示</li>
+<li>都有一个名字</li>
+<li>流入可表示写，流出表示读，双向可表示修改</li>
+</ul>
+</li>
+<li>外部实体：指存在于软件之外的人员或组织，指出系统数据的发源地和产生数据的归宿地<ul>
+<li>用矩形表示</li>
+<li>源宿可以用相同符号表示，流出表示源，流入表示宿，都有表示既源又宿</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-分层数据流图"><a href="#2-分层数据流图" class="headerlink" title="2. 分层数据流图"></a>2. 分层数据流图</h4><p>根据层次关系分为顶层、中间、底层数据流图。除顶层外，其余分层图从 0 开始编号。对于某一层来说，上层和下层称为父图和子图。</p>
+<ul>
+<li>顶层图只有一张，仅包含一个加工</li>
+<li>顶层图分解后的图称为 0 层图，也只有一张</li>
+<li>子图号就是父图被分解的加工号</li>
+</ul>
+<h3 id="3-DFD-审查"><a href="#3-DFD-审查" class="headerlink" title="3. DFD 审查"></a>3. DFD 审查</h3><p>DFD 的一致性和完整性，反应了图本身的正确性。</p>
+<ul>
+<li>一致性：<ul>
+<li>父图与子图平衡：子图的输入输出数据流必须与父图对应加工的一致</li>
+<li>数据守恒：加工的输出仅由它的输入决定</li>
+<li>局部数据存储：一个存储必须有输入和输出，除非其供其他系统使用或其由其他系统维护</li>
+<li>输出不能与输入同名</li>
+</ul>
+</li>
+<li>完整性：<ul>
+<li>每个加工必须有一个输入和一个输出</li>
+<li>在整个分层 DFD 中，每个存储必须至少一个读和一个写</li>
+<li>分层 DFD 中，数据流和文件必须命名（除存储的流入流出），且与数据字典一致</li>
+<li>每个加工和数据流名称必须体现其全部内容</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-数据字典（DD）"><a href="#4-数据字典（DD）" class="headerlink" title="4. 数据字典（DD）"></a>4. 数据字典（DD）</h3><p>为每个数据流图中的数据量、加工、文件等做出说明。包含 4 个条目：数据流、数据项、数据存储、基本加工。</p>
 <h2 id="3-机构化设计方法"><a href="#3-机构化设计方法" class="headerlink" title="3. 机构化设计方法"></a>3. 机构化设计方法</h2><h3 id="1-结构化设计"><a href="#1-结构化设计" class="headerlink" title="1. 结构化设计"></a>1. 结构化设计</h3><p>结构化设计（SD）是一种面向数据流的设计方法，与 SA 衔接，基本思想是将系统设计成相对独立、功能单一的模块组成的结构。</p>
-<h3 id="2-结构化设计步骤"><a href="#2-结构化设计步骤" class="headerlink" title="2. 结构化设计步骤"></a>2. 结构化设计步骤</h3><ul>
-<li>建立初始结构图</li>
-<li>对结构图进行改进</li>
-<li>书写设计文档</li>
-<li>设计评审</li>
-</ul>
+<h3 id="2-结构化设计步骤"><a href="#2-结构化设计步骤" class="headerlink" title="2. 结构化设计步骤"></a>2. 结构化设计步骤</h3><p>建立初始结构图、对结构图进行改进、书写设计文档、设计评审。</p>
 <h3 id="3-数据流图到软件体系结构的映射"><a href="#3-数据流图到软件体系结构的映射" class="headerlink" title="3. 数据流图到软件体系结构的映射"></a>3. 数据流图到软件体系结构的映射</h3><ul>
 <li>信息流的类型：交换流（主加工）、事物流。</li>
 <li>变换分析</li>
@@ -253,6 +266,10 @@
       <ul>
         
           <li>
+            <a href="/2023/10/02/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/06%E7%BB%93%E6%9E%84%E5%8C%96%E5%BC%80%E5%8F%91%E6%96%B9%E6%B3%95/">软件设计师学习-第六章 结构化开发方法</a>
+          </li>
+        
+          <li>
             <a href="/2023/10/01/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/03%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">软件设计师学习-第三章 数据结构</a>
           </li>
         
@@ -266,10 +283,6 @@
         
           <li>
             <a href="/2023/09/26/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/01%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86/">软件设计师学习-第一章 计算机系统知识</a>
-          </li>
-        
-          <li>
-            <a href="/2023/10/04/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/10%E7%BD%91%E7%BB%9C%E4%B8%8E%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">软件设计师学习-第十章 网络与信息关系基础知识</a>
           </li>
         
       </ul>
