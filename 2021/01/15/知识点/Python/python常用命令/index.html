@@ -140,11 +140,12 @@
 <li><code>pip freeze</code>：总览已经安装包的版本</li>
 <li><code>pip list</code>：总览已经安装的包</li>
 <li><code>pip list -o</code>：查看可升级的包</li>
+<li><code>pip config list</code>：查看配置</li>
 </ul>
 <h2 id="4-linux-安装-python"><a href="#4-linux-安装-python" class="headerlink" title="4. linux 安装 python"></a>4. linux 安装 python</h2><ol>
 <li><p>下载相关 tgz 文件，并上传至主机，解压；</p>
 </li>
-<li><p>准备编译环境：<code>yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gcc make</code> </p>
+<li><p>准备编译环境：<code>yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gcc make</code></p>
 </li>
 <li><p>编译安装，需要依次执行3个命令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--prefix 是 Python 的安装目录</span></span><br><span class="line">./configure --prefix=/home/glett/service/Python-3.9.5</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
@@ -157,6 +158,9 @@
 </ol>
 <h2 id="5-Python-http-服务"><a href="#5-Python-http-服务" class="headerlink" title="5. Python http 服务"></a>5. Python http 服务</h2><p>在拥有 Python 环境时，可以快速搭建一个 http 服务，提供文件浏览的 web 服务，可以把当前目录发布到相应端口</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">python2</span></span><br><span class="line">python -m SimpleHTTPServer [port]</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">python3</span></span><br><span class="line">python -m http.server [port]</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-修改-pip-cache-地址"><a href="#6-修改-pip-cache-地址" class="headerlink" title="6. 修改 pip cache 地址"></a>6. 修改 pip cache 地址</h2><p>若新文件夹为 “D:\pip_cache”，可用 pip 命令设置新缓存地址，之后可删除默认在 C 盘的文件夹，位置是 “C:\Users\admin\AppData\Local\pip” 下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip config set global.cache-dir &quot;D:\pip_cache&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">出现 Writing to C:\Users\admin\AppData\Roaming\pip\pip.ini 表示成功</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
