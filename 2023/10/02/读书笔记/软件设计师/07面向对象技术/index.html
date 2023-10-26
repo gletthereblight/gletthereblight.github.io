@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://gletthereblight.github.io/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E9%83%A8%E7%BD%B2%E5%9B%BE.png">
 <meta property="og:image" content="https://gletthereblight.github.io/images/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/UML%E5%8C%85%E5%9B%BE.png">
 <meta property="article:published_time" content="2023-10-02T12:05:00.000Z">
-<meta property="article:modified_time" content="2023-10-25T14:22:40.535Z">
+<meta property="article:modified_time" content="2023-10-26T03:50:45.665Z">
 <meta property="article:author" content="Gao Peng">
 <meta property="article:tag" content="软考">
 <meta property="article:tag" content="软件设计师">
@@ -183,9 +183,13 @@
 <h3 id="2-关系"><a href="#2-关系" class="headerlink" title="2. 关系"></a>2. 关系</h3><p>UML 中有四种关系：</p>
 <ul>
 <li>依赖（Dependency）：两个事物之间的语义关系，其中一个事物发生变化会影响另一个</li>
-<li>关联（Association）：类与类之间的联接，可以标注重复度和角色。聚合关系是一个关联特例，它体现的是整体与部分。</li>
-<li>泛化（Generalization）：是一般化和特殊化的关系，描述特殊元素（子元素）的对象可替换一般元素（父元素）的对象，箭头指向父元素</li>
-<li>实现（Realization）：类之间的语义关系，其中的一个类指定了由另一个类保证执行的契约，一般用在接口和实现类之间，或者用例和实现它们的协作之间</li>
+<li>关联（Association）：类与类之间的联接，可以标注重复度和角色<ul>
+<li>聚合（Aggregation）：整体与部分的关系，且部分可以离开整体而单独存在</li>
+<li>组合（Composition）：整体与部分的关系，且部分不可以离开整体而单独存在</li>
+</ul>
+</li>
+<li>泛化（Generalization）：一般化（父元素）和特殊化（子元素）的关系，箭头指向父元素</li>
+<li>实现（Realization）：一般用在接口和实现类之间，或者用例和实现它们的协作之间</li>
 </ul>
 <p>这四种关系是 UML 模型中可以包含的基本关系事物。它们也有变体，例如，依赖的变体有精华、跟踪、包含、延伸。</br></p>
 <ul>
