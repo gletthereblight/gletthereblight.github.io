@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>动态密码算法(待续) | Glett的码字间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="动态密码，即一次性密码（OTP），以及 HOTP 和 TOTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态密码算法(待续)">
+<meta property="og:url" content="https://gletthereblight.github.io/2023/12/04/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%85%B6%E4%BB%96/%E5%8A%A8%E6%80%81%E5%AF%86%E7%A0%81%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="Glett的码字间">
+<meta property="og:description" content="动态密码，即一次性密码（OTP），以及 HOTP 和 TOTP">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-04T10:31:00.000Z">
+<meta property="article:modified_time" content="2023-12-11T01:41:00.203Z">
+<meta property="article:author" content="Gao Peng">
+<meta property="article:tag" content="杂记">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Glett的码字间</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">理想三旬</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://gletthereblight.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-知识点/其他/动态密码算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/12/04/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%85%B6%E4%BB%96/%E5%8A%A8%E6%80%81%E5%AF%86%E7%A0%81%E7%AE%97%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2023-12-04T10:31:00.000Z" itemprop="datePublished">2023-12-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      动态密码算法(待续)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-wiki">1. wiki</h2>
+<p>动态密码，也叫一次性密码 <code>(OTP, One-Time Password)</code>，本身最大优点是防止重放攻击（replay attack），常见的动态密码有 <code>HOTP</code> 和 <code>TOPT</code> 两种。</p>
+<h3 id="1-hotp">1. HOTP</h3>
+<p><code>HOTP(HMAC-based One-Time Password)</code>：表示基于基于事件计数的一次性密码生成算法，通过某一特定的事件次序及相同的种子值作为输入，通过 HASH 算法运算出一致的密码。详见 <a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc4226">RFC 4226</a>。</br></p>
+<p>算法本身可以用两条简短的表达式描述：</p>
+<ul>
+<li><code>HOTP(K,C) = Truncate(HMAC-SHA-1(K,C))</code></li>
+<li><code>PWD(K,C,digit) = HOTP(K,C) mod 10^Digit</code></li>
+</ul>
+<p>其中：</p>
+<ul>
+<li><code>K</code> 表示共享密钥，一般与设备绑定，使相同设备才能生成有效的 <code>HOTP</code> 值</li>
+<li><code>C</code> 表示事件计数的值，在每次验证成功后加一，因此在一次性密码被使用后 <code>C</code> 就会变化，从而下一个 <code>HOTP</code> 的值也会发生改变。使用 8 字节的整数，称为移动因子（moving factor）。</li>
+<li><code>HMAC-SHA-1</code> 表示对共享密钥和移动因子进行 HMAC 的 SHA1 算法加密，得到 160 位长度（20字节）的加密结果</li>
+<li><code>Truncate</code> 表示截断函数，取加密后串的哪些字段组成一个数字</li>
+<li><code>Digit</code> 表示产生的验证码的长度，常见的是 6 位长度的动态密码</li>
+</ul>
+<h4 id="1-知识点补充">1. 知识点补充</h4>
+<h5 id="1-mac">1. MAC</h5>
+<p><code>MAC(Message Authentication Code)</code> ，消息认证码，它兼容了 MD 和 SHA 的特性，并且在它们的基础上加入了密钥，因此也叫含密钥散列函数算法，即 <code>HMAC(keyed-Hash Message Authentication Code)</code> ，是通信实体双方使用的一种验证机制。</br></p>
+<p>使用时，双方约定好散列函数并共享密钥，发送方使用该散列函数计算数据的摘要值，并用密钥加密，和数据一起发送。接收方收到报文后，会用密钥解密摘要值，同时用同一散列函数在本地计算所收到数据的摘要值，并比对两个摘要是否相同，从而确认报文是否被篡改。</br></p>
+<h4 id="2-实战">2. 实战</h4>
+<p>计算步骤为：</p>
+<ol>
+<li>SHA-1 算法加密得到的 20 字节长度的 key；</li>
+<li>取最后一个字节的低字节位的 4 位，作为偏移量；</li>
+<li>以上述偏移量连续截取 4 个字节（32 位），最后返回 32 位中的后面 31 位；</li>
+<li>根据验证码长度 digit ，并对 10<sup>digit</sup> 取模，不足的补零。</li>
+</ol>
+<p>其中，利用 JDK8 自带的 MAC 算法以及事件计数，来生成新的密文：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取实例</span></span><br><span class="line"><span class="type">Mac</span> <span class="variable">mac</span> <span class="operator">=</span> Mac.getInstance(<span class="string">&quot;HmacSHA1&quot;</span>);</span><br><span class="line">mac.init(key);            <span class="comment">// 使用给定的密钥计算 MAC 值</span></span><br><span class="line">mac.update(array, <span class="number">0</span>, <span class="number">8</span>);  <span class="comment">// 添加数据到指定的偏移量和长度</span></span><br><span class="line">mac.doFinal(array, <span class="number">0</span>);    <span class="comment">// 完成计算，并使用偏移量输出到指定数组</span></span><br></pre></td></tr></table></figure>
+<p>使用 <code>ByteBuffer</code> 来操作字节数组：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 按照 Mac 长度（一般20字节）分配空间</span></span><br><span class="line"><span class="type">ByteBuffer</span> <span class="variable">buffer</span> <span class="operator">=</span> ByteBuffer.allocate(mac.getMacLength());</span><br><span class="line"><span class="comment">// 获取最后一个字节，并取 4 位置的值，作为偏移量</span></span><br><span class="line"><span class="keyword">final</span> <span class="type">int</span> <span class="variable">offset</span> <span class="operator">=</span> buffer.get(buffer.capacity() - <span class="number">1</span>) &amp; <span class="number">0x0f</span>;</span><br><span class="line"><span class="comment">// 从偏移量，向前获取32位，取它的前31位，取模（密钥长度是6位）</span></span><br><span class="line">(buffer.getInt(offset) &amp; <span class="number">0x7fffffff</span>) % <span class="number">1_000_000</span>;</span><br></pre></td></tr></table></figure>
+<p>详见 <a href="/2023/12/07/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/OTP/" title="Java 代码之一次性密码算法">一次性密码算法</a></p>
+<h3 id="2-totp">2. TOTP</h3>
+<p><code>TOTP(Time-based One-Time Password)</code>：表示基于基于时间戳的一次性密码生成算法，其也是基于 HOTP 算法实现，但将移动因子从事件计数改为时间差，基于客户端的动态口令和动态口令验证服务器的时间比对，两者的时钟一致时，计算的动态口令才能一致。详见 <a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc6238">RFC 6238</a>。</p>
+<h4 id="1-实战">1. 实战</h4>
+<p>可以直接调用 HOTP 的实现，将 count 值替换成相应时间变量。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <!-- <a data-url="https://gletthereblight.github.io/2023/12/04/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%85%B6%E4%BB%96/%E5%8A%A8%E6%80%81%E5%AF%86%E7%A0%81%E7%AE%97%E6%B3%95/" data-id="clpulb29i0000owjw1zqv0gzq" data-title="动态密码算法(待续)" class="article-share-link"><span class="fa fa-share">分享</span></a> -->
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/12/07/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/OTP/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Java 代码之一次性密码算法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/11/30/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%89%8D%E7%AB%AF/Vue/5.Vue3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Vue 基础-Vue3(第五章)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">关于我</h3>
+      <ul class="widget about">
+      
+      
+      <li>专业泼冷水，执着负能量</li>
+      
+    </ul>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近更新</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/12/04/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%85%B6%E4%BB%96/%E5%8A%A8%E6%80%81%E5%AF%86%E7%A0%81%E7%AE%97%E6%B3%95/">动态密码算法(待续)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/12/07/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/OTP/">Java 代码之一次性密码算法</a>
+          </li>
+        
+          <li>
+            <a href="/2020/12/18/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%89%8D%E7%AB%AF/Vue/0.%E9%9B%B6%E7%A2%8E/">Vue 基础-总览(第零章)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/11/30/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%89%8D%E7%AB%AF/Vue/5.Vue3/">Vue 基础-Vue3(第五章)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/17/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%89%8D%E7%AB%AF/Vue/1.%E7%AE%80%E4%BB%8B/">Vue 基础-简介(第一章)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%A4%96/">技术之外</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a><span class="category-list-count">220</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/">大数据部件</a><span class="category-list-count">28</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Docker/">Docker</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/">Flink</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flume/">Flume</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/HBase/">HBase</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hadoop/">Hadoop</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Hive/">Hive</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kafka/">Kafka</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Kubernetes/">Kubernetes</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a><span class="category-list-count">40</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/3Blue1Brown/" rel="tag">3Blue1Brown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/" rel="tag">AngularJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C-C/" rel="tag">C&amp;C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DAMA-DMBOK/" rel="tag">DAMA-DMBOK</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Electron/" rel="tag">Electron</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink/" rel="tag">Flink</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flink-CDC/" rel="tag">Flink CDC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flume/" rel="tag">Flume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Guava/" rel="tag">Guava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/" rel="tag">HBase</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Idea-Instructions/" rel="tag">Idea Instructions</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jackson/" rel="tag">Jackson</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">75</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java8/" rel="tag">Java8</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kubernetes/" rel="tag">Kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LaTex/" rel="tag">LaTex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Netty/" rel="tag">Netty</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenJDK/" rel="tag">OpenJDK</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/" rel="tag">PostgreSQL</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pyqt5/" rel="tag">Pyqt5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Quartz/" rel="tag">Quartz</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/" rel="tag">Scala</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/" rel="tag">Spring Cloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/" rel="tag">Swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypeScript/" rel="tag">TypeScript</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vim/" rel="tag">Vim</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zookeeper/" rel="tag">Zookeeper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/" rel="tag">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pyinstaller/" rel="tag">pyinstaller</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" rel="tag">代码归档</a><span class="tag-list-count">29</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" rel="tag">内建包</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%A7%A3/" rel="tag">图解</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" rel="tag">安全框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B9%E5%99%A8/" rel="tag">容器</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" rel="tag">日志框架</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%AF%E8%AF%AD/" rel="tag">术语</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a><span class="tag-list-count">29</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" rel="tag">第三方包</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" rel="tag">线性代数的本质</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%88%B6/" rel="tag">自制</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B1%E8%AF%AD/" rel="tag">英语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag">计算机基础</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AC%E8%BD%BD/" rel="tag">转载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/" rel="tag">软件设计师</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E8%80%83/" rel="tag">软考</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/3Blue1Brown/" style="font-size: 10px;">3Blue1Brown</a> <a href="/tags/AngularJS/" style="font-size: 10px;">AngularJS</a> <a href="/tags/C-C/" style="font-size: 10px;">C&C++</a> <a href="/tags/CSS/" style="font-size: 10.48px;">CSS</a> <a href="/tags/DAMA-DMBOK/" style="font-size: 18.1px;">DAMA-DMBOK</a> <a href="/tags/Docker/" style="font-size: 11.43px;">Docker</a> <a href="/tags/Electron/" style="font-size: 10px;">Electron</a> <a href="/tags/Flink/" style="font-size: 15.71px;">Flink</a> <a href="/tags/Flink-CDC/" style="font-size: 10px;">Flink CDC</a> <a href="/tags/Flume/" style="font-size: 10px;">Flume</a> <a href="/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/tags/Golang/" style="font-size: 14.76px;">Golang</a> <a href="/tags/Guava/" style="font-size: 10.48px;">Guava</a> <a href="/tags/HBase/" style="font-size: 10px;">HBase</a> <a href="/tags/Hadoop/" style="font-size: 10.48px;">Hadoop</a> <a href="/tags/Hive/" style="font-size: 10px;">Hive</a> <a href="/tags/Idea-Instructions/" style="font-size: 12.86px;">Idea Instructions</a> <a href="/tags/JVM/" style="font-size: 10.48px;">JVM</a> <a href="/tags/Jackson/" style="font-size: 10px;">Jackson</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Java8/" style="font-size: 11.43px;">Java8</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Kafka/" style="font-size: 11.43px;">Kafka</a> <a href="/tags/Kubernetes/" style="font-size: 10px;">Kubernetes</a> <a href="/tags/LaTex/" style="font-size: 10px;">LaTex</a> <a href="/tags/Linux/" style="font-size: 15.24px;">Linux</a> <a href="/tags/Maven/" style="font-size: 11.43px;">Maven</a> <a href="/tags/MongoDB/" style="font-size: 10px;">MongoDB</a> <a href="/tags/Mysql/" style="font-size: 10.48px;">Mysql</a> <a href="/tags/Netty/" style="font-size: 11.9px;">Netty</a> <a href="/tags/OpenJDK/" style="font-size: 10px;">OpenJDK</a> <a href="/tags/Oracle/" style="font-size: 14.29px;">Oracle</a> <a href="/tags/PostgreSQL/" style="font-size: 10.48px;">PostgreSQL</a> <a href="/tags/Pyqt5/" style="font-size: 10px;">Pyqt5</a> <a href="/tags/Python/" style="font-size: 16.67px;">Python</a> <a href="/tags/Quartz/" style="font-size: 10px;">Quartz</a> <a href="/tags/Redis/" style="font-size: 13.33px;">Redis</a> <a href="/tags/Rust/" style="font-size: 10.95px;">Rust</a> <a href="/tags/Scala/" style="font-size: 11.43px;">Scala</a> <a href="/tags/Shell/" style="font-size: 13.81px;">Shell</a> <a href="/tags/Spring/" style="font-size: 12.86px;">Spring</a> <a href="/tags/Spring-Boot/" style="font-size: 11.9px;">Spring Boot</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/Swagger/" style="font-size: 10px;">Swagger</a> <a href="/tags/TypeScript/" style="font-size: 11.43px;">TypeScript</a> <a href="/tags/Vim/" style="font-size: 10.95px;">Vim</a> <a href="/tags/Vue/" style="font-size: 12.38px;">Vue</a> <a href="/tags/Zookeeper/" style="font-size: 10px;">Zookeeper</a> <a href="/tags/cmd/" style="font-size: 10.95px;">cmd</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/pyinstaller/" style="font-size: 10px;">pyinstaller</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E5%BD%92%E6%A1%A3/" style="font-size: 19.52px;">代码归档</a> <a href="/tags/%E5%86%85%E5%BB%BA%E5%8C%85/" style="font-size: 14.29px;">内建包</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 17.14px;">前端</a> <a href="/tags/%E5%9B%BE%E8%A7%A3/" style="font-size: 13.33px;">图解</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 19.05px;">大数据</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%A1%86%E6%9E%B6/" style="font-size: 10.95px;">安全框架</a> <a href="/tags/%E5%AE%B9%E5%99%A8/" style="font-size: 11.9px;">容器</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 17.62px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 13.33px;">数据结构与算法</a> <a href="/tags/%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" style="font-size: 10.95px;">日志框架</a> <a href="/tags/%E6%9C%AF%E8%AF%AD/" style="font-size: 15.24px;">术语</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 19.52px;">杂记</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 10.48px;">树莓派</a> <a href="/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/" style="font-size: 18.57px;">第三方包</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12.86px;">算法</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E6%9C%AC%E8%B4%A8/" style="font-size: 10px;">线性代数的本质</a> <a href="/tags/%E8%87%AA%E5%88%B6/" style="font-size: 10.95px;">自制</a> <a href="/tags/%E8%8B%B1%E8%AF%AD/" style="font-size: 10px;">英语</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" style="font-size: 11.43px;">计算机基础</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 11.43px;">计算机网络</a> <a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 10px;">转载</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E5%B8%88/" style="font-size: 16.19px;">软件设计师</a> <a href="/tags/%E8%BD%AF%E8%80%83/" style="font-size: 16.19px;">软考</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 10px;">面试</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      <!-- 不蒜子统计数据 -->
+      <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      <span id="busuanzi_container_site_pv">本站总访问量 <span id="busuanzi_value_site_pv"></span>  次</span><br>
+      <!-- <span id="busuanzi_container_site_pv">本站访客数 <span id="busuanzi_value_site_uv"></span> 人次</span><br> -->
+      
+      
+      &copy; 2023 Gao Peng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+<!-- totopo -->
+<div id="totop" style="position:fixed;bottom:150px;right:50px;cursor: pointer;">
+  <a title="返回顶部"><img src="/images/totop.png"/></a>
+</div>
+<script src="/js/totop.js"></script>
+  </div>
+</body>
+</html>
