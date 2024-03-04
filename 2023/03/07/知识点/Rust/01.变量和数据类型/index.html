@@ -14,7 +14,7 @@
 <meta property="og:description" content="Rust 的变量和数据类型">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-07T14:40:00.000Z">
-<meta property="article:modified_time" content="2024-03-04T06:02:57.360Z">
+<meta property="article:modified_time" content="2024-03-04T07:29:42.595Z">
 <meta property="article:author" content="Gao Peng">
 <meta property="article:tag" content="Rust">
 <meta name="twitter:card" content="summary">
@@ -157,17 +157,55 @@
 <p>悬垂引用也叫做悬垂指针，意为指针指向的值被释放了，而指针仍然存在，在 Rust 中编译器可以确保引用永远也不会变成悬垂状态。</p>
 <h2 id="3-数据类型">3. 数据类型</h2>
 <p>作为静态语言，编译时需要知道其类型，当可能得类型比较多时（如字符串转数字），不指定类型就会编译报错。</p>
-<h3 id="1-基本类型">1. 基本类型</h3>
-<p>基本类型意味着它们往往是一个最小化原子类型，无法解构为其它类型(一般意义上来说)，由以下组成：</p>
+<h3 id="1-标量类型">1. 标量类型</h3>
+<p>标量（scalar）类型表示单个值，由以下组成：</p>
 <ul>
-<li>整数类型：有无符号分为 <code>i</code> 和 <code>u</code>，长度为 <code>8,16,32,64,128bit</code>，<code>i32</code>为默认类型。特殊的有 <code>isize</code> 和 <code>usize</code>，根据系统架构决定(如32位计算机长度为32bit)。</br><br>
-对于整数类型溢出，当使用调试模式时，会抛出 panic，发布模式下则会直接环绕(如 u8 时，256变0，257变1)</br></li>
-<li>浮点类型：分为2种，<code>f32</code> 单精度32位，<code>f64</code> 双精度64位，后者是默认类型。</li>
-<li>布尔类型：符号为 <code>bool</code>，占1个字节，分为2种，<code>true</code> 和 <code>false</code>。</li>
-<li>字符类型：符号为 <code>char</code>，占4个字节，字面量使用单引号。</li>
-<li>字符串：字符串字面量和字符串切片 <code>&amp;str</code></li>
-<li>单元类型: 即 <code>()</code> ，其唯一的值也是 <code>()</code></li>
+<li>整数类型：有无符号分为 <code>i</code> 和 <code>u</code>，长度为 <code>8,16,32,64,128bit</code>，特殊的有 <code>isize</code> 和 <code>usize</code> ，共有 12 种了类型
+<ul>
+<li><code>i32</code> 为默认类型</li>
+<li><code>isize</code> 和 <code>usize</code>，根据系统架构决定，如 32 位计算机长度为 32bit</li>
+<li>可以使用如下任意形式来编写整型的字面量，如使用类型后缀来指定类型（57u8），使用 <code>_</code> 作为可视分隔符（1_000）</li>
+<li>对于整型溢出，当使用调试模式时，会抛出 panic，发布模式下则会直接环绕，如 u8 时，256变0，257变1</li>
 </ul>
+</li>
+<li>浮点类型：分为2种，<code>f32</code> 单精度32位，<code>f64</code> 双精度64位，
+<ul>
+<li><code>f64</code> 为默认类型</li>
+</ul>
+</li>
+<li>布尔类型：符号为 <code>bool</code>，占1个字节，分为 2 种，<code>true</code> 和 <code>false</code></li>
+<li>字符类型：符号为 <code>char</code>，占4个字节，字面量使用单引号，表示一个 Unicode 标量值</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>数字字面量</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>十进制</td>
+<td>98_222</td>
+</tr>
+<tr>
+<td>十六进制</td>
+<td>0xff</td>
+</tr>
+<tr>
+<td>八进制</td>
+<td>0o77</td>
+</tr>
+<tr>
+<td>二进制</td>
+<td>0b1111_0000</td>
+</tr>
+<tr>
+<td>字节</td>
+<td>b’A’</td>
+</tr>
+</tbody>
+</table>
 <h3 id="2-数字运算">2. 数字运算</h3>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">  <span class="comment">// 编译器会进行自动推导，给予twenty i32的类型</span></span><br><span class="line">  <span class="keyword">let</span> <span class="variable">twenty</span> = <span class="number">20</span>;</span><br><span class="line">  <span class="comment">// 类型标注</span></span><br><span class="line">  <span class="keyword">let</span> <span class="variable">twenty_one</span>: <span class="type">i32</span> = <span class="number">21</span>;</span><br><span class="line">  <span class="comment">// 通过类型后缀的方式进行类型标注：22是i32类型</span></span><br><span class="line">  <span class="keyword">let</span> <span class="variable">twenty_two</span> = <span class="number">22i32</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 只有同样类型，才能运算</span></span><br><span class="line">  <span class="keyword">let</span> <span class="variable">addition</span> = twenty + twenty_one + twenty_two;</span><br><span class="line">  <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125; + &#123;&#125; + &#123;&#125; = &#123;&#125;&quot;</span>, twenty, twenty_one, twenty_two, addition);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 对于较长的数字，可以用_进行分割，提升可读性</span></span><br><span class="line">  <span class="keyword">let</span> <span class="variable">one_million</span>: <span class="type">i64</span> = <span class="number">1_000_000</span>;</span><br><span class="line">  <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, one_million.<span class="title function_ invoke__">pow</span>(<span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 定义一个f32数组，其中42.0会自动被推导为f32类型</span></span><br><span class="line">  <span class="keyword">let</span> <span class="variable">forty_twos</span> = [</span><br><span class="line">    <span class="number">42.0</span>,</span><br><span class="line">    <span class="number">42f32</span>,</span><br><span class="line">    <span class="number">42.0_f32</span>,</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 打印数组中第一个值，并控制小数位为2位</span></span><br><span class="line">  <span class="built_in">println!</span>(<span class="string">&quot;&#123;:.2&#125;&quot;</span>, forty_twos[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="3-位运算">3. 位运算</h3>
@@ -209,10 +247,14 @@
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="comment">// 二进制为00000010</span></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">a</span>:<span class="type">i32</span> = <span class="number">2</span>;</span><br><span class="line">    <span class="comment">// 二进制为00000011</span></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">b</span>:<span class="type">i32</span> = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;(a &amp; b) value is &#123;&#125;&quot;</span>, a &amp; b);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;(a | b) value is &#123;&#125;&quot;</span>, a | b);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;(a ^ b) value is &#123;&#125;&quot;</span>, a ^ b);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;(!b) value is &#123;&#125; &quot;</span>, !b);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;(a &lt;&lt; b) value is &#123;&#125;&quot;</span>, a &lt;&lt; b);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;(a &gt;&gt; b) value is &#123;&#125;&quot;</span>, a &gt;&gt; b);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">a</span> = a;</span><br><span class="line">    <span class="comment">// 赋值</span></span><br><span class="line">    a &lt;&lt;= b;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;(a &lt;&lt; b) value is &#123;&#125;&quot;</span>, a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="2-复合类型">2. 复合类型</h3>
 <h4 id="1-tuple-元组">1. Tuple 元组</h4>
-<p>可以存放多种数据类型，且长度是固定的，一旦声明就无法改变</p>
+<p>可以存放多种数据类型，且长度是固定的，一旦声明就无法改变。</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">tup</span> = (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4.1</span>)</span><br><span class="line"><span class="comment">// 访问: 使用访问下标方式</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">s</span> = tup.<span class="number">0</span>;</span><br><span class="line"><span class="comment">// 结构: 使用解构方式</span></span><br><span class="line"><span class="keyword">let</span> (x,y,z) = tup;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>没有任何值的元组 <code>()</code> 是一种特殊的类型，被称为单元类型（unit type），它只有一个值 <code>()</code>，该值被称为单元值（unit value）。</li>
+<li>如果表达式不返回任何其他值，就隐式地返回单元值</li>
+</ul>
 <h4 id="2-数组">2. 数组</h4>
-<p>只能存放单一数据类型，且长度是固定的，存在栈内存中。下标溢出时，编译通过，但运行时报错</p>
+<p>只能存放单一数据类型，且长度是固定的，存在栈内存中。当下标溢出时，编译通过，但运行时报错。</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建: 可以显示声明类型或者省略</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">a</span> = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];                <span class="comment">// rust推断为[i32;3]</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">a</span>: [<span class="type">u8</span>; <span class="number">3</span>] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];     <span class="comment">// [类型;长度]</span></span><br><span class="line"><span class="comment">// 对于相同内容的，可以简写</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">a</span> = [<span class="number">3</span>;<span class="number">5</span>];                  <span class="comment">// 相当于 let a = [3,3,3,3,3]</span></span><br><span class="line"><span class="comment">// 访问: 使用访问下标方式</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">x</span> = a[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">let</span> <span class="variable">y</span> = a[<span class="number">1</span>];</span><br><span class="line"><span class="comment">// 访问: 使用解构方式</span></span><br><span class="line"><span class="keyword">let</span> [x, y, ..] = a;             <span class="comment">// .. 符号表示，此时只解构出第一和第二个元素</span></span><br></pre></td></tr></table></figure>
 
       
