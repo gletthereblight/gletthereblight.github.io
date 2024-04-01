@@ -9,11 +9,11 @@
   <meta name="description" content="Spring Boot 中常用注解介绍">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring Boot 注解">
-<meta property="og:url" content="https://gletthereblight.github.io/2020/09/02/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/1.SpringBoot%E6%B3%A8%E8%A7%A3/index.html">
+<meta property="og:url" content="https://gletthereblight.github.io/2023/08/07/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/1.SpringBoot%E6%B3%A8%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Glett的码字间">
 <meta property="og:description" content="Spring Boot 中常用注解介绍">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-09-02T03:10:00.000Z">
+<meta property="article:published_time" content="2023-08-07T08:01:21.274Z">
 <meta property="article:modified_time" content="2023-03-30T06:28:00.000Z">
 <meta property="article:author" content="Gao Peng">
 <meta property="article:tag" content="Java">
@@ -84,8 +84,8 @@
       <div class="outer">
         <section id="main"><article id="post-知识点/Java/Spring/1.SpringBoot注解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2020/09/02/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/1.SpringBoot%E6%B3%A8%E8%A7%A3/" class="article-date">
-  <time class="dt-published" datetime="2020-09-02T03:10:00.000Z" itemprop="datePublished">2020-09-02</time>
+    <a href="/2023/08/07/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/1.SpringBoot%E6%B3%A8%E8%A7%A3/" class="article-date">
+  <time class="dt-published" datetime="2023-08-07T08:01:21.274Z" itemprop="datePublished">2023-08-07</time>
 </a>
     
   <div class="article-category">
@@ -108,17 +108,22 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="1-RestController-与-Controller"><a href="#1-RestController-与-Controller" class="headerlink" title="1. @RestController 与 @Controller"></a>1. <code>@RestController</code> 与 <code>@Controller</code></h2><p>都用来表示 <code>Spring</code> 某个类是否可以接收HTTP请求</p>
+        <h2 id="1-restcontroller-与-controller">1. <code>@RestController</code> 与 <code>@Controller</code></h2>
+<p>都用来表示 <code>Spring</code> 某个类是否可以接收HTTP请求</p>
 <ul>
-<li><code>@RestController</code><br>等价于<code>@ResponseBody + @Controller</code>。如果需要返回<code>JSON</code>，<code>XML</code>或自定义<code>mediaType</code>内容到页面，它会自动将对象实体转换为<code>JSON</code>格式</li>
-<li><code>@Controller</code><br>使用在对应的方法上，视图解析器可以解析 <code>return</code>的<code>jsp</code>或者<code>html</code>页面，并跳转到相应页面</li>
+<li><code>@RestController</code><br>
+等价于<code>@ResponseBody + @Controller</code>。如果需要返回<code>JSON</code>，<code>XML</code>或自定义<code>mediaType</code>内容到页面，它会自动将对象实体转换为<code>JSON</code>格式</li>
+<li><code>@Controller</code><br>
+使用在对应的方法上，视图解析器可以解析 <code>return</code>的<code>jsp</code>或者<code>html</code>页面，并跳转到相应页面</li>
 </ul>
-<h2 id="2-RequestMapping-和-GetMapping-PostMapping"><a href="#2-RequestMapping-和-GetMapping-PostMapping" class="headerlink" title="2. @RequestMapping 和 @GetMapping , @PostMapping"></a>2. <code>@RequestMapping</code> 和 <code>@GetMapping</code> , <code>@PostMapping</code></h2><p><code>@GetMapping</code>和<code>@PostMapping</code>是组合注解，将<code>HTTP get/put</code> 请求映射到特定处理程序的方法注解，即</p>
+<h2 id="2-requestmapping-和-getmapping-postmapping">2. <code>@RequestMapping</code> 和 <code>@GetMapping</code> , <code>@PostMapping</code></h2>
+<p><code>@GetMapping</code>和<code>@PostMapping</code>是组合注解，将<code>HTTP get/put</code> 请求映射到特定处理程序的方法注解，即</p>
 <ul>
-<li><code>@GetMapping</code> &#x3D; <code>@RequestMapping(method = RequestMethod.GET)</code></li>
-<li><code>@PostMapping</code> &#x3D; <code>@RequestMapping(method = RequestMethod.PUT)</code></li>
+<li><code>@GetMapping</code> = <code>@RequestMapping(method = RequestMethod.GET)</code></li>
+<li><code>@PostMapping</code> = <code>@RequestMapping(method = RequestMethod.PUT)</code></li>
 </ul>
-<h2 id="3-Configuration"><a href="#3-Configuration" class="headerlink" title="3. @Configuration"></a>3. <code>@Configuration</code></h2><p>用于定义配置类，定义的配置类可以替换<code>xml</code>文件，一般和<code>@Bean</code>注解联合使用</p>
+<h2 id="3-configuration">3. <code>@Configuration</code></h2>
+<p>用于定义配置类，定义的配置类可以替换<code>xml</code>文件，一般和<code>@Bean</code>注解联合使用</p>
 <ul>
 <li><code>@Configuration</code>注解主要标注在某个类上，相当于<code>xml</code>配置文件中的<code>&lt;beans&gt;</code></li>
 <li><code>@Configuration</code>不可以是<code>final</code>类型，不可以是匿名类，嵌套使用必须是静态类</li>
@@ -128,19 +133,28 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">default-lazy-init</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;mockService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;..MockServiceImpl&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">propery</span> <span class="attr">name</span> =<span class="string">&quot;dependencyService&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;dependencyService&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dependencyService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;DependencyServiceImpl&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>基于 JavaConfig 配置的方式</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MockConfiguration</span>&#123;</span><br><span class="line">  <span class="meta">@Bean</span></span><br><span class="line">  <span class="keyword">public</span> MockService <span class="title function_">mockService</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">MockServiceImpl</span>(dependencyService());</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="meta">@Bean</span></span><br><span class="line">  <span class="keyword">public</span> DependencyService <span class="title function_">dependencyService</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DependencyServiceImpl</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-Component-相关"><a href="#4-Component-相关" class="headerlink" title="4. @Component 相关"></a>4. <code>@Component</code> 相关</h2><h3 id="Component"><a href="#Component" class="headerlink" title="@Component"></a><code>@Component</code></h3><p>可以使用此注解描述<code>Spring</code>中的<code>Bean</code>，但它是一个泛化的概念，仅仅表示一个组件(<code>Bean</code>)，并且可以作用在任何层次，使用时只需将该注解标注在相应类上即可</p>
+<h2 id="4-component-相关">4. <code>@Component</code> 相关</h2>
+<h3 id="component"><code>@Component</code></h3>
+<p>可以使用此注解描述<code>Spring</code>中的<code>Bean</code>，但它是一个泛化的概念，仅仅表示一个组件(<code>Bean</code>)，并且可以作用在任何层次，使用时只需将该注解标注在相应类上即可</p>
 <ul>
 <li>此注解表明这个类将被 Spring IoC 容器扫描装配，如果不配置名称，则 IoC 容器就会把类名首字母小写，其他的不变作为 Bean 名称放入到容器中</li>
 </ul>
-<h3 id="Repository"><a href="#Repository" class="headerlink" title="@Repository"></a><code>@Repository</code></h3><p>用于将数据访问层(<code>DAO</code>层)的类标识为<code>Spring</code>中的<code>Bean</code>，其功能与<code>@Component</code>相同</p>
-<h3 id="Service"><a href="#Service" class="headerlink" title="@Service"></a><code>@Service</code></h3><p>通常作用在业务层(<code>Service</code>层)，用于将业务层的类标识为<code>Spring</code>中的<code>Bean</code>，其功能与<code>@Component</code>相同</p>
-<h3 id="Controller"><a href="#Controller" class="headerlink" title="@Controller"></a><code>@Controller</code></h3><p>通常作用在控制层(如<code>Spring MVC Controller</code>)，用于将控制层的类标识为<code>Spring</code>中的<code>Bean</code>，其功能与<code>@Component</code>相同</p>
-<h3 id="Autowired"><a href="#Autowired" class="headerlink" title="@Autowired"></a><code>@Autowired</code></h3><ul>
-<li>用在参数上<br>用于对<code>Bean</code>的属性变量、属性的<code>setter</code>方法及构造方法进行标注，配合对应的注解处理器完成<code>Bean</code>的自动配置工作 默认按照<code>Bean</code>的类型进行装配</li>
-<li>用在方法上<br>spring 容器会在类加载后自动注入这个方法的参数，并执行一遍方法。这就像 static{} 块语句会初始化执行，但执行阶段不一样。</li>
+<h3 id="repository"><code>@Repository</code></h3>
+<p>用于将数据访问层(<code>DAO</code>层)的类标识为<code>Spring</code>中的<code>Bean</code>，其功能与<code>@Component</code>相同</p>
+<h3 id="service"><code>@Service</code></h3>
+<p>通常作用在业务层(<code>Service</code>层)，用于将业务层的类标识为<code>Spring</code>中的<code>Bean</code>，其功能与<code>@Component</code>相同</p>
+<h3 id="controller"><code>@Controller</code></h3>
+<p>通常作用在控制层(如<code>Spring MVC Controller</code>)，用于将控制层的类标识为<code>Spring</code>中的<code>Bean</code>，其功能与<code>@Component</code>相同</p>
+<h3 id="autowired"><code>@Autowired</code></h3>
+<ul>
+<li>用在参数上<br>
+用于对<code>Bean</code>的属性变量、属性的<code>setter</code>方法及构造方法进行标注，配合对应的注解处理器完成<code>Bean</code>的自动配置工作 默认按照<code>Bean</code>的类型进行装配</li>
+<li>用在方法上<br>
+spring 容器会在类加载后自动注入这个方法的参数，并执行一遍方法。这就像 static{} 块语句会初始化执行，但执行阶段不一样。</li>
 </ul>
-<h3 id="Resource"><a href="#Resource" class="headerlink" title="@Resource"></a><code>@Resource</code></h3><p>作用与<code>@Autowired</code>一样，其区别在于<code>@Autowired</code>默认按照<code>Bean</code>类型装配，而<code>@Resource</code>默认按照<code>Bean</code>实例名称进行装配。</br><br><code>@Resource</code>中有两个重要属性:<code>name</code>和<code>type</code>。<code>name</code>属性解析为<code>Bean</code>实例名称，<code>type</code>属性解析为<code>Bean</code>实例类型。</p>
+<h3 id="resource"><code>@Resource</code></h3>
+<p>作用与<code>@Autowired</code>一样，其区别在于<code>@Autowired</code>默认按照<code>Bean</code>类型装配，而<code>@Resource</code>默认按照<code>Bean</code>实例名称进行装配。</br><br>
+<code>@Resource</code>中有两个重要属性:<code>name</code>和<code>type</code>。<code>name</code>属性解析为<code>Bean</code>实例名称，<code>type</code>属性解析为<code>Bean</code>实例类型。</p>
 <ul>
 <li>如果指定<code>name</code> 属性，则按实例名称进行装配</li>
 <li>如果指定<code>type</code>属性，则按<code>Bean</code>类型进行装配</li>
@@ -148,39 +162,58 @@
 <li>如果不能匹配，再按照<code>Bean</code>类型进行装配</li>
 <li>如果都无法匹配，则抛出<code>NoSuchBeanDefinitionException</code>异常</li>
 </ul>
-<h3 id="Qualifier"><a href="#Qualifier" class="headerlink" title="@Qualifier"></a><code>@Qualifier</code></h3><p>与<code>@Autowired</code>注解配合使用，会将默认的按<code>Bean</code>类型装配修改为接<code>Bean</code>的实例名称装配，<code>Bean</code>的实例名称由<code>@Qualifier</code> 注解的参数指定。</p>
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>在上面几个注解中，虽然<code>@Repository</code>、<code>@Service</code>、<code>@Controller</code>功能与<code>@Component</code>注解的功能相同，但为了使标注类本身用途更加清晰，建议在实际开发中分别对实现类进行标注</p>
-<h2 id="5-读取配置信息"><a href="#5-读取配置信息" class="headerlink" title="5. 读取配置信息"></a>5. 读取配置信息</h2><h3 id="5-1-ConfigurationProperties"><a href="#5-1-ConfigurationProperties" class="headerlink" title="5.1.  @ConfigurationProperties"></a>5.1.  <code>@ConfigurationProperties</code></h3><h3 id="5-2-Value"><a href="#5-2-Value" class="headerlink" title="5.2.  @Value"></a>5.2.  <code>@Value</code></h3><h3 id="5-3-PropertySource-和-PropertySources"><a href="#5-3-PropertySource-和-PropertySources" class="headerlink" title="5.3. @PropertySource 和 @PropertySources"></a>5.3. <code>@PropertySource</code> 和 <code>@PropertySources</code></h3><p>将 properties 配置文件中的值存储到 Environment中，但不支持 .yml 文件</p>
+<h3 id="qualifier"><code>@Qualifier</code></h3>
+<p>与<code>@Autowired</code>注解配合使用，会将默认的按<code>Bean</code>类型装配修改为接<code>Bean</code>的实例名称装配，<code>Bean</code>的实例名称由<code>@Qualifier</code> 注解的参数指定。</p>
+<h3 id="注意">注意</h3>
+<p>在上面几个注解中，虽然<code>@Repository</code>、<code>@Service</code>、<code>@Controller</code>功能与<code>@Component</code>注解的功能相同，但为了使标注类本身用途更加清晰，建议在实际开发中分别对实现类进行标注</p>
+<h2 id="5-读取配置信息">5. 读取配置信息</h2>
+<h3 id="5-1-configurationproperties">5.1.  <code>@ConfigurationProperties</code></h3>
+<h3 id="5-2-value">5.2.  <code>@Value</code></h3>
+<h3 id="5-3-propertysource-和-propertysources">5.3. <code>@PropertySource</code> 和 <code>@PropertySources</code></h3>
+<p>将 properties 配置文件中的值存储到 Environment中，但不支持 .yml 文件</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 读取单个属性</span></span><br><span class="line"><span class="meta">@PropertySource(ignoreResourceNotFound = true, value = &quot;classpath:xxx.properties&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取多个属性</span></span><br><span class="line"><span class="meta">@PropertySource(value=&#123;&quot;classpath:xxx.properties&quot;, &quot;classpath:yyy.properties&quot;&#125;)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@PropertySources(value=&#123;</span></span><br><span class="line"><span class="meta">    @PropertySource(value=&#123;&quot;classpath:xxx.properties&quot;&#125;),</span></span><br><span class="line"><span class="meta">    @PropertySource(value=&#123;&quot;classpath:yyy.properties&quot;&#125;),</span></span><br><span class="line"><span class="meta">&#125;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 赋值</span></span><br><span class="line"><span class="type">AnnotationConfigApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AnnotationConfigApplicationContext</span>(PropertyValueConfig.class);</span><br><span class="line"><span class="type">Environment</span> <span class="variable">environment</span> <span class="operator">=</span> context.getEnvironment();</span><br><span class="line"></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> Environment environment;</span><br><span class="line"></span><br><span class="line">environment.getProperty(<span class="string">&quot;person.name&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-4-注："><a href="#5-4-注：" class="headerlink" title="5.4. 注："></a>5.4. 注：</h3><ol>
+<h3 id="5-4-注：">5.4. 注：</h3>
+<ol>
 <li><code>@ConfigurationProperties</code> 和 <code>@Value</code> 只能读取默认配置文件的属性值，即 application.yml 或 application.properties 的属性值</li>
 </ol>
-<h2 id="6-PathVariable"><a href="#6-PathVariable" class="headerlink" title="6. @PathVariable"></a>6. <code>@PathVariable</code></h2><p>spring3.0的一个新功能，接收请求路径中占位符的值，比如</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 请求路径：http://localhost:8080/hello/show/1/james</span></span><br><span class="line"><span class="comment">// 占位符参数 &#123;xxx&#125; 绑定到处理器类的方法形参中 @PathVariable(&quot;xxx&quot;) </span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;show/&#123;id&#125;/&#123;name&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Result&lt;Void&gt; <span class="title function_">test</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id, <span class="meta">@PathVariable(&quot;name&quot;)</span> String name)</span> &#123;</span><br><span class="line">    Result&lt;Void&gt; result = <span class="keyword">new</span> <span class="title class_">Result</span>&lt;Void&gt;();</span><br><span class="line">    result.setId(id);</span><br><span class="line">    result.setName(name);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="7-ModelAttribute"><a href="#7-ModelAttribute" class="headerlink" title="7. @ModelAttribute"></a>7. <code>@ModelAttribute</code></h2><h3 id="7-1-应用在方法的参数上"><a href="#7-1-应用在方法的参数上" class="headerlink" title="7.1 应用在方法的参数上"></a>7.1 应用在方法的参数上</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping(value = &quot;/modelattribute&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ModelAttributeParamController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ModelAttribute(value = &quot;attributeName&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">myModel</span><span class="params">(<span class="meta">@RequestParam(required = false)</span> String abc)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> abc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ModelAttribute</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">myModel3</span><span class="params">(Model model)</span> &#123;</span><br><span class="line">        model.addAttribute(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;zong&quot;</span>);</span><br><span class="line">        model.addAttribute(<span class="string">&quot;age&quot;</span>, <span class="number">20</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(value = &quot;/param&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">param</span><span class="params">(<span class="meta">@ModelAttribute(&quot;attributeName&quot;)</span> String str,</span></span><br><span class="line"><span class="params">                       <span class="meta">@ModelAttribute(&quot;name&quot;)</span> String str2,</span></span><br><span class="line"><span class="params">                       <span class="meta">@ModelAttribute(&quot;age&quot;)</span> <span class="type">int</span> str3)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;param&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="6-pathvariable-与-pathparam">6. <code>@PathVariable</code> 与 <code>@PathParam</code></h2>
+<ul>
+<li><code>@PathVariable</code>: 会将 url 占位符的的参数，按名绑定到相应同名形参</li>
+<li><code>@PathParam</code>: 从 request 中以键值对方式取值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 请求路径：http://localhost:8080/hello/show/1/james</span></span><br><span class="line"><span class="comment">// 占位符参数 &#123;xxx&#125; 绑定到处理器类的方法形参中 @PathVariable(&quot;xxx&quot;) </span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;show/&#123;id&#125;/&#123;name&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Result&lt;Void&gt; <span class="title function_">test</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id, <span class="meta">@PathVariable(&quot;name&quot;)</span> String name)</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 请求路径：http://localhost:8080/hello/show?id=1&amp;name=james</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;show&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Result&lt;Void&gt; <span class="title function_">test</span><span class="params">(<span class="meta">@PathParam(&quot;id&quot;)</span> Long id, <span class="meta">@PathParam(&quot;name&quot;)</span> String name)</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>区别：</p>
+<ul>
+<li>在没有对应属性时，<code>@PathVariable</code> 会 404，<code>@PathParam</code> 是 null 值</li>
+</ul>
+<h2 id="7-modelattribute">7. <code>@ModelAttribute</code></h2>
+<h3 id="7-1-应用在方法的参数上">7.1 应用在方法的参数上</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping(value = &quot;/modelattribute&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ModelAttributeParamController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ModelAttribute(value = &quot;attributeName&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">myModel</span><span class="params">(<span class="meta">@RequestParam(required = false)</span> String abc)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> abc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ModelAttribute</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">myModel3</span><span class="params">(Model model)</span> &#123;</span><br><span class="line">        model.addAttribute(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;zong&quot;</span>);</span><br><span class="line">        model.addAttribute(<span class="string">&quot;age&quot;</span>, <span class="number">20</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(value = &quot;/param&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">param</span><span class="params">(<span class="meta">@ModelAttribute(&quot;attributeName&quot;)</span> String str,</span></span><br><span class="line"><span class="params">                       <span class="meta">@ModelAttribute(&quot;name&quot;)</span> String str2,</span></span><br><span class="line"><span class="params">                       <span class="meta">@ModelAttribute(&quot;age&quot;)</span> <span class="type">int</span> str3)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;param&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如上代码，使用 <code>@ModelAttribute</code> 注解的参数，意思是从前面的 Model 中提取对应名称的属性</p>
-<h2 id="8-关联用到的注解"><a href="#8-关联用到的注解" class="headerlink" title="8. 关联用到的注解"></a>8. 关联用到的注解</h2><ul>
+<h2 id="8-关联用到的注解">8. 关联用到的注解</h2>
+<ul>
 <li><code>@DateTimeFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</code></li>
 <li><code>@JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;, timezone = &quot;GMT+8&quot;)</code></li>
 </ul>
-<h2 id="9-RestControllerAdvice"><a href="#9-RestControllerAdvice" class="headerlink" title="9. @RestControllerAdvice"></a>9. <code>@RestControllerAdvice</code></h2><p><code>@RestControllerAdvice</code> 是一个组合注解, 由 <code>@ControllerAdvice</code> 和 <code>@ResponseBody组成</code>, 而 <code>@ControllerAdvice</code> 继承了 <code>@Component</code>, 因此 <code>@RestControllerAdvice</code> 本质上是个 <code>@Component</code>, 其将作用于所有使用 <code>@RequestMapping</code> 方法, 可以用来定义 3个 方法 </p>
+<h2 id="9-restcontrolleradvice">9. <code>@RestControllerAdvice</code></h2>
+<p><code>@RestControllerAdvice</code> 是一个组合注解, 由 <code>@ControllerAdvice</code> 和 <code>@ResponseBody组成</code>, 而 <code>@ControllerAdvice</code> 继承了 <code>@Component</code>, 因此 <code>@RestControllerAdvice</code> 本质上是个 <code>@Component</code>, 其将作用于所有使用 <code>@RequestMapping</code> 方法, 可以用来定义 3个 方法</p>
 <ul>
 <li><code>@ExceptionHandler</code> : 用于指定异常处理方法, 当与 <code>@RestControllerAdvice</code> 配合使用时, 用于全局处理控制器里的异常</li>
 <li><code>@InitBinder</code> : 用来设置 <code>WebDataBinder</code>, 用于自动绑定前台请求参数到 Model 中</li>
 <li><code>@ModelAttribute</code> : 本来作用是绑定键值对到 Model 中，当与 <code>@ControllerAdvice</code> 配合使用时，可以让全局的 <code>@RequestMapping</code> 都能获得在此处设置的键值对</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 全局数据绑定, 应用到所有 <span class="doctag">@RequestMapping</span> 注解方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RestControllerAdvice</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GlobalController</span>&#123;  </span><br><span class="line">     </span><br><span class="line">    <span class="comment">// 将键值对添加到全局，注解了@RequestMapping的方法都可以获得此键值对  </span></span><br><span class="line">    <span class="meta">@ModelAttribute</span> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addUser</span><span class="params">(Model model)</span> &#123;   </span><br><span class="line">        model.addAttribute(<span class="string">&quot;msg&quot;</span>, <span class="string">&quot;此处将键值对添加到全局，注解了@RequestMapping的方法都可以获得此键值对&quot;</span>);  </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//用来设置 WebDataBinder  </span></span><br><span class="line">    <span class="meta">@InitBinder(&quot;user&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">initBinder</span><span class="params">(WebDataBinder binder)</span> &#123;</span><br><span class="line">    &#125;    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 定义全局异常处理，value 属性可以过滤拦截指定异常，此处拦截所有的 Exception  </span></span><br><span class="line">    <span class="meta">@ExceptionHandler(Exception.class)</span>    </span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">handleException</span><span class="params">(Exception e)</span> &#123;    </span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;error&quot;</span>;</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>常用可选参数</p>
 <ul>
 <li><code>basePackages</code> : 定一个或多个包，这些包及其子包下的所有 Controller 都被该 @ControllerAdvice 管理</li>
 <li><code>basePackageClasses</code> : 是 basePackages 的一种变形，指定一个或多个 Controller 类，这些类所属的包及其子包下的所有 Controller 都被该 @ControllerAdvice 管理</li>
 <li><code>annotations</code> : 指定一个或多个注解，被这些注解所标记的 Controller 会被该 @ControllerAdvice 管理</li>
 </ul>
-<h2 id="10-Transactional"><a href="#10-Transactional" class="headerlink" title="10. @Transactional"></a>10. <code>@Transactional</code></h2><p>可以作用在接口、类、类方法</p>
-<h3 id="1-属性"><a href="#1-属性" class="headerlink" title="1. 属性"></a>1. 属性</h3><h4 id="1-propagation"><a href="#1-propagation" class="headerlink" title="1. propagation"></a>1. <code>propagation</code></h4><p>代表事务的传播行为</p>
+<h2 id="10-transactional">10. <code>@Transactional</code></h2>
+<p>可以作用在接口、类、类方法</p>
+<h3 id="1-属性">1. 属性</h3>
+<h4 id="1-propagation">1. <code>propagation</code></h4>
+<p>代表事务的传播行为</p>
 <ul>
 <li><code>Propagation.REQUIRED</code> : 默认行为。如果当前存在事务，则加入该事务，如果当前不存在事务，则创建一个新的事务。( 也就是说如果A方法和B方法都添加了注解，在默认传播模式下，A方法内部调用B方法，会把两个方法的事务合并为一个事务 ）</li>
 <li><code>Propagation.SUPPORTS</code> : 如果当前存在事务，则加入该事务；如果当前不存在事务，则以非事务的方式继续运行。</li>
@@ -190,7 +223,8 @@
 <li><code>Propagation.NEVER</code> : 以非事务的方式运行，如果当前存在事务，则抛出异常。</li>
 <li><code>Propagation.NESTED</code> : 和 <code>REQUIRED</code> 效果一样。</li>
 </ul>
-<h4 id="2-isolation"><a href="#2-isolation" class="headerlink" title="2. isolation"></a>2. <code>isolation</code></h4><p>事务的隔离级别</p>
+<h4 id="2-isolation">2. <code>isolation</code></h4>
+<p>事务的隔离级别</p>
 <ul>
 <li><code>Isolation.DEFAULT</code> : 使用底层数据库默认的隔离级别。</li>
 <li><code>Isolation.READ_UNCOMMITTED</code></li>
@@ -198,55 +232,67 @@
 <li><code>Isolation.REPEATABLE_READ</code></li>
 <li><code>Isolation.SERIALIZABLE</code></li>
 </ul>
-<h4 id="3-timeout"><a href="#3-timeout" class="headerlink" title="3. timeout"></a>3. <code>timeout</code></h4><p>事务的超时时间，默认值为 -1。如果超过该时间限制但事务还没有完成，则自动回滚事务</p>
-<h4 id="4-readOnly"><a href="#4-readOnly" class="headerlink" title="4. readOnly"></a>4. <code>readOnly</code></h4><p>指定事务是否为只读事务，默认值为 false；为了忽略那些不需要事务的方法，比如读取数据，可以设置 read-only 为 true</p>
-<h4 id="5-rollbackFor"><a href="#5-rollbackFor" class="headerlink" title="5. rollbackFor"></a>5. <code>rollbackFor</code></h4><p>用于指定能够触发事务回滚的异常类型，可以指定多个异常类型</p>
-<h4 id="4-noRollbackFor"><a href="#4-noRollbackFor" class="headerlink" title="4. noRollbackFor"></a>4. <code>noRollbackFor</code></h4><p>抛出指定的异常类型，不回滚事务，可以指定多个异常类型</p>
-<h3 id="2-失效"><a href="#2-失效" class="headerlink" title="2. 失效"></a>2. 失效</h3><ol>
+<h4 id="3-timeout">3. <code>timeout</code></h4>
+<p>事务的超时时间，默认值为 -1。如果超过该时间限制但事务还没有完成，则自动回滚事务</p>
+<h4 id="4-readonly">4. <code>readOnly</code></h4>
+<p>指定事务是否为只读事务，默认值为 false；为了忽略那些不需要事务的方法，比如读取数据，可以设置 read-only 为 true</p>
+<h4 id="5-rollbackfor">5. <code>rollbackFor</code></h4>
+<p>用于指定能够触发事务回滚的异常类型，可以指定多个异常类型</p>
+<h4 id="4-norollbackfor">4. <code>noRollbackFor</code></h4>
+<p>抛出指定的异常类型，不回滚事务，可以指定多个异常类型</p>
+<h3 id="2-失效">2. 失效</h3>
+<ol>
 <li>事务支持: 数据库不支持时</li>
 <li>spring 框架: 类不被 spring 管理、方法非 public、数据源没有配置事务管理器</li>
 <li>填写错误: 属性设置错误、异常被捕捉</li>
 </ol>
-<h2 id="11-Spring-Cache-相关"><a href="#11-Spring-Cache-相关" class="headerlink" title="11. Spring Cache 相关"></a>11. Spring Cache 相关</h2><p>开启缓存注解 <code>@EnableCaching</code>，只有使用 public 定义的方法才可以被缓存，当在一个类上使用注解时，该类中每个公共方法的返回值都将被缓存到指定的缓存项中或者从中移除</p>
-<h3 id="1-Cacheable"><a href="#1-Cacheable" class="headerlink" title="1. @Cacheable"></a>1. <code>@Cacheable</code></h3><p>指定了被注解方法的返回值是可被缓存的。缓存名必要，可以使用引号、Value 或者 cacheNames 属性来定义名称</p>
+<h2 id="11-spring-cache-相关">11. Spring Cache 相关</h2>
+<p>开启缓存注解 <code>@EnableCaching</code>，只有使用 public 定义的方法才可以被缓存，当在一个类上使用注解时，该类中每个公共方法的返回值都将被缓存到指定的缓存项中或者从中移除</p>
+<h3 id="1-cacheable">1. <code>@Cacheable</code></h3>
+<p>指定了被注解方法的返回值是可被缓存的。缓存名必要，可以使用引号、Value 或者 cacheNames 属性来定义名称</p>
 <p>属性</p>
 <ul>
 <li><code>cacheNames/value</code> : 指定缓存的名字，缓存使用 CacheManager 管理多个缓存 Cache，其根据该属性进行区分。对缓存的真正增删改查操作在 Cache 中定义，每个缓存 Cache 都有自己唯一的名字</li>
 <li><code>key</code> : 缓存数据时的 key 的值，默认是使用方法所有入参的值，可以使用 SpEL 表达式表示</li>
-<li><code>keyGenerator</code> : 缓存键生成器，和 key 二选一，在默认情况下，缓存抽象使用（方法签名及参数值）作为一个键值，并将该键与方法调用的结果组成键&#x2F;值对，可以通过实现 <code>org.springframework.cache.interceptor.KeyGenerator</code> 接口来定义自己实际需要的键生成器</li>
+<li><code>keyGenerator</code> : 缓存键生成器，和 key 二选一，在默认情况下，缓存抽象使用（方法签名及参数值）作为一个键值，并将该键与方法调用的结果组成键/值对，可以通过实现 <code>org.springframework.cache.interceptor.KeyGenerator</code> 接口来定义自己实际需要的键生成器</li>
 <li><code>cacheManager</code> : 指定缓存管理器(例如ConcurrentHashMap、Redis等)</li>
 <li><code>cacheResolver</code> : 和 cacheManager 作用一样，使用时二选一</li>
 <li><code>condition</code> : 指定缓存的条件，满足条件时才缓存，可用 SpEL 表达式，例如：方法入参为对象 user 则表达式可以写为 <code>condition = &quot;#user.age&gt;18&quot;</code>，表示当入参对象user的属性age大于18才进行缓存</li>
 <li><code>unless</code> : 否定缓存的条件，即满足指定的条件时，对调用方法获取的结果不进行缓存，例如：<code>unless = &quot;result==null&quot;</code>，表示如果结果为null时不缓存</li>
 <li><code>sync</code> : 是否使用异步模式进行缓存，默认false</li>
 </ul>
-<h3 id="2-CachePut"><a href="#2-CachePut" class="headerlink" title="2. @CachePut"></a>2. <code>@CachePut</code></h3><p>与 <code>@Cacheable</code> 注解属性相比少了 <code>sync</code> 属性，其他用法基本相同。如果一个方法使用了 <code>@Cacheable</code> 注解，当重复（n&gt;1）调用该方法时，由于缓存机制，并未再次执行方法体，其结果直接从缓存中找到并返回，即获取还的是第一次方法执行后放进缓存中的结果。</p>
+<h3 id="2-cacheput">2. <code>@CachePut</code></h3>
+<p>与 <code>@Cacheable</code> 注解属性相比少了 <code>sync</code> 属性，其他用法基本相同。如果一个方法使用了 <code>@Cacheable</code> 注解，当重复（n&gt;1）调用该方法时，由于缓存机制，并未再次执行方法体，其结果直接从缓存中找到并返回，即获取还的是第一次方法执行后放进缓存中的结果。</p>
 <p>但实际业务并不总是如此，有些情况下要求方法一定会被调用，例如数据库数据的更新，系统日志的记录，确保缓存对象属性的实时性等。<code>@CachePut</code> 注解就确保方法调用即执行，执行后更新缓存。</p>
-<h3 id="3-CacheEvict"><a href="#3-CacheEvict" class="headerlink" title="3. @CacheEvict"></a>3. <code>@CacheEvict</code></h3><p>是 <code>@Cachable</code> 注解的反向操作，它负责从给定的缓存中移除一个值。大多数缓存框架都提供了缓存数据的有效期，使用该注解可以显式地从缓存中删除失效的缓存数据。该注解通常用于更新或者删除用户的操作。</p>
+<h3 id="3-cacheevict">3. <code>@CacheEvict</code></h3>
+<p>是 <code>@Cachable</code> 注解的反向操作，它负责从给定的缓存中移除一个值。大多数缓存框架都提供了缓存数据的有效期，使用该注解可以显式地从缓存中删除失效的缓存数据。该注解通常用于更新或者删除用户的操作。</p>
 <p>属性</p>
 <ul>
 <li><code>cacheNames/value</code>,<code>key</code>,<code>keyGenerator</code>,<code>cacheManager</code>,<code>cacheResolver</code>,<code>condition</code> 同上</li>
 <li><code>allEntries</code> : 布尔类型的，用来表示是否需要清除缓存中的所有元素。默认值为 false ，表示不需要。当指定为 true 时，Spring 将忽略指定的 key，清除缓存中的所有内容。</li>
 <li><code>beforeInvocation</code> : 清除操作默认是在对应方法执行成功后触发的(<code>beforeInvocation = false</code>)，即方法如果因为抛出异常而未能成功返回时则不会触发清除操作。使用该属性可以改变触发清除操作的时间。当指定该属性值为 true 时，Spring 会在调用该方法之前清除缓存中的指定元素</li>
 </ul>
-<h3 id="4-Caching"><a href="#4-Caching" class="headerlink" title="4. @Caching"></a>4. <code>@Caching</code></h3><p>是一个组注解，可以为一个方法定义提供基于 <code>@Cacheable</code>,<code>@CacheEvict</code>,<code>@CachePut</code> 注解的数组</p>
+<h3 id="4-caching">4. <code>@Caching</code></h3>
+<p>是一个组注解，可以为一个方法定义提供基于 <code>@Cacheable</code>,<code>@CacheEvict</code>,<code>@CachePut</code> 注解的数组</p>
 <p>属性</p>
 <ul>
 <li><code>cacheable</code> : 取值为基于 <code>@Cacheable</code> 注解的数组，定义对方法返回结果进行缓存的多个缓存</li>
 <li><code>put</code> : 取值为基于 <code>@CachePut</code> 注解的数组，定义执行方法后，对返回方的方法结果进行更新的多个缓存</li>
 <li><code>evict</code> : 取值为基于 <code>@CacheEvict</code> 注解的数组。定义多个移除缓存</li>
 </ul>
-<h3 id="5-CacheConfig"><a href="#5-CacheConfig" class="headerlink" title="5. @CacheConfig"></a>5. <code>@CacheConfig</code></h3><p>前面的注解都是基于方法的，如果在同一个类中需要缓存的方法注解属性都相似，则需要重复增加。Spring 4.0之后增加了 <code>@CacheConfig</code> 类级别的注解来解决这个问题</p>
+<h3 id="5-cacheconfig">5. <code>@CacheConfig</code></h3>
+<p>前面的注解都是基于方法的，如果在同一个类中需要缓存的方法注解属性都相似，则需要重复增加。Spring 4.0之后增加了 <code>@CacheConfig</code> 类级别的注解来解决这个问题</p>
 <p>属性</p>
 <ul>
 <li><code>cacheNames/value</code>,<code>key</code>,<code>keyGenerator</code>,<code>cacheManager</code>,<code>cacheResolver</code> 同上</li>
 </ul>
-<h2 id="12-PreDestroy"><a href="#12-PreDestroy" class="headerlink" title="12. @PreDestroy"></a>12. <code>@PreDestroy</code></h2><p>被 <code>@PreDestroy</code> 注解标注的方法会在服务器卸载 Servlet 时运行，并且只会被服务器调用一次，会在 Servlet 的 destroy() 之后，被彻底卸载之前执行</p>
+<h2 id="12-predestroy">12. <code>@PreDestroy</code></h2>
+<p>被 <code>@PreDestroy</code> 注解标注的方法会在服务器卸载 Servlet 时运行，并且只会被服务器调用一次，会在 Servlet 的 destroy() 之后，被彻底卸载之前执行</p>
 
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://gletthereblight.github.io/2020/09/02/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/1.SpringBoot%E6%B3%A8%E8%A7%A3/" data-id="clnh06zmz009m5wjw4ytg3qkz" data-title="Spring Boot 注解" class="article-share-link"><span class="fa fa-share">分享</span></a> -->
+      <!-- <a data-url="https://gletthereblight.github.io/2023/08/07/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/Spring/1.SpringBoot%E6%B3%A8%E8%A7%A3/" data-id="clnh06zmz009m5wjw4ytg3qkz" data-title="Spring Boot 注解" class="article-share-link"><span class="fa fa-share">分享</span></a> -->
       
       
       
@@ -258,19 +304,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/09/03/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%83%A8%E4%BB%B6/Flink/%E5%9F%BA%E7%A1%80/5.Flink%20watermark/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2023/08/07/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E5%9B%BE%E8%A7%A3/%E5%9B%BE%E8%A7%A3JVM/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前一篇</strong>
       <div class="article-nav-title">
         
-          Flink 基础-watermark(第五章)
+          图解-Java JVM
         
       </div>
     </a>
   
   
-    <a href="/2020/08/27/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/Guava/Preconditions/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2023/08/03/%E7%9F%A5%E8%AF%86%E7%82%B9/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E4%B8%8E%E7%BD%91%E7%BB%9C/0.%E9%9B%B6%E7%A2%8E/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">Java 第三方包-Guava Preconditions</div>
+      <div class="article-nav-title">计算机基础与网络-杂记</div>
     </a>
   
 </nav>
