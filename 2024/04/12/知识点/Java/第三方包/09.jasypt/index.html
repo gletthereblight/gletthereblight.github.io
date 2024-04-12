@@ -14,7 +14,7 @@
 <meta property="og:description" content="Jasypt 用来提供基本的加解密功能">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-12T00:43:00.000Z">
-<meta property="article:modified_time" content="2024-04-12T01:35:16.035Z">
+<meta property="article:modified_time" content="2024-04-12T01:39:42.078Z">
 <meta property="article:author" content="Gao Peng">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="第三方包">
@@ -141,6 +141,8 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">jasypt.spring.boot.version</span>&gt;</span>3.0.4<span class="tag">&lt;/<span class="name">jasypt.spring.boot.version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.ulisesbocchio<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jasypt-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;jasypt.spring.boot.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>配置项：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jasypt.encryptor.password=salt</span><br><span class="line">jasypt.encryptor.algorithm=PBEWithMD5AndDES</span><br><span class="line">jasypt.encryptor.iv-generator-classname=org.jasypt.iv.NoIvGenerator</span><br></pre></td></tr></table></figure>
+<p>使用时，在配置文件中，将明文使用上述方式加密后，将密文替换明文，并用 <code>ENC</code> 包裹：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datasource.password=ENC(Kh4BPjpQIt00Af/s+1Fx8w==)</span><br></pre></td></tr></table></figure>
 
       
     </div>
