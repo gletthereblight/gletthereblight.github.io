@@ -13,14 +13,12 @@
 <meta property="og:site_name" content="Glett的码字间">
 <meta property="og:description" content="JWT 的原理和使用">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gletthereblight.github.io/images/others/1.webp">
 <meta property="article:published_time" content="2020-05-25T09:28:00.000Z">
-<meta property="article:modified_time" content="2021-12-15T03:35:00.000Z">
+<meta property="article:modified_time" content="2024-04-18T08:27:36.278Z">
 <meta property="article:author" content="Gao Peng">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="术语">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gletthereblight.github.io/images/others/1.webp">
   
     <link rel="alternate" href="/atom.xml" title="Glett的码字间" type="application/atom+xml">
   
@@ -109,40 +107,84 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="API-验证"><a href="#API-验证" class="headerlink" title="API 验证"></a>API 验证</h2><p><strong>某些 API 资源需要限制访问</strong> 。例如，我们不希望一个用户能够更改另一个用户的密码。保护HTTP API的困难在于请求是 <strong>无状态</strong> 的——API 无法知道是否有两个请求来自同一用户。</p>
-<h3 id="JSON-Web-Token"><a href="#JSON-Web-Token" class="headerlink" title="JSON Web Token"></a>JSON Web Token</h3><h4 id="Token-的结构"><a href="#Token-的结构" class="headerlink" title="Token 的结构"></a>Token 的结构</h4><p>例如：</p>
-<blockquote>
-<p>Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U</p>
-</blockquote>
-<p><code>Token</code>是由三个不同的字符串组成，以句点分隔。这三个部分是 <code>Base64</code> 编码后的内容，并且分别对应 <code>Header</code> , <code>Payload</code> 以及 <code>Signature</code></br></p>
-<h5 id="1-1-Header"><a href="#1-1-Header" class="headerlink" title="1.1. Header"></a>1.1. Header</h5><p><code>Header</code> 是 <code>Token</code> 的元信息，头部承载两部分信息：</p>
+        <h2 id="1-产生原因">1. 产生原因</h2>
+<p>为了限制 HTTP API 资源访问，如一个用户更改另一个用户的密码，而保护 API 的困难在于请求是无状态的，通过 API 本身是无法知道有两个请求是否来自同一用户。</p>
+<h2 id="2-jwt">2. JWT</h2>
+<p><code>JWT(Json Web Token)</code> 是一种用于在网络应用之间安全地传输信息的开放标准。它通过将用户信息以 JSON 格式加密并封装在一个 token 中，然后将该 token 发送给服务端进行验证，从而实现身份验证和授权。</br></p>
+<p><code>JWT</code> 特别适用于分布式站点的单点登录（SSO）场景，它本质上是一种令牌格式，与终端设备、服务器、传输类型都无关，它只规范了令牌的格式而已。</p>
+<h2 id="3-加密解密流程">3. 加密解密流程</h2>
+<ol>
+<li>生成：客户端登录成功后，服务器使用用户的信息（如用户ID、用户名等）以及服务器端的密钥，通过特定的加密算法生成 <code>JWT</code></li>
+<li>发送：客户端请求时携带 <code>JWT</code> 发送给服务器，通常是通过 HTTP 请求的头部 <code>Authorization</code> 字段发送。</li>
+<li>服务器验证：服务器收到 <code>JWT</code> 后，校验格式并解析出头部和载荷部分，再使用存储在服务器端的密钥和相同的加密算法，对头部和载荷进行签名验证来确认请求的合法性</li>
+<li>响应处理：当 <code>JWT</code> 验证成功后，服务器才正式响应请求</li>
+</ol>
+<h2 id="4-认证区别">4. 认证区别</h2>
 <ul>
-<li>声明类型，这里是<code>jwt</code></li>
-<li>声明加密的算法 通常直接使用 <code>HMAC SHA256</code></li>
+<li>传统 Token ：登录成功后，服务端生成一个随机 Token 并分配给用户，同时在服务端（如数据库或缓存）保存一份记录，用户在后续的请求中需携带它，服务端会进行验证</li>
+<li><code>JWT</code>：登录成功后，服务端使用 <code>JWT</code> 生成一个随机 Token 并分配给用户，但不存储它，用户在后续的请求中需携带它，服务端通过 <code>JWT</code> 进行验证</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 定义 Header</span><br><span class="line">&#123;</span><br><span class="line">  &#x27;typ&#x27;: &#x27;JWT&#x27;,</span><br><span class="line">  &#x27;alg&#x27;: &#x27;HS256&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="1-2-Payload"><a href="#1-2-Payload" class="headerlink" title="1.2. Payload"></a>1.2. Payload</h5><p><code>Payload</code> 存放有效信息，其可以包含任何数据，这些数据可以包含三个部分</p>
+<h2 id="5-组成">5. 组成</h2>
+<p><code>JWT</code> 包含三个部分：头部(<code>Header</code>)、载荷(<code>Payload</code>)、签名(<code>Signature</code>)，以句点分隔，分别使用 <code>Base64url</code> 编码。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://jwt.io/#debugger-io">jwt.io</a> 可用于在线测试</p>
+</blockquote>
+<h3 id="1-header">1. Header</h3>
+<p><code>Header</code> 是 <code>Token</code> 的元信息，头部承载两部分信息，由 json 格式经 <code>Base64url</code>（对 <code>Base64</code> 编码后的字符串，用 <code>-</code> 替代 <code>+</code>，用 <code>_</code> 替代<code>/</code>） 编码得到。</p>
+<ul>
+<li>声明令牌类型 <code>typ</code>: 这里是 <code>JWT</code></li>
+<li>声明加密的算法 <code>alg</code>: 通常直接使用 <code>HMAC SHA256</code></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">定义 Header</span></span><br><span class="line">&#123;</span><br><span class="line">  &quot;typ&quot;: &quot;JWT&quot;,</span><br><span class="line">  &quot;alg&quot;: &quot;HS256&quot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编码得到</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-payload">2. Payload</h3>
+<p><code>Payload</code> 存放有效信息，如用户ID、用户名等，也可以包含其他自定义信息，载荷的内容是经过<code>Base64url</code> 编码，能够被解码。它可以包含三个部分</p>
 <ul>
 <li>标准中注册的声明</li>
 <li>公共的声明</li>
 <li>私有的声明</li>
 </ul>
-<h6 id="1-2-1-标准中注册的声明-建议但不强制使用"><a href="#1-2-1-标准中注册的声明-建议但不强制使用" class="headerlink" title="1.2.1. 标准中注册的声明 (建议但不强制使用)"></a>1.2.1. 标准中注册的声明 (建议但不强制使用)</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">iss: jwt签发者</span><br><span class="line">sub: jwt所面向的用户</span><br><span class="line">aud: 接收jwt的一方</span><br><span class="line">exp: jwt的过期时间，这个过期时间必须要大于签发时间</span><br><span class="line">nbf: 定义在什么时间之前，该jwt都是不可用的.</span><br><span class="line">iat: jwt的签发时间</span><br><span class="line">jti: jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击。</span><br></pre></td></tr></table></figure>
-
-<h6 id="1-2-2-公共的声明"><a href="#1-2-2-公共的声明" class="headerlink" title="1.2.2. 公共的声明"></a>1.2.2. 公共的声明</h6><p>公共的声明可以添加任何的信息，一般添加用户的相关信息或其他业务需要的必要信息.但不建议添加敏感信息，因为该部分在客户端可解密.</p>
-<h6 id="1-2-3-私有的声明"><a href="#1-2-3-私有的声明" class="headerlink" title="1.2.3. 私有的声明"></a>1.2.3. 私有的声明</h6><p>私有声明是提供者和消费者所共同定义的声明，一般不建议存放敏感信息，因为<code>base64</code>是对称解密的，意味着该部分信息可以归类为明文信息。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 定义payload</span><br><span class="line">&#123;</span><br><span class="line">  &quot;sub&quot;: &quot;1234567890&quot;,</span><br><span class="line">  &quot;name&quot;: &quot;John Doe&quot;,</span><br><span class="line">  &quot;admin&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="1-3-Signature"><a href="#1-3-Signature" class="headerlink" title="1.3. Signature"></a>1.3. Signature</h5><p>签证信息，这个签证信息由三部分组成</p>
+<h4 id="1-标准中注册的声明-建议但不强制使用">1. 标准中注册的声明 (建议但不强制使用)</h4>
 <ul>
-<li>header (base64后的)</li>
-<li>payload (base64后的)</li>
-<li>secret</li>
+<li><code>iss</code>: JWT 签发者</li>
+<li><code>sub</code>: JWT 所面向的用户</li>
+<li><code>aud</code>: 接收 JWT 的一方</li>
+<li><code>exp</code>: JWT 的过期时间，这个过期时间必须要大于签发时间</li>
+<li><code>nbf</code>: 定义在什么时间之前，该 JWT 都是不可用的.</li>
+<li><code>iat</code>: JWT 的签发时间</li>
+<li><code>jti</code>: JWT 的唯一身份标识，主要用来作为一次性 Token，从而回避重放攻击。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># <span class="title class_">Header</span> + <span class="title class_">Payload</span>，确保了签名对于此特定令牌是唯一的</span><br><span class="line"><span class="keyword">var</span> encodedString = <span class="title function_">base64UrlEncode</span>(header) + <span class="string">&#x27;.&#x27;</span> + <span class="title function_">base64UrlEncode</span>(payload);</span><br><span class="line"></span><br><span class="line"># secret 保存在认证服务器端，防止客户端伪造令牌，三者再进行哈希计算</span><br><span class="line"><span class="keyword">var</span> signature = <span class="title class_">HMACSHA256</span>(encodedString, <span class="string">&#x27;secret&#x27;</span>); </span><br></pre></td></tr></table></figure>
-
-<h2 id="验证流程"><a href="#验证流程" class="headerlink" title="验证流程"></a>验证流程</h2><p><img src="/../../../../images/others/1.webp" alt="image"></p>
+<h4 id="2-公共的声明">2. 公共的声明</h4>
+<p>公共的声明可以添加任何的信息，一般添加用户的相关信息或其他业务需要的必要信息。其可在客户端解密，不建议添加敏感信息。</p>
+<h4 id="3-私有的声明">3. 私有的声明</h4>
+<p>私有声明是提供者和消费者所共同定义的声明。其可在客户端解密，不建议添加敏感信息。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">定义 Payload</span></span><br><span class="line">&#123;</span><br><span class="line">  &quot;id&quot;: 1001,</span><br><span class="line">  &quot;name&quot;: &quot;gaop&quot;,</span><br><span class="line">  &quot;phone&quot;: 123456789,</span><br><span class="line">  &quot;address&quot;: &quot;zh-cn&quot; </span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编码得到</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">eyJpZCI6MTAwMSwibmFtZSI6Imdhb3AiLCJwaG9uZSI6MTIzNDU2Nzg5LCJhZGRyZXNzIjoiemgtY24ifQ</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-signature">3. Signature</h3>
+<p>用于验证 Token 的合法性，签名是由三部分并结合特定的加密算法生成：</p>
+<ul>
+<li><code>Header</code>: <code>Base64url</code> 后的头部</li>
+<li><code>Payload</code>: <code>Base64url</code> 后的载荷</li>
+<li><code>Secret</code>: 密钥</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Header + Payload，确保了签名对于此特定令牌是唯一的</span></span><br><span class="line"><span class="comment">// Secret 保存在认证服务器端，防止客户端伪造令牌，三者再进行哈希计算</span></span><br><span class="line"><span class="title class_">HMACSHA256</span>(<span class="title function_">base64UrlEncode</span>(header) + <span class="string">&quot;.&quot;</span> + <span class="title function_">base64UrlEncode</span>(payload), gaop)</span><br><span class="line"><span class="comment">// 编码得到</span></span><br><span class="line"><span class="comment">// jrgCJ4Nhybc6DxO9leQZOhQuYkMSIOEvWcsIffTtfUk</span></span><br></pre></td></tr></table></figure>
+<h2 id="6-攻击方式">6. 攻击方式</h2>
+<h3 id="1-修改加密算法伪造-token">1. 修改加密算法伪造 Token</h3>
+<p><code>JWT</code> 中最常用的两种算法为 HMAC 和 RSA，若某程序在 <code>JWT</code> 传输过程中使用 RSA 算法，同时使用密钥 private_src 对 <code>JWT</code> 进行签名，公钥 public_abc 对签名进行验证。获取公钥后，将 <code>JWT</code> 的加密算法修改为 HMAC，同时使用获取到的公钥作为算法的密钥，对 token 进行签名，发送到服务器端，服务器端会将 RSA 的公钥视为当前算法（HMAC）的密钥，而 HMAC 是对称加密算法，故服务器使用密钥 abc 对接收到的签名进行验证，从而造成 token 伪造问题。</p>
+<h3 id="2-none-算法攻击绕过验证">2. None 算法攻击绕过验证</h3>
+<p>在 Header 中指定 alg 为 None，同时不添加 Signature，服务器在验证JWT时会认为这个JWT是不需要签名的，从而跳过了对签名的验证，直接信任 <code>JWT</code> 中的信息，实现伪造身份绕过服务器验证。</p>
+<h3 id="3-kid-参数">3. kid 参数</h3>
+<p><code>kid</code> 是 <code>JWT</code> 头部中的一个可选参数，全称为 Key ID，它用于指定加密算法所使用的密钥。这可能导致以下问题：</p>
+<ul>
+<li>任意文件读取：系统并不会验证 <code>kid</code> 参数路径指向的文件是否是有效的密钥文件。因此，在没有对参数进行过滤或验证的情况下，可造成任意文件读取</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;alg&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;HS256&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;typ&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;jwt&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;kid&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;../../etc/passwd&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>SQL 注入：<code>kid</code> 参数也可能从数据库中提取数据，故存在 SQL 注入攻击的风险</li>
+</ul>
+ <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;alg&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;HS256&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;typ&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;jwt&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;kid&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;user1&#x27; || union select &#x27;users&#x27; -- &quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>命令注入：若服务器后端使用的是 Ruby，在读取密钥文件时使用了 open 函数，通过构造参数可能实现命令注入</li>
+</ul>
+ <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;alg&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;HS256&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;typ&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;jwt&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;kid&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;/path/to/key_file|whoami&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -203,6 +245,10 @@
       <ul>
         
           <li>
+            <a href="/2020/05/25/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/8.JWT/">JWT</a>
+          </li>
+        
+          <li>
             <a href="/2024/04/12/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/09.jasypt/">Java 第三方包-Jasypt</a>
           </li>
         
@@ -216,10 +262,6 @@
         
           <li>
             <a href="/2024/03/27/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%85%B6%E4%BB%96/%E9%9A%8F%E6%89%8B%E8%AE%B0/">随手记（持续更新）</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/21/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/04.Jackson/">Java 第三方包-Jackson</a>
           </li>
         
       </ul>
