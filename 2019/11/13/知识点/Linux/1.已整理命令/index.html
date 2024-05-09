@@ -14,7 +14,7 @@
 <meta property="og:description" content="Linux 常使用命令整理">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-11-13T02:18:00.000Z">
-<meta property="article:modified_time" content="2024-05-08T03:52:31.355Z">
+<meta property="article:modified_time" content="2024-05-09T04:24:37.528Z">
 <meta property="article:author" content="Gao Peng">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="杂记">
@@ -675,9 +675,12 @@ JDK9 之后就没有了 <code>dt.jar</code> 和 <code>tools.jar</code>，不用�
 </ul>
 <h2 id="2-firewalld">2. <code>firewalld</code></h2>
 <ul>
+<li>启动防火墙：<code>systemctl start firewalld</code></li>
+<li>关闭防火墙：<code>systemctl stop firewalld</code></li>
+<li>查看防火墙状态：<code>systemctl status firewalld</code></li>
 <li>查看所有区域及其默认策略：<code>sudo firewall-cmd --list-all-zones</code></li>
 <li>查看特定服务或端口是否开放：<code>sudo firewall-cmd --query-service=SERVICE_NAME 或 sudo firewall-cmd --query-port=PORT/tcp</code></li>
-<li>开放端口：<code>sudo firewall-cmd --permanent --add-port=PORT/tcp</code></li>
+<li>开放端口：<code>sudo firewall-cmd --zone=public --permanent --add-port=PORT/tcp</code></li>
 <li>关闭端口：首先使用上述命令打开端口，然后用 <code>--remove-port</code> 替换 <code>--add-port</code> 来关闭</li>
 <li>重载配置：每次修改规则后，需使用 <code>sudo firewall-cmd --reload</code> 使更改生效</li>
 <li>添加服务：<code>sudo firewall-cmd --permanent --add-service=SERVICE_NAME</code></li>
