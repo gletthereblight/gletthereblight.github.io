@@ -14,7 +14,7 @@
 <meta property="og:description" content="双亲委派机制概念和实现">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-01-11T13:32:00.000Z">
-<meta property="article:modified_time" content="2023-08-03T09:32:00.000Z">
+<meta property="article:modified_time" content="2024-08-27T08:24:35.578Z">
 <meta property="article:author" content="Gao Peng">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="术语">
@@ -107,81 +107,113 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="1-什么是双亲委派机制"><a href="#1-什么是双亲委派机制" class="headerlink" title="1. 什么是双亲委派机制"></a>1. 什么是双亲委派机制</h2><p>Java语言系统中支持以下4种类加载器，从顶到底(父子级关系)分别是：</p>
+        <h2 id="1-双亲委派机制">1. 双亲委派机制</h2>
+<h3 id="1-什么是类加载器">1. 什么是类加载器</h3>
+<p>类加载器（Class loaders）， 是 JRE 的一部分，负责在 JVM 程序运行时，动态加载 Java 类到 JVM 内存中，通过类加载器，JVM 在运行 JAVA 程序时，不需要知道底层的文件系统和文件，即类加载器解耦了 JVM 和操作系统底层的文件系统。之所以说类是 “动态” 加载的，主要是因为运行程序时需要的所有的 Java 类，并不是一次性全部加载到 JVM 内存中，而是在需要哪个类时才加载那个类。</p>
+<h3 id="2-有哪些类加载器">2. 有哪些类加载器</h3>
+<p>Java 语言系统中支持以下 4 种类加载器，从顶到底(父子级关系)分别是：</p>
+<h4 id="1-bootstrap-classloader">1. <code>Bootstrap ClassLoader</code></h4>
 <ul>
-<li><code>Bootstrap ClassLoader</code>：启动类加载器</li>
-<li><code>Extention ClassLoader</code>：标准扩展类加载器</li>
-<li><code>Application ClassLoader</code>：应用类加载器</li>
-<li><code>User ClassLoader</code>：用户自定义类加载器</li>
+<li>启动类加载器，是 JVM 核心的一部分，主要负责加载 Java 核心类库，位于 <code>%JRE_HOME%\lib</code> 下的<code>rt.jar</code>、<code>resources.jar</code>、<code>charsets.jar</code> 等</li>
+<li>它是所有其它类加载器的父类，不是普通类继承关系层面上的父类</li>
+<li>它是使用 native 代码编写的，所以在不同的平台上（如windows,linus,macos），有不同的实现，也因此打印时会显示为 null</li>
 </ul>
-<p>所谓的双亲委派机制，指的就是：</p>
-<blockquote>
-<p>当一个类加载器收到了类加载的请求的时候，他不会直接去加载指定的类，而是把这个请求委托给自己的父加载器去加载。只有父加载器无法加载这个类的时候，才会由当前这个加载器来负责类的加载。</p>
-</blockquote>
-<p>什么情况下父加载器会无法加载某一个类呢？</br></p>
-<p>其实，Java中提供的这四种类型的加载器，是有各自的职责的：</p>
+<h4 id="2-extention-classloader">2. <code>Extention ClassLoader</code></h4>
 <ul>
-<li><code>Bootstrap ClassLoader</code> 主要负责加载 Java 核心类库，<code>%JRE_HOME%\lib</code> 下的<code>rt.jar</code>、<code>resources.jar</code>、<code>charsets.jar</code> 和 class 等</li>
-<li><code>Extention ClassLoader</code> 主要负责加载目录 <code>%JRE_HOME%\lib\ext</code> 目录下的 jar 包和 class 文件</li>
-<li><code>Application ClassLoader</code> 主要负责加载当前应用的 classpath 下的所有类</li>
-<li><code>User ClassLoader</code> 用户自定义的类加载器,可加载指定路径的 class 文件</li>
+<li>标准扩展类加载器，主要负责加载 JDK 的扩展类，位于 <code>%JRE_HOME%\lib\ext</code> 目录下的 jar 包和 class 文件，或系统变量 <code>java.ext.dirs</code> 指定的其它目录</li>
+<li>它是 <code>Bootstrap ClassLoader</code> 的子类，一般显示为 <code>sun.misc.Launcher$ExtClassLoader@XXXXX</code></li>
 </ul>
-<p>即一个用户自定义的类，如 com.glett.ClassUserDef 是无论如何也不会被 Bootstrap 和 Extention 加载器加载的。</p>
-<h2 id="2-为什么需要双亲委派"><a href="#2-为什么需要双亲委派" class="headerlink" title="2. 为什么需要双亲委派"></a>2. 为什么需要双亲委派</h2><p>因为类加载器之间有严格的层次关系，那么得 Java 类也随之具备了层次关系，即优先级。</p>
+<h4 id="3-application-classloader">3. <code>Application ClassLoader</code></h4>
+<ul>
+<li>应用类加载器，主要负责加载当前应用的环境变量 classpath 下的所有类，可以通过命令行参数 <code>-classpath</code> 或<code>-cp</code> 指定环境变量 classpath</li>
+<li>它是 <code>Extention ClassLoader</code> 的子类，一般显示为 <code>sun.misc.Launcher$AppClassLoader@XXXXX</code></li>
+</ul>
+<h4 id="4-user-classloader">4. <code>User ClassLoader</code></h4>
+<p>用户自定义类加载器</p>
+<h3 id="3-什么是双亲委派机制">3. 什么是双亲委派机制</h3>
+<ul>
+<li>双亲，更严谨来讲，其实是多级单亲，所有的类加载器，除 <code>Bootstrap ClassLoader</code>，都有一个唯一的父加载器，而所说的父子关系，不是普通类层面上的父子继承关系 （extends），而更像是一种有层次之分的组合关系</li>
+<li>当类加载器收到一个类或资源的加载请求后，会首先搜索是否已被加载到内存中，如果没有，它会把这个请求委托给自己的父加载器去加载</li>
+<li>父级加载器一样遵循向上委派机制，将加载请求委派给其父级加载器去加载，通过这种向上传导关系，所有的类加载请求，最终都会被传入到启动类加载器 <code>Bootstrap ClassLoader</code> 中</li>
+<li>当当父级加载器反馈无法完成特定类或资源的加载请求时，即父级加载器在它的搜索范围内找不到该类或资源时，子级加载器才尝试在自己的搜索范围内加载类或资源</li>
+<li>如果所有父子加载器在自己的搜索范围内都找不到该类或资源，JVM 就会报 <code>java.lang.ClassNotFoundException</code></li>
+</ul>
+<h3 id="4-双亲委派的优点">4. 双亲委派的优点</h3>
+<p>通过以上双亲委派模型，JVM 确保了类的行为：</p>
+<ul>
+<li>唯一性（Unique）：只有在父类加载器在其搜索范围内找不到类，无法加载类时，子类加载器才会尝试自己加载，这样就避免了重复加载，确保了类的唯一性</li>
+<li>可见性（Visibility）：父类加载器加载的类对子类加载器可见（即能访问），而子类加载器加载的类对父类加载器不可见</li>
+<li>安全性（Secure）：双亲委派模型实现了类的唯一性和可见性，避免了用户随意定义类加载器加载核心 API 带来的安全隐患，从而进一步确保了类的安全性；</li>
+</ul>
+<h3 id="5-双亲委派的缺点">5. 双亲委派的缺点</h3>
+<p>JVM 核心类可能需要动态加载应用开发人员提供的特定类或资源，如 JNDI 或 JDBC ，它们核心功能都是在 <code>rt.jar</code> 的核心内部类中实现的，但在程序运行时，这些类可能需要加载路径下各个具体实现类（通过命令行参数 <code>-classpath</code> 或 <code>-cp</code> 指定类加载路径的具体目录），此时就需要 <code>Bootstrap ClassLoader</code> 加载本应只对 <code>Application ClassLoader</code> 可见的类。</p>
+<p>此时，双亲委派机制就不能满足了，为此，JVM 提供了 <code>Thread ContextClassLoader</code>：</p>
+<ul>
+<li>每个线程在创建时，都有一个对应的 <code>ContextClassLoader</code>，来负责该线程中类或资源的加载</li>
+<li>当没有显示指定时，线程的 <code>ContextClassLoader</code> 跟其父线程的 <code>ContextClassLoader</code> 是同一个</li>
+<li>可以通过方法 <code>getContextClassLoader()</code> 获得当前线程的 <code>ContextClassLoader</code></li>
+<li>可以通过方法 <code>setContextClassLoader(ClassLoader cl)</code> 重置当前线程的 <code>ContextClassLoader</code></li>
+</ul>
+<h2 id="2-为什么需要双亲委派">2. 为什么需要双亲委派</h2>
+<p>因为类加载器之间有严格的层次关系，那么得 Java 类也随之具备了层次关系，即优先级。</p>
 <p>一个用户自定义的类，他会被一直委托到 <code>Bootstrap ClassLoader</code>，但是因为 <code>Bootstrap ClassLoader</code> 不负责加载该类，那么会在由 <code>Extention ClassLoader</code> 尝试加载，而 <code>Extention ClassLoader</code> 也不负责这个类的加载，最终才会被 <code>Application ClassLoader</code> 加载。</p>
 <p>这种机制有几个好处：</p>
 <ul>
 <li><strong>可以避免类的重复加载</strong>：当父加载器已经加载过某一个类时，子加载器就不会再重新加载这个类</li>
 <li><strong>保证了安全性</strong>：因为 Bootstrap ClassLoader 在加载的时候，只会加载 <code>JAVA_HOME</code> 中的 jar 包里面的类，如 <code>java.lang.Integer</code>，那么这个类是不会被随意替换的，可以有效的防止核心 Java API 被篡改，除非 JDK 被破坏</li>
 </ul>
-<h2 id="3-“父子加载器”之间的关系是继承吗"><a href="#3-“父子加载器”之间的关系是继承吗" class="headerlink" title="3. “父子加载器”之间的关系是继承吗"></a>3. “父子加载器”之间的关系是继承吗</h2><p>双亲委派模型中，类加载器之间的父子关系一般 <strong>不会以继承（Inheritance）</strong> 的关系来实现，而是 <strong>使用组合（Composition）</strong> 关系来复用父加载器的代码的。</p>
+<h2 id="3-父子加载器-之间的关系是继承吗">3. &quot;父子加载器&quot;之间的关系是继承吗</h2>
+<p>双亲委派模型中，类加载器之间的父子关系一般 <strong>不会以继承（Inheritance）</strong> 的关系来实现，而是 <strong>使用组合（Composition）</strong> 关系来复用父加载器的代码的。</p>
 <p>ClassLoader 中父加载器的定义：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">ClassLoader</span> &#123;</span><br><span class="line">    <span class="comment">// The parent class loader for delegation</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ClassLoader parent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-双亲委派是怎么实现的"><a href="#4-双亲委派是怎么实现的" class="headerlink" title="4. 双亲委派是怎么实现的"></a>4. 双亲委派是怎么实现的</h2><p>实现双亲委派的代码都集中在 <code>java.lang.ClassLoader</code> 的 <code>loadClass()</code> 方法之中，主要就是以下几个步骤：</p>
+<h2 id="4-双亲委派是怎么实现的">4. 双亲委派是怎么实现的</h2>
+<p>实现双亲委派的代码都集中在 <code>java.lang.ClassLoader</code> 的 <code>loadClass()</code> 方法之中，主要就是以下几个步骤：</p>
 <ol>
-<li>先检查类是否已经被加载过 </li>
-<li>若没有加载则调用父加载器的 <code>loadClass()</code> 方法进行加载 </li>
+<li>先检查类是否已经被加载过</li>
+<li>若没有加载则调用父加载器的 <code>loadClass()</code> 方法进行加载</li>
 <li>若父加载器为空则默认使用启动类加载器作为父加载器</li>
 <li>如果父类加载失败，抛出 <code>ClassNotFoundException</code> 异常后，再调用自己的 <code>findClass()</code> 方法进行加载。</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="type">boolean</span> resolve) <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;</span><br><span class="line">        <span class="comment">// First, check if the class has already been loaded</span></span><br><span class="line">        Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (c == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="type">long</span> <span class="variable">t0</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (parent != <span class="literal">null</span>) &#123;</span><br><span class="line">                    c = parent.loadClass(name, <span class="literal">false</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    c = findBootstrapClassOrNull(name);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                <span class="comment">// ClassNotFoundException thrown if class not found from the non-null parent class loader</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (c == <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="comment">// If still not found, then invoke findClass in order to find the class.</span></span><br><span class="line">                <span class="type">long</span> <span class="variable">t1</span> <span class="operator">=</span> System.nanoTime();</span><br><span class="line">                c = findClass(name);</span><br><span class="line">                </span><br><span class="line">                <span class="comment">// this is the defining class loader; record the stats</span></span><br><span class="line">                sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</span><br><span class="line">                sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</span><br><span class="line">                sun.misc.PerfCounter.getFindClasses().increment();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (resolve) &#123;</span><br><span class="line">            resolveClass(c);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-如何主动破坏双亲委派机制"><a href="#5-如何主动破坏双亲委派机制" class="headerlink" title="5. 如何主动破坏双亲委派机制"></a>5. 如何主动破坏双亲委派机制</h2><p>由于双亲委派过程都是在 <code>loadClass</code> 方法中实现的，那么想要破坏这种机制，那么就自定义一个类加载器，重写其中的 <code>loadClass</code> 方法，使其不进行双亲委派即可。</p>
-<h2 id="6-loadClass-、findClass-、defineClass-区别"><a href="#6-loadClass-、findClass-、defineClass-区别" class="headerlink" title="6. loadClass()、findClass()、defineClass() 区别"></a>6. loadClass()、findClass()、defineClass() 区别</h2><ul>
+<h2 id="5-如何主动破坏双亲委派机制">5. 如何主动破坏双亲委派机制</h2>
+<p>由于双亲委派过程都是在 <code>loadClass</code> 方法中实现的，那么想要破坏这种机制，那么就自定义一个类加载器，重写其中的 <code>loadClass</code> 方法，使其不进行双亲委派即可。</p>
+<h2 id="6-loadclass-findclass-defineclass-区别">6. loadClass()、findClass()、defineClass() 区别</h2>
+<ul>
 <li><code>loadClass()</code>：就是主要进行类加载的方法，默认的双亲委派机制就实现在这个方法中。</li>
 <li><code>findClass()</code>：根据名称或位置加载 .class 字节码</li>
 <li><code>definclass()</code>：把字节码转化为 Class</li>
 </ul>
 <p>我们想定义一个类加载器，但是不想破坏双亲委派模型时，可以继承 <code>ClassLoader</code> ，并且重写 <code>findClass()</code> 方法。该方法只抛出了一个异常，没有默认实现：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span>  1.2</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; findClass(String name) <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">ClassNotFoundException</span>(name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>JDK1.2 之后不再提倡用户直接覆盖 <code>loadClass()</code> 方法，而是建议把自己的类加载逻辑实现到 <code>findClass()</code> 方法中。因为在 <code>loadClass()</code> 方法的中，如果父类加载器加载失败，则会调用自己的 <code>findClass()</code> 方法来完成加载。</p>
-<h2 id="7-双亲委派被破坏的例子"><a href="#7-双亲委派被破坏的例子" class="headerlink" title="7. 双亲委派被破坏的例子"></a>7. 双亲委派被破坏的例子</h2><ol>
+<h2 id="7-双亲委派被破坏的例子">7. 双亲委派被破坏的例子</h2>
+<ol>
 <li>被破坏的情况是在双亲委派出现之前。比如在 JDK1.2 之前实现的自定义类加载器。</li>
-<li>JNDI、JDBC 等需要加载SPI接口实现类的情况。</li>
+<li>JNDI、JDBC 等需要加载 SPI 接口实现类的情况。</li>
 <li>为了实现热插拔热部署工具。为了让代码动态生效而无需重启，实现方式时把模块连同类加载器一起换掉就实现了代码的热替换。</li>
-<li>tomcat等web容器的出现。</li>
-<li>OSGI、Jigsaw等模块化技术的应用。</li>
+<li>Tomcat 等 web 容器的出现。</li>
+<li>OSGI、Jigsaw 等模块化技术的应用。</li>
 </ol>
-<h2 id="8-为什么JNDI，JDBC等需要破坏双亲委派"><a href="#8-为什么JNDI，JDBC等需要破坏双亲委派" class="headerlink" title="8. 为什么JNDI，JDBC等需要破坏双亲委派"></a>8. 为什么JNDI，JDBC等需要破坏双亲委派</h2><p>大多数时候会通过 API 的方式调用 Java 提供的那些基础类，这些基础类时被 Bootstrap 加载的。但是，还有一种 SPI 的方式，比如 JDBC 服务：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Connection</span> <span class="variable">conn</span> <span class="operator">=</span> DriverManager.getConnection(<span class="string">&quot;jdbc:mysql://localhost:3306/mysql&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;1234&quot;</span>);</span><br></pre></td></tr></table></figure>
-
+<h2 id="8-为什么-jndi-jdbc-等需要破坏双亲委派">8. 为什么 JNDI，JDBC 等需要破坏双亲委派</h2>
+<p>大多数时候会通过 API 的方式调用 Java 提供的那些基础类，这些基础类时被 Bootstrap 加载的。但是，还有一种 SPI 的方式，比如 JDBC 服务：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Connection</span> <span class="variable">conn</span> <span class="operator">=</span> DriverManager</span><br><span class="line">    .getConnection(<span class="string">&quot;jdbc:mysql://localhost:3306/mysql&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;1234&quot;</span>);</span><br></pre></td></tr></table></figure>
 <p><code>DriverManager</code> 会先被类加载器加载，因为 <code>java.sql.DriverManager</code> 类是位于 <code>rt.jar</code> 下面的 ，所以他会被根加载器加载。</p>
 <p>类加载时，会执行该类的静态方法。其中有一段关键的代码是：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ServiceLoader&lt;Driver&gt; loadedDrivers = ServiceLoader.load(Driver.class);</span><br></pre></td></tr></table></figure>
-
 <p>这段代码，会尝试加载 <code>classpath</code> 下面的所有实现了 <code>Driver</code> 接口的实现类。</p>
 <p>问题是，<code>DriverManager</code> 是被根加载器加载的，那么在加载时遇到以上代码，会尝试加载所有 <code>Driver</code> 的实现类，但是这些实现类基本都是第三方提供的，根据双亲委派原则，第三方的类不能被根加载器加载。于是，在 JDBC 中通过引入 <code>ThreadContextClassLoader</code>（线程上下文加载器，默认情况下是 <code>AppClassLoader</code>）的方式破坏了双亲委派原则。</p>
 <p>我们深入到ServiceLoader.load方法就可以看到：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;S&gt; ServiceLoader&lt;S&gt; <span class="title function_">load</span><span class="params">(Class&lt;S&gt; service)</span> &#123;</span><br><span class="line">    <span class="type">ClassLoader</span> <span class="variable">cl</span> <span class="operator">=</span> Thread.currentThread().getContextClassLoader();</span><br><span class="line">    <span class="keyword">return</span> ServiceLoader.load(service, cl);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>第一行，获取当前线程的线程上下⽂类加载器 <code>AppClassLoader</code>，⽤于加载 <code>classpath</code> 中的具体实现类。</p>
-<h2 id="9-为什么-Tomcat-要破坏双亲委派"><a href="#9-为什么-Tomcat-要破坏双亲委派" class="headerlink" title="9. 为什么 Tomcat 要破坏双亲委派"></a>9. 为什么 Tomcat 要破坏双亲委派</h2><p>一个 web 容器可能需要部署多个应用程序。不同的应用程序可能会依赖同一个第三方类库的不同版本，但是不同版本的类库中某一个类的全路径名可能是一样的。</br><br>如多个应用都要依赖 hello.jar，但是 A 应用需要依赖 1.0.0 版本，但是 B 应用需要依赖 1.0.1 版本。这两个版本中都有一个类是 com.hello.Test.class。如果采用默认的双亲委派类加载机制，那么是无法加载多个相同的类。</br><br>所以，Tomcat 破坏双亲委派原则，提供隔离的机制，为每个 web 容器单独提供一个 WebAppClassLoader 加载器。</br></p>
+<h2 id="9-为什么-tomcat-要破坏双亲委派">9. 为什么 Tomcat 要破坏双亲委派</h2>
+<p>一个 web 容器可能需要部署多个应用程序。不同的应用程序可能会依赖同一个第三方类库的不同版本，但是不同版本的类库中某一个类的全路径名可能是一样的。</br><br>
+如多个应用都要依赖 hello.jar，但是 A 应用需要依赖 1.0.0 版本，但是 B 应用需要依赖 1.0.1 版本。这两个版本中都有一个类是 com.hello.Test.class。如果采用默认的双亲委派类加载机制，那么是无法加载多个相同的类。</br><br>
+所以，Tomcat 破坏双亲委派原则，提供隔离的机制，为每个 web 容器单独提供一个 WebAppClassLoader 加载器。</br></p>
 <blockquote>
 <p>Tomcat 的类加载机制：为了实现隔离性，优先加载 Web 应用自己定义的类，所以没有遵照双亲委派的约定，每一个应用自己的类加载器—— WebAppClassLoader，负责加载本身的目录下的 class 文件，加载不到时再交给 CommonClassLoader 加载，这和双亲委派刚好相反。</p>
 </blockquote>
-<h2 id="10-模块化技术与类加载机制"><a href="#10-模块化技术与类加载机制" class="headerlink" title="10. 模块化技术与类加载机制"></a>10. 模块化技术与类加载机制</h2><p>OSGI 框架是模块化的，而之所以能够实现模块热插拔和模块内部可见性的精准控制都归结于其特殊的类加载机制，加载器之间的关系不再是双亲委派模型的树状结构，而是发展成复杂的网状结构。</p>
+<h2 id="10-模块化技术与类加载机制">10. 模块化技术与类加载机制</h2>
+<p>OSGI 框架是模块化的，而之所以能够实现模块热插拔和模块内部可见性的精准控制都归结于其特殊的类加载机制，加载器之间的关系不再是双亲委派模型的树状结构，而是发展成复杂的网状结构。</p>
 <p>在 JDK 中，双亲委派也不是绝对的了。在 JDK9 之前，JVM 的基础类以前都是在 <code>rt.jar</code> 这个包里，这个包也是 JRE 运行的基石。这不仅是违反了单一职责原则，同样程序在编译的时候会将很多无用的类也一并打包，造成臃肿。</p>
 <p>在 JDK9 中，整个 JDK 都基于模块化进行构建，以前的 <code>rt.jar</code>，<code>tool.jar</code> 被拆分成数十个模块，编译的时候只编译实际用到的模块，同时各个类加载器各司其职，只加载自己负责的模块。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; c = findLoadedClass(cn);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (c == <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="comment">// 找到当前类属于哪个模块</span></span><br><span class="line">    <span class="type">LoadedModule</span> <span class="variable">loadedModule</span> <span class="operator">=</span> findLoadedModule(cn);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (loadedModule != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">//获取当前模块的类加载器</span></span><br><span class="line">        <span class="type">BuiltinClassLoader</span> <span class="variable">loader</span> <span class="operator">=</span> loadedModule.loader();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//进行类加载</span></span><br><span class="line">        c = findClassInModuleOrNull(loadedModule, cn);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 找不到模块信息才会进行双亲委派</span></span><br><span class="line">        <span class="keyword">if</span> (parent != <span class="literal">null</span>) &#123;</span><br><span class="line">            c = parent.loadClassOrNull(cn);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -245,6 +277,10 @@
       <ul>
         
           <li>
+            <a href="/2021/01/11/%E7%9F%A5%E8%AF%86%E7%82%B9/Java/%E6%9C%AF%E8%AF%AD/3.%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE/">Java 的双亲委派</a>
+          </li>
+        
+          <li>
             <a href="/2019/11/13/%E7%9F%A5%E8%AF%86%E7%82%B9/Linux/1.%E5%B7%B2%E6%95%B4%E7%90%86%E5%91%BD%E4%BB%A4/">Linux 常用命令(持续更新)</a>
           </li>
         
@@ -258,10 +294,6 @@
         
           <li>
             <a href="/2019/08/19/%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql/Mysql%E5%91%BD%E4%BB%A4/">Mysql 常用命令</a>
-          </li>
-        
-          <li>
-            <a href="/2024/04/01/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%89%8D%E7%AB%AF/%E5%89%8D%E7%AB%AF%E9%9B%B6%E7%A2%8E/">前端零碎</a>
           </li>
         
       </ul>
